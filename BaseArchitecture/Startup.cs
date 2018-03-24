@@ -1,10 +1,13 @@
-﻿using BaseArchitecture.Repository.Database;
+﻿using Architecture.Repository;
+using Infrastructure.Configuration;
+using Infrastructure.Logging;
+using Infrastructure.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BaseArchitecture
+namespace WebAPI
 {
     public class Startup
     {
@@ -20,7 +23,10 @@ namespace BaseArchitecture
         {
             services.AddOptions();
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+
             services.AddScoped<IDatabaseFactory, DefaultDatabaseFactory>();
+            services.AddTransient<ILogger, DefaultLogger>();
+
             services.AddMvc();
         }
 

@@ -1,8 +1,10 @@
-﻿using Microsoft.Extensions.Options;
+﻿using System.Data;
+using Architecture.Repository;
+using Infrastructure.Configuration;
+using Microsoft.Extensions.Options;
 using Npgsql;
-using System.Data;
 
-namespace BaseArchitecture.Repository.Database
+namespace Infrastructure.Repository
 {
     public class DefaultDatabaseFactory : IDatabaseFactory
     {
