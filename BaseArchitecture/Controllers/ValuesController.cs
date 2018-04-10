@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Architecture.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace WebAPI.Controllers
 {
@@ -8,10 +9,13 @@ namespace WebAPI.Controllers
     public class ValuesController : Controller
     {
         private readonly IDatabaseFactory _databaseFactory;
+        private readonly ILogger _logger;
 
-        public ValuesController(IDatabaseFactory databaseFactory)
+        public ValuesController(IDatabaseFactory databaseFactory,
+            ILogger<ValuesController> logger)
         {
             _databaseFactory = databaseFactory;
+            _logger = logger;
         }
 
         // GET api/values
@@ -19,6 +23,12 @@ namespace WebAPI.Controllers
         public IEnumerable<string> Get()
         {
             var conn = _databaseFactory.GetConnection();
+            _logger.LogTrace("trace");
+            _logger.LogDebug("debug");
+            _logger.LogInformation("information");
+            _logger.LogWarning("warning");
+            _logger.LogError("error");
+            _logger.LogCritical("critical");
             return new string[] { "value1", "value2" };
         }
 

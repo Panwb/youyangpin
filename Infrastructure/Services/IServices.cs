@@ -1,4 +1,4 @@
-using Infrastructure.Entities;
+using Infrastructure.DomainModel;
 
 namespace  Infrastructure.Services
 {

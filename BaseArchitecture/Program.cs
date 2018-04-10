@@ -1,6 +1,6 @@
-﻿using Architecture;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace WebAPI
 {
@@ -13,6 +13,13 @@ namespace WebAPI
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureLogging((hostingContext, logging) =>
+                    {
+                        logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                        logging.AddDebug();
+                        logging.AddConsole();
+                        //logging.AddEventLog();
+                    })
                 .UseStartup<Startup>()
                 .Build();
     }

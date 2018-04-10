@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
-namespace Infrastructure.Entities
+namespace Infrastructure.DomainModel
 {
     public interface IEntity
     {

@@ -1,6 +1,5 @@
 ﻿using Architecture.Repository;
 using Infrastructure.Configuration;
-using Infrastructure.Logging;
 using Infrastructure.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,9 +24,11 @@ namespace WebAPI
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
             services.AddScoped<IDatabaseFactory, DefaultDatabaseFactory>();
-            services.AddTransient<ILogger, DefaultLogger>();
 
             services.AddMvc();
+
+            //Session服务
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +38,9 @@ namespace WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            //Session
+            app.UseSession();
 
             app.UseMvc();
         }

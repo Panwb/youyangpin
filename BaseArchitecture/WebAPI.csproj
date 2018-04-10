@@ -6,15 +6,17 @@
 
   <ItemGroup>
     <Folder Include="Repository\" />
+    <Folder Include="Services\Implementation\" />
+    <Folder Include="Services\Interface\" />
     <Folder Include="wwwroot\" />
-    <Folder Include="Services\" />
-    <Folder Include="Entities\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.50.4" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.0.1" />
     <PackageReference Include="Npgsql" Version="3.2.7" />
+    <PackageReference Include="vue" Version="2.5.16" />
   </ItemGroup>
 
   <ItemGroup>

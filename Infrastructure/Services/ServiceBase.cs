@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Transactions;
-using Infrastructure.Entities;
-using Infrastructure.Logging;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
+using Infrastructure.DomainModel;
+using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Services
 {
@@ -13,20 +11,18 @@ namespace Infrastructure.Services
     {
         private readonly ILogger _logger;
 
-        protected ServiceBase()
+        protected ServiceBase() { }
+
+        protected ServiceBase(ILogger logger)
         {
-            try
-            {
-                _logger = HttpContext.RequestServices.GetService<ILogger>();
-            }
-            catch { }
+            _logger = logger;
         }
 
         [DebuggerStepThrough]
         protected TResult ExecuteCommand<TResult>(Func<TResult> command)
             where TResult : ServiceResultBase
         {
-            var options = new TransactionOptions{IsolationLevel = IsolationLevel.ReadUncommitted};
+            var options = new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted };
             using (var ts = new TransactionScope(TransactionScopeOption.Required, options))
             {
                 try
@@ -40,7 +36,7 @@ namespace Infrastructure.Services
 
                     if (result.HasViolation && _logger != null)
                     {
-                        _logger.Info(result.ErrorMessage);
+                        _logger.LogInformation(result.ErrorMessage);
                     }
                     if (!result.HasViolation)
                     {
@@ -61,11 +57,11 @@ namespace Infrastructure.Services
                     }
                     if (_logger != null)
                     {
-                        _logger.Error(exception.ToString());
+                        _logger.LogError(exception.ToString());
                     }
                     return instance as TResult;
                 }
             }
-        }          
+        }
     }
 }
