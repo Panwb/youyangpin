@@ -5,7 +5,59 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Repository\" />
+    <Compile Remove="Repository\**" />
+    <Content Remove="Repository\**" />
+    <EmbeddedResource Remove="Repository\**" />
+    <None Remove="Repository\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\MerchantController.cs" />
+    <Compile Remove="Controllers\OrderController.cs" />
+    <Compile Remove="Controllers\OrderGoodController.cs" />
+    <Compile Remove="Controllers\ShopController.cs" />
+    <Compile Remove="Controllers\StudioHostController.cs" />
+    <Compile Remove="Controllers\WithdrawalController.cs" />
+    <Compile Remove="Data\Implementation\MerchantRepository.cs" />
+    <Compile Remove="Data\Implementation\OrderGoodRepository.cs" />
+    <Compile Remove="Data\Implementation\OrderRepository.cs" />
+    <Compile Remove="Data\Implementation\ShopRepository.cs" />
+    <Compile Remove="Data\Implementation\StudioHostRepository.cs" />
+    <Compile Remove="Data\Implementation\WithdrawalRepository.cs" />
+    <Compile Remove="Data\Interface\IMerchantRepository.cs" />
+    <Compile Remove="Data\Interface\IOrderGoodRepository.cs" />
+    <Compile Remove="Data\Interface\IOrderRepository.cs" />
+    <Compile Remove="Data\Interface\IShopRepository.cs" />
+    <Compile Remove="Data\Interface\IStudioHostRepository.cs" />
+    <Compile Remove="Data\Interface\IWithdrawalRepository.cs" />
+    <Compile Remove="Entities\Merchant.cs" />
+    <Compile Remove="Entities\Order.cs" />
+    <Compile Remove="Entities\OrderGood.cs" />
+    <Compile Remove="Entities\Shop.cs" />
+    <Compile Remove="Entities\StudioHost.cs" />
+    <Compile Remove="Entities\Withdrawal.cs" />
+    <Compile Remove="Services\Implementation\MerchantService.cs" />
+    <Compile Remove="Services\Implementation\OrderGoodService.cs" />
+    <Compile Remove="Services\Implementation\OrderService.cs" />
+    <Compile Remove="Services\Implementation\ShopService.cs" />
+    <Compile Remove="Services\Implementation\StudioHostService.cs" />
+    <Compile Remove="Services\Implementation\WithdrawalService.cs" />
+    <Compile Remove="Services\Interface\IMerchantService.cs" />
+    <Compile Remove="Services\Interface\IOrderGoodService.cs" />
+    <Compile Remove="Services\Interface\IOrderService.cs" />
+    <Compile Remove="Services\Interface\IShopService.cs" />
+    <Compile Remove="Services\Interface\IStudioHostService.cs" />
+    <Compile Remove="Services\Interface\IWithdrawalService.cs" />
+    <Compile Remove="Services\ServiceResult\MerchantResult.cs" />
+    <Compile Remove="Services\ServiceResult\OrderGoodResult.cs" />
+    <Compile Remove="Services\ServiceResult\OrderResult.cs" />
+    <Compile Remove="Services\ServiceResult\ShopResult.cs" />
+    <Compile Remove="Services\ServiceResult\StudioHostResult.cs" />
+    <Compile Remove="Services\ServiceResult\UserServiceResult.cs" />
+    <Compile Remove="Services\ServiceResult\WithdrawalResult.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Services\Implementation\" />
     <Folder Include="Services\Interface\" />
     <Folder Include="wwwroot\" />

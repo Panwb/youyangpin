@@ -1,22 +1,21 @@
-﻿using System.Collections.Generic;
-using Architecture.Repository;
+﻿using Architecture.Repository;
 using Infrastructure.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebAPI.Common;
 using WebAPI.Entities;
-using WebAPI.Services.ServiceResult;
+using WebAPI.Services;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/user/[controller]")]
+    [Route("api/[controller]")]
     public class UserController : Controller
     {
         private readonly IDatabaseFactory _databaseFactory;
         private readonly ILogger _logger;
 
         public UserController(IDatabaseFactory databaseFactory,
-            ILogger<ValuesController> logger)
+            ILogger<UserController> logger)
         {
             _databaseFactory = databaseFactory;
             _logger = logger;
