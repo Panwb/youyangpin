@@ -1,7 +1,9 @@
 ﻿using System.Data;
+using Infrastructure.Configuration;
 using Infrastructure.Repository;
+using Microsoft.Extensions.Options;
 
-namespace Kingston.KCMS.Data
+namespace Infrastructure.Data
 {
     public abstract class RepositoryBase
     {
@@ -9,7 +11,7 @@ namespace Kingston.KCMS.Data
 
         private static IDbConnection _database;
 
-        public static IDbConnection Database => _database ?? (_database = new DefaultDatabaseFactory(ConfigManager.ConnectionString));
+        public static IDbConnection Database => _database ?? (_database = new DefaultDatabaseFactory(new OptionsManager<AppSettings>()).GetConnection());
 
         protected static void DisposeStaticMember()
         {
