@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebAPI.Common;
 using WebAPI.Entities;
+using IdentityServer4;
+using IdentityServer4.Models;
+using IdentityModel.Client;
 
 namespace WebAPI.Controllers
 {
@@ -30,7 +33,7 @@ namespace WebAPI.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public async void LoginAsync([FromBody]string accountName, [FromBody]string password)
+        public async Task<TokenResponse> LoginAsync([FromBody]string accountName, [FromBody]string password)
         {
             ////检查用户信息
             User user = new User();
@@ -44,16 +47,27 @@ namespace WebAPI.Controllers
 
             if (user != null)
             {
-                //用户标识
-                var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-                identity.AddClaim(new Claim(ClaimTypes.Sid, "userName"));
-                identity.AddClaim(new Claim(ClaimTypes.Name, "Name"));
-                identity.AddClaim(new Claim(ClaimTypes.Role, "Role"));
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+                ////用户标识
+                //var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+                //identity.AddClaim(new Claim(ClaimTypes.Sid, "userName"));
+                //identity.AddClaim(new Claim(ClaimTypes.Name, "Name"));
+                //identity.AddClaim(new Claim(ClaimTypes.Role, "Role"));
+                //await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+                var identityServer = await DiscoveryClient.GetAsync("http://localhost:61106"); //discover the IdentityServer
+                if (identityServer.IsError)
+                {
+                    return null;
+                }
+
+                //Get the token
+                var tokenClient = new TokenClient(identityServer.TokenEndpoint, "Client1", "secret");
+                var tokenResponse = await tokenClient.RequestClientCredentialsAsync("api1");
+                return tokenResponse;
             }
             else
             {
                 HttpContext.Response.StatusCode = 401; //Unauthorized
+                return null;
             }
         }
 

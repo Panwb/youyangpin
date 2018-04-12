@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using WebAPI.IdentityServer;
 
 namespace WebAPI
 {
@@ -28,13 +29,43 @@ namespace WebAPI
 
             services.AddScoped<IDatabaseFactory, DefaultDatabaseFactory>();
 
-            services.AddMvc();
-            //添加认证Cookie信息
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                    .AddCookie();
+            //services.AddMvc();
 
-            //Session服务
-            services.AddSession();
+            //Identity Server
+            services.AddIdentityServer().AddDeveloperSigningCredential()
+                .AddInMemoryClients(Config.GetClients())
+                .AddInMemoryApiResources(Config.GetApiResources())
+                .AddInMemoryIdentityResources(Config.GetIdentityResources());
+
+            //services.AddAuthentication(options =>
+            //{
+            //    options.DefaultScheme = "Cookies";
+            //    options.DefaultChallengeScheme = "oidc";
+            //})
+            //.AddCookie("Cookies")
+            //.AddOpenIdConnect("oidc", options =>
+            //{
+            //    options.SignInScheme = "Cookies";
+
+            //    options.Authority = "http://localhost:61106/";//Identity Server URL
+            //    options.RequireHttpsMetadata = false;// make it false since we are not using https
+
+            //    options.ClientId = "mvc";
+            //    options.SaveTokens = true;
+            //});
+
+            services.AddMvcCore().AddAuthorization().AddJsonFormatters();
+
+            services.AddAuthentication("Bearer") // it is a Bearer token
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = "http://localhost:61106/"; //Identity Server URL
+                    options.RequireHttpsMetadata = false; // make it false since we are not using https
+                    options.ApiName = "api1"; //api name which should be registered in IdentityServer
+                });
+
+            ////Session服务
+            //services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,11 +76,10 @@ namespace WebAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            //Session
-            app.UseSession();
+            ////Session
+            //app.UseSession();
 
-            //验证中间件
-            app.UseAuthentication();
+            app.UseAuthentication(); // add the Authentication middleware
 
             app.UseMvc();
         }
