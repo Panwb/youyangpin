@@ -1,14 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using Architecture.Repository;
 using Infrastructure.Helper;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebAPI.Common;
 using WebAPI.Entities;
-using WebAPI.Services.ServiceResult;
 
 namespace WebAPI.Controllers
 {
+    [Authorize]
     [Route("api/user/[controller]")]
     public class UserController : Controller
     {
@@ -22,24 +28,44 @@ namespace WebAPI.Controllers
             _logger = logger;
         }
 
+        [AllowAnonymous]
         [HttpPost]
-        public UserServiceResult Login([FromBody]string accountName, [FromBody]string password)
+        public async void LoginAsync([FromBody]string accountName, [FromBody]string password)
         {
-            //检查用户信息
+            ////检查用户信息
             User user = new User();
-            //var user = _userAppService.CheckUser(model.UserName, model.Password);
+            ////var user = _userAppService.CheckUser(model.UserName, model.Password);
+            //if (user != null)
+            //{
+            //    //记录Session
+            //    HttpContext.Session.Set(GlobalConstants.UserSessionKey, ByteConvertHelper.Object2Bytes(user));
+            //}
+            //return null;
+
             if (user != null)
             {
-                //记录Session
-                HttpContext.Session.Set(GlobalConstants.UserSessionKey, ByteConvertHelper.Object2Bytes(user));
+                //用户标识
+                var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+                identity.AddClaim(new Claim(ClaimTypes.Sid, "userName"));
+                identity.AddClaim(new Claim(ClaimTypes.Name, "Name"));
+                identity.AddClaim(new Claim(ClaimTypes.Role, "Role"));
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
             }
-            return null;
+            else
+            {
+                HttpContext.Response.StatusCode = 401; //Unauthorized
+            }
         }
 
+        //[HttpDelete]
+        //public void Logout()
+        //{
+        //    HttpContext.Session.Set(GlobalConstants.UserSessionKey, null);
+        //}
         [HttpDelete]
-        public void Logout()
+        public async void Logout()
         {
-            HttpContext.Session.Set(GlobalConstants.UserSessionKey, null);
+            await HttpContext.SignOutAsync("Cookie");
         }
     }
 }
