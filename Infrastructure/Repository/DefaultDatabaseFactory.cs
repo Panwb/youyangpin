@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Data.SqlClient;
 using Architecture.Repository;
 using Infrastructure.Configuration;
 using Microsoft.Extensions.Options;
@@ -24,6 +25,9 @@ namespace Infrastructure.Repository
             {
                 case "postgresql":
                     conn = new NpgsqlConnection(_connectionString);
+                    break;
+                case "mssqlserver":
+                    conn = new SqlConnection(_connectionString);
                     break;
             }
             conn.Open();
