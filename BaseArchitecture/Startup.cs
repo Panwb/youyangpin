@@ -79,7 +79,7 @@ namespace WebAPI
             ////Session
             //app.UseSession();
 
-            app.UseAuthentication(); // add the Authentication middleware
+            app.UseIdentityServer();
 
             app.UseMvc();
         }
