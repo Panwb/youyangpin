@@ -11,10 +11,10 @@ namespace Infrastructure.Repository
         private readonly string _connectionString;
         private readonly string _databaseName;
 
-        public DefaultDatabaseFactory(IOptions<AppSettings> settings)
+        public DefaultDatabaseFactory(IOptions<ConnectionStrings> settings)
         {
-            _connectionString = settings.Value.ConnectionStrings.ConnectionString;
-            _databaseName = settings.Value.ConnectionStrings.DatabaseName;
+            _connectionString = settings.Value.ConnectionString;
+            _databaseName = settings.Value.DatabaseName;
         }     
 
         public IDbConnection GetConnection()
