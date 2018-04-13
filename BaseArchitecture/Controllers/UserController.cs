@@ -1,37 +1,39 @@
-﻿using Architecture.Repository;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using WebAPI.Entities;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Mvc;
 using WebAPI.Common;
 using Infrastructure.Helper;
+using WebAPI.Entities;
+using WebAPI.Services;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]/[action]")]
     public class UserController : Controller
     {
-        private readonly IDatabaseFactory _databaseFactory;
-        private readonly ILogger _logger;
+        private readonly IUserService _userService;
 
-        public UserController(IDatabaseFactory databaseFactory,
-            ILogger<UserController> logger)
+        public UserController(IUserService userService)
         {
-            _databaseFactory = databaseFactory;
-            _logger = logger;
+            _userService = userService;
         }
 
         [HttpPost]
-        public void Login(string accountName, string password)
+        public UserServiceResult Register(User user)
+        {
+            return _userService.Register(user);
+        }
+
+        [HttpPost]
+        public UserServiceResult Login(string accountName, string password)
         {
             ////检查用户信息
-            User user = new User();
-            //var user = _userAppService.CheckUser(model.UserName, model.Password);
-            if (user != null)
+            var userResult = _userService.GetUser(accountName, password);
+            if (!userResult.HasViolation && userResult.User != null)
             {
                 //记录Session
-                HttpContext.Session.Set(GlobalConstants.UserSessionKey, ByteConvertHelper.Object2Bytes(user));
+                HttpContext.Session.Set(GlobalConstants.UserSessionKey, ByteConvertHelper.Object2Bytes(userResult.User));
             }
+
+            return userResult;
         }
 
         [HttpDelete]

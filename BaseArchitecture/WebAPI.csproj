@@ -5,31 +5,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Repository\**" />
-    <Content Remove="Repository\**" />
-    <EmbeddedResource Remove="Repository\**" />
-    <None Remove="Repository\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="Controllers\MerchantController.cs" />
     <Compile Remove="Controllers\OrderController.cs" />
     <Compile Remove="Controllers\OrderGoodController.cs" />
     <Compile Remove="Controllers\ShopController.cs" />
     <Compile Remove="Controllers\StudioHostController.cs" />
     <Compile Remove="Controllers\WithdrawalController.cs" />
-    <Compile Remove="Data\Implementation\MerchantRepository.cs" />
-    <Compile Remove="Data\Implementation\OrderGoodRepository.cs" />
-    <Compile Remove="Data\Implementation\OrderRepository.cs" />
-    <Compile Remove="Data\Implementation\ShopRepository.cs" />
-    <Compile Remove="Data\Implementation\StudioHostRepository.cs" />
-    <Compile Remove="Data\Implementation\WithdrawalRepository.cs" />
-    <Compile Remove="Data\Interface\IMerchantRepository.cs" />
-    <Compile Remove="Data\Interface\IOrderGoodRepository.cs" />
-    <Compile Remove="Data\Interface\IOrderRepository.cs" />
-    <Compile Remove="Data\Interface\IShopRepository.cs" />
-    <Compile Remove="Data\Interface\IStudioHostRepository.cs" />
-    <Compile Remove="Data\Interface\IWithdrawalRepository.cs" />
+    <Compile Remove="Repository\Implementation\MerchantRepository.cs" />
+    <Compile Remove="Repository\Implementation\OrderGoodRepository.cs" />
+    <Compile Remove="Repository\Implementation\OrderRepository.cs" />
+    <Compile Remove="Repository\Implementation\ShopRepository.cs" />
+    <Compile Remove="Repository\Implementation\StudioHostRepository.cs" />
+    <Compile Remove="Repository\Implementation\WithdrawalRepository.cs" />
+    <Compile Remove="Repository\Interface\IMerchantRepository.cs" />
+    <Compile Remove="Repository\Interface\IOrderGoodRepository.cs" />
+    <Compile Remove="Repository\Interface\IOrderRepository.cs" />
+    <Compile Remove="Repository\Interface\IShopRepository.cs" />
+    <Compile Remove="Repository\Interface\IStudioHostRepository.cs" />
+    <Compile Remove="Repository\Interface\IWithdrawalRepository.cs" />
     <Compile Remove="Entities\Merchant.cs" />
     <Compile Remove="Entities\Order.cs" />
     <Compile Remove="Entities\OrderGood.cs" />
@@ -67,6 +60,7 @@
     <PackageReference Include="Dapper" Version="1.50.4" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.0.1" />
+    <PackageReference Include="NETCore.Encrypt" Version="2.0.6" />
     <PackageReference Include="Npgsql" Version="3.2.7" />
   </ItemGroup>
 

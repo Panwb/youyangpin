@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using Architecture.Repository;
 using Infrastructure.DomainModel;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.Repository
 {
@@ -12,36 +10,40 @@ namespace Infrastructure.Repository
     {
         #region Database
 
-        private static IDbConnection _database;
-
-        public static IDbConnection Database => _database ?? (_database = null);//HttpContext.RequestServices.GetService<IDatabaseFactory>().GetConnection());
-        
-        protected static void DisposeStaticMember()
+        protected RepositoryBase(IDatabaseFactory db)
         {
-            _database = null;
+            Database = db.GetConnection();
         }
+
+        public IDbConnection Database { get; }
 
         #endregion
     }
 
     public abstract class RepositoryBase<TEntity> : RepositoryBase where TEntity : class, IEntity
     {
-        public virtual int Add(TEntity entity)
+        protected RepositoryBase(IDatabaseFactory db)
+            : base(db)
+        {
+
+        }
+
+        public virtual string Add(TEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public virtual int Update(TEntity entity)
+        public virtual void Update(TEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public virtual int Delete(int id)
+        public virtual void Delete(string id)
         {
             throw new NotImplementedException();
         }
 
-        public virtual TEntity GetById(int id)
+        public virtual TEntity GetById(string id)
         {
             throw new NotImplementedException();
         }

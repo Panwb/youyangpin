@@ -6,7 +6,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using WebAPI.Common;
 using WebAPI.Middleware;
+using WebAPI.Repository;
+using WebAPI.Services;
 
 namespace WebAPI
 {
@@ -26,6 +29,13 @@ namespace WebAPI
             services.Configure<ConnectionStrings>(Configuration.GetSection("AppSettings:ConnectionStrings"));
 
             services.AddScoped<IDatabaseFactory, DefaultDatabaseFactory>();
+            services.AddScoped<IWorkContext, DefaultWorkContext>();
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IGoodRepository, GoodRepository>();
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IGoodService, GoodService>();
 
             services.AddResponseCompression();
 
@@ -46,11 +56,20 @@ namespace WebAPI
             //Session
             app.UseSession();
 
-            app.UseWhen(x => !(x.Request.Path.StartsWithSegments("/api/user/login", StringComparison.OrdinalIgnoreCase)),
-                builder =>
+            var nonAuthPaths = new[] {"/api/user/login", "/api/user/register"};//这些入口不做权限控制
+            app.UseWhen(x =>
                 {
-                    builder.UseMiddleware<AuthenticationMiddleware>();
-                });
+                    foreach (var path in nonAuthPaths)
+                    {
+                        if (x.Request.Path.StartsWithSegments(path, StringComparison.OrdinalIgnoreCase))
+                        {
+                            return false;
+                        }
+                    }
+
+                    return true;
+                },
+                builder => { builder.UseMiddleware<AuthenticationMiddleware>(); });
 
             app.UseResponseCompression();
 
