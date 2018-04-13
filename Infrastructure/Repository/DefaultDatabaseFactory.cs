@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Data.SqlClient;
 using Architecture.Repository;
 using Infrastructure.Configuration;
 using Microsoft.Extensions.Options;
@@ -11,10 +12,10 @@ namespace Infrastructure.Repository
         private readonly string _connectionString;
         private readonly string _databaseName;
 
-        public DefaultDatabaseFactory(IOptions<AppSettings> settings)
+        public DefaultDatabaseFactory(IOptions<ConnectionStrings> settings)
         {
-            _connectionString = settings.Value.ConnectionStrings.ConnectionString;
-            _databaseName = settings.Value.ConnectionStrings.DatabaseName;
+            _connectionString = settings.Value.ConnectionString;
+            _databaseName = settings.Value.DatabaseName;
         }     
 
         public IDbConnection GetConnection()
@@ -24,6 +25,9 @@ namespace Infrastructure.Repository
             {
                 case "postgresql":
                     conn = new NpgsqlConnection(_connectionString);
+                    break;
+                case "mssqlserver":
+                    conn = new SqlConnection(_connectionString);
                     break;
             }
             conn.Open();
