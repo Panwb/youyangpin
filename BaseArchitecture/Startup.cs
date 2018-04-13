@@ -1,13 +1,10 @@
 ﻿using Architecture.Repository;
 using Infrastructure.Configuration;
 using Infrastructure.Repository;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using WebAPI.IdentityServer;
 
 namespace WebAPI
@@ -29,7 +26,7 @@ namespace WebAPI
 
             services.AddScoped<IDatabaseFactory, DefaultDatabaseFactory>();
 
-            //services.AddMvc();
+            services.AddMvc();
 
             //Identity Server
             services.AddIdentityServer().AddDeveloperSigningCredential()
@@ -37,35 +34,37 @@ namespace WebAPI
                 .AddInMemoryApiResources(Config.GetApiResources())
                 .AddInMemoryIdentityResources(Config.GetIdentityResources());
 
-            //services.AddAuthentication(options =>
-            //{
-            //    options.DefaultScheme = "Cookies";
-            //    options.DefaultChallengeScheme = "oidc";
-            //})
-            //.AddCookie("Cookies")
-            //.AddOpenIdConnect("oidc", options =>
-            //{
-            //    options.SignInScheme = "Cookies";
 
-            //    options.Authority = "http://localhost:61106/";//Identity Server URL
-            //    options.RequireHttpsMetadata = false;// make it false since we are not using https
-
-            //    options.ClientId = "mvc";
-            //    options.SaveTokens = true;
-            //});
-
-            services.AddMvcCore().AddAuthorization().AddJsonFormatters();
-
-            services.AddAuthentication("Bearer") // it is a Bearer token
-                .AddIdentityServerAuthentication(options =>
+            services.AddAuthentication(options =>
                 {
-                    options.Authority = "http://localhost:61106/"; //Identity Server URL
-                    options.RequireHttpsMetadata = false; // make it false since we are not using https
-                    options.ApiName = "api1"; //api name which should be registered in IdentityServer
+                    options.DefaultScheme = "Cookies";
+                    options.DefaultChallengeScheme = "oidc";
+                })
+                .AddCookie("Cookies")
+                .AddOpenIdConnect("oidc", options =>
+                {
+                    options.SignInScheme = "Cookies";
+
+                    options.Authority = "http://localhost:56234/";
+                    options.RequireHttpsMetadata = false;
+
+                    options.ClientId = "mvc";
+                    options.Scope.Add("roles");
+                    options.SaveTokens = true;
                 });
 
-            ////Session服务
-            //services.AddSession();
+            //services.AddMvcCore().AddAuthorization().AddJsonFormatters();
+
+            //services.AddAuthentication("Bearer") // it is a Bearer token
+            //    .AddIdentityServerAuthentication(options =>
+            //    {
+            //        options.Authority = "http://localhost:61106/"; //Identity Server URL
+            //        options.RequireHttpsMetadata = false; // make it false since we are not using https
+            //        options.ApiName = "api1"; //api name which should be registered in IdentityServer
+            //    });
+
+            //Session服务
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -80,6 +79,8 @@ namespace WebAPI
             //app.UseSession();
 
             app.UseIdentityServer();
+
+            app.UseAuthentication();
 
             app.UseMvc();
         }
