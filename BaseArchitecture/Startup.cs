@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WebAPI.IdentityServer;
+using System;
+using WebAPI.Middleware;
 
 namespace WebAPI
 {
@@ -26,42 +27,9 @@ namespace WebAPI
 
             services.AddScoped<IDatabaseFactory, DefaultDatabaseFactory>();
 
+            services.AddResponseCompression();
+
             services.AddMvc();
-
-            //Identity Server
-            services.AddIdentityServer().AddDeveloperSigningCredential()
-                .AddInMemoryClients(Config.GetClients())
-                .AddInMemoryApiResources(Config.GetApiResources())
-                .AddInMemoryIdentityResources(Config.GetIdentityResources());
-
-
-            services.AddAuthentication(options =>
-                {
-                    options.DefaultScheme = "Cookies";
-                    options.DefaultChallengeScheme = "oidc";
-                })
-                .AddCookie("Cookies")
-                .AddOpenIdConnect("oidc", options =>
-                {
-                    options.SignInScheme = "Cookies";
-
-                    options.Authority = "http://localhost:56234/";
-                    options.RequireHttpsMetadata = false;
-
-                    options.ClientId = "mvc";
-                    options.Scope.Add("roles");
-                    options.SaveTokens = true;
-                });
-
-            //services.AddMvcCore().AddAuthorization().AddJsonFormatters();
-
-            //services.AddAuthentication("Bearer") // it is a Bearer token
-            //    .AddIdentityServerAuthentication(options =>
-            //    {
-            //        options.Authority = "http://localhost:61106/"; //Identity Server URL
-            //        options.RequireHttpsMetadata = false; // make it false since we are not using https
-            //        options.ApiName = "api1"; //api name which should be registered in IdentityServer
-            //    });
 
             //Session服务
             services.AddSession();
@@ -75,12 +43,16 @@ namespace WebAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            ////Session
-            //app.UseSession();
+            //Session
+            app.UseSession();
 
-            app.UseIdentityServer();
+            app.UseWhen(x => !(x.Request.Path.StartsWithSegments("/api/user/login", StringComparison.OrdinalIgnoreCase)),
+                builder =>
+                {
+                    builder.UseMiddleware<AuthenticationMiddleware>();
+                });
 
-            app.UseAuthentication();
+            app.UseResponseCompression();
 
             app.UseMvc();
         }
