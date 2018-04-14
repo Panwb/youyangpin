@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using YYP.ComLib;
+using Microsoft.AspNetCore.Http;
+using YYP.ComLib.Services;
 using YYP.ComLib.Middleware;
 using YYP.Repository;
 using YYP.Services;
@@ -27,6 +28,8 @@ namespace WebAPI
         {
             services.AddOptions();
             services.Configure<ConnectionStrings>(Configuration.GetSection("AppSettings:ConnectionStrings"));
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped<IDatabaseFactory, DefaultDatabaseFactory>();
             services.AddScoped<IWorkContext, DefaultWorkContext>();

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using YYP.Entities;
 
-namespace YYP.ComLib
+namespace YYP.ComLib.Services
 {
     public interface IWorkContext
     {
