@@ -1,8 +1,13 @@
-'use strict'
+'use strict';
 const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+const webpack = require('webpack')
+
+const entries = utils.getMultiEntry('./src/' +config.moduleName+ '/**/**/*.js');
+console.log(entries);
+var chunks = Object.keys(entries);
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -12,9 +17,7 @@ function resolve (dir) {
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
-  entry: {
-    app: './src/main.js'
-  },
+  entry: entries,
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
@@ -65,8 +68,15 @@ module.exports = {
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       }
-    ]
+    ],
   },
+  plugins:[
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendors', // 公共模块的名称
+      chunks: chunks,  // chunks是需要提取的模块
+      minChunks: 4 || chunks.length //公共模块被使用的最小次数。比如配置为3，也就是同一个模块只有被3个以外的页面同时引用时才会被提取出来作为common chunks。
+    }),
+  ],
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
     // source contains it (although only uses it if it's native).
