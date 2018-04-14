@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace Architecture.Repository
+namespace Infrastructure.Repository
 {
     public interface IDatabaseFactory
     {

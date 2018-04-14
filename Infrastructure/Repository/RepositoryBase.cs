@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using Architecture.Repository;
+using Infrastructure.Repository;
 using Infrastructure.DomainModel;
 
 namespace Infrastructure.Repository

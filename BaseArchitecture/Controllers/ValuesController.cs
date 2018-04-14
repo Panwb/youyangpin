@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Architecture.Repository;
+using Infrastructure.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

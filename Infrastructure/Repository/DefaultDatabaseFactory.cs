@@ -1,6 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
-using Architecture.Repository;
+using Infrastructure.Repository;
 using Infrastructure.Configuration;
 using Microsoft.Extensions.Options;
 using Npgsql;
