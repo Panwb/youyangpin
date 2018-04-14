@@ -3,6 +3,8 @@ using YYP.ComLib;
 using Infrastructure.Helper;
 using YYP.Entities;
 using YYP.Services;
+using YYP.ComLib.Services;
+using System;
 
 namespace WebAPI.Controllers
 {
@@ -10,16 +12,12 @@ namespace WebAPI.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
+        private readonly ISendSmsService _sendSmsService;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, ISendSmsService sendSmsService)
         {
             _userService = userService;
-        }
-
-        [HttpPost]
-        public UserServiceResult Register(User user)
-        {
-            return _userService.Register(user);
+            _sendSmsService = sendSmsService;
         }
 
         [HttpPost]
@@ -34,6 +32,14 @@ namespace WebAPI.Controllers
             }
 
             return userResult;
+        }
+
+        [HttpGet]
+        public SendSmsServiceResult SendSms(string telphone)
+        {
+            string identifyingCode = new Random().Next(100000, 999999).ToString();//验证码
+            var result = _sendSmsService.SendMessage("{'code':'" + identifyingCode + "'}", telphone, telphone, GlobalConstants.AliyunSMSRegisterTempCode, GlobalConstants.AliyunSMSSignname);
+            return result;
         }
 
         [HttpDelete]

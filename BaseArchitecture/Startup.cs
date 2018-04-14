@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using Microsoft.AspNetCore.Http;
+using YYP.ComLib.Configuration;
 using YYP.ComLib.Services;
 using YYP.ComLib.Middleware;
 using YYP.Repository;
@@ -27,6 +28,9 @@ namespace WebAPI
         {
             services.AddOptions();
             services.Configure<ConnectionStrings>(Configuration.GetSection("AppSettings:ConnectionStrings"));
+            services.Configure<AliyunSetting>(Configuration.GetSection("Aliyun"));
+
+            services.AddSingleton<ISendSmsService, AliyunSendSmsService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -58,7 +62,7 @@ namespace WebAPI
             //Session
             app.UseSession();
 
-            var nonAuthPaths = new[] {"/api/user/login", "/api/user/register"};//这些入口不做权限控制
+            var nonAuthPaths = new[] {"/api/user/login", "/api/studiohost/register", "/api/user/sendsms" };//这些入口不做权限控制
             app.UseWhen(x =>
                 {
                     foreach (var path in nonAuthPaths)

@@ -7,6 +7,8 @@ namespace YYP.ComLib.Services
     public interface IWorkContext
     {
         User CurrentUser { get; }
+
+        string AccountName { get; }
     }
 
     public class DefaultWorkContext : IWorkContext
@@ -28,5 +30,7 @@ namespace YYP.ComLib.Services
                 return null;
             }
         }
+
+        public string AccountName => CurrentUser?.Account;
     }
 }

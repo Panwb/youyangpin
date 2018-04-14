@@ -6,12 +6,6 @@
 
   <ItemGroup>
     <PackageReference Include="Aliyun.Acs.Core" Version="1.0.0" />
-    <PackageReference Include="Aliyun.Acs.Sms" Version="1.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Entities\Entities.csproj" />
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

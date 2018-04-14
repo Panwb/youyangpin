@@ -9,7 +9,6 @@
     <Compile Remove="Controllers\OrderController.cs" />
     <Compile Remove="Controllers\OrderGoodController.cs" />
     <Compile Remove="Controllers\ShopController.cs" />
-    <Compile Remove="Controllers\StudioHostController.cs" />
     <Compile Remove="Controllers\WithdrawalController.cs" />
   </ItemGroup>
 
