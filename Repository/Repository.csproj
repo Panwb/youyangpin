@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Implementation\MerchantRepository.cs" />
+    <Compile Remove="Implementation\OrderGoodRepository.cs" />
+    <Compile Remove="Implementation\OrderRepository.cs" />
+    <Compile Remove="Implementation\ShopRepository.cs" />
+    <Compile Remove="Implementation\StudioHostRepository.cs" />
+    <Compile Remove="Implementation\WithdrawalRepository.cs" />
+    <Compile Remove="Interface\IMerchantRepository.cs" />
+    <Compile Remove="Interface\IOrderGoodRepository.cs" />
+    <Compile Remove="Interface\IOrderRepository.cs" />
+    <Compile Remove="Interface\IShopRepository.cs" />
+    <Compile Remove="Interface\IStudioHostRepository.cs" />
+    <Compile Remove="Interface\IWithdrawalRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.50.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ComLib\ComLib.csproj" />
+    <ProjectReference Include="..\Entities\Entities.csproj" />
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

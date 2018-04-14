@@ -11,57 +11,15 @@
     <Compile Remove="Controllers\ShopController.cs" />
     <Compile Remove="Controllers\StudioHostController.cs" />
     <Compile Remove="Controllers\WithdrawalController.cs" />
-    <Compile Remove="Repository\Implementation\MerchantRepository.cs" />
-    <Compile Remove="Repository\Implementation\OrderGoodRepository.cs" />
-    <Compile Remove="Repository\Implementation\OrderRepository.cs" />
-    <Compile Remove="Repository\Implementation\ShopRepository.cs" />
-    <Compile Remove="Repository\Implementation\StudioHostRepository.cs" />
-    <Compile Remove="Repository\Implementation\WithdrawalRepository.cs" />
-    <Compile Remove="Repository\Interface\IMerchantRepository.cs" />
-    <Compile Remove="Repository\Interface\IOrderGoodRepository.cs" />
-    <Compile Remove="Repository\Interface\IOrderRepository.cs" />
-    <Compile Remove="Repository\Interface\IShopRepository.cs" />
-    <Compile Remove="Repository\Interface\IStudioHostRepository.cs" />
-    <Compile Remove="Repository\Interface\IWithdrawalRepository.cs" />
-    <Compile Remove="Entities\Merchant.cs" />
-    <Compile Remove="Entities\Order.cs" />
-    <Compile Remove="Entities\OrderGood.cs" />
-    <Compile Remove="Entities\Shop.cs" />
-    <Compile Remove="Entities\StudioHost.cs" />
-    <Compile Remove="Entities\Withdrawal.cs" />
-    <Compile Remove="Services\Implementation\MerchantService.cs" />
-    <Compile Remove="Services\Implementation\OrderGoodService.cs" />
-    <Compile Remove="Services\Implementation\OrderService.cs" />
-    <Compile Remove="Services\Implementation\ShopService.cs" />
-    <Compile Remove="Services\Implementation\StudioHostService.cs" />
-    <Compile Remove="Services\Implementation\WithdrawalService.cs" />
-    <Compile Remove="Services\Interface\IMerchantService.cs" />
-    <Compile Remove="Services\Interface\IOrderGoodService.cs" />
-    <Compile Remove="Services\Interface\IOrderService.cs" />
-    <Compile Remove="Services\Interface\IShopService.cs" />
-    <Compile Remove="Services\Interface\IStudioHostService.cs" />
-    <Compile Remove="Services\Interface\IWithdrawalService.cs" />
-    <Compile Remove="Services\ServiceResult\MerchantResult.cs" />
-    <Compile Remove="Services\ServiceResult\OrderGoodResult.cs" />
-    <Compile Remove="Services\ServiceResult\OrderResult.cs" />
-    <Compile Remove="Services\ServiceResult\ShopResult.cs" />
-    <Compile Remove="Services\ServiceResult\StudioHostResult.cs" />
-    <Compile Remove="Services\ServiceResult\UserServiceResult.cs" />
-    <Compile Remove="Services\ServiceResult\WithdrawalResult.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Implementation\" />
-    <Folder Include="Services\Interface\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="1.50.4" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.0.1" />
-    <PackageReference Include="NETCore.Encrypt" Version="2.0.6" />
-    <PackageReference Include="Npgsql" Version="3.2.7" />
   </ItemGroup>
 
   <ItemGroup>
@@ -69,7 +27,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ComLib\ComLib.csproj" />
+    <ProjectReference Include="..\Entities\Entities.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\Repository\Repository.csproj" />
+    <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
 
 </Project>

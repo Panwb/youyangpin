@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using WebAPI.Common;
-using WebAPI.Middleware;
-using WebAPI.Repository;
-using WebAPI.Services;
+using YYP.ComLib;
+using YYP.ComLib.Middleware;
+using YYP.Repository;
+using YYP.Services;
 
 namespace WebAPI
 {

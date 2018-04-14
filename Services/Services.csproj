@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Implementation\MerchantService.cs" />
+    <Compile Remove="Implementation\OrderGoodService.cs" />
+    <Compile Remove="Implementation\OrderService.cs" />
+    <Compile Remove="Implementation\ShopService.cs" />
+    <Compile Remove="Implementation\StudioHostService.cs" />
+    <Compile Remove="Implementation\WithdrawalService.cs" />
+    <Compile Remove="Interface\IMerchantService.cs" />
+    <Compile Remove="Interface\IOrderGoodService.cs" />
+    <Compile Remove="Interface\IOrderService.cs" />
+    <Compile Remove="Interface\IShopService.cs" />
+    <Compile Remove="Interface\IStudioHostService.cs" />
+    <Compile Remove="Interface\IWithdrawalService.cs" />
+    <Compile Remove="ServiceResult\MerchantResult.cs" />
+    <Compile Remove="ServiceResult\OrderGoodResult.cs" />
+    <Compile Remove="ServiceResult\OrderResult.cs" />
+    <Compile Remove="ServiceResult\ShopResult.cs" />
+    <Compile Remove="ServiceResult\StudioHostResult.cs" />
+    <Compile Remove="ServiceResult\UserServiceResult.cs" />
+    <Compile Remove="ServiceResult\WithdrawalResult.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NETCore.Encrypt" Version="2.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ComLib\ComLib.csproj" />
+    <ProjectReference Include="..\Entities\Entities.csproj" />
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\Repository\Repository.csproj" />
+  </ItemGroup>
+
+</Project>
