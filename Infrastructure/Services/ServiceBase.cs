@@ -2,21 +2,20 @@
 using System.Diagnostics;
 using System.Transactions;
 using Infrastructure.DomainModel;
-using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Services
 {
     public abstract class ServiceBase<TEntity> : IService<TEntity>
         where TEntity : IEntity
     {
-        private readonly ILogger _logger;
+        //
 
         protected ServiceBase() { }
 
-        protected ServiceBase(ILogger logger)
-        {
-            _logger = logger;
-        }
+        //protected ServiceBase(ILogger logger)
+        //{
+        //    _logger = logger;
+        //}
 
         [DebuggerStepThrough]
         protected TResult ExecuteCommand<TResult>(Func<TResult> command)
@@ -34,10 +33,10 @@ namespace Infrastructure.Services
                         return null;
                     }
 
-                    if (result.HasViolation && _logger != null)
-                    {
-                        _logger.LogInformation(result.ErrorMessage);
-                    }
+                    //if (result.HasViolation && _logger != null)
+                    //{
+                    //    _logger.LogInformation(result.ErrorMessage);
+                    //}
                     if (!result.HasViolation)
                     {
                         ts.Complete();
@@ -55,10 +54,10 @@ namespace Infrastructure.Services
                         instance.ViolationType = ViolationType.Exception;
                         instance.RuleViolations.Add(new RuleViolation("exception", exception.Message));
                     }
-                    if (_logger != null)
-                    {
-                        _logger.LogError(exception.ToString());
-                    }
+                    //if (_logger != null)
+                    //{
+                    //    _logger.LogError(exception.ToString());
+                    //}
                     return instance as TResult;
                 }
             }

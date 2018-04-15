@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 
 namespace Infrastructure.Services
 {
-    [DataContract]
     public abstract class ServiceResultBase
     {
         [DebuggerStepThrough]
@@ -15,7 +14,6 @@ namespace Infrastructure.Services
             ViolationType = ViolationType.Default;
         }
 
-        [DataMember]
         public IList<RuleViolation> RuleViolations
         {
             get;
@@ -30,7 +28,6 @@ namespace Infrastructure.Services
         {
             get { return RuleViolations.Count > 0; }
         }
-        [DataMember]
         public ViolationType ViolationType
         {
             get;

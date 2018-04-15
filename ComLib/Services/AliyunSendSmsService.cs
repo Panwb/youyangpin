@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Aliyun.Acs.Core;
 using Aliyun.Acs.Core.Exceptions;
 using Aliyun.Acs.Core.Profile;
 using Aliyun.Acs.Dysmsapi.Model.V20170525;
 using Infrastructure.DomainModel;
 using Infrastructure.Services;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using YYP.ComLib.Configuration;
 
 namespace YYP.ComLib.Services
@@ -17,20 +14,12 @@ namespace YYP.ComLib.Services
     /// </summary>
     public class AliyunSendSmsService : ISendSmsService
     {
-        private readonly IOptions<AliyunSetting> _aliyunSetting;
-        private readonly ILogger _logger;
-        public AliyunSendSmsService(IOptions<AliyunSetting> aliyunSetting, ILogger<AliyunSendSmsService> logger)
-        {
-            _aliyunSetting = aliyunSetting;
-            _logger = logger;
-        }
-
         public SendSmsServiceResult SendMessage(string paramstr, string phones, string userid, string tmpCode, string signname)
         {
             var result = new SendSmsServiceResult();
-            IClientProfile profile = DefaultProfile.GetProfile(_aliyunSetting.Value.RegionIdForPop, _aliyunSetting.Value.AppKey, _aliyunSetting.Value.AppSecret);
-            //DefaultProfile.AddEndpoint(_aliyunSetting.Value.RegionIdForPop, _aliyunSetting.Value.RegionIdForPop, _aliyunSetting.Value.ProductName, _aliyunSetting.Value.Domain);
-            DefaultProfile.AddEndpoint("cn-hangzhou", "cn-hangzhou", "Dysmsapi", "dysmsapi.aliyuncs.com");
+            IClientProfile profile = DefaultProfile.GetProfile(AliyunSetting.RegionIdForPop, AliyunSetting.KeyId, AliyunSetting.KeySecret);
+            DefaultProfile.AddEndpoint(AliyunSetting.RegionIdForPop, AliyunSetting.RegionIdForPop, AliyunSetting.Product, AliyunSetting.Domain);
+            //DefaultProfile.AddEndpoint("cn-hangzhou", "cn-hangzhou", "Dysmsapi", "dysmsapi.aliyuncs.com");
             IAcsClient acsClient = new DefaultAcsClient(profile);
             SendSmsRequest request = new SendSmsRequest();
             try
@@ -52,12 +41,12 @@ namespace YYP.ComLib.Services
             }
             catch (ServerException e)
             {
-                _logger.LogError(e.ErrorMessage);
+                //_logger.LogError(e.ErrorMessage);
                 result.RuleViolations.Add(new RuleViolation("SendSms", e.ErrorMessage));
             }
             catch (ClientException e)
             {
-                _logger.LogError(e.ErrorMessage);
+                //_logger.LogError(e.ErrorMessage);
                 result.RuleViolations.Add(new RuleViolation("SendSms", e.ErrorMessage));
             }
             return result;
