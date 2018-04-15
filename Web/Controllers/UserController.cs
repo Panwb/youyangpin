@@ -4,7 +4,6 @@ using YYP.ComLib.Services;
 using System;
 using System.Web.Http;
 using System.Web;
-using System.Web.Security;
 using YYP.Web;
 
 namespace WebAPI.Controllers

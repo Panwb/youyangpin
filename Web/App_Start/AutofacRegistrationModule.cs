@@ -17,10 +17,21 @@ namespace YYP.Web
             builder.RegisterType<AliyunSendSmsService>().As<ISendSmsService>().InstancePerRequest();
             builder.RegisterType<UserService>().As<IUserService>().InstancePerRequest();
             builder.RegisterType<GoodService>().As<IGoodService>().InstancePerRequest();
+            builder.RegisterType<MerchantService>().As<IMerchantService>().InstancePerRequest();
+            builder.RegisterType<OrderGoodService>().As<IOrderGoodService>().InstancePerRequest();
+            builder.RegisterType<OrderService>().As<IOrderService>().InstancePerRequest();
+            builder.RegisterType<ShopService>().As<IShopService>().InstancePerRequest();
+            builder.RegisterType<StudioHostService>().As<IStudioHostService>().InstancePerRequest();
+            builder.RegisterType<WithdrawalService>().As<IWithdrawalService>().InstancePerRequest();
 
             builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerRequest();
             builder.RegisterType<GoodRepository>().As<IGoodRepository>().InstancePerRequest();
-            builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerRequest();
+            builder.RegisterType<MerchantRepository>().As<IMerchantRepository>().InstancePerRequest();
+            builder.RegisterType<OrderGoodRepository>().As<IOrderGoodRepository>().InstancePerRequest();
+            builder.RegisterType<OrderRepository>().As<IOrderRepository>().InstancePerRequest();
+            builder.RegisterType<ShopRepository>().As<IShopRepository>().InstancePerRequest();
+            builder.RegisterType<StudioHostRepository>().As<IStudioHostRepository>().InstancePerRequest();
+            builder.RegisterType<WithdrawalRepository>().As<IWithdrawalRepository>().InstancePerRequest();
         }
     }
 }

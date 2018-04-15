@@ -76,4 +76,7 @@
   <ItemGroup>
     <None Include="Scripts\StoredProcedures\dbo.Usp_T_Sys_User_Update.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\StoredProcedures\dbo.Usp_TYYP_StudioHost_Insert.sql" />
+  </ItemGroup>
 </Project>

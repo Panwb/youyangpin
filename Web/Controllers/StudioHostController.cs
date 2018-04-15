@@ -2,26 +2,25 @@
 using YYP.Entities;
 using YYP.Services;
 using System.Web.Http;
+using YYP.Dto;
 
 namespace WebAPI.Controllers
 {
     //主播用户管理
     public class StudioHostController : ApiController
     {
-        private readonly IUserService _userService;
+        private readonly IStudioHostService _studioHostService;
 
-        public StudioHostController(IUserService userService)
+        public StudioHostController(IStudioHostService studioHostService)
         {
-            _userService = userService;
+            _studioHostService = studioHostService;
         }
 
         [HttpPost]
-        public UserServiceResult Register(string telphone, string password)
+        public StudioHostServiceResult Register([FromUri]RegisterDto dto)
         {
-            var user = new User() {Account = telphone, TelPhone = telphone, Pwd = password, UserType = UserType.StudioHost};
-
             //TODO: 同时插入主播表和用户表
-            return _userService.Register(user);
+            return _studioHostService.Register(dto);
         }
     }
 }

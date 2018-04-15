@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\GoodStatistic.cs" />
+    <Compile Include="Dto\RegisterDto.cs" />
     <Compile Include="Entities\Good.cs" />
     <Compile Include="Entities\Merchant.cs" />
     <Compile Include="Entities\Order.cs" />
