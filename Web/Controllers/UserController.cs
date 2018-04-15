@@ -1,5 +1,4 @@
 ﻿using YYP.ComLib;
-using Infrastructure.Helper;
 using YYP.Services;
 using YYP.ComLib.Services;
 using System;
@@ -21,15 +20,29 @@ namespace WebAPI.Controllers
             _sendSmsService = sendSmsService;
         }
 
-        public UserServiceResult Login(string accountName, string password)
+        [HttpGet]
+        public UserServiceResult Login(string accountName, string password, string identifyingCode)
         {
+            var session = HttpContext.Current.Session;
+            //if (session == null || identifyingCode != (string)session[SessionKey.IdentifyingCode])
+            //{
+            //    var result = new UserServiceResult();
+            //    result.RuleViolations.Add(new Infrastructure.DomainModel.RuleViolation("identifyingCode", "验证码输入错误"));
+            //    return result;
+            //}
+
             ////检查用户信息
             var userResult = _userService.GetUser(accountName, password);
             if (!userResult.HasViolation && userResult.User != null)
             {
                 //记录Session
-                //HttpContext.Current.Session.Set(GlobalConstants.UserSessionKey, ByteConvertHelper.Object2Bytes(userResult.User));
-                FormsAuthentication.SetAuthCookie(userResult.User.Account, true);
+                HttpContext.Current.Session[SessionKey.LoginUser] = userResult.User;
+            }
+            else
+            {
+                var result = new UserServiceResult();
+                result.RuleViolations.Add(new Infrastructure.DomainModel.RuleViolation("", "用户名或密码不正确"));
+                return result;
             }
 
             return userResult;
@@ -39,15 +52,22 @@ namespace WebAPI.Controllers
         public SendSmsServiceResult SendSms(string telphone)
         {
             string identifyingCode = new Random().Next(100000, 999999).ToString();//验证码
+            HttpContext.Current.Session[SessionKey.IdentifyingCode] = identifyingCode;
             var result = _sendSmsService.SendMessage("{'code':'" + identifyingCode + "'}", telphone, telphone, GlobalConstants.AliyunSMSRegisterTempCode, GlobalConstants.AliyunSMSSignname);
             return result;
+        }
+
+        [HttpPut]
+        public UserServiceResult ChangePassword(string oldPassword, string newPassword)
+        {
+            return _userService.ChangePassword(oldPassword, newPassword);
         }
 
         [Authorization]
         [HttpDelete]
         public void Logout()
         {
-            FormsAuthentication.SignOut();
+            HttpContext.Current.Session.Clear();
         }
     }
 }

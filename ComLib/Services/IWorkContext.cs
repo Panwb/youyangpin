@@ -6,22 +6,15 @@ namespace YYP.ComLib.Services
 {
     public interface IWorkContext
     {
+        User CurrentUser { get; }
+
         string AccountName { get; }
     }
 
     public class DefaultWorkContext : IWorkContext
     {
-        public string AccountName
-        {
-            get
-            {
-                var user = HttpContext.Current.User;
-                if(user != null)
-                {
-                    return user.Identity.Name;
-                }
-                return null;
-            }
-        }
+        public string AccountName => CurrentUser?.Account;
+
+        public User CurrentUser => HttpContext.Current.Session[SessionKey.LoginUser] as User;
     }
 }

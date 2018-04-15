@@ -16,9 +16,11 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public UserServiceResult Register(string telphone, string pwd)
+        public UserServiceResult Register(string telphone, string password)
         {
-            var user = new User() {Account = telphone, TelPhone = telphone, Pwd = pwd, UserType = UserType.StudioHost};
+            var user = new User() {Account = telphone, TelPhone = telphone, Pwd = password, UserType = UserType.StudioHost};
+
+            //TODO: 同时插入主播表和用户表
             return _userService.Register(user);
         }
     }

@@ -13,11 +13,11 @@ namespace YYP.Web
     {
         protected override bool IsAuthorized(HttpActionContext actionContext)
         {
-            var session = HttpContext.Current.Session;
-            if(session == null || session[GlobalConstants.UserSessionKey] == null)
-            {
-                return false;
-            }
+            var user = HttpContext.Current.Session[SessionKey.LoginUser];
+            //if(user == null)
+            //{
+            //    return false;
+            //}
             return true;
         }
     }

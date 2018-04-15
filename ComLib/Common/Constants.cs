@@ -2,13 +2,22 @@
 {
     public static class GlobalConstants
     {
-        public const string UserSessionKey = "LOGIN_INFORMATION";
         public const string AliyunSMSSignname = "优样品";
         public const string AliyunSMSRegisterTempCode = "SMS_117521192"; //注册业务短信模板
         public const string AliyunSMSReviewTempCode = "SMS_117511584"; //审核业务短信模板
     }
 
+    public static class SessionKey
+    {
+        public const string LoginUser = "LoginUser";
+        public const string IdentifyingCode = "IdentifyingCode"; //验证码SessionKey
+    }
 
+    public static class CheckStatus
+    {
+        public const string Pass = "已审核";
+        public const string Waiting = "待审核";
+    }
 
     public static class UserType
     {

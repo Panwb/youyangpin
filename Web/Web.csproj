@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>YouYangPin</RootNamespace>
     <AssemblyName>YouYangPin</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -57,6 +57,9 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -65,9 +68,9 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -75,9 +78,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
@@ -190,7 +190,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudioHostController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Attribute\AuthorizationAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -228,112 +227,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="wwwroot\Readme.txt" />
-    <Content Include="wwwroot\youyangpin\.postcssrc.js" />
-    <Content Include="wwwroot\youyangpin\build\build.js" />
-    <Content Include="wwwroot\youyangpin\build\check-versions.js" />
-    <Content Include="wwwroot\youyangpin\build\logo.png" />
-    <Content Include="wwwroot\youyangpin\build\utils.js" />
-    <Content Include="wwwroot\youyangpin\build\vue-loader.conf.js" />
-    <Content Include="wwwroot\youyangpin\build\webpack.base.conf.js" />
-    <Content Include="wwwroot\youyangpin\build\webpack.dev.conf.js" />
-    <Content Include="wwwroot\youyangpin\build\webpack.prod.conf.js" />
-    <Content Include="wwwroot\youyangpin\config\dev.env.js" />
-    <Content Include="wwwroot\youyangpin\config\index.js" />
-    <Content Include="wwwroot\youyangpin\config\prod.env.js" />
-    <Content Include="wwwroot\youyangpin\index.html" />
-    <Content Include="wwwroot\youyangpin\src\assets\css\reset.css" />
-    <Content Include="wwwroot\youyangpin\src\assets\images\hamburger.png" />
-    <Content Include="wwwroot\youyangpin\src\assets\images\jian.png" />
-    <Content Include="wwwroot\youyangpin\src\assets\images\logo.png" />
-    <Content Include="wwwroot\youyangpin\src\assets\images\pro.png" />
-    <Content Include="wwwroot\youyangpin\src\assets\images\quan.png" />
-    <Content Include="wwwroot\youyangpin\src\assets\images\tianmao.png" />
-    <Content Include="wwwroot\youyangpin\src\assets\images\wangwang.png" />
-    <Content Include="wwwroot\youyangpin\src\main.js" />
-    <Content Include="wwwroot\youyangpin\src\router\index.js" />
-    <Content Include="wwwroot\youyangpin\src\views\apply\app\apply.html" />
-    <Content Include="wwwroot\youyangpin\src\views\apply\app\apply.js" />
-    <Content Include="wwwroot\youyangpin\src\views\index\app\index.html" />
-    <Content Include="wwwroot\youyangpin\src\views\index\app\index.js" />
-    <Content Include="wwwroot\youyangpin\src\views\user\app\user.html" />
-    <Content Include="wwwroot\youyangpin\src\views\user\app\user.js" />
-    <Content Include="wwwroot\youyangpin\theme\alert.css" />
-    <Content Include="wwwroot\youyangpin\theme\aside.css" />
-    <Content Include="wwwroot\youyangpin\theme\autocomplete.css" />
-    <Content Include="wwwroot\youyangpin\theme\badge.css" />
-    <Content Include="wwwroot\youyangpin\theme\base.css" />
-    <Content Include="wwwroot\youyangpin\theme\breadcrumb-item.css" />
-    <Content Include="wwwroot\youyangpin\theme\breadcrumb.css" />
-    <Content Include="wwwroot\youyangpin\theme\button-group.css" />
-    <Content Include="wwwroot\youyangpin\theme\button.css" />
-    <Content Include="wwwroot\youyangpin\theme\card.css" />
-    <Content Include="wwwroot\youyangpin\theme\carousel-item.css" />
-    <Content Include="wwwroot\youyangpin\theme\carousel.css" />
-    <Content Include="wwwroot\youyangpin\theme\cascader.css" />
-    <Content Include="wwwroot\youyangpin\theme\checkbox-button.css" />
-    <Content Include="wwwroot\youyangpin\theme\checkbox-group.css" />
-    <Content Include="wwwroot\youyangpin\theme\checkbox.css" />
-    <Content Include="wwwroot\youyangpin\theme\col.css" />
-    <Content Include="wwwroot\youyangpin\theme\collapse-item.css" />
-    <Content Include="wwwroot\youyangpin\theme\collapse.css" />
-    <Content Include="wwwroot\youyangpin\theme\color-picker.css" />
-    <Content Include="wwwroot\youyangpin\theme\container.css" />
-    <Content Include="wwwroot\youyangpin\theme\date-picker.css" />
-    <Content Include="wwwroot\youyangpin\theme\dialog.css" />
-    <Content Include="wwwroot\youyangpin\theme\display.css" />
-    <Content Include="wwwroot\youyangpin\theme\dropdown-item.css" />
-    <Content Include="wwwroot\youyangpin\theme\dropdown-menu.css" />
-    <Content Include="wwwroot\youyangpin\theme\dropdown.css" />
-    <Content Include="wwwroot\youyangpin\theme\element-variables.css" />
-    <Content Include="wwwroot\youyangpin\theme\footer.css" />
-    <Content Include="wwwroot\youyangpin\theme\form-item.css" />
-    <Content Include="wwwroot\youyangpin\theme\form.css" />
-    <Content Include="wwwroot\youyangpin\theme\header.css" />
-    <Content Include="wwwroot\youyangpin\theme\icon.css" />
-    <Content Include="wwwroot\youyangpin\theme\index.css" />
-    <Content Include="wwwroot\youyangpin\theme\input-number.css" />
-    <Content Include="wwwroot\youyangpin\theme\input.css" />
-    <Content Include="wwwroot\youyangpin\theme\loading.css" />
-    <Content Include="wwwroot\youyangpin\theme\main.css" />
-    <Content Include="wwwroot\youyangpin\theme\menu-item-group.css" />
-    <Content Include="wwwroot\youyangpin\theme\menu-item.css" />
-    <Content Include="wwwroot\youyangpin\theme\menu.css" />
-    <Content Include="wwwroot\youyangpin\theme\message-box.css" />
-    <Content Include="wwwroot\youyangpin\theme\message.css" />
-    <Content Include="wwwroot\youyangpin\theme\notification.css" />
-    <Content Include="wwwroot\youyangpin\theme\option-group.css" />
-    <Content Include="wwwroot\youyangpin\theme\option.css" />
-    <Content Include="wwwroot\youyangpin\theme\pagination.css" />
-    <Content Include="wwwroot\youyangpin\theme\popover.css" />
-    <Content Include="wwwroot\youyangpin\theme\popper.css" />
-    <Content Include="wwwroot\youyangpin\theme\progress.css" />
-    <Content Include="wwwroot\youyangpin\theme\radio-button.css" />
-    <Content Include="wwwroot\youyangpin\theme\radio-group.css" />
-    <Content Include="wwwroot\youyangpin\theme\radio.css" />
-    <Content Include="wwwroot\youyangpin\theme\rate.css" />
-    <Content Include="wwwroot\youyangpin\theme\reset.css" />
-    <Content Include="wwwroot\youyangpin\theme\row.css" />
-    <Content Include="wwwroot\youyangpin\theme\scrollbar.css" />
-    <Content Include="wwwroot\youyangpin\theme\select-dropdown.css" />
-    <Content Include="wwwroot\youyangpin\theme\select.css" />
-    <Content Include="wwwroot\youyangpin\theme\slider.css" />
-    <Content Include="wwwroot\youyangpin\theme\spinner.css" />
-    <Content Include="wwwroot\youyangpin\theme\step.css" />
-    <Content Include="wwwroot\youyangpin\theme\steps.css" />
-    <Content Include="wwwroot\youyangpin\theme\submenu.css" />
-    <Content Include="wwwroot\youyangpin\theme\switch.css" />
-    <Content Include="wwwroot\youyangpin\theme\tab-pane.css" />
-    <Content Include="wwwroot\youyangpin\theme\table-column.css" />
-    <Content Include="wwwroot\youyangpin\theme\table.css" />
-    <Content Include="wwwroot\youyangpin\theme\tabs.css" />
-    <Content Include="wwwroot\youyangpin\theme\tag.css" />
-    <Content Include="wwwroot\youyangpin\theme\time-picker.css" />
-    <Content Include="wwwroot\youyangpin\theme\time-select.css" />
-    <Content Include="wwwroot\youyangpin\theme\tooltip.css" />
-    <Content Include="wwwroot\youyangpin\theme\transfer.css" />
-    <Content Include="wwwroot\youyangpin\theme\tree.css" />
-    <Content Include="wwwroot\youyangpin\theme\upload.css" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -354,26 +248,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="wwwroot\youyangpin\.babelrc" />
-    <Content Include="wwwroot\youyangpin\.editorconfig" />
-    <Content Include="wwwroot\youyangpin\.gitignore" />
-    <Content Include="wwwroot\youyangpin\build\export" />
-    <Content Include="wwwroot\youyangpin\element-variables.scss" />
-    <Content Include="wwwroot\youyangpin\package-lock.json" />
-    <Content Include="wwwroot\youyangpin\package.json" />
-    <Content Include="wwwroot\youyangpin\README.md" />
-    <Content Include="wwwroot\youyangpin\src\App.vue" />
-    <Content Include="wwwroot\youyangpin\src\components\footer.vue" />
-    <Content Include="wwwroot\youyangpin\src\components\header.vue" />
-    <Content Include="wwwroot\youyangpin\src\page\index.vue" />
-    <Content Include="wwwroot\youyangpin\src\page\myorder.vue" />
-    <Content Include="wwwroot\youyangpin\src\page\user.vue" />
-    <Content Include="wwwroot\youyangpin\src\views\apply\app\apply.vue" />
-    <Content Include="wwwroot\youyangpin\src\views\index\app\index.vue" />
-    <Content Include="wwwroot\youyangpin\src\views\user\app\user.vue" />
-    <Content Include="wwwroot\youyangpin\static\.gitkeep" />
-    <Content Include="wwwroot\youyangpin\theme\fonts\element-icons.ttf" />
-    <Content Include="wwwroot\youyangpin\theme\fonts\element-icons.woff" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
