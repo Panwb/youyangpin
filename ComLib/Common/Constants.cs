@@ -10,7 +10,8 @@
     public static class SessionKey
     {
         public const string LoginUser = "LoginUser";
-        public const string IdentifyingCode = "IdentifyingCode"; //验证码SessionKey
+        public const string ImageIdentifyCode = "IdentifyCode"; //图片验证码SessionKey
+        public const string SmsIdentifyCode = "SmsIdentifyCode"; //短信验证码SessionKey
     }
 
     public static class CheckStatus

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Text;
 using Newtonsoft.Json;
 
@@ -39,6 +41,18 @@ namespace Infrastructure.Helper
         {
             string json = System.Text.Encoding.UTF8.GetString(buff);
             return JsonConvert.DeserializeObject<T>(json);
+        }
+
+        public static byte[] Bitmap2Bytes(Bitmap bmp)
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                bmp.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
+                byte[] data = new byte[stream.Length];
+                stream.Seek(0, SeekOrigin.Begin);
+                stream.Read(data, 0, Convert.ToInt32(stream.Length));
+                return data;
+            }
         }
     }
 }

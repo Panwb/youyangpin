@@ -11,5 +11,7 @@ namespace YYP.Dto
         public string TelPhone { get; set; }
         public string Password { get; set; }
         public string StudioHostName { get; set; }
+        public string IdentifyCode { get; set; }
+        public string SmsIdentifyCode { get; set; }
     }
 }

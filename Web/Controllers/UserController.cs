@@ -20,17 +20,17 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        public UserServiceResult Login(string accountName, string password, string identifyingCode)
+        public UserServiceResult Login(string accountName, string password, string identifyCode)
         {
             var session = HttpContext.Current.Session;
-            //if (session == null || identifyingCode != (string)session[SessionKey.IdentifyingCode])
-            //{
-            //    var result = new UserServiceResult();
-            //    result.RuleViolations.Add(new Infrastructure.DomainModel.RuleViolation("identifyingCode", "验证码输入错误"));
-            //    return result;
-            //}
+            if (session == null || identifyCode != (string)session[SessionKey.ImageIdentifyCode])
+            {
+                var result = new UserServiceResult();
+                result.RuleViolations.Add(new Infrastructure.DomainModel.RuleViolation("identifyCode", "验证码输入错误"));
+                return result;
+            }
 
-            ////检查用户信息
+            //检查用户信息
             var userResult = _userService.GetUser(accountName, password);
             if (!userResult.HasViolation && userResult.User != null)
             {
@@ -50,9 +50,9 @@ namespace WebAPI.Controllers
         [HttpGet]
         public SendSmsServiceResult SendSms(string telphone)
         {
-            string identifyingCode = new Random().Next(100000, 999999).ToString();//验证码
-            HttpContext.Current.Session[SessionKey.IdentifyingCode] = identifyingCode;
-            var result = _sendSmsService.SendMessage("{'code':'" + identifyingCode + "'}", telphone, telphone, GlobalConstants.AliyunSMSRegisterTempCode, GlobalConstants.AliyunSMSSignname);
+            string identifyCode = new Random().Next(100000, 999999).ToString();//验证码
+            HttpContext.Current.Session[SessionKey.SmsIdentifyCode] = identifyCode;
+            var result = _sendSmsService.SendMessage("{'code':'" + identifyCode + "'}", telphone, telphone, GlobalConstants.AliyunSMSRegisterTempCode, GlobalConstants.AliyunSMSSignname);
             return result;
         }
 
