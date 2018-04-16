@@ -10,7 +10,7 @@
     public static class SessionKey
     {
         public const string LoginUser = "LoginUser";
-        public const string ImageIdentifyCode = "IdentifyCode"; //图片验证码SessionKey
+        public const string ImageIdentifyCode = "ImageIdentifyCode"; //图片验证码SessionKey
         public const string SmsIdentifyCode = "SmsIdentifyCode"; //短信验证码SessionKey
     }
 
@@ -18,6 +18,7 @@
     {
         public const string Pass = "已审核";
         public const string Waiting = "待审核";
+        public const string Failed = "审核不通过";
     }
 
     public static class UserType

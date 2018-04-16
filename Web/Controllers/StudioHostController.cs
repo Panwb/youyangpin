@@ -20,21 +20,27 @@ namespace WebAPI.Controllers
         [HttpPost]
         public StudioHostServiceResult Register([FromUri]RegisterDto dto)
         {
+            var result = new StudioHostServiceResult();
             var session = HttpContext.Current.Session;
-            if (session == null || dto.IdentifyCode != (string)session[SessionKey.ImageIdentifyCode])
+            if (session == null || dto.ImageIdentifyCode != (string)session[SessionKey.ImageIdentifyCode])
             {
-                var result = new StudioHostServiceResult();
                 result.RuleViolations.Add(new Infrastructure.DomainModel.RuleViolation("identifyCode", "验证码输入错误"));
                 return result;
             }
             if (session == null || dto.SmsIdentifyCode != (string)session[SessionKey.SmsIdentifyCode])
             {
-                var result = new StudioHostServiceResult();
                 result.RuleViolations.Add(new Infrastructure.DomainModel.RuleViolation("identifyCode", "短信验证码输入错误"));
                 return result;
             }
 
-            return _studioHostService.Register(dto);
+            result = _studioHostService.Register(dto);
+            if (!result.HasViolation) //注册成功，使原验证码无效
+            {
+                session[SessionKey.ImageIdentifyCode] = null;
+                session[SessionKey.SmsIdentifyCode] = null;
+            }
+
+            return result;
         }
     }
 }

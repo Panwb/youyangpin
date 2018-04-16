@@ -44,6 +44,11 @@ namespace WebAPI.Controllers
                 return result;
             }
 
+            if (!userResult.HasViolation) //登陆成功，使原验证码无效
+            {
+                session[SessionKey.ImageIdentifyCode] = null;
+            }
+
             return userResult;
         }
 

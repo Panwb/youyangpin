@@ -79,4 +79,16 @@
   <ItemGroup>
     <None Include="Scripts\StoredProcedures\dbo.Usp_TYYP_StudioHost_Insert.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\StoredProcedures\dbo.Usp_TYYP_Shop_Select.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\StoredProcedures\dbo.Usp_TYYP_StudioHost_Select.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\StoredProcedures\dbo.Usp_TYYP_Goods_Select.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\StoredProcedures\dbo.Usp_TYYP_Goods_SelectRelated.sql" />
+  </ItemGroup>
 </Project>
