@@ -11,4 +11,10 @@ namespace YYP.ComLib
         Enabled = 1,
         Disabled = 2
     }
+
+    public enum SendSmsType
+    {
+        Register = 1,
+        RetrievePassword = 2
+    }
 }

@@ -12,6 +12,7 @@
         public const string LoginUser = "LoginUser";
         public const string ImageIdentifyCode = "ImageIdentifyCode"; //图片验证码SessionKey
         public const string SmsIdentifyCode = "SmsIdentifyCode"; //短信验证码SessionKey
+        public const string RetrievePasswordTelphone = "RetrievePasswordTelphone"; //找回密码手机号
     }
 
     public static class CheckStatus

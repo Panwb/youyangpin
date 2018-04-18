@@ -44,6 +44,7 @@
     <Compile Include="Dto\GoodDetailDto.cs" />
     <Compile Include="Dto\GoodStatistic.cs" />
     <Compile Include="Dto\RegisterDto.cs" />
+    <Compile Include="Dto\StudioHostDto.cs" />
     <Compile Include="Entities\Good.cs" />
     <Compile Include="Entities\Merchant.cs" />
     <Compile Include="Entities\Order.cs" />
