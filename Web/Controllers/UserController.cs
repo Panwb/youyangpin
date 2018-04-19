@@ -7,7 +7,7 @@ using System.Web;
 using YYP.Web;
 using Infrastructure.DomainModel;
 
-namespace WebAPI.Controllers
+namespace YYP.Controllers
 {
     public class UserController : ApiController
     {

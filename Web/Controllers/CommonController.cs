@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using YYP.ComLib;
 
-namespace YouYangPin.Controllers
+namespace YYP.Controllers
 {
     public class CommonController : Controller
     {

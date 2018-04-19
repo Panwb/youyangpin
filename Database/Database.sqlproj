@@ -94,4 +94,10 @@
   <ItemGroup>
     <None Include="Scripts\StoredProcedures\dbo.Usp_TYYP_StudioHost_Update.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\StoredProcedures\dbo.Usp_TYYP_Order_SelectByUserId.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\StoredProcedures\dbo.Usp_TYYP_Goods_SelectByOrderId.sql" />
+  </ItemGroup>
 </Project>

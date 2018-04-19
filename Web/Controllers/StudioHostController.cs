@@ -8,7 +8,7 @@ using YYP.ComLib.Services;
 using Infrastructure.DomainModel;
 using YYP.Web;
 
-namespace WebAPI.Controllers
+namespace YYP.Controllers
 {
     //主播用户管理
     public class StudioHostController : ApiController

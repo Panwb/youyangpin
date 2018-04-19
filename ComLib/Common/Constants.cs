@@ -28,6 +28,17 @@
         public const string Admin = "管理员用户";
         public const string Business = "商家用户";
         public const string StudioHost = "主播用户";
+    }
 
+    public static class OrderStatus
+    {
+        public const string WaitingSend = "待发货";
+        public const string Sended = "已发货";
+        public const string Arrived = "已到货";
+        public const string WaitingReturn = "待退货";
+        public const string Returned = "已退货";
+        public const string WaitingReturnFee = "待退费";
+        public const string ReturnedFee = "已退费";
+        public const string Finished = "已完成";
     }
 }
