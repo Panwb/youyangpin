@@ -1,40 +1,8 @@
 <template>
-  <div class="index">  
+  <div id="app">
 	<el-container>
-      <!--header start--->
-       <div class="optbox">
-          <div class="wd1200">      
-			  <span class="loginbtn">请登录</span>
-			  <span>免费注册</span>
-          </div>
-         </el-header>
-      </div>
-      <div class="wd1200 searchbox">
-	      <el-row>
-			  <el-col :span="8"><div class="grid-content bg-purple"> <img src="../assets/images/logo.png" class="logo"></div></el-col>
-			  <el-col :span="16">
-			   <div class="grid-content bg-purple-light seabox">
-			     <el-input placeholder="关键词搜索" prefix-icon="el-icon-search"></el-input>
-			     <el-button class="sea-btn">搜索</el-button>
-			   </div>
-			  </el-col>
-		  </el-row>
-      </div>
-      <div class="navbox">
-		  <el-header>
-		     <div class="wd1200">
-		      <el-menu :default-active="activeIndex"  class="el-menu-demo" mode="horizontal" @select="handleSelect" background-color="#261f1e" text-color="#fff" active-text-color="#f9513b">
-				  <el-menu-item index="1">首页</el-menu-item>
-				  <el-menu-item index="2">日常产品</el-menu-item>
-				  <el-menu-item index="3">秒杀产品</el-menu-item>
-				  <el-menu-item index="4">新款产品</el-menu-item>
-				  <el-menu-item index="5">清仓产品</el-menu-item>
-				  <el-menu-item index="6">高端产品</el-menu-item>
-			  </el-menu>
-			 </div>
-		  </el-header>
-	  </div>
-	  <!--header end--->
+
+      <mainHeader></mainHeader>
 
       <!--main start--->
 	  <el-main>
@@ -65,7 +33,7 @@
 				  <el-col :span="6" v-for="(o, index) in 6" :key="o">
 				    <el-card :body-style="{ padding: '0px' }" shadow="hover">
 				      <span class="type"><i>日常产品</i></span>
-				      <img src="../assets/images/hamburger.png" class="image">
+				     <img src="../../../assets/images/hamburger.png" class="image">
 				      <div class="numbox">
                            <div class="rcprice"><div class="inner">日常价：69.00</div></div>
                            <div class="xl"><div class="inner">销量39998</div></div>
@@ -120,11 +88,12 @@
 </template>
 
 <script>
+import mainHeader from '../../../components/header.vue'
+
 export default {
-  name: 'Index',
+  components: {mainHeader},
   data () {
     return {
-      activeIndex: '1',
       currentPage1:4
     }
   },
@@ -284,7 +253,7 @@ export default {
 .listbox .type{
     height: 55px;
     width: 44px;
-    background: url(../assets/images/pro.png) -52px 0 no-repeat;
+    background: url(../../../assets/images/pro.png) -52px 0 no-repeat;
     display: block;
     position: absolute;
     right: 0;
@@ -344,10 +313,10 @@ export default {
     height: 22px;
 }
 .listbox .el-card .icon-tian{
-	background: url(../assets/images/pro.png) -162px 0 no-repeat;
+	background: url(../../../assets/images/pro.png) -162px 0 no-repeat;
 }
 .listbox .el-card .icon-tao{
-	background: url(../assets/images/pro.png) -162px -28px no-repeat;
+	background: url(../../../assets/images/pro.png) -162px -28px no-repeat;
 }
 .listbox .content{
 	position:relative
@@ -397,10 +366,10 @@ export default {
 	position:relative;
 }
 .listbox .middle .youhui.quan{
-	background: url(../assets/images/quan.png) 0 0 no-repeat;
+	background: url(../../../assets/images/quan.png) 0 0 no-repeat;
 }
 .listbox .middle .youhui.jian{
-	background: url(../assets/images/jian.png) 0 0 no-repeat;
+	background: url(../../../assets/images/jian.png) 0 0 no-repeat;
 }
 .listbox .middle .youhui .num{
 	position:absolute;

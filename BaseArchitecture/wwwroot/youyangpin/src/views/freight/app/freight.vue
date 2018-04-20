@@ -1,5 +1,5 @@
 <template>
-  <div class="user">  
+  <div id="app">  
 	<el-container>
       <!--header start--->
        <div class="optbox">
@@ -11,7 +11,7 @@
       </div>
       <div class="wd1200 searchbox">
 	      <el-row>
-			  <el-col :span="8"><div class="grid-content bg-purple"> <img src="../assets/images/logo.png" class="logo"></div></el-col>
+			  <el-col :span="8"><div class="grid-content bg-purple"> <img src="../../../assets/images/logo.png" class="logo"></div></el-col>
 			  <el-col :span="16">
 			   <div class="grid-content bg-purple-light seabox">
 			     <el-input placeholder="关键词搜索" prefix-icon="el-icon-search"></el-input>
@@ -23,7 +23,7 @@
       <div class="navbox">
 		  <el-header>
 		     <div class="wd1200">
-		      <el-menu :default-active="activeIndex"  class="el-menu-demo" mode="horizontal" @select="handleSelect" background-color="#261f1e" text-color="#fff" active-text-color="#f9513b">
+		      <el-menu class="el-menu-demo" mode="horizontal" @select="handleSelect" background-color="#261f1e" text-color="#fff" active-text-color="#f9513b">
 				  <el-menu-item index="1">首页</el-menu-item>
 				  <el-menu-item index="2">日常产品</el-menu-item>
 				  <el-menu-item index="3">秒杀产品</el-menu-item>
@@ -40,64 +40,47 @@
 	  <el-main class="maincontent">
 	    <div class="wd1200">
              <el-container>
-				  <el-aside class="asidebox">
+				 <el-aside class="asidebox">
 				       <p class="title">个人中心</p>
-                       <el-menu class="linklist">
+                       <el-menu class="linklist" :default-active="asideIndex">
 					      <el-menu-item index="1">
 					        <span slot="title">我的订单</span>
 					      </el-menu-item>
 					      <el-menu-item index="2">
-					        <span slot="title">运费申请</span>
+					        <span slot="title">申请记录</span>
 					      </el-menu-item>
-					      <el-submenu index="3">
-					        <template slot="title">账号管理</template>
-					        <el-menu-item-group>
-					          <el-menu-item index="3-1">个人信息</el-menu-item>
-					          <el-menu-item index="3-2">修改密码</el-menu-item>
-					        </el-menu-item-group>
-					      </el-submenu>
+					      <el-menu-item index="3">
+					        <span slot="title">运费提现</span>
+					      </el-menu-item>
 					      <el-menu-item index="4">
-					        <span slot="title">服务协议</span>
+					        <span slot="title">个人信息</span>
+					      </el-menu-item>
+					       <el-menu-item index="5">
+					        <span slot="title">修改密码</span>
 					      </el-menu-item>
 					    </el-menu>
 				  </el-aside>
 				  <el-main class="mainbox">
-				  <router-view/>
-				    <p class="title">我的订单</p>
+				    <p class="title">运费申请</p>
 				    <div class="content">
-                       <el-tabs v-model="activeName" @tab-click="handleClick">
-					     <el-tab-pane label="所有订单" name="order1">
-					         <template>
-							    <el-table :data="tableData">
-							      <el-table-column prop="shopname" label="店铺名" width="80"></el-table-column>
-							      <el-table-column prop="userid" label="旺旺号" width="100"></el-table-column>
-							      <el-table-column prop="userphone" label="联系人电话" width="110"></el-table-column>
-							      <el-table-column prop="orderid" label="订单号" width="110"></el-table-column>
-							      <el-table-column prop="orderstate" label="订单状态" width="110"></el-table-column>
-							      <el-table-column prop="planstate" label="定向计划状态" width="110"></el-table-column>
-							      <el-table-column prop="shopinfo" label="商品信息"></el-table-column>
-							      <el-table-column prop="option" label="操作" width="110"></el-table-column>
-							    </el-table>
-							  </template>
-						  </el-tab-pane>
-					      <el-tab-pane label="待发货" name="order2"></el-tab-pane>
-					      <el-tab-pane label="已发货" name="order3"></el-tab-pane>
-					      <el-tab-pane label="待退货" name="order5"></el-tab-pane>
-					      <el-tab-pane label="已退货" name="order6">已退货</el-tab-pane>
-					      <el-tab-pane label="待退费" name="order7">待退费</el-tab-pane>
-					      <el-tab-pane label="已退费" name="order8">已退费</el-tab-pane>
-					      <el-tab-pane label="已完成" name="order9">已完成</el-tab-pane>
-					      <el-tab-pane label="异常订单" name="order10">异常订单</el-tab-pane>
-					      <el-tab-pane label="异常订单" name="order10">异常订单</el-tab-pane>
-				    </el-tabs>
-						<template class="yfapply">
-						   <div class="applybox">
+                       <!--运费申请-->
+					   <div class="applybox">
 	                        <div class="zfbbox">您的支付宝账号：<span class="zfid">111</span></div> 
 	                        <div class="moneybox">当前可提现金额：<span class="num">100元</span></div>
-	                        <div class="btnbox"><el-button class="applybtn" disabled>申请提现</el-button></div>
-	                        <div class="tipbox">（*单次提现金额需超过100元）</div>
-	                       </div>
-				         </template> 
+	                        <div class="btnbox"><el-button class="applybtn">申请提现</el-button> <span class="tipbox">（*单次提现金额需超过100元）</span></div>
+	                       
+	                    </div>
+	                    <template>
+	                        <p class="txtitle">提现记录</p>
+						    <el-table :data="tableData"  style="width: 100%">
+						      <el-table-column prop="no" label="序号" width="60"></el-table-column>
+						      <el-table-column prop="applytime" label="申请时间" width="220"></el-table-column>
+						      <el-table-column prop="applymoney" label="申请金额" width="220"></el-table-column>
+						      <el-table-column prop="dealtime" label="处理时间" width="220"></el-table-column>
+						      <el-table-column prop="dealstate" label="处理状态" width="220"></el-table-column>
+						    </el-table>
+					    </template>
+
 				    </div>
 				  </el-main>
 			  </el-container>
@@ -126,21 +109,43 @@
 </template>
 
 <script>
+import mainHeader from '../../../components/header.vue'
+import mainFooter from '../../../components/footer.vue'
+
 export default {
-  name: 'User',
   data () {
     return {
-      activeIndex: '1',
-      activeName: 'order1',
+      asideIndex: '3',
       tableData: [{
-            shopname: '王小二的店铺',
-            userid: 'cutemantou',
-            userphone: '18825815552',
-            orderid:'123456',
-            orderstate:'已完成',
-            planstate:'开始执行',
-            shopinfo:"商品信息",
-            option:"操作"
+            no: '1',
+            applytime: '2018-01-03',
+            applymoney: '188',
+            dealtime:'2018-09-08',
+            dealstate:'已发送'
+          },{
+            no: '2',
+            applytime: '2018-01-03',
+            applymoney: '188',
+            dealtime:'2018-09-08',
+            dealstate:'已发送'
+          },{
+            no: '3',
+            applytime: '2018-01-03',
+            applymoney: '188',
+            dealtime:'2018-09-08',
+            dealstate:'已发送'
+          },{
+            no: '4',
+            applytime: '2018-01-03',
+            applymoney: '188',
+            dealtime:'2018-09-08',
+            dealstate:'已发送'
+          },{
+            no: '5',
+            applytime: '2018-01-03',
+            applymoney: '188',
+            dealtime:'2018-09-08',
+            dealstate:'已发送'
           }]
     }
   },
@@ -265,6 +270,7 @@ export default {
 .mainbox .content{
 	background:#fff;
 	margin-top:10px;
+	padding:20px;
 }
 .mainbox .content .el-tabs__header{
 	padding:0 15px;
@@ -276,12 +282,15 @@ export default {
 	width:100% !important;
 }
 .applybox{
-   width:300px;
-   padding:50px 0;
-   margin:0 auto;
+  margin-bottom:40px;
 }
 .applybox div{
 	margin-bottom:15px;
+	overflow:hidden;
+	font-size:16px;
+}
+.applybox div span{
+	font-size:14px;
 }
 .applybox .moneybox .num{
 	color:red;
@@ -291,6 +300,11 @@ export default {
 	color:#fff;
 	border:none;
 	padding:10px 20px;
+	float:left;
+	margin-left:20px;
+}
+.applybox .applybtn.active{
+	background:#f9513b;
 }
 .applybox .applybtn.active{
 	background:#f9513b;
@@ -298,6 +312,9 @@ export default {
 .applybox .tipbox{
 	font-size:12px;
 	color:#f9513b;
+	margin-top:15px;
+	margin-left:10px;
+	float:left;
 }
 .el-footer{
    height:auto !important;
@@ -341,5 +358,29 @@ export default {
 }
 .el-footer .copyright a{
 	color:#fff;
+}
+.modifypsd{
+	width:500px;
+	padding:50px 0;
+	margin:0 auto;
+}
+.txtitle{
+	color: #f9513b;
+	font-weight:bold;
+	font-size:16px;
+	margin-bottom:15px;
+}
+.el-table th{
+	background:#f5f5f5;
+	color:#333;
+}
+.el-table th,.el-table td{
+	text-align:center;
+}
+.applybox{
+    width: 300px;
+    margin: 0 auto 15px;
+    padding: 20px;
+    margin-bottom:15px;
 }
 </style>
