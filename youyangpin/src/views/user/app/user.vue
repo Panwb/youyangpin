@@ -86,6 +86,11 @@
 							   <el-select v-model="ruleForm.size" placeholder="请选择">
 							      <el-option label="S" value="S"></el-option>
                                   <el-option label="M" value="M"></el-option>
+                                  <el-option label="L" value="L"></el-option>
+                                  <el-option label="XL" value="XL"></el-option>
+                                  <el-option label="XXL" value="XXL"></el-option>
+                                  <el-option label="XXXL" value="XXXL"></el-option>
+                                  <el-option label="XXXXL" value="XXXXL"></el-option>
 							   </el-select>
 							  </el-form-item>
 							  <el-form-item label="收货地址" prop="address" class="addressbox">

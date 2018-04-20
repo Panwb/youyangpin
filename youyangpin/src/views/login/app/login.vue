@@ -21,7 +21,7 @@
           </el-col>
           <el-col :span="12">  
            <div class="logininbox">
-            <p class="titlename">欢迎注册</p>
+            <p class="titlename">欢迎登录</p>
             <el-form :model="ruleForm2"  :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
               <el-form-item label="手机号码" prop="mobilePhone" >
                 <el-input  v-model="ruleForm2.mobilePhone" auto-complete="off"  placeholder="请输入手机号码"></el-input>
@@ -33,6 +33,7 @@
                 <el-input  v-model="ruleForm2.yzCode"  auto-complete="off"  placeholder="请输入图形验证码"  class="codetxt"></el-input> <span class="imgbox"><img src="../../../assets/images/hamburger.png" class="logo"></span>
               </el-form-item>
               <el-form-item>
+                <p class="forgetpwd"><a href="">忘记密码</a></p>
                 <el-button type="primary" @click="submitForm('ruleForm2')">登录</el-button>
               </el-form-item>
              </el-form>  
@@ -139,6 +140,14 @@ import mainFooter from '../../../components/footer.vue'
   }
 </script>
 <style>
+.forgetpwd{
+  text-align:right;
+  margin-right:60px;
+  
+}
+.forgetpwd a{
+  color: #f95741;
+}
 .wd1000{
   width:1000px;
   margin:0 auto;

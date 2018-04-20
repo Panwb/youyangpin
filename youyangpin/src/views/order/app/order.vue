@@ -102,13 +102,18 @@
 								            <div class="planstate"><span>待审核</span></div>
 								            <div class="orderstate"><span>已发送</span></div>
 								            <div class="option">
-								             <div>
+								             <div class="box">
                                                   <!--排期-->
-								            <el-button type="text" @click="dialogVisible2 = true">排期</el-button>
+								            <el-button  class="optbtn" type="text" @click="dialogVisible2 = true">排期</el-button>
 											<el-dialog :visible.sync="dialogVisible2"  width="30%">
 											  <el-form :model="form">
 											    <el-form-item label="排期日期" label-width="80px">
-											      <el-input v-model="form.date" auto-complete="off"></el-input>
+									
+											      <el-date-picker
+												      v-model="form.date"
+												      type="date"
+												      placeholder="选择日期">
+												  </el-date-picker>
 											    </el-form-item>
 											  </el-form>
 											  <div slot="footer" class="dialog-footer">
@@ -118,7 +123,7 @@
 											</el-dialog>
 
                                             <!--评价-->
-								            <el-button type="text" @click="dialogVisible4 = true">评价</el-button>
+								            <el-button  class="optbtn"  type="text" @click="dialogVisible4 = true">评价</el-button>
 											<el-dialog :visible.sync="dialogVisible4"  width="30%">
 											  <el-form :model="form4">
 											    <el-form-item label="物流编号" label-width="80px">
@@ -137,7 +142,7 @@
 											</el-dialog>
 
 								            <!--申请定向-->
-								            <el-button type="text" @click="dialogVisible1 = true">申请定向</el-button>
+								            <el-button  class="optbtn" type="text" @click="dialogVisible1 = true">申请定向</el-button>
 									         <el-dialog :visible.sync="dialogVisible1" width="30%">
 											  <span>确认已在阿里妈妈后台生成定向计划?</span>
 											  <span slot="footer" class="dialog-footer">
@@ -148,7 +153,7 @@
 
 
 											<!--填写物流信息-->
-								            <el-button type="text" @click="dialogVisible3 = true">填写物流信息</el-button>
+								            <el-button  class="optbtn" type="text" @click="dialogVisible3 = true">填写物流信息</el-button>
 											<el-dialog :visible.sync="dialogVisible3"  width="30%">
 											  <el-form :model="form3">
 											    <el-form-item label="物流公司" label-width="80px">
@@ -217,13 +222,17 @@
 								            <div class="planstate"><span>待审核</span></div>
 								            <div class="orderstate"><span>已发送</span></div>
 								            <div class="option">
-								            <div>
+								            <div class="box">
                                                   <!--排期-->
-								            <el-button type="text" @click="dialogVisible2 = true">排期</el-button>
+								            <el-button class="optbtn" type="text" @click="dialogVisible2 = true">排期</el-button>
 											<el-dialog :visible.sync="dialogVisible2"  width="30%">
 											  <el-form :model="form">
 											    <el-form-item label="排期日期" label-width="80px">
-											      <el-input v-model="form.date" auto-complete="off"></el-input>
+											      <el-date-picker
+												      v-model="form.date"
+												      type="date"
+												      placeholder="选择日期">
+												  </el-date-picker>
 											    </el-form-item>
 											  </el-form>
 											  <div slot="footer" class="dialog-footer">
@@ -233,7 +242,7 @@
 											</el-dialog>
 
                                             <!--评价-->
-								            <el-button type="text" @click="dialogVisible4 = true">评价</el-button>
+								            <el-button  class="optbtn" type="text" @click="dialogVisible4 = true">评价</el-button>
 											<el-dialog :visible.sync="dialogVisible4"  width="30%">
 											  <el-form :model="form4">
 											    <el-form-item label="物流编号" label-width="80px">
@@ -252,7 +261,7 @@
 											</el-dialog>
 
 								            <!--申请定向-->
-								            <el-button type="text" @click="dialogVisible1 = true">申请定向</el-button>
+								            <el-button  class="optbtn" type="text" @click="dialogVisible1 = true">申请定向</el-button>
 									         <el-dialog :visible.sync="dialogVisible1" width="30%">
 											  <span>确认已在阿里妈妈后台生成定向计划?</span>
 											  <span slot="footer" class="dialog-footer">
@@ -263,7 +272,7 @@
 
 
 											<!--填写物流信息-->
-								            <el-button type="text" @click="dialogVisible3 = true">填写物流信息</el-button>
+								            <el-button  class="optbtn" type="text" @click="dialogVisible3 = true">填写物流信息</el-button>
 											<el-dialog :visible.sync="dialogVisible3"  width="30%">
 											  <el-form :model="form3">
 											    <el-form-item label="物流公司" label-width="80px">
@@ -341,6 +350,7 @@ export default {
   data () {
     return {
       asideIndex: '1',
+      currentPage1:4,
       textarea: '',
       value: null,
       activeName: 'order1',
@@ -368,6 +378,12 @@ export default {
 	},
 	handleClick(tab, event) {
       console.log(tab, event);
+    },
+     handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+    },
+     handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
     }
   }
 }
@@ -659,10 +675,10 @@ export default {
 	margin-top:-70px;
 	display:block;
 }
-.contentbox2 .bottombox2 .option div{
+.contentbox2 .bottombox2 .option div.box{
 	margin-top:-70px;
 }
-.bottombox .option button{
+.bottombox .option button.optbtn{
 	display:block;
 	width:100%;
 	margin:10px 0;
@@ -718,5 +734,8 @@ export default {
 .pagebox{
 	margin:30px auto;
 	text-align:right;
+}
+.el-date-editor.el-input, .el-date-editor.el-input__inner{
+	width:400px;
 }
 </style>
