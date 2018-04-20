@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+import '../../../../theme/index.css'
+import '../../../assets/css/reset.css'
 import Apply from './apply.vue'
-require('../../../assets/css/reset.css');
 
 Vue.use(ElementUI)
 new Vue({

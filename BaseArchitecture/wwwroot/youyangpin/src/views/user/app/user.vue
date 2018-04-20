@@ -1,3 +1,4 @@
+
 <template>
   <div id="app">  
 	<el-container>
@@ -42,77 +43,97 @@
              <el-container>
 				  <el-aside class="asidebox">
 				       <p class="title">个人中心</p>
-                       <el-menu class="linklist">
+                       <el-menu class="linklist" :default-active="asideIndex">
 					      <el-menu-item index="1">
 					        <span slot="title">我的订单</span>
 					      </el-menu-item>
 					      <el-menu-item index="2">
-					        <span slot="title">运费申请</span>
+					        <span slot="title">申请记录</span>
 					      </el-menu-item>
-					      <el-submenu index="3">
-					        <template slot="title">账号管理</template>
-					        <el-menu-item-group>
-					          <el-menu-item index="3-1">个人信息</el-menu-item>
-					          <el-menu-item index="3-2">修改密码</el-menu-item>
-					        </el-menu-item-group>
-					      </el-submenu>
+					      <el-menu-item index="3">
+					        <span slot="title">运费提现</span>
+					      </el-menu-item>
 					      <el-menu-item index="4">
-					        <span slot="title">服务协议</span>
+					        <span slot="title">个人信息</span>
+					      </el-menu-item>
+					       <el-menu-item index="5">
+					        <span slot="title">修改密码</span>
 					      </el-menu-item>
 					    </el-menu>
 				  </el-aside>
 				  <el-main class="mainbox">
-				  <router-view/>
-				    <p class="title">我的订单</p>
+				    <p class="title">个人信息</p>
 				    <div class="content">
-				       <!--我的订单-->
-				       <div class="myorder">
-	                       <el-tabs v-model="activeName" @tab-click="handleClick">
-						     <el-tab-pane label="所有订单" name="order1">
-						         <template>
-								    <el-table :data="tableData">
-								      <el-table-column prop="shopname" label="店铺名" width="80"></el-table-column>
-								      <el-table-column prop="userid" label="旺旺号" width="100"></el-table-column>
-								      <el-table-column prop="userphone" label="联系人电话" width="110"></el-table-column>
-								      <el-table-column prop="orderid" label="订单号" width="110"></el-table-column>
-								      <el-table-column prop="orderstate" label="订单状态" width="110"></el-table-column>
-								      <el-table-column prop="planstate" label="定向计划状态" width="110"></el-table-column>
-								      <el-table-column prop="shopinfo" label="商品信息"></el-table-column>
-								      <el-table-column prop="option" label="操作" width="110"></el-table-column>
-								    </el-table>
-								  </template>
-							  </el-tab-pane>
-						      <el-tab-pane label="待发货" name="order2"></el-tab-pane>
-						      <el-tab-pane label="已发货" name="order3"></el-tab-pane>
-						      <el-tab-pane label="待退货" name="order5"></el-tab-pane>
-						      <el-tab-pane label="已退货" name="order6">已退货</el-tab-pane>
-						      <el-tab-pane label="待退费" name="order7">待退费</el-tab-pane>
-						      <el-tab-pane label="已退费" name="order8">已退费</el-tab-pane>
-						      <el-tab-pane label="已完成" name="order9">已完成</el-tab-pane>
-						      <el-tab-pane label="异常订单" name="order10">异常订单</el-tab-pane>
-						      <el-tab-pane label="异常订单" name="order10">异常订单</el-tab-pane>
-					       </el-tabs>
-                       </div>
-                       <!--运费申请-->
-					   <div class="applybox">
-	                        <div class="zfbbox">您的支付宝账号：<span class="zfid">111</span></div> 
-	                        <div class="moneybox">当前可提现金额：<span class="num">100元</span></div>
-	                        <div class="btnbox"><el-button class="applybtn" disabled>申请提现</el-button></div>
-	                        <div class="tipbox">（*单次提现金额需超过100元）</div>
-	                    </div>
-	                    <!--修改密码-->
+	                    <!--个人信息-->
 	                    <div class="modifypsd">
-	                         <el-form label-width="120px" >
-							  <el-form-item label="*验证原密码：" >
-							    <el-input type="age" auto-complete="off"></el-input>
+	                       <el-form :model="ruleForm"  :rules="rules" ref="ruleForm" label-width="100px">
+							  <el-form-item label="主播名称" prop="userName" >
+							    <el-input v-model="ruleForm.userName" auto-complete="off"></el-input>
 							  </el-form-item>
-							  <el-form-item label="*设置新密码：" >
-							    <el-input type="age" auto-complete="off"></el-input>
+							  <el-form-item label="支付宝账号" prop="zhifuId" >
+							    <el-input v-model="ruleForm.zhifuId" auto-complete="off"></el-input>
+							  </el-form-item>
+							   <el-form-item label="身高" prop="height" class="linebox">
+							    <el-input v-model="ruleForm.height" auto-complete="off" placeholder="CM"></el-input>
+							  </el-form-item>
+							  <el-form-item label="体重" prop="weight" class="linebox">
+							    <el-input v-model="ruleForm.weight" auto-complete="off" placeholder="KG"></el-input>
+							  </el-form-item>
+							  <el-form-item label="鞋码" prop="shoeSize" class="linebox">
+							    <el-input v-model="ruleForm.shoeSize" auto-complete="off" placeholder="码数"></el-input>
+							  </el-form-item>
+							  <el-form-item label="尺码" prop="size"  class="linebox">
+							   <el-select v-model="ruleForm.size" placeholder="请选择">
+							      <el-option label="S" value="S"></el-option>
+                                  <el-option label="M" value="M"></el-option>
+							   </el-select>
+							  </el-form-item>
+							  <el-form-item label="收货地址" prop="address" class="addressbox">
+							    <el-input :autosize="{ minRows:3, maxRows: 6}" type="textarea" v-model="ruleForm.address"></el-input>
+							  </el-form-item>
+							  <el-form-item label="收货人姓名" prop="linkName" >
+							    <el-input v-model="ruleForm.linkName" auto-complete="off"></el-input>
+							  </el-form-item>
+							  <el-form-item label="收货人电话" prop="linkPhone" >
+							    <el-input v-model="ruleForm.linkPhone" auto-complete="off"></el-input>
+							  </el-form-item>
+							  <el-form-item label="淘客名称" prop="tkName" >
+							    <el-input v-model="ruleForm.tkName" auto-complete="off"></el-input>
+							  </el-form-item>
+							  <el-form-item label="微信" prop="wechatId" >
+							    <el-input v-model="ruleForm.wechatId" auto-complete="off"></el-input>
+							  </el-form-item>
+							  <el-form-item label="QQ" prop="qqId" >
+							    <el-input v-model="ruleForm.qqId" auto-complete="off"></el-input>
+							  </el-form-item>
+							  <el-form-item label="垂直领域" prop="type">
+							    <el-checkbox-group v-model="ruleForm.type">
+							      <el-checkbox label="美搭" name="type1"></el-checkbox>
+							      <el-checkbox label="美妆个护" name="type2"></el-checkbox>
+							      <el-checkbox label="居家" name="type3"></el-checkbox>
+							      <el-checkbox label="美食" name="type4"></el-checkbox>
+							      <el-checkbox label="母婴" name="type5"></el-checkbox>
+							      <el-checkbox label="型男" name="type6"></el-checkbox>
+							      <el-checkbox label="其他" name="type7"></el-checkbox>
+							    </el-checkbox-group>
+							  </el-form-item>
+							  <el-form-item label="每天开播时段"  >
+							    <el-time-select  class="time" placeholder="起始时间" v-model="ruleForm.startTime" :picker-options="{ start: '08:30',step: '00:15',end: '18:30'}">
+								</el-time-select>
+								<span class="line"></span>
+								<el-time-select  class="time" placeholder="结束时间" v-model="ruleForm.endTime"
+								    :picker-options="{
+								      start: '08:30',
+								      step: '00:15',
+								      end: '18:30',
+								      minTime: startTime
+								    }">
+								  </el-time-select>
 							  </el-form-item>
 							  <el-form-item>
-							    <el-button type="primary">保存</el-button>
+							    <el-button type="primary" @click="submitForm('ruleForm')">保&nbsp;存</el-button>
 							  </el-form-item>
-							</el-form>
+						   </el-form>
 	                    </div>
 				    </div>
 				  </el-main>
@@ -147,19 +168,122 @@ import mainFooter from '../../../components/footer.vue'
 
 export default {
   data () {
+	var validateuserName = (rule, value, callback) => {
+	    if (value === '') {
+	      callback(new Error('请输入主播名称'));
+	    }else {
+	      callback();
+	    }
+	};
+	var validateuserzhifuId= (rule, value, callback) => {
+	    if (value === '') {
+	      callback(new Error('请输入支付宝账号'));
+	    }else {
+	      callback();
+	    }
+	};
+	var validateheight= (rule, value, callback) => {
+	    if (value === '') {
+	      callback(new Error('请输入身高'));
+	    }else {
+	      callback();
+	    }
+	};
+	var validateweight= (rule, value, callback) => {
+	    if (value === '') {
+	      callback(new Error('请输入体重'));
+	    }else {
+	      callback();
+	    }
+	};
+	var validateshoeSize= (rule, value, callback) => {
+	    if (value === '') {
+	      callback(new Error('请输入鞋码'));
+	    }else {
+	      callback();
+	    }
+	};
+	var validateaddress= (rule, value, callback) => {
+	    if (value === '') {
+	      callback(new Error('请输入收货地址'));
+	    }else {
+	      callback();
+	    }
+	};
+	var validatelinkName= (rule, value, callback) => {
+	    if (value === '') {
+	      callback(new Error('请输入联系人姓名'));
+	    }else {
+	      callback();
+	    }
+	};
+	var validatelinkPhone= (rule, value, callback) => {
+	    if (value === '') {
+	      callback(new Error('请输入联系人电话'));
+	    }else {
+	      callback();
+	    }
+	};
+	var validateqqId= (rule, value, callback) => {
+	    var qqreg=/[1-9]\\d{4,14}/;  
+	    if (!qqreg.test(value)) {
+	      callback(new Error('qq号码格式不正确'));
+	    }else {
+	      callback();
+	    }
+	};
+
     return {
-      activeName: 'order1',
-      tableData: [{
-            shopname: '王小二的店铺',
-            userid: 'cutemantou',
-            userphone: '18825815552',
-            orderid:'123456',
-            orderstate:'已完成',
-            planstate:'开始执行',
-            shopinfo:"商品信息",
-            option:"操作"
-          }]
-    }
+      asideIndex:'4',
+      ruleForm: {
+          userName: '',
+          zhifuId:'',
+          height:'',
+          weight:'',
+          size:'',
+          shoeSize:'',
+          address:'',
+          linkName:'',
+          linkPhone:'',
+          tkName:'',
+          type: [],
+          qqId:'',
+          startTime: '',
+          endTime: ''
+        },
+        rules: {
+          userName: [
+            { required: true, validator: validateuserName, trigger: 'blur' }
+          ],
+          zhifuId: [
+            { required: true, validator: validateuserzhifuId, trigger: 'blur' }
+          ],
+          height: [
+            { required: true, validator: validateheight, trigger: 'blur' }
+          ],
+          weight: [
+            { required: true, validator: validateweight, trigger: 'blur' }
+          ],
+          shoeSize: [
+            { required: true, validator: validateshoeSize, trigger: 'blur' }
+          ],
+          address: [
+            { required: true, validator: validateaddress, trigger: 'blur' }
+          ],
+          linkName: [
+            { required: true, validator: validatelinkName, trigger: 'blur' }
+          ],
+          linkPhone: [
+            { required: true, validator: validatelinkPhone, trigger: 'blur' }
+          ],
+          qqId: [
+            { validator: validateqqId, trigger: 'blur' }
+          ],
+          type: [
+            { type: 'array', required: true, message: '请至少选择一个垂直领域', trigger: 'change' }
+          ]
+      }
+     }
   },
   methods: {
 	handleSelect(key, keyPath) {
@@ -167,6 +291,16 @@ export default {
 	},
 	handleClick(tab, event) {
       console.log(tab, event);
+    },
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert('submit!');
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
     }
   }
 }
@@ -360,8 +494,59 @@ export default {
 	color:#fff;
 }
 .modifypsd{
-	width:500px;
-	padding:50px 0;
+	padding:40px;
 	margin:0 auto;
+}
+.modifypsd .el-form{
+	overflow:hidden;
+}
+.modifypsd .el-form-item{
+	margin-bottom:15px;
+}
+.modifypsd .el-input{
+    width:300px;
+	height:35px;
+	line-height:35px;
+	width:300px;
+}
+.modifypsd .el-input.time{
+	width:120px;
+}
+.modifypsd .el-textarea{
+	width:610px;
+}
+.modifypsd .el-input .el-input__inner{
+	height:35px;
+	line-height:35px;
+}
+.modifypsd .el-form-item__content{
+	line-height:35px;
+}
+.el-form-item__error{
+    padding-top:0;
+}
+.el-form-item.desc .el-form-item__label,.el-form-item.range .el-form-item__label{
+	line-height:20px;
+}
+.linebox{
+	width:170px;
+	float:left;
+}
+.linebox .el-input{
+	width:100px;
+}
+.addressbox{
+	clear:both;
+}
+.el-form-item__label{
+	line-height:35px;
+}
+.line{
+	display: inline-block;
+    width: 10px;
+    padding: 0 8px;
+    height: 1px;
+    background: #ddd;
+    vertical-align: middle;
 }
 </style>

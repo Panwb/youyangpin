@@ -54,7 +54,7 @@
                           <div class="infobox">
                              <p class="name">2018春季新款大V领荷叶边长袖小心机雪纺阿达</p>
                              <p class="price">直播专享价:<span class="num">168.00</span> <span class="normal">日常价:198.00</span></p>
-                             <p class="money">佣金:<span class="num">10</span</p>
+                             <p class="money">佣金比例:<span class="num">10</span</p>
                              <p class="date">活动日期：2018年4月11日-2018年4月12日</p>
                              <p class="detail">提供多色</p>
                           </div>
@@ -107,7 +107,7 @@
                           <div class="infobox">
                              <p class="name">2018春季新款大V领荷叶边长袖小心机雪纺阿达</p>
                              <p class="price">直播专享价:<span class="num">168.00</span> <span class="normal">日常价:198.00</span></p>
-                             <p class="money">佣金:<span class="num">10</span</p>
+                             <p class="money">佣金比例:<span class="num">10</span</p>
                              <p class="date">活动日期：2018年4月11日-2018年4月12日</p>
                              <p class="detail">提供多色</p>
                           </div>
@@ -152,7 +152,7 @@
                           <div class="infobox">
                              <p class="name">2018春季新款大V领荷叶边长袖小心机雪纺阿达</p>
                              <p class="price">直播专享价:<span class="num">168.00</span> <span class="normal">日常价:198.00</span></p>
-                             <p class="money">佣金:<span class="num">10</span</p>
+                             <p class="money">佣金比例:<span class="num">10</span</p>
                              <p class="date">活动日期：2018年4月11日-2018年4月12日</p>
                              <p class="detail">提供多色</p>
                           </div>
@@ -201,8 +201,25 @@
 			      <span class="txt opt"><el-button type="text">修改</el-button></span>
 			  </div>
 			</el-card>
-			<div class="txt addaddressbox"><el-button>+完善收货地址</el-button></div>
-			<div class="txt applybtnbox"><el-button type="text">申请拿样</el-button></div>
+			<div class="remarkbox">
+                <div>
+                  <span class="tip">(商家最多接受1000服务费)</span>
+                  <el-input></el-input> 
+                  <el-checkbox>我想要商家付费</el-checkbox>
+                </div>
+                <div>
+                  <span class="tip">(商家最多接受50%的返佣)</span>
+                  <el-input></el-input> 
+                  <el-checkbox>我想要调整佣金比例</el-checkbox>
+                </div>
+                <div>
+                  <span class="tip">(商家最大接受50元的优惠力度)</span>
+                  <el-input></el-input> 
+                  <el-checkbox>我想要商家调整优惠力度</el-checkbox>
+                </div>
+			</div>
+			<div class="txt addaddressbox"><el-button>+完善收货地址</el-button> </div>
+			<div class="txt applybtnbox"><el-button type="text">提交申请</el-button></div>
 	    </div>
 	  </el-main>
 	  <!--main end--->
@@ -370,6 +387,7 @@ export default {
 .el-card .txt{
     padding:5px 0;
 	overflow:hidden;
+	text-align:right;
 }
 .el-card .box,.el-card .line{
 	float:left;
@@ -503,7 +521,7 @@ export default {
 	margin-right:182px;
 }
 .pinfobox{
-	width:400px;
+	width:500px;
 	border:1px solid #f35f17;
 	float:right;
 	padding:10px 20px 0;
@@ -517,6 +535,7 @@ export default {
 	padding:0;
 	height:35px;
 	line-height:35px;
+	text-align:right;
 }
 .pinfobox .el-card__body{
 	padding:10px 0;
@@ -528,9 +547,12 @@ export default {
 }
 .pinfobox .el-card__body .phone{
 	margin-bottom:20px;
+	text-align:right;
 }
 .pinfobox .el-card__body .opt button{
 	padding:0;
+	float:right;
+	margin:10px 0;
 }
 .pinfobox .el-card__body .opt span{
 	font-size:12px;
@@ -571,5 +593,35 @@ export default {
 	height:100%;
 	border-radius:0; 
 	padding:0;
+}
+.remarkbox{
+	float: right;
+    margin-top: 40px;
+    width: 460px;
+    padding: 0;
+    clear: both;
+}
+.remarkbox div{
+	margin-bottom:15px;
+	overflow:hidden;
+}
+.remarkbox .el-input,.remarkbox .el-checkbox{
+	float:right;
+}
+.remarkbox .el-input{
+	width:100px;
+	height:25px;
+	line-height:25px;
+	margin:-2px 5px 0;
+}
+.remarkbox .el-input input{
+	height:22px;
+	line-height:22px;
+}
+.remarkbox .tip{
+	color:#999;
+	font-size:12px;
+	margin-top:1px;
+	float:right;
 }
 </style>
