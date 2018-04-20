@@ -49,7 +49,6 @@
   <ItemGroup>
     <Compile Include="Implementation\GoodService.cs" />
     <Compile Include="Implementation\MerchantService.cs" />
-    <Compile Include="Implementation\OrderGoodService.cs" />
     <Compile Include="Implementation\OrderService.cs" />
     <Compile Include="Implementation\ShopService.cs" />
     <Compile Include="Implementation\StudioHostService.cs" />
@@ -57,7 +56,6 @@
     <Compile Include="Implementation\WithdrawalService.cs" />
     <Compile Include="Interface\IGoodService.cs" />
     <Compile Include="Interface\IMerchantService.cs" />
-    <Compile Include="Interface\IOrderGoodService.cs" />
     <Compile Include="Interface\IOrderService.cs" />
     <Compile Include="Interface\IShopService.cs" />
     <Compile Include="Interface\IStudioHostService.cs" />
@@ -66,7 +64,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceResult\GoodResult.cs" />
     <Compile Include="ServiceResult\MerchantResult.cs" />
-    <Compile Include="ServiceResult\OrderGoodResult.cs" />
     <Compile Include="ServiceResult\OrderResult.cs" />
     <Compile Include="ServiceResult\ShopResult.cs" />
     <Compile Include="ServiceResult\StudioHostResult.cs" />

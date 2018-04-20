@@ -46,7 +46,6 @@
   <ItemGroup>
     <Compile Include="Implementation\GoodRepository.cs" />
     <Compile Include="Implementation\MerchantRepository.cs" />
-    <Compile Include="Implementation\OrderGoodRepository.cs" />
     <Compile Include="Implementation\OrderRepository.cs" />
     <Compile Include="Implementation\ShopRepository.cs" />
     <Compile Include="Implementation\StudioHostRepository.cs" />
@@ -54,7 +53,6 @@
     <Compile Include="Implementation\WithdrawalRepository.cs" />
     <Compile Include="Interface\IGoodRepository.cs" />
     <Compile Include="Interface\IMerchantRepository.cs" />
-    <Compile Include="Interface\IOrderGoodRepository.cs" />
     <Compile Include="Interface\IOrderRepository.cs" />
     <Compile Include="Interface\IShopRepository.cs" />
     <Compile Include="Interface\IStudioHostRepository.cs" />
