@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 344b0bc09fb9b6a239ba071944d6b75bd67d9743
 <template>
   <div id="app">  
 	<el-container>
@@ -43,11 +46,16 @@
              <el-container>
 				  <el-aside class="asidebox">
 				       <p class="title">个人中心</p>
+<<<<<<< HEAD
                        <el-menu class="linklist" :default-active="asideIndex">
+=======
+                       <el-menu class="linklist">
+>>>>>>> 344b0bc09fb9b6a239ba071944d6b75bd67d9743
 					      <el-menu-item index="1">
 					        <span slot="title">我的订单</span>
 					      </el-menu-item>
 					      <el-menu-item index="2">
+<<<<<<< HEAD
 					        <span slot="title">申请记录</span>
 					      </el-menu-item>
 					      <el-menu-item index="3">
@@ -58,10 +66,24 @@
 					      </el-menu-item>
 					       <el-menu-item index="5">
 					        <span slot="title">修改密码</span>
+=======
+					        <span slot="title">运费申请</span>
+					      </el-menu-item>
+					      <el-submenu index="3">
+					        <template slot="title">账号管理</template>
+					        <el-menu-item-group>
+					          <el-menu-item index="3-1">个人信息</el-menu-item>
+					          <el-menu-item index="3-2">修改密码</el-menu-item>
+					        </el-menu-item-group>
+					      </el-submenu>
+					      <el-menu-item index="4">
+					        <span slot="title">服务协议</span>
+>>>>>>> 344b0bc09fb9b6a239ba071944d6b75bd67d9743
 					      </el-menu-item>
 					    </el-menu>
 				  </el-aside>
 				  <el-main class="mainbox">
+<<<<<<< HEAD
 				    <p class="title">个人信息</p>
 				    <div class="content">
 	                    <!--个人信息-->
@@ -139,6 +161,59 @@
 							    <el-button type="primary" @click="submitForm('ruleForm')">保&nbsp;存</el-button>
 							  </el-form-item>
 						   </el-form>
+=======
+				  <router-view/>
+				    <p class="title">我的订单</p>
+				    <div class="content">
+				       <!--我的订单-->
+				       <div class="myorder">
+	                       <el-tabs v-model="activeName" @tab-click="handleClick">
+						     <el-tab-pane label="所有订单" name="order1">
+						         <template>
+								    <el-table :data="tableData">
+								      <el-table-column prop="shopname" label="店铺名" width="80"></el-table-column>
+								      <el-table-column prop="userid" label="旺旺号" width="100"></el-table-column>
+								      <el-table-column prop="userphone" label="联系人电话" width="110"></el-table-column>
+								      <el-table-column prop="orderid" label="订单号" width="110"></el-table-column>
+								      <el-table-column prop="orderstate" label="订单状态" width="110"></el-table-column>
+								      <el-table-column prop="planstate" label="定向计划状态" width="110"></el-table-column>
+								      <el-table-column prop="shopinfo" label="商品信息"></el-table-column>
+								      <el-table-column prop="option" label="操作" width="110"></el-table-column>
+								    </el-table>
+								  </template>
+							  </el-tab-pane>
+						      <el-tab-pane label="待发货" name="order2"></el-tab-pane>
+						      <el-tab-pane label="已发货" name="order3"></el-tab-pane>
+						      <el-tab-pane label="待退货" name="order5"></el-tab-pane>
+						      <el-tab-pane label="已退货" name="order6">已退货</el-tab-pane>
+						      <el-tab-pane label="待退费" name="order7">待退费</el-tab-pane>
+						      <el-tab-pane label="已退费" name="order8">已退费</el-tab-pane>
+						      <el-tab-pane label="已完成" name="order9">已完成</el-tab-pane>
+						      <el-tab-pane label="异常订单" name="order10">异常订单</el-tab-pane>
+						      <el-tab-pane label="异常订单" name="order10">异常订单</el-tab-pane>
+					       </el-tabs>
+                       </div>
+                       <!--运费申请-->
+					   <div class="applybox">
+	                        <div class="zfbbox">您的支付宝账号：<span class="zfid">111</span></div> 
+	                        <div class="moneybox">当前可提现金额：<span class="num">100元</span></div>
+	                        <div class="btnbox"><el-button class="applybtn" disabled>申请提现</el-button></div>
+	                        <div class="tipbox">（*单次提现金额需超过100元）</div>
+	                    </div>
+	                    <!--修改密码-->
+	                    <div class="modifypsd">
+	                         <el-form label-width="120px" >
+							  <el-form-item label="*验证原密码：" >
+							    <el-input type="age" auto-complete="off"></el-input>
+							  </el-form-item>
+							  <el-form-item label="*设置新密码：" >
+							    <el-input type="age" auto-complete="off"></el-input>
+							  </el-form-item>
+							  <el-form-item>
+							    <el-button type="primary">保存</el-button>
+							  </el-form-item>
+							</el-form>
+>>>>>>> 344b0bc09fb9b6a239ba071944d6b75bd67d9743
 	                    </div>
 				    </div>
 				  </el-main>
@@ -173,6 +248,7 @@ import mainFooter from '../../../components/footer.vue'
 
 export default {
   data () {
+<<<<<<< HEAD
 	var validateuserName = (rule, value, callback) => {
 	    if (value === '') {
 	      callback(new Error('请输入主播名称'));
@@ -289,6 +365,21 @@ export default {
           ]
       }
      }
+=======
+    return {
+      activeName: 'order1',
+      tableData: [{
+            shopname: '王小二的店铺',
+            userid: 'cutemantou',
+            userphone: '18825815552',
+            orderid:'123456',
+            orderstate:'已完成',
+            planstate:'开始执行',
+            shopinfo:"商品信息",
+            option:"操作"
+          }]
+    }
+>>>>>>> 344b0bc09fb9b6a239ba071944d6b75bd67d9743
   },
   methods: {
 	handleSelect(key, keyPath) {
@@ -296,6 +387,7 @@ export default {
 	},
 	handleClick(tab, event) {
       console.log(tab, event);
+<<<<<<< HEAD
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
@@ -306,6 +398,8 @@ export default {
           return false;
         }
       });
+=======
+>>>>>>> 344b0bc09fb9b6a239ba071944d6b75bd67d9743
     }
   }
 }
@@ -499,6 +593,7 @@ export default {
 	color:#fff;
 }
 .modifypsd{
+<<<<<<< HEAD
 	padding:40px;
 	margin:0 auto;
 }
@@ -554,4 +649,10 @@ export default {
     background: #ddd;
     vertical-align: middle;
 }
+=======
+	width:500px;
+	padding:50px 0;
+	margin:0 auto;
+}
+>>>>>>> 344b0bc09fb9b6a239ba071944d6b75bd67d9743
 </style>
