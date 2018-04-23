@@ -3,10 +3,10 @@
       <!--header start--->
        <div class="optbox">
           <div class="wd1200">      
-        <span class="loginbtn">请登录</span>
-        <span>免费注册</span>
+           <!-- <span class="loginbtn">请登录</span>
+            <span>免费注册</span>-->
+             <div class="loginedbox">您好！<span class="account">173****0262</span> <span class="loginout">[退出]</span><span class="center">个人中心</span></div> 
           </div>
-         </el-header>
       </div>
       <div class="wd1200 searchbox">
         <el-row>
@@ -52,3 +52,22 @@
     }
   }
 </script>
+<style>
+  .loginedbox{
+     color:#666;
+  }
+  .account{
+     color:#f84933;
+     margin:0 20px 0 15px;
+     font-size:14px;
+  }
+  .loginout{
+     margin-right:20px;
+  }
+  .center:hover{
+     color:#f84933;
+  }
+  .loginout:hover{
+     color:#f84933;
+  }
+</style>
