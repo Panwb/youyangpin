@@ -92,7 +92,7 @@ export default {
             })
         },
         getCode() {
-            ajax.getSmsCode(this.ruleForm1.mobilePhone).then((result) => {
+            ajax.getSmsCode(this.ruleForm1.telphone).then((result) => {
                 this.$message('验证码已发送你手机上');
                // this.ruleForm2.mobileYzCode = result
             })

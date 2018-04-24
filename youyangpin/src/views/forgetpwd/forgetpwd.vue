@@ -45,7 +45,7 @@
 							    <el-input  v-model="ruleForm2.imageIdentifyCode"  auto-complete="off"  placeholder="请输入6位数字短信验证码"  class="codetxt"></el-input><el-button class="getcode" @click="getCode">获取验证码</el-button>
 							   </el-form-item>
 							   <el-form-item>
-								    <el-button type="primary" @click="submitForm('ruleForm2',ruleForm2)">下一步</el-button>
+								    <el-button type="primary" @click="submitForm('ruleForm2',ruleForm2.imageIdentifyCode)">下一步</el-button>
 							   </el-form-item>
 							</el-form>
 	                    </div>

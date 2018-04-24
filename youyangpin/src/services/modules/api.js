@@ -154,9 +154,9 @@ export default{
     /**
      * 忘记密码
      */
-    retrievePassword(telphone,imageIdentifyCode,localLoading = 'retrievePassword') {
+    retrievePassword(data,localLoading = 'retrievePassword') {
         return ajax({
-            url: `/User/RetrievePassword?telphone=${telphone}&imageIdentifyCode=${imageIdentifyCode}`,
+            url: `/User/RetrievePassword?telphone=${data.telphone}&imageIdentifyCode=${data.imageIdentifyCode}`,
             localLoading
         })
     },
@@ -166,12 +166,11 @@ export default{
             localLoading
         })
     },
-    resetPassword(data, localLoading = 'resetPassword') {
+    resetPassword(newPassword, localLoading = 'resetPassword') {
         return ajax({
-            url: '/User/ResetPassword',
+            url: `/User/ResetPassword?newPassword=${newPassword}`,
             method: 'put',
-            localLoading,
-            body: data
+            localLoading
         })
     },
 
