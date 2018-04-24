@@ -17,7 +17,6 @@
           <el-col :span="12">
             <div class="grid-content bg-purple"> 
               <img src="~assets/images/login.jpg" class="login">
-              <div class="line"></div>
             </div>
           </el-col>
           <el-col :span="12">  
@@ -177,7 +176,7 @@
 }
 .loginbox .login{
   width:400px;
-  margin-top:12px;
+  height:400px;
 }
 .logininbox{
   width:400px;

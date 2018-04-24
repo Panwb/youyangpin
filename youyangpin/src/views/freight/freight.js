@@ -3,6 +3,7 @@ import { api as ajax } from 'services'
 export default {
     data() {
         return {
+            dialogVisible: false,
             menus: [
                 {
                     title: '我的订单',
@@ -31,7 +32,7 @@ export default {
                 }
             ],
             asideIndex: '3',
-            freightData: null,
+            freightData: '1',
             tableData: [
                 {
                     no: '1',
@@ -95,6 +96,13 @@ export default {
         },
         handleClick(tab, event) {
             console.log(tab, event);
-        }
+        },
+        handleClose(done) {
+        this.$confirm('确认关闭？')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
+      }
     }
 }
