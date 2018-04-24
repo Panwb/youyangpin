@@ -144,12 +144,35 @@ export default{
     /**
      * 修改密码
      */
-    changePassword(data, localLoading = 'changePassword') {
+    changePassword(data,localLoading = 'changePassword') {
         return ajax({
-            url: '/User/ChangePassword',
-            method: 'post',
+            url: `/User/ChangePassword?oldpassword=${data.oldpassword}&newpassword=${data.newpassword}`,
+            method: 'put',
+            localLoading
+        })
+    },
+    /**
+     * 忘记密码
+     */
+    retrievePassword(telphone,imageIdentifyCode,localLoading = 'retrievePassword') {
+        return ajax({
+            url: `/User/RetrievePassword?telphone=${telphone}&imageIdentifyCode=${imageIdentifyCode}`,
+            localLoading
+        })
+    },
+    validateSmsIdentifyCode(smsIdentifyCode) {
+        return ajax({
+            url: `/Common/ValidateSmsIdentifyCode?smsIdentifyCode=${smsIdentifyCode}`,
+            localLoading
+        })
+    },
+    resetPassword(data, localLoading = 'resetPassword') {
+        return ajax({
+            url: '/User/ResetPassword',
+            method: 'put',
             localLoading,
             body: data
         })
-    }
+    },
+
 }
