@@ -5,31 +5,36 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
     data () {
         return {
-            pageIndex: 1,
-            itemsPerPage: 10,
-            pageList: [],
-            total: 0,
-            goodsName: '',
-            verticalFieldCode: '',
-            activityType: '',
-            sales: '',
-            lowDailyPrice: '',
-            highDailyPrice: '',
-            commissionRatio: '',
-            sortField: '',
-            sort: ''
+            searchForm: {
+                pageIndex: 1,
+                itemsPerPage: 10,
+                pageList: [],
+                total: 0,
+                goodsName: '',
+                verticalFieldCode: '',
+                activityType: '',
+                lowSales: '',
+                highSales: '',
+                lowDailyPrice: '',
+                highDailyPrice: '',
+                lowCommissionRatio: '',
+                highCommissionRatio: '',
+                sortField: '',
+                sort: ''
+            },
+            sortValue: 0
         }
     },
     watch: {
         '$route'() {
             if (this.$route.query.keywords) {
-                this.goodsName = this.$route.query.keywords
-                this.pageIndex = 1
+                this.goodsName = this.$route.query.keywords;
+                this.pageIndex = 1;
                 this.goodsSearch()
             }
             else {
-                his.goodsName = ''
-                this.pageIndex = 1
+                this.goodsName = '';
+                this.pageIndex = 1;
                 this.goodsSearch()
             }
         }
@@ -38,7 +43,7 @@ export default {
         if (this.$route.query.keywords) {
             this.goodsName = this.$route.query.keywords
         }
-        this.goodsSearch()
+        this.goodsSearch();
         this.getStatistics()
     },
     computed: {
@@ -51,9 +56,9 @@ export default {
             'setStatistics'
         ]),
         goodsSearch() {
-            ajax.goodSearch(this.goodsName, this.verticalFieldCode, this.activityType, this.sales, this.lowDailyPrice, this.highDailyPrice, this.commissionRatio, this.pageIndex, this.itemsPerPage, this.sortField, this.sort).then((result) => {
-                console.log(result)
-                this.pageList = result.Goods
+            ajax.goodSearch(this.searchForm).then((result) => {
+                console.log(result);
+                this.pageList = result.Goods;
                 this.total = result.RecordCount
             })
         },
@@ -63,14 +68,24 @@ export default {
             })
         },
         handleSizeChange(val) {
-            this.itemsPerPage = val
+            this.searchForm.itemsPerPage = val;
             this.goodSearch()
             console.log(`每页 ${val} 条`);
         },
         handleCurrentChange(val) {
-            this.pageIndex = val
+            this.searchForm.pageIndex = val
             this.goodsSearch()
             console.log(`当前页: ${val}`);
-        }
+        },
+        clickSort(val,name) {
+            this.sortValue = val;
+            this.searchForm.sort = name;
+            this.goodsSearch();
+        },
+        clickField(name) {
+            this.searchForm.sort = name;
+            this.goodsSearch();
+        },
+
     }
 }

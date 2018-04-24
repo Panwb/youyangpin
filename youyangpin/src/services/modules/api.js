@@ -72,12 +72,13 @@ export default{
     /**
      * 首页商品搜索
      */
-    goodSearch(goodsName = '', verticalFieldCode = '', activityType = '', sales = '', lowDailyPrice = '', highDailyPrice = '', commissionRatio = '', pageIndex = 1, itemsPerPage = 10, sortField = '', sort = '', localLoading = 'goodsSearch') {
+    goodSearch(searchForm,localLoading = 'goodsSearch') {
         return ajax({
-            url: `/Good/Search?goodsName=${goodsName}&verticalFieldCode=${verticalFieldCode}&activityType=${activityType}&sales=${sales}&lowDailyPrice=${lowDailyPrice}&highDailyPrice=${highDailyPrice}&commissionRatio=${commissionRatio}&pageIndex=${pageIndex}&itemsPerPage=${itemsPerPage}&sortField=${sortField}&sort=${sort}`,
+            url: `/Good/Search?goodsName=${searchForm.goodsName}&verticalFieldCode=${searchForm.verticalFieldCode}&activityType=${searchForm.activityType}&lowSales=${searchForm.lowSales}&highSales=${searchForm.highSales}&lowDailyPrice=${searchForm.lowDailyPrice}&highDailyPrice=${searchForm.highDailyPrice}&lowCommissionRatio=${searchForm.lowCommissionRatio}&highCommissionRatio=${searchForm.highCommissionRatio}&pageIndex=${searchForm.pageIndex}&itemsPerPage=${searchForm.itemsPerPage}&sortField=${searchForm.sortField}&sort=${searchForm.sort}`,
             localLoading
         })
     },
+    //api/Good/Search?goodsName={goodsName}&verticalFieldCode={verticalFieldCode}&activityType={activityType}&lowSales={lowSales}&highSales={highSales}&lowDailyPrice={lowDailyPrice}&highDailyPrice={highDailyPrice}&lowCommissionRatio={lowCommissionRatio}&highCommissionRatio={highCommissionRatio}&pageIndex={pageIndex}&itemsPerPage={itemsPerPage}&sortField={sortField}&sort={sort}
     /**
      * 商品详情
      */
@@ -85,6 +86,14 @@ export default{
         return ajax({
             url: '/good/getdetail?goodsId=' + goodsId,
             localLoading
+        })
+    },
+    requestApplication(data, localLoading = 'requestApplication') {
+        return ajax({
+            url: '/Order/Add',
+            method: 'post',
+            localLoading,
+            body: data
         })
     },
     /**
