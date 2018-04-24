@@ -24,14 +24,14 @@
 	                    <div class="modifypsd registerbox  modifypsd1" v-show="active == 1">
 	                         <el-form :model="ruleForm1"  :rules="rules1" ref="ruleForm1" label-width="100px">
 							  <el-form-item label="手机号码" prop="mobilePhone" >
-							    <el-input  v-model="ruleForm1.mobilePhone" auto-complete="off"  placeholder="请输入手机号码"></el-input>
+							    <el-input  v-model="ruleForm1.telphone" auto-complete="off"  placeholder="请输入手机号码"></el-input>
 							  </el-form-item>
 							  <el-form-item label="验证码" prop="yzCode">
-							    <el-input  v-model="ruleForm1.yzCode"  auto-complete="off"  placeholder="请输入图形验证码"  class="codetxt"></el-input>
+							    <el-input  v-model="ruleForm1.imageIdentifyCode"  auto-complete="off"  placeholder="请输入图形验证码"  class="codetxt"></el-input>
 								  <span class="imgbox" @click="getImgCode"><img :src="imgCode" class="logo"></span>
 							  </el-form-item>
 							  <el-form-item>
-							    <el-button type="primary" @click="submitForm('ruleForm1')">下一步</el-button>
+							    <el-button type="primary" @click="submitForm('ruleForm1',ruleForm1)">下一步</el-button>
 							  </el-form-item>
 							</el-form>	  
 	                    </div>
@@ -39,13 +39,13 @@
 	                    <div class="modifypsd registerbox modifypsd2" v-show="active == 2">
 	                         <el-form :model="ruleForm2"  :rules="rules2" ref="ruleForm2" label-width="100px">
 	                           <el-form-item label="手机号码">
-								  <span>{{ ruleForm1.mobilePhone }}</span>
+								  <span>{{ ruleForm1.telphone }}</span>
 							   </el-form-item>
 							   <el-form-item label="短信验证码" prop="mobileYzCode">
-							    <el-input  v-model="ruleForm2.mobileYzCode"  auto-complete="off"  placeholder="请输入6位数字短信验证码"  class="codetxt"></el-input><el-button class="getcode" @click="getCode">获取验证码</el-button>
+							    <el-input  v-model="ruleForm2.imageIdentifyCode"  auto-complete="off"  placeholder="请输入6位数字短信验证码"  class="codetxt"></el-input><el-button class="getcode" @click="getCode">获取验证码</el-button>
 							   </el-form-item>
 							   <el-form-item>
-								    <el-button type="primary" @click="submitForm('ruleForm2')">下一步</el-button>
+								    <el-button type="primary" @click="submitForm('ruleForm2',ruleForm2)">下一步</el-button>
 							   </el-form-item>
 							</el-form>
 	                    </div>
@@ -53,20 +53,20 @@
 	                    <div class="modifypsd registerbox modifypsd3" v-show="active == 3">
 	                         <el-form :model="ruleForm3"  :rules="rules3" ref="ruleForm3" label-width="100px">
 	                           <el-form-item label="设置密码" prop="pass">
-							     <el-input type="password" v-model="ruleForm3.pass" auto-complete="off" placeholder="密码必须为6-25位数字 + 字母"></el-input>
+							     <el-input type="password" v-model="ruleForm3.newPassword" auto-complete="off" placeholder="密码必须为6-25位数字 + 字母"></el-input>
 							   </el-form-item>
 							   <el-form-item label="确认密码" prop="checkPass">
 							     <el-input type="password" v-model="ruleForm3.checkPass" auto-complete="off" placeholder="请再次输入密码"></el-input>
 							   </el-form-item>
 							   <el-form-item>
-								    <el-button type="primary" @click="submitForm('ruleForm3')">下一步</el-button>
+								    <el-button type="primary" @click="submitForm('ruleForm3',ruleForm3.newPassword)">下一步</el-button>
 							   </el-form-item>
 							</el-form>
 	                    </div>
 	                    <!--4.完成-->
 	                    <div class="modifypsd registerbox modifypsd4" v-show="active == 4">
-	                         <div class="tip">恭喜您,密码重置成功</div>
-                            <div class="link">您现在可以<router-link to="login">登录</router-link>或返回<router-link to="index">优样品首页</router-link></div>
+				 			<div class="tip">恭喜您,密码重置成功</div>
+							<div class="link">您现在可以<router-link to="login">登录</router-link>或返回<router-link to="index">优样品首页</router-link></div>
 	                    </div>
 				    </div>
 				  </el-main>

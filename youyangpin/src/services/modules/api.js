@@ -160,7 +160,7 @@ export default{
             localLoading
         })
     },
-    validateSmsIdentifyCode(smsIdentifyCode) {
+    validateSmsIdentifyCode(smsIdentifyCode, localLoading = 'validateSmsIdentifyCode') {
         return ajax({
             url: `/Common/ValidateSmsIdentifyCode?smsIdentifyCode=${smsIdentifyCode}`,
             localLoading
