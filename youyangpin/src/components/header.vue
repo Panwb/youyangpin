@@ -2,7 +2,8 @@
   <div class="header">
       <!-- header start -->
        <div class="optbox">
-          <div class="wd1200">      
+          <div class="wd1200">    
+            
             <span class="loginbtn">
               <router-link to="/order" v-if="account">
                 {{ account.UserType }} {{ account.Account }}
@@ -13,6 +14,8 @@
               <a href="javascript:void(0)" style="color: #333" @click="logout" v-if="account">退出</a>
               <router-link style="color: #333" to="/register" v-else>免费注册</router-link>
             </span>
+            
+           <!-- <div class="loginedbox">您好！<span class="account">173****0262</span> <span class="loginout">[退出]</span><span class="center">个人中心</span></div>--> 
           </div>
       </div>
       <div class="wd1200 searchbox">
@@ -192,4 +195,21 @@
   line-height:50px;
   margin-right:30px;
 }
+ .loginedbox{
+     color:#666;
+  }
+  .account{
+     color:#f84933;
+     margin:0 20px 0 15px;
+     font-size:14px;
+  }
+  .loginout{
+     margin-right:20px;
+  }
+  .center:hover{
+     color:#f84933;
+  }
+  .loginout:hover{
+     color:#f84933;
+  }
   </style>

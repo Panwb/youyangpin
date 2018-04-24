@@ -16,7 +16,7 @@
 			        <div class="box">
 			          <span class="tianmao"><img src="~assets/images/tianmao.png" class="image"></span>
 			          <span class="name">店铺:{{ applyData.Shop.ShopName }}</span>
-			          <span class="wangwang"><img src="~assets/images/wangwang.png" class="image"></span>
+			          <span class="wangwang"></span>
 			        </div>
 			        <span class="line"></span>
 			        <div class="box">
