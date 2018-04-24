@@ -28,20 +28,20 @@ export default {
     watch: {
         '$route'() {
             if (this.$route.query.keywords) {
-                this.goodsName = this.$route.query.keywords;
-                this.pageIndex = 1;
+                this.searchForm.goodsName = this.$route.query.keywords;
+                this.searchForm.pageIndex = 1;
                 this.goodsSearch()
             }
             else {
-                this.goodsName = '';
-                this.pageIndex = 1;
+                this.searchForm.goodsName = '';
+                this.searchForm.pageIndex = 1;
                 this.goodsSearch()
             }
         }
     },
     created() {
         if (this.$route.query.keywords) {
-            this.goodsName = this.$route.query.keywords
+            this.searchForm.goodsName = this.$route.query.keywords
         }
         this.goodsSearch();
         this.getStatistics()
