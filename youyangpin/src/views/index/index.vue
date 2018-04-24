@@ -50,7 +50,7 @@
                                             <div class="middle">
                                                 <span class="money">￥<i class="count">{{ item.LivePrice }}</i></span>
                                                 <div class="price">
-                                                    <p class="count">￥78.00</p>
+                                                    <p class="count">￥{{ item.LivePrice }}</p>
                                                     <p class="state">主播专享价</p>
                                                 </div>
                                                 <div class="youhui jian">

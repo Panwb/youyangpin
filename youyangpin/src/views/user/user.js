@@ -172,10 +172,10 @@ export default {
         handleSelect(key, keyPath) {
             this.$router.push(this.menus[key - 1]['path'])
         },
-        submitForm(formName) {
+        submitForm(formName,formValue) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    alert('submit!');
+                    this.$router.go(-1);
                 } else {
                     console.log('error submit!!');
                     return false;
