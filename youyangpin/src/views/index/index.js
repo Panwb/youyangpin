@@ -7,7 +7,7 @@ export default {
         return {
             searchForm: {
                 pageIndex: 1,
-                itemsPerPage: 10,
+                itemsPerPage: 32,
                 pageList: [],
                 total: 0,
                 goodsName: '',

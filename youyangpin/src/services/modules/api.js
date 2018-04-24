@@ -99,7 +99,7 @@ export default{
     /**
      * 我的订单
      */
-    getPagedOrder(orderStatus, pageIndex = 1, itemsPerPage = 32, localLoading = 'getPagedOrder') {
+    getPagedOrder(orderStatus, pageIndex = 1, itemsPerPage = 10, localLoading = 'getPagedOrder') {
         return ajax({
             url: `/Order/GetPagedOrder?orderStatus=${orderStatus}&pageIndex=${pageIndex}&itemsPerPage=${itemsPerPage}`,
             localLoading
