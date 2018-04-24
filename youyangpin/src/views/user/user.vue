@@ -28,22 +28,22 @@
 	                    <div class="modifypsd">
 	                       <el-form :model="ruleForm"  :rules="rules" ref="ruleForm" label-width="100px">
 							  <el-form-item label="主播名称" prop="userName" >
-							    <el-input v-model="ruleForm.userName" auto-complete="off"></el-input>
+							    <el-input v-model="ruleForm.StudioHostName" auto-complete="off"></el-input>
 							  </el-form-item>
 							  <el-form-item label="支付宝账号" prop="zhifuId" >
-							    <el-input v-model="ruleForm.zhifuId" auto-complete="off"></el-input>
+							    <el-input v-model="ruleForm.AlipayAccount" auto-complete="off"></el-input>
 							  </el-form-item>
 							   <el-form-item label="身高" prop="height" class="linebox">
-							    <el-input v-model="ruleForm.height" auto-complete="off" placeholder="CM"></el-input>
+							    <el-input v-model="ruleForm.Height" auto-complete="off" placeholder="CM"></el-input>
 							  </el-form-item>
 							  <el-form-item label="体重" prop="weight" class="linebox">
-							    <el-input v-model="ruleForm.weight" auto-complete="off" placeholder="KG"></el-input>
+							    <el-input v-model="ruleForm.Weight" auto-complete="off" placeholder="KG"></el-input>
 							  </el-form-item>
 							  <el-form-item label="鞋码" prop="shoeSize" class="linebox">
-							    <el-input v-model="ruleForm.shoeSize" auto-complete="off" placeholder="码数"></el-input>
+							    <el-input v-model="ruleForm.ShoeSize" auto-complete="off" placeholder="码数"></el-input>
 							  </el-form-item>
 							  <el-form-item label="尺码" prop="size"  class="linebox">
-							   <el-select v-model="ruleForm.size" placeholder="请选择">
+							   <el-select v-model="ruleForm.ClothesSize" placeholder="请选择">
 							      <el-option label="S" value="S"></el-option>
                                   <el-option label="M" value="M"></el-option>
                                   <el-option label="L" value="L"></el-option>
@@ -54,25 +54,25 @@
 							   </el-select>
 							  </el-form-item>
 							  <el-form-item label="收货地址" prop="address" class="addressbox">
-							    <el-input :autosize="{ minRows:3, maxRows: 6}" type="textarea" v-model="ruleForm.address"></el-input>
+							    <el-input :autosize="{ minRows:3, maxRows: 6}" type="textarea" v-model="ruleForm.Address"></el-input>
 							  </el-form-item>
 							  <el-form-item label="收货人姓名" prop="linkName" >
-							    <el-input v-model="ruleForm.linkName" auto-complete="off"></el-input>
+							    <el-input v-model="ruleForm.LinkmanName" auto-complete="off"></el-input>
 							  </el-form-item>
 							  <el-form-item label="收货人电话" prop="linkPhone" >
-							    <el-input v-model="ruleForm.linkPhone" auto-complete="off"></el-input>
+							    <el-input v-model="ruleForm.LinkmanPhone" auto-complete="off"></el-input>
 							  </el-form-item>
 							  <el-form-item label="淘客名称" prop="tkName" >
-							    <el-input v-model="ruleForm.tkName" auto-complete="off"></el-input>
+							    <el-input v-model="ruleForm.TKName" auto-complete="off"></el-input>
 							  </el-form-item>
 							  <el-form-item label="微信" prop="wechatId" >
-							    <el-input v-model="ruleForm.wechatId" auto-complete="off"></el-input>
+							    <el-input v-model="ruleForm.WeChat" auto-complete="off"></el-input>
 							  </el-form-item>
 							  <el-form-item label="QQ" prop="qqId" >
-							    <el-input v-model="ruleForm.qqId" auto-complete="off"></el-input>
+							    <el-input v-model="ruleForm.QQ" auto-complete="off"></el-input>
 							  </el-form-item>
 							  <el-form-item label="垂直领域" prop="type">
-							    <el-checkbox-group v-model="ruleForm.type">
+							    <el-checkbox-group v-model="ruleForm.VerticalFieldCode">
 							      <el-checkbox label="美搭" name="type1"></el-checkbox>
 							      <el-checkbox label="美妆个护" name="type2"></el-checkbox>
 							      <el-checkbox label="居家" name="type3"></el-checkbox>
@@ -83,10 +83,10 @@
 							    </el-checkbox-group>
 							  </el-form-item>
 							  <el-form-item label="每天开播时段"  >
-							    <el-time-select  class="time" placeholder="起始时间" v-model="ruleForm.startTime" :picker-options="{ start: '08:30',step: '00:15',end: '18:30'}">
+							    <el-time-select  class="time" placeholder="起始时间" v-model="ruleForm.DailyBeginTime" :picker-options="{ start: '08:30',step: '00:15',end: '18:30'}">
 								</el-time-select>
 								<span class="line"></span>
-								<el-time-select  class="time" placeholder="结束时间" v-model="ruleForm.endTime"
+								<el-time-select  class="time" placeholder="结束时间" v-model="ruleForm.DailyEndTime"
 								    :picker-options="{
 								      start: '08:30',
 								      step: '00:15',
