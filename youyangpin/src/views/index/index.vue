@@ -1,7 +1,7 @@
 <template>
     <div id="app">
 	    <el-container>
-            <main-header></main-header>
+            <main-header @clickType="clickType"></main-header>
             <!-- main start -->
             <el-main>
                 <div class="wd1200">

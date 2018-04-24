@@ -86,6 +86,9 @@ export default {
             this.searchForm.sort = name;
             this.goodsSearch();
         },
-
+        clickType(name) {
+            this.searchForm.activityType = name;
+            this.goodsSearch();
+        }
     }
 }
