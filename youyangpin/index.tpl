@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>有样品</title>
-  <link href="/dist/style.css" rel="stylesheet"></head>
+  </head>
   <body>
     <div id="app"></div>
-  <script type="text/javascript" src="/dist/vendor.js"></script><script type="text/javascript" src="/dist/build.js"></script><script type="text/javascript" src="/dist/common.js"></script></body>
+  </body>
 </html>

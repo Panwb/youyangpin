@@ -1,0 +1,8 @@
+{
+  "build": [
+    "build.js",
+    "style.css"
+  ],
+  "common": "common.js",
+  "vendor": "vendor.js"
+}
