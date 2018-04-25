@@ -111,20 +111,21 @@ export default {
                 // QQ: '',
                 // DailyBeginTime: '',
                 // DailyEndTime: ''
-                userName: '',
-                zhifuId:'',
-                height:'',
-                weight:'',
-                size:'',
-                shoeSize:'',
-                address:'',
-                linkName:'',
-                linkPhone:'',
-                tkName:'',
-                type: [],
-                qqId:'',
-                startTime: '',
-                endTime: ''
+                StudioHostName: '',
+                AlipayAccount:'',
+                Height:'',
+                Weight:'',
+                ShoeSize:'',
+                ClothesSize:'',
+                Address:'',
+                LinkmanName:'',
+                LinkmanPhone:'',
+                TKName:'',
+                WeChat: '',
+                QQ:'',
+                VerticalFieldCode: [],
+                DailyBeginTime: '',
+                DailyEndTime: ''
             },
             rules: {
                 userName: [
@@ -172,10 +173,10 @@ export default {
         handleSelect(key, keyPath) {
             this.$router.push(this.menus[key - 1]['path'])
         },
-        submitForm(formName) {
+        submitForm(formName,formValue) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    alert('submit!');
+                    this.$router.go(-1);
                 } else {
                     console.log('error submit!!');
                     return false;

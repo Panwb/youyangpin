@@ -5,7 +5,13 @@ export default {
         return {
             currentPage1: 4,
             goodsId: '',
-            applyData: null
+            applyData: null,
+            ApplicationForm: {
+                GoodIds: [],
+                MerchantUserId: null,
+                ShopId: null,
+                AnchorAbilitySelfReport: null
+            }
         }
     },
     created() {
@@ -22,9 +28,40 @@ export default {
         getGoodsDetail() {
             ajax.getGoodsDetail(this.goodsId).then((result) => {
                 this.applyData = result;
-                console.log(123,result)
-                console.log(this.applyData.Shop)
+                this.ApplicationForm.ShopId = result.Shop.ShopId;
+                console.log('店铺信息',this.applyData.Shop)
+                console.log('主播信息',this.applyData.StudioHost)
+                console.log('当前申请商品信息',this.applyData.CurrentGood)
             }) 
+        },
+        //提交申请
+        requestApplication() {
+            // {
+            //     "GoodIds": [
+            //     "sample string 1",
+            //     "sample string 2"
+            // ],
+            //     "MerchantUserId": "sample string 1",
+            //     "ShopId": "sample string 2",
+            //     "AnchorAbilitySelfReport": "sample string 3"
+            // }
+            ajax.requestApplication(this.ApplicationForm)
+                .then((result) => {
+                    this.$message({type:"success",message:"提交成功"});
+                    console.log(result)
+                })
+                .catch(error => {
+                    this.$message({type:"warning",message:"提交成功"});
+                    console.log(error)
+                })
+        },
+        //修改个人信息
+        editPersonalMeg() {
+            this.$router.push('user')
+        },
+        //完善收货地址
+        improveAddress() {
+            this.$router.push('user')
         },
         handleSelect(key, keyPath) {
             console.log(key, keyPath);

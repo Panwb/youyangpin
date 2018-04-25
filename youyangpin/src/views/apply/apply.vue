@@ -16,7 +16,7 @@
 			        <div class="box">
 			          <span class="tianmao"><img src="~assets/images/tianmao.png" class="image"></span>
 			          <span class="name">店铺:{{ applyData.Shop.ShopName }}</span>
-			          <span class="wangwang"><img src="~assets/images/wangwang.png" class="image"></span>
+			          <span class="wangwang"></span>
 			        </div>
 			        <span class="line"></span>
 			        <div class="box">
@@ -28,7 +28,6 @@
 			        <div class="box">
 			           <span class="type">当前活动类型：{{ applyData.CurrentGood.ActivityType }}</span>
 			        </div>
-			       
 			      </div>
 			  </div>
 			</el-card>
@@ -54,7 +53,7 @@
                           <div class="infobox">
                              <p class="name">{{ applyData.CurrentGood.GoodsName }}</p>
                              <p class="price">直播专享价:<span class="num">{{ applyData.CurrentGood.LivePrice }}</span> <span class="normal">日常价:{{ applyData.CurrentGood.DailyPrice }}</span></p>
-                             <p class="money">佣金比例:<span class="num">{{ applyData.CurrentGood.CommissionRatio }}%</span</p>
+                             <p class="money">佣金比例:<span class="num">{{ applyData.CurrentGood.CommissionRatio }}%</span></p>
                              <p class="date">活动日期：{{ applyData.CurrentGood.ActivityBeginTime }}-{{ applyData.CurrentGood.ActivityEndTime }}</p>
                              <p class="detail">{{ applyData.CurrentGood.SellingPointDescribe }}</p>
                           </div>
@@ -68,19 +67,19 @@
 			           <li>
 			              <div class="detailbox">
 			                 <p class="title">库存</p>
-			                 <p class="num">{{ applyData.CurrentGood.SupplyNum }}</p>
+			                 <p class="num">{{ applyData.CurrentGood.InventoryNum }}</p>
 			              </div>
 			           </li>
 			           <li>
 			              <div class="detailbox">
 			                 <p class="title">已申请数/供样数</p>
-			                 <p class="num">18/20</p>
+						     <p class="num">{{ applyData.CurrentGood.RequestQuantity }}/{{ applyData.CurrentGood.SupplyNum }}</p>
 			              </div>
 			           </li>
 			           <li>
 			              <div class="detailbox">
 			                 <p class="title">优惠方式</p>
-			                 <p class="num">30元优惠券</p>
+						     <p class="num">{{applyData.CurrentGood.PreferentialWay ==='拍下立减'?'拍下立减':applyData.CurrentGood.DailyPrice-applyData.CurrentGood.LivePrice+'元优惠券'}}</p>
 			              </div>
 			           </li>
 			           <li>
@@ -99,7 +98,7 @@
 			    <span>店铺同类商品</span>
 			  </div>
 			  <div  class="text item">
-			      <div 
+			      <div
                     class="txt"
                     v-for="item in applyData.RelatedGoods"
                     :key="item.GoodsId">
@@ -110,7 +109,7 @@
                           <div class="infobox">
                              <p class="name">{{ item.GoodsName }}</p>
                              <p class="price">直播专享价:<span class="num">{{ item.LivePrice }}</span> <span class="normal">日常价:{{ item.DailyPrice }}</span></p>
-                             <p class="money">佣金比例:<span class="num">{{ item.CommissionRatio }}%</span</p>
+							  <p class="money">佣金比例:<span class="num">{{ item.CommissionRatio }}%</span></p>
                              <p class="date">活动日期：{{ item.ActivityBeginTime }}-{{ item.ActivityEndTime }}</p>
                              <p class="detail">{{ item.SellingPointDescribe }}</p>
                           </div>
@@ -124,19 +123,19 @@
 			           <li>
 			              <div class="detailbox">
 			                 <p class="title">库存</p>
-			                 <p class="num">{{ item.SupplyNum }}</p>
+			                 <p class="num">{{ item.InventoryNum }}</p>
 			              </div>
 			           </li>
 			           <li>
 			              <div class="detailbox">
 			                 <p class="title">已申请数/供样数</p>
-			                 <p class="num">18/20</p>
+			                 <p class="num">{{ item.RequestQuantity }}/{{ item.SupplyNum }}</p>
 			              </div>
 			           </li>
 			           <li>
 			              <div class="detailbox">
 			                 <p class="title">优惠方式</p>
-			                 <p class="num">30元优惠券</p>
+						     <p class="num">{{applyData.CurrentGood.PreferentialWay ==='拍下立减'?'拍下立减':applyData.CurrentGood.DailyPrice-applyData.CurrentGood.LivePrice+'元优惠券'}}</p>
 			              </div>
 			           </li>
 			           <li>
@@ -149,20 +148,20 @@
 			      </div>
 			  </div>
 			</el-card>
-            <el-card class="box-card pinfobox" shadow="never">
+            <el-card class="box-card pinfobox" shadow="never" v-if="applyData.StudioHost.LinkmanName||applyData.StudioHost.Address||applyData.StudioHost.LinkmanPhone">
 			  <div slot="header" class="clearfix title">
-			    <span>王女士</span>
+			    <span>{{ applyData.StudioHost.LinkmanName }}</span>
 			  </div>
 			  <div  class="text item">
 			      <div class="txt address">
-                    {{ applyData.Shop.ShopAddress }}         
+                    {{ applyData.StudioHost.Address }}
                   </div>
-			      <div class="txt phone">173****6462</div>
-			      <span class="txt opt"><el-button type="text">修改</el-button></span>
+			      <div class="txt phone">{{ applyData.StudioHost.LinkmanPhone }}</div>
+			      <span class="txt opt"><el-button @click="editPersonalMeg" type="text">修改</el-button></span>
 			  </div>
 			</el-card>
 			<div class="remarkbox">
-				<el-input v-model="AnchorAbilitySelfReport" placeholder="请输入内容"></el-input>
+				<el-input v-model="ApplicationForm.AnchorAbilitySelfReport" placeholder="请简要描述一下您对商品的带货能力和优势"></el-input>
                 <!--<div>-->
                   <!--<span class="tip">(商家最多接受1000服务费)</span>-->
                   <!--<el-input></el-input> -->
@@ -179,8 +178,8 @@
                   <!--<el-checkbox>我想要商家调整优惠力度</el-checkbox>-->
                 <!--</div>-->
 			</div>
-			<div class="txt addaddressbox"><el-button>+完善收货地址</el-button> </div>
-			<div class="txt applybtnbox"><el-button type="text">提交申请</el-button></div>
+			<div class="txt addaddressbox" @click="improveAddress"><el-button>+完善收货地址</el-button> </div>
+			<div class="txt applybtnbox"><el-button @click="requestApplication" type="text">提交申请</el-button></div>
 	    </div>
 	  </el-main>
 	  <!-- main end -->
@@ -261,7 +260,7 @@ export default {
    height:auto !important;
    background-color: #363636;
    padding:20px;
-}                                                                                                      
+}
 .el-footer ul {
     width: 711px;
     height: 62px;
@@ -528,7 +527,7 @@ export default {
 .addaddressbox button{
 	width:100%;
 	height:100%;
-	border-radius:0; 
+	border-radius:0;
 	padding:0;
     margin: 15px 0;
 }

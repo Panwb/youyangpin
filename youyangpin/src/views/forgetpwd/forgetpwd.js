@@ -39,7 +39,7 @@ export default {
         var validatePass2 = (rule, value, callback) => {
             if (value === '') {
               callback(new Error('请再次输入密码'));
-            } else if (value !== this.ruleForm3.pass) {
+            } else if (value !== this.ruleForm3.newPassword) {
               callback(new Error('两次输入密码不一致!'));
             } else {
               callback();
@@ -49,31 +49,31 @@ export default {
             imgCode: '',
             active: 1,
             ruleForm1: {
-                mobilePhone:'',
-                yzCode:''
+                telphone:'',
+                imageIdentifyCode:''
             },
             ruleForm2: {
-                mobileYzCode:''
+                smsIdentifyCode:''
             },
             ruleForm3: {
-                pass: '',
+                newPassword: '',
                 checkPass: ''
             },
             rules1: {
-                yzCode:[
+                imageIdentifyCode:[
                     { required: true, validator: validateyzCode, trigger: 'blur' }
                 ],
-                mobilePhone:[
+                telphone:[
                     { required: true, validator: validatemobilePhone, trigger: 'blur' }
                 ]
             },
             rules2: {
-                mobileYzCode:[
+                smsIdentifyCode:[
                     { required: true, validator: validatemobileYzCode, trigger: 'blur' }
                 ]
             },
             rules3: {
-                pass: [
+                newPassword: [
                     { required: true, validator: validatePass, trigger: 'blur' }
                 ],
                 checkPass: [
@@ -92,7 +92,7 @@ export default {
             })
         },
         getCode() {
-            ajax.getSmsCode(this.ruleForm1.mobilePhone).then((result) => {
+            ajax.getSmsCode(this.ruleForm1.telphone).then((result) => {
                 this.$message('验证码已发送你手机上');
                // this.ruleForm2.mobileYzCode = result
             })
@@ -103,11 +103,52 @@ export default {
         handleClick(tab, event) {
             console.log(tab, event);
         },
-        submitForm(formName) {
+        submitForm(formName,formValue) {
             let that = this;
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    that.active++
+                    switch(formName)
+                    {
+                        case 'ruleForm1':
+                            ajax.retrievePassword(formValue)
+                                .then((result) => {
+                                    that.active = 2;
+                                })
+                                .catch(error => {
+                                    that.active = 1;
+                                    this.$message({
+                                        type:"warning",
+                                        message:error
+                                    })
+                                });
+                            break;
+                        case 'ruleForm2':
+                            ajax.validateSmsIdentifyCode(formValue)
+                                .then((result) => {
+                                    that.active = 3;
+                                })
+                                .catch(error => {
+                                    that.active = 2;
+                                    this.$message({
+                                        type:"warning",
+                                        message:error
+                                    })
+                                });
+                            break;
+                        case 'ruleForm3':
+                            ajax.resetPassword(formValue)
+                                .then((result) => {
+                                    that.active = 4;
+                                })
+                                .catch(error => {
+                                    that.active = 3;
+                                    this.$message({
+                                        type:"warning",
+                                        message:error
+                                    })
+                                });
+                            break;
+                    }
                     if (that.active >= 4) {
                         that.active = 4
                     }
