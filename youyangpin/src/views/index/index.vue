@@ -11,7 +11,7 @@
                                 class="lab"
                                 v-for="(item, index) in statistics"
                                 :key="index"
-                                @click="clickField(item.VerticalFieldCode)">
+                                @click="clickVField(item.VerticalFieldCode)">
                                 {{ item.VerticalFieldCode }}(<i>{{item.Quantity}}</i>)
                             </span>
                         </div>
@@ -24,10 +24,10 @@
                                 <el-col :span="6">
                                     <div class="grid-content paixu"><span class="name">排序:</span>
                                         <ul>
-                                            <li @click="clickSort(0,'')" :class="sortValue===0?'active':''">默认</li>
-                                            <li @click="clickSort(1,'价格')" :class="sortValue===1?'active':''">价格</li>
-                                            <li @click="clickSort(2,'销量')" :class="sortValue===2?'active':''">销量</li>
-                                            <li @click="clickSort(3,'佣金')" :class="sortValue===3?'active':''">佣金</li>
+                                            <li @click="clickSortField(0,'')" :class="sortValue===0?'active':''">默认</li>
+                                            <li @click="clickSortField(1,'DailyPrice')" :class="sortValue===1?'active':''">价格</li>
+                                            <li @click="clickSortField(2,'Sales')" :class="sortValue===2?'active':''">销量</li>
+                                            <li @click="clickSortField(3,'CommissionRatio')" :class="sortValue===3?'active':''">佣金</li>
                                         </ul>
                                     </div>
                                 </el-col>

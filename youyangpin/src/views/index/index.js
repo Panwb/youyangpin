@@ -77,13 +77,13 @@ export default {
             this.goodsSearch()
             console.log(`当前页: ${val}`);
         },
-        clickSort(val,name) {
+        clickSortField(val,name) {
             this.sortValue = val;
-            this.searchForm.sort = name;
+            this.searchForm.sortField = name;
             this.goodsSearch();
         },
-        clickField(name) {
-            this.searchForm.sort = name;
+        clickVField(name) {
+            this.searchForm.verticalFieldCode = name;
             this.goodsSearch();
         },
         clickType(name) {
