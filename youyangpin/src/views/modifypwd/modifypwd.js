@@ -69,7 +69,11 @@ export default {
                         oldpassword: this.ruleForm.prepwd,
                         newpassword: this.ruleForm.newpwd
                     }).then((result) => {
-
+                        this.$message({
+                            type:'success',
+                            message:'修改密码成功！'
+                        });
+                        this.$router.push('login')
                     })
                 } else {
                     console.log('error submit!!');

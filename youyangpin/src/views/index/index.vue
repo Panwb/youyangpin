@@ -1,89 +1,95 @@
 <template>
-  <div id="app">
-	<el-container>
+    <div id="app">
+	    <el-container>
+            <main-header @clickType="clickType"></main-header>
+            <!-- main start -->
+            <el-main>
+                <div class="wd1200">
+                    <div class="typebox">
+                        <div class="topbox">
+                            <span
+                                class="lab"
+                                v-for="(item, index) in statistics"
+                                :key="index"
+                                @click="clickField(item.VerticalFieldCode)">
+                                {{ item.VerticalFieldCode }}(<i>{{item.Quantity}}</i>)
+                            </span>
+                        </div>
+                        <div class="bottombox">
+                            <el-row>
+                                <el-col :span="1"><div class="grid-content title">筛选:</div></el-col>
+                                <el-col :span="5"><div class="grid-content"><span class="name">价格:</span> <el-input v-model="searchForm.lowDailyPrice"></el-input><span class="fuhao">~</span><el-input v-model="searchForm.highDailyPrice"></el-input></div></el-col>
+                                <el-col :span="5"><div class="grid-content"><span class="name">销量:</span> <el-input v-model="searchForm.lowSales"></el-input><span class="fuhao">~</span><el-input v-model="searchForm.highSales"></el-input></div></el-col>
+                                <el-col :span="7"><div class="grid-content"><span class="name">佣金比例:</span><el-input v-model="searchForm.lowCommissionRatio"></el-input><span class="fuhao">~</span><el-input v-model="searchForm.highCommissionRatio"></el-input> <el-button @click="goodsSearch" class="sxbtn">筛选</el-button></div></el-col>
+                                <el-col :span="6">
+                                    <div class="grid-content paixu"><span class="name">排序:</span>
+                                        <ul>
+                                            <li @click="clickSort(0,'')" :class="sortValue===0?'active':''">默认</li>
+                                            <li @click="clickSort(1,'价格')" :class="sortValue===1?'active':''">价格</li>
+                                            <li @click="clickSort(2,'销量')" :class="sortValue===2?'active':''">销量</li>
+                                            <li @click="clickSort(3,'佣金')" :class="sortValue===3?'active':''">佣金</li>
+                                        </ul>
+                                    </div>
+                                </el-col>
+                            </el-row>
+                        </div>
+                    </div>
+                    <div class="listbox">
+                        <el-row :gutter="20">
+                            <el-col :span="6" v-for="(item,index) in pageList" :key="item.GoodsId">
+                                <el-card :body-style="{ padding: '0px' }" shadow="hover">
+                                    <router-link :to="'/apply?goodsId=' + item.GoodsId">
+                                        <span class="type"><i>{{ item.ActivityType }}</i></span>
+                                        <img :src="item.GoodsImgURL" class="image"/>
+                                        <div class="numbox">
+                                            <div class="rcprice"><div class="inner">日常价：{{ item.DailyPrice }}</div></div>
+                                            <div class="xl"><div class="inner">销量{{ item.Sales }}</div></div>
+                                        </div>
+                                        <div class="content">
+                                            <p class="words"><span class="icon icon-tao"></span>{{ item.GoodsName }}</p>
+                                            <div class="middle">
+                                                <span class="money">￥<i class="count">{{ item.LivePrice }}</i></span>
+                                                <div class="price">
+                                                    <p class="count">￥{{ item.LivePrice }}</p>
+                                                    <p class="state">主播专享价</p>
+                                                </div>
+                                                <div class="youhui jian">
+                                                    <span class="num">5</span>
+                                                </div>
+                                            </div>
+                                            <div class="bottom clearfix">
+                                                <div class="moneybox">佣金：<span class="money">{{ item.CommissionRatio }}%</span></div> <el-button class="button enterbtn">进店拿样</el-button>
+                                            </div>
+                                        </div>
+                                    </router-link>
+                                </el-card>
+                            </el-col>
+                        </el-row>
+                    </div>
+                    <div class="pagebox">
+                        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="pageIndex" :page-size="itemsPerPage" layout="prev, pager, next, jumper" :total="total"></el-pagination>
+                    </div>
+                </div>
+            </el-main>
+            <!-- main end -->
 
-      <main-header></main-header>
-
-      <!-- main start -->
-	  <el-main>
-	    <div class="wd1200">
-	      <div class="typebox">
-	        <div class="topbox">
-                <span 
-                    class="lab"
-                    v-for="(item, index) in statistics"
-                    :key="index">
-                    {{ item.VerticalFieldCode }}(<i>{{item.Quantity}}</i>)
-                </span>
-	        </div>
-	        <div class="bottombox">
-	            <el-row>
-				  <el-col :span="1"><div class="grid-content title">筛选:</div></el-col>
-				  <el-col :span="5"><div class="grid-content"><span class="name">价格:</span> <el-input></el-input><span class="fuhao">~</span><el-input></el-input></div></el-col>
-				  <el-col :span="5"><div class="grid-content"><span class="name">销量:</span> <el-input></el-input><span class="fuhao">~</span><el-input></el-input></div></el-col>
-				  <el-col :span="7"><div class="grid-content"><span class="name">佣金比例:</span><el-input></el-input><span class="fuhao">~</span><el-input></el-input> <el-button class="sxbtn ">筛选</el-button></div></el-col>
-				  <el-col :span="6"><div class="grid-content paixu"><span class="name">排序:</span> <ul><li class="active">默认</li><li>价格</li><li>销量</li><li>佣金</li></ul></div></el-col>
-				</el-row>
-	        </div>
-	      </div> 
-	      <div class="listbox">
-	         <el-row :gutter="20">
-				  <el-col :span="6" v-for="(item, index) in pageList" :key="item.GoodsId">
-				    <el-card :body-style="{ padding: '0px' }" shadow="hover">
-                      <router-link :to="'/apply?goodsId=' + item.GoodsId">
-				      <span class="type"><i>{{ item.ActivityType }}</i></span>
-				     <img :src="item.GoodsImgURL" class="image">
-				      <div class="numbox">
-                           <div class="rcprice"><div class="inner">日常价：{{ item.DailyPrice }}</div></div>
-                           <div class="xl"><div class="inner">销量{{ item.Sales }}</div></div>
-				      </div>
-				      <div class="content">
-				        <p class="words"><span class="icon icon-tao"></span>{{ item.GoodsName }}</p>
-				        <div class="middle">
-				            <span class="money">￥<i class="count">{{ item.LivePrice }}</i></span>
-				            <div class="price">
-				               <p class="count">￥78.00</p>
-                               <p class="state">主播专享价</p>
-				            </div>
-				            <div class="youhui jian">
-				               <span class="num">5</span>
-				            </div>
-				        </div>
-				        <div class="bottom clearfix">
-				          <div class="moneybox
-				          ">佣金：<span class="money">{{ item.CommissionRatio }}%</span></div> <el-button class="button enterbtn">进店拿样</el-button>
-				        </div>
-				      </div>
-                      </router-link>
-				    </el-card>
-				  </el-col>
-			 </el-row>
-	     </div>
-	     <div class="pagebox">
-		    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange":current-page.sync="pageIndex":page-size="itemsPerPage" layout="prev, pager, next, jumper" :total="total">
-            </el-pagination>
-		  </div>
-	    </div>
-	  </el-main>
-	  <!-- main end -->
-
-	  <!-- footer start -->
-	  <el-footer>
-	     <div class="wd1200">
-		     <ul class="linklist">
-		        <li><a a href="https://www.taobao.com/" target="_blank">淘宝网</a></li>
-		        <li><a a href="https://www.tmall.com/" target="_blank">天猫</a></li>
-		        <li><a a href="https://ju.taobao.com/" target="_blank">聚划算</a></li>
-		        <li><a a href="https://www.aliexpress.com/" target="_blank">全球速实通</a></li>
-		        <li><a a href="https://www.1688.com/" target="_blank">1688</a></li>
-		        <li><a a href="http://pub.alimama.com/" target="_blank">阿里妈妈</a></li>
-		        <li><a a href="https://m.kuaidi100.com/" target="_blank">快递查询</a></li>
-		     </ul>
-		     <p class="copyright">©copyright 2016-2018 优样品 www.youyangpin.com.<a href="http://www.beianbeian.com/beianxinxi/a40cc71f-db17-4d78-80dd-4b232dab5880.html">粤ICP备15114843号-1</a></p>
-         </div>
-	  </el-footer>
-	  <!-- footer end -->
-	</el-container>
+            <!-- footer start -->
+            <el-footer>
+                <div class="wd1200">
+                    <ul class="linklist">
+                    <li><a a href="https://www.taobao.com/" target="_blank">淘宝网</a></li>
+                    <li><a a href="https://www.tmall.com/" target="_blank">天猫</a></li>
+                    <li><a a href="https://ju.taobao.com/" target="_blank">聚划算</a></li>
+                    <li><a a href="https://www.aliexpress.com/" target="_blank">全球速实通</a></li>
+                    <li><a a href="https://www.1688.com/" target="_blank">1688</a></li>
+                    <li><a a href="http://pub.alimama.com/" target="_blank">阿里妈妈</a></li>
+                    <li><a a href="https://m.kuaidi100.com/" target="_blank">快递查询</a></li>
+                    </ul>
+                    <p class="copyright">©copyright 2016-2018 优样品 www.youyangpin.com.<a href="http://www.beianbeian.com/beianxinxi/a40cc71f-db17-4d78-80dd-4b232dab5880.html">粤ICP备15114843号-1</a></p>
+                </div>
+            </el-footer>
+            <!-- footer end -->
+	    </el-container>
   </div>
 </template>
 
@@ -154,7 +160,7 @@
 }
 .typebox .topbox{
    background:#fff;
-   padding:10px; 
+   padding:10px;
 }
 .typebox .topbox .lab{
 	margin-right:18px;
@@ -232,7 +238,7 @@
 }
 .listbox .el-col-6{
   margin-bottom:20px;
-  
+
 }
 .listbox .el-card{
 	position:relative;
@@ -285,7 +291,7 @@
 	width:50%;
 	background:rgba(0,0,0,0.4);
 	text-align:right;
-	
+
 }
 .listbox .numbox .xl .inner{
 	padding-right:12px;
