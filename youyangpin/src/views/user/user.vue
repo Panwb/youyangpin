@@ -96,7 +96,7 @@
 								  </el-time-select>
 							  </el-form-item>
 							  <el-form-item>
-							    <el-button type="primary" @click="submitForm('ruleForm',ruleForm)">保&nbsp;存</el-button>
+							    <el-button type="primary" @click="submitForm('ruleForm')">保&nbsp;存</el-button>
 							  </el-form-item>
 						   </el-form>
 	                    </div>

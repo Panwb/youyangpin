@@ -142,6 +142,17 @@ export default{
         })
     },
     /**
+     * 保存个人信息
+     */
+    updateStudioHost(data, localLoading = 'updateStudioHost') {
+        return ajax({
+            url: '/StudioHost/Update',
+            method: 'post',
+            localLoading,
+            body: data
+        })
+    },
+    /**
      * 修改密码
      */
     changePassword(data,localLoading = 'changePassword') {
