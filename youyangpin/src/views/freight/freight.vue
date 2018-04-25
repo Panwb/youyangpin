@@ -28,12 +28,12 @@
 	                        <div class="zfbbox">您的支付宝账号：<span class="zfid">{{ freightData.AlipayAccount }}</span></div> 
 	                        <div class="moneybox">当前可提现金额：<span class="num">{{ freightData.AccountBalance }}元</span></div>
 	                        <div class="btnbox">
-	                           <el-button class="applybtn" @click="dialogVisible = true">申请提现</el-button> 
+	                           <el-button class="applybtn" :class="freightData.AccountBalance>100?'active':''" @click="freightData.AccountBalance<100?dialogVisible = false:dialogVisible = true">申请提现</el-button>
 	                           <el-dialog :visible.sync="dialogVisible" width="30%">
 								  <span>确认要提现吗</span>
 								  <span slot="footer" class="dialog-footer">
 								    <el-button @click="dialogVisible = false">取 消</el-button>
-								    <el-button type="primary" :disabled="freightData.AccountBalance>100?'true':'false'" @click="dialogVisible = false">确 定</el-button>
+								    <el-button type="primary"  @click="dialogVisible = false">确 定</el-button>
 								  </span>
 								</el-dialog>
 
