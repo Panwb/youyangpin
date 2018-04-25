@@ -5,11 +5,11 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
     data () {
         return {
+            pageList: [],
+            total: 0,
             searchForm: {
                 pageIndex: 1,
-                itemsPerPage: 32,
-                pageList: [],
-                total: 0,
+                itemsPerPage: 40,
                 goodsName: '',
                 verticalFieldCode: '',
                 activityType: '',
@@ -83,7 +83,7 @@ export default {
             this.goodsSearch();
         },
         clickVField(name) {
-            this.searchForm.verticalFieldCode = name;
+            name === '全部' ? this.searchForm.verticalFieldCode = "" : this.searchForm.verticalFieldCode = name;
             this.goodsSearch();
         },
         clickType(name) {

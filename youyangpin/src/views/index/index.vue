@@ -67,7 +67,7 @@
                         </el-row>
                     </div>
                     <div class="pagebox">
-                        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="pageIndex" :page-size="itemsPerPage" layout="prev, pager, next, jumper" :total="total"></el-pagination>
+                        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="searchForm.pageIndex" :page-size="searchForm.itemsPerPage" layout="prev, pager, next, jumper" :total="total"></el-pagination>
                     </div>
                 </div>
             </el-main>

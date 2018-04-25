@@ -3,17 +3,28 @@
       <!-- header start -->
         <div class="optbox">
             <div class="wd1200">
-                <span class="loginbtn">
-                    <router-link to="/order" v-if="account">
-                        {{ account.UserType }} {{ account.Account }}
-                    </router-link>
-                    <router-link to="/login" v-else>请登录</router-link>
-                </span>
-                <span>
-                    <a href="javascript:void(0)" style="color: #333" @click="logout" v-if="account">退出</a>
-                    <router-link style="color: #333" to="/register" v-else>免费注册</router-link>
-                </span>
-               <!-- <div class="loginedbox">您好！<span class="account">173****0262</span> <span class="loginout">[退出]</span><span class="center">个人中心</span></div>-->
+                <!--<span class="loginbtn">-->
+                    <!--<router-link to="/order" v-if="account">-->
+                        <!--{{ account.UserType }} {{ account.Account }}-->
+                    <!--</router-link>-->
+                    <!--<router-link to="/login" v-else>请登录</router-link>-->
+                <!--</span>-->
+                <!--<span>-->
+                    <!--<a href="javascript:void(0)" style="color: #333" @click="logout" v-if="account">退出</a>-->
+                    <!--<router-link style="color: #333" to="/register" v-else>免费注册</router-link>-->
+                <!--</span>-->
+                <div class="loginedbox">
+                    <span>您好！</span>
+                    <span class="loginbtn">
+                        <router-link to="/order" v-if="account">{{ account.UserType }}{{ account.Account }}</router-link>
+                        <router-link to="/login" v-if="!account">请登录</router-link>
+                    </span>
+                    <span class="loginout" @click="logout" v-if="account">[退出]</span>
+                    <span class="center">
+                        <router-link to="/order" v-if="account">个人中心</router-link>
+                        <router-link style="color: #333" to="/register" v-if="!account">免费注册</router-link>
+                    </span>
+                </div>
             </div>
         </div>
         <div class="wd1200 searchbox">

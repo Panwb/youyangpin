@@ -78,7 +78,6 @@ export default{
             localLoading
         })
     },
-    //api/Good/Search?goodsName={goodsName}&verticalFieldCode={verticalFieldCode}&activityType={activityType}&lowSales={lowSales}&highSales={highSales}&lowDailyPrice={lowDailyPrice}&highDailyPrice={highDailyPrice}&lowCommissionRatio={lowCommissionRatio}&highCommissionRatio={highCommissionRatio}&pageIndex={pageIndex}&itemsPerPage={itemsPerPage}&sortField={sortField}&sort={sort}
     /**
      * 商品详情
      */
