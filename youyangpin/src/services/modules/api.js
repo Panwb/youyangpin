@@ -72,12 +72,13 @@ export default{
     /**
      * 首页商品搜索
      */
-    goodSearch(goodsName = '', verticalFieldCode = '', activityType = '', sales = '', lowDailyPrice = '', highDailyPrice = '', commissionRatio = '', pageIndex = 1, itemsPerPage = 10, sortField = '', sort = '', localLoading = 'goodsSearch') {
+    goodSearch(searchForm,localLoading = 'goodsSearch') {
         return ajax({
-            url: `/Good/Search?goodsName=${goodsName}&verticalFieldCode=${verticalFieldCode}&activityType=${activityType}&sales=${sales}&lowDailyPrice=${lowDailyPrice}&highDailyPrice=${highDailyPrice}&commissionRatio=${commissionRatio}&pageIndex=${pageIndex}&itemsPerPage=${itemsPerPage}&sortField=${sortField}&sort=${sort}`,
+            url: `/Good/Search?goodsName=${searchForm.goodsName}&verticalFieldCode=${searchForm.verticalFieldCode}&activityType=${searchForm.activityType}&lowSales=${searchForm.lowSales}&highSales=${searchForm.highSales}&lowDailyPrice=${searchForm.lowDailyPrice}&highDailyPrice=${searchForm.highDailyPrice}&lowCommissionRatio=${searchForm.lowCommissionRatio}&highCommissionRatio=${searchForm.highCommissionRatio}&pageIndex=${searchForm.pageIndex}&itemsPerPage=${searchForm.itemsPerPage}&sortField=${searchForm.sortField}&sort=${searchForm.sort}`,
             localLoading
         })
     },
+    //api/Good/Search?goodsName={goodsName}&verticalFieldCode={verticalFieldCode}&activityType={activityType}&lowSales={lowSales}&highSales={highSales}&lowDailyPrice={lowDailyPrice}&highDailyPrice={highDailyPrice}&lowCommissionRatio={lowCommissionRatio}&highCommissionRatio={highCommissionRatio}&pageIndex={pageIndex}&itemsPerPage={itemsPerPage}&sortField={sortField}&sort={sort}
     /**
      * 商品详情
      */
@@ -85,6 +86,14 @@ export default{
         return ajax({
             url: '/good/getdetail?goodsId=' + goodsId,
             localLoading
+        })
+    },
+    requestApplication(data, localLoading = 'requestApplication') {
+        return ajax({
+            url: '/Order/Add',
+            method: 'post',
+            localLoading,
+            body: data
         })
     },
     /**
@@ -135,12 +144,34 @@ export default{
     /**
      * 修改密码
      */
-    changePassword(data, localLoading = 'changePassword') {
+    changePassword(data,localLoading = 'changePassword') {
         return ajax({
-            url: '/User/ChangePassword',
-            method: 'post',
-            localLoading,
-            body: data
+            url: `/User/ChangePassword?oldpassword=${data.oldpassword}&newpassword=${data.newpassword}`,
+            method: 'put',
+            localLoading
         })
-    }
+    },
+    /**
+     * 忘记密码
+     */
+    retrievePassword(data,localLoading = 'retrievePassword') {
+        return ajax({
+            url: `/User/RetrievePassword?telphone=${data.telphone}&imageIdentifyCode=${data.imageIdentifyCode}`,
+            localLoading
+        })
+    },
+    validateSmsIdentifyCode(smsIdentifyCode, localLoading = 'validateSmsIdentifyCode') {
+        return ajax({
+            url: `/Common/ValidateSmsIdentifyCode?smsIdentifyCode=${smsIdentifyCode}`,
+            localLoading
+        })
+    },
+    resetPassword(newPassword, localLoading = 'resetPassword') {
+        return ajax({
+            url: `/User/ResetPassword?newPassword=${newPassword}`,
+            method: 'put',
+            localLoading
+        })
+    },
+
 }

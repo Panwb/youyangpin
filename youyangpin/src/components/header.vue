@@ -1,57 +1,50 @@
 <template>
-  <div class="header">
+    <div class="header">
       <!-- header start -->
-       <div class="optbox">
-          <div class="wd1200">    
-            
-            <span class="loginbtn">
-              <router-link to="/order" v-if="account">
-                {{ account.UserType }} {{ account.Account }}
-              </router-link>
-              <router-link to="/login" v-else>请登录</router-link>
-            </span>
-            <span>
-              <a href="javascript:void(0)" style="color: #333" @click="logout" v-if="account">退出</a>
-              <router-link style="color: #333" to="/register" v-else>免费注册</router-link>
-            </span>
-            
-           <!-- <div class="loginedbox">您好！<span class="account">173****0262</span> <span class="loginout">[退出]</span><span class="center">个人中心</span></div>--> 
-          </div>
-      </div>
-      <div class="wd1200 searchbox">
-        <el-row>
-        <el-col :span="8"><div class="grid-content bg-purple">
-          <router-link to="/index"><img src="~assets/images/logo.png" class="logo"></router-link></div></el-col>
-        <el-col :span="16">
-         <div class="grid-content bg-purple-light seabox">
-           <el-input placeholder="关键词搜索" prefix-icon="el-icon-search" v-model="keywords"></el-input>
-           <el-button class="sea-btn" @click="search">搜索</el-button>
-         </div>
-        </el-col>
-      </el-row>
-      </div>
-      <div class="navbox">
-      <el-header>
-         <div class="wd1200">
-          <el-menu :default-active="activeIndex"  class="el-menu-demo" mode="horizontal" @select="handleSelect" background-color="#261f1e" text-color="#fff" active-text-color="#f9513b">
-            <el-menu-item
-              v-for="(menu, index) in activityTypes"
-              :index="(index + 1).toString()"
-              :key="index">
-              {{ menu }}
-            </el-menu-item>
-<!--           <el-menu-item index="1">首页</el-menu-item>
-          <el-menu-item index="2">日常产品</el-menu-item>
-          <el-menu-item index="3">秒杀产品</el-menu-item>
-          <el-menu-item index="4">新款产品</el-menu-item>
-          <el-menu-item index="5">清仓产品</el-menu-item>
-          <el-menu-item index="6">高端产品</el-menu-item> -->
-        </el-menu>
-       </div>
-      </el-header>
+        <div class="optbox">
+            <div class="wd1200">
+                <span class="loginbtn">
+                    <router-link to="/order" v-if="account">
+                        {{ account.UserType }} {{ account.Account }}
+                    </router-link>
+                    <router-link to="/login" v-else>请登录</router-link>
+                </span>
+                <span>
+                    <a href="javascript:void(0)" style="color: #333" @click="logout" v-if="account">退出</a>
+                    <router-link style="color: #333" to="/register" v-else>免费注册</router-link>
+                </span>
+               <!-- <div class="loginedbox">您好！<span class="account">173****0262</span> <span class="loginout">[退出]</span><span class="center">个人中心</span></div>-->
+            </div>
+        </div>
+        <div class="wd1200 searchbox">
+            <el-row>
+                <el-col :span="8"><div class="grid-content bg-purple">
+                <router-link to="/index"><img src="~assets/images/logo.png" class="logo"></router-link></div></el-col>
+                <el-col :span="16">
+                    <div class="grid-content bg-purple-light seabox">
+                        <el-input placeholder="关键词搜索" prefix-icon="el-icon-search" v-model="keywords"></el-input>
+                        <el-button class="sea-btn" @click="search">搜索</el-button>
+                    </div>
+                </el-col>
+            </el-row>
+        </div>
+        <div class="navbox">
+            <el-header>
+                <div class="wd1200">
+                    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" background-color="#261f1e" text-color="#fff" active-text-color="#f9513b">
+                        <el-menu-item index="0">首页</el-menu-item>
+                        <el-menu-item
+                            v-for="(menu, index) in activityTypes"
+                            :index="(index + 1).toString()"
+                            :key="index">
+                        {{ menu }}
+                        </el-menu-item>
+                    </el-menu>
+                </div>
+            </el-header>
+        </div>
+        <!-- header end -->
     </div>
-    <!-- header end -->
-  </div>
 </template>
 
 <script>
@@ -69,33 +62,7 @@
     },
     data() {
       return {
-        activeIndex: '1',
-        menus: [
-        //   {
-        //     path: '/index',
-        //     key: 1
-        //   },
-        //   {
-        //     path: '/index',
-        //     key: 2
-        //   },
-        //   {
-        //     path: '/index',
-        //     key: 3
-        //   },
-        //   {
-        //     path: '/index',
-        //     key: 4
-        //   },
-        //   {
-        //     path: '/index',
-        //     key: 5
-        //   },
-        //   {
-        //     path: '/index',
-        //     key: 6
-        //   }
-        ],
+        activeIndex: '0',
         keywords: ''
       }
     },
@@ -119,7 +86,9 @@
         'setActivityTypes'
       ]),
       handleSelect(key, keyPath) {
-        console.log(key, keyPath)
+          let name = "";
+          key === '0'?name = "":name = this.activityTypes[key-1];
+          this.$emit('clickType',name);
       },
       logout() {
         this.setAccount(null)

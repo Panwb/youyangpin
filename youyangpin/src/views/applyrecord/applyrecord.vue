@@ -124,7 +124,7 @@
                                          </div>
                                      </div>
                                       <div class="pagebox">
-                                        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange":current-page.sync="pageIndex":page-size="itemsPerPage" layout="prev, pager, next, jumper" :total="total">
+                                        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="pageIndex" :page-size="itemsPerPage" layout="prev, pager, next, jumper" :total="total">
                                         </el-pagination>
                                       </div>
 					      
