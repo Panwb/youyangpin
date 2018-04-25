@@ -46,7 +46,7 @@
                                             <div class="xl"><div class="inner">销量{{ item.Sales }}</div></div>
                                         </div>
                                         <div class="content">
-                                            <p class="words"><span class="icon icon-tao"></span>{{ item.GoodsName }}</p>
+                                            <p class="words"><span :class="item.ShopType=='淘宝店'?'icon icon-tao':'icon icon-tian'"></span>{{ item.GoodsName }}</p>
                                             <div class="middle">
                                                 <span class="money">￥<i class="count">{{ item.LivePrice }}</i></span>
                                                 <div class="price">
