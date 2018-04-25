@@ -54,7 +54,7 @@
 											<div class="infobox">
 												<div class="imgbox"><img src="~assets/images/hamburger.png"></div>
 												<div class="con">
-													<p class="name">2018春季新款大V领荷叶边长袖小心机雪纺阿达</p>
+													<p class="name">{{ item.GoodsName }}</p>
 													<p class="price">直播专享价:<span class="num">{{ item.LivePrice }}</span> <span class="normal">日常价:198.00</span></p>
 													<p class="money">佣金比例:<span class="num">{{ item.CommissionRatio }}%</span></p>
 													<p class="detail">提供多色（{{ item.ColorNum }}种颜色)</p>
@@ -65,7 +65,6 @@
 											<div class="leavenum">{{ item.InventoryNum }}</div>
 											<div class="quan">{{ item.PreferentialWay ==='拍下立减'?'拍下立减':item.DailyPrice-item.LivePrice+'元优惠券' }}</div>
 											<div class="planstate"><span>{{ item.OrderStatus }}</span></div>
-											<!--<div class="orderstate"><span>已发送</span></div>-->
 											<div class="option">
 												<div class="box">
 													<el-button  class="optbtn" type="text" @click="dialogVisible2 = true">排期</el-button>
@@ -81,7 +80,6 @@
 									<el-dialog :visible.sync="dialogVisible2"  width="30%">
 										<el-form :model="form">
 											<el-form-item label="排期日期" label-width="80px">
-
 												<el-date-picker
 														v-model="form.date"
 														type="date"
@@ -115,9 +113,9 @@
 									<el-dialog :visible.sync="dialogVisible1" width="30%">
 										<span>确认已在阿里妈妈后台生成定向计划?</span>
 										<span slot="footer" class="dialog-footer">
-                                                            <el-button @click="dialogVisible1 = false">取 消</el-button>
-                                                            <el-button type="primary" @click="dialogVisible1 = false">确 定</el-button>
-                                                        </span>
+											<el-button @click="dialogVisible1 = false">取 消</el-button>
+											<el-button type="primary" @click="dialogVisible1 = false">确 定</el-button>
+										</span>
 									</el-dialog>
 									<!--填写物流信息-->
 									<el-dialog :visible.sync="dialogVisible3"  width="30%">
