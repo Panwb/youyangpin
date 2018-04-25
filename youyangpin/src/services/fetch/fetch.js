@@ -16,7 +16,16 @@ const checkStatus = function(response) {
     } else {
         // 如果没有登录,则跳转到登录页面
         if (response.status == 401) {
-            window.location = '/#/login'
+            Notification({
+                // title: '接口' + url + '错误',
+                title: '登陆超时',
+                message:'将重新登陆',
+                type: 'error'
+            })
+            setTimeout(()=>{
+                window.location = '/#/login'
+            },1000)
+
         }
         const error = new Error(response.statusText)
         error.response = response
@@ -117,9 +126,10 @@ const ajax = ({
                     throw new Error(result.ErrorMessage)
 
                     Notification({
-                        title: '接口' + url + '错误',
+                        // title: '接口' + url + '错误',
                         // title: '错误',
-                        message: result.ErrorMessage,
+                        title:error + '',
+                        message: error + '',
                         type: 'error'
                     })
                 }
@@ -143,10 +153,12 @@ const ajax = ({
                 }
                 // 显示错误提示
                 reject(error)
+
+                console.log(error)
                 Notification({
-                    title: '接口' + url + '错误',
-                    // title: '错误',
-                    message: error.ErrorMessage,
+                    // title: '接口' + url + '错误',
+                    title: error + '',
+                    message: error + '',
                     type: 'error'
                 })
             })
