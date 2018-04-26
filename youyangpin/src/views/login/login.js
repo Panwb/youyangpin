@@ -5,7 +5,7 @@ import { mapActions } from 'vuex'
 export default {
     data() {
         var validatePass = (rule, value, callback) => {
-            var passwordreg=/^[a-zA-Z0-9]{6,10}$/;  
+            var passwordreg=/^[a-zA-Z0-9]{6,25}$/;
             if (value === '') {
                 callback(new Error('请输入密码'));
             } else if(!passwordreg.test(value)){

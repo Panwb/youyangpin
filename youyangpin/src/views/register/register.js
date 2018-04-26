@@ -3,7 +3,7 @@ import  { api as ajax } from 'services'
 export default {
     data() {
         var validatePass = (rule, value, callback) => {
-            var passwordreg=/^[a-zA-Z0-9]{6,10}$/;  
+            var passwordreg=/^[a-zA-Z0-9]{6,25}$/;
             if (value === '') {
                 callback(new Error('请输入密码'));
             } else if(!passwordreg.test(value)){
@@ -15,7 +15,7 @@ export default {
         var validatePass2 = (rule, value, callback) => {
             if (value === '') {
                 callback(new Error('请再次输入密码'));
-            } else if (value !== this.ruleForm2.pass) {
+            } else if (value !== this.ruleForm2.password) {
                 callback(new Error('两次输入密码不一致!'));
             } else {
                 callback();
@@ -75,7 +75,7 @@ export default {
                     { required: true, validator: validatePass, trigger: 'blur' }
                 ],
                 checkPass: [
-                    { required: true, validator: validatePass, trigger: 'blur' }
+                    { required: true, validator: validatePass2, trigger: 'blur' }
                 ],
                 studioHostName: [
                     { required: true, validator: validateZbName, trigger: 'blur' }
