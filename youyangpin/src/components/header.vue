@@ -10,7 +10,7 @@
                     <router-link to="/login" v-else>请登录</router-link>
                 </span>
                 <span>
-                    <a href="javascript:void(0)" style="color: #333" @click="logout" v-if="account">退出</a>
+                    <a href="javascript:void(0)" style="color: #333" @click="logout" v-if="userInfo">退出</a>
                     <router-link style="color: #333" to="/register" v-else>免费注册</router-link>
                 </span>
                <!-- <div class="loginedbox">您好！<span class="account">173****0262</span> <span class="loginout">[退出]</span><span class="center">个人中心</span></div>-->
@@ -95,7 +95,7 @@
       },
       logout() {
         this.setAccount(null)
-        this.$router.push('/index')
+        this.$router.push('/login')
       },
       getActivityTypes() {
         if (this.activityTypes.length > 0) return
