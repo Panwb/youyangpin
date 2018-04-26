@@ -92,6 +92,7 @@
           let name = "";
           key === '0'?name = "":name = this.activityTypes[key-1];
           this.$emit('clickType',name);
+          this.$router.push('/index')
       },
       logout() {
         this.setAccount(null);
