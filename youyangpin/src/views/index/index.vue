@@ -37,7 +37,7 @@
                         <el-row :gutter="20">
                             <el-col :span="6" v-for="(item,index) in pageList" :key="item.GoodsId">
                                 <el-card :body-style="{ padding: '0px' }" shadow="hover">
-                                    <a :href="item.GoodsURL">
+                                    <a :href="item.GoodsURL" target="view_window">
                                         <span class="type"><i>{{ item.ActivityType }}商品</i></span>
                                         <img :src="item.GoodsImgURL" class="image"/>
                                         <div class="numbox">

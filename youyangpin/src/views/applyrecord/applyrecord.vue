@@ -50,7 +50,7 @@
                                         </div>
                                         <div class="bottombox clear" v-for="(good,index) in item.Goods" :key="index">
                                             <div class="infobox">
-                                                <div class="imgbox"><a :href="good.GoodsURL"><img :src="good.GoodsImgURL"></a></div>
+                                                <div class="imgbox"><a :href="good.GoodsURL" target="view_window"><img :src="good.GoodsImgURL"></a></div>
                                                 <div class="con">
                                                     <p class="name">{{ good.GoodsName }}</p>
                                                     <p class="price">直播专享价:<span class="num">{{ good.LivePrice }}</span> <span class="normal">日常价:{{ good.DailyPrice }}</span></p>
