@@ -48,7 +48,7 @@
 			  <div  class="text item">
 			      <div class="txt">
 			         <ul class="list">
-			           <li><div class="imgbox"><img :src="applyData.Shop.GoodsImgURL" class="image"></div></li>
+			           <li><div class="imgbox"><img :src="applyData.CurrentGood.GoodsImgURL" class="image"></div></li>
 			           <li>
                           <div class="infobox">
                              <p class="name">{{ applyData.CurrentGood.GoodsName }}</p>

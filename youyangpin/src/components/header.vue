@@ -16,7 +16,7 @@
                 <div class="loginedbox">
                     <span>您好！</span>
                     <span class="loginbtn">
-                        <router-link to="/order" v-if="account">{{ account.UserType }}{{ account.Account }}</router-link>
+                        <router-link to="/user" v-if="account">{{ account.Account }}</router-link>
                         <router-link to="/login" v-if="!account">请登录</router-link>
                     </span>
                     <span class="loginout" @click="logout" v-if="account">[退出]</span>
@@ -48,7 +48,7 @@
                             v-for="(menu, index) in activityTypes"
                             :index="(index + 1).toString()"
                             :key="index">
-                        {{ menu }}
+                        {{ menu+"商品" }}
                         </el-menu-item>
                     </el-menu>
                 </div>
