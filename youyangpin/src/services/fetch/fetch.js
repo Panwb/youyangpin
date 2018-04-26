@@ -4,7 +4,6 @@ import { rootPath, commonPath } from './config'
 import actions from '../../vuex/actions'
 import store from '../../vuex'
 import { Notification } from 'element-ui'
-
 /**
  * 检查ajax返回的状态码,如果为401,则跳转到登录页
  * @param response
@@ -23,7 +22,7 @@ const checkStatus = function(response) {
                 type: 'error'
             })
             setTimeout(()=>{
-                window.location = '/#/login'
+                window.location = '/login'
             },1000)
 
         }
@@ -154,11 +153,11 @@ const ajax = ({
                 // 显示错误提示
                 reject(error)
 
-                console.log(error)
+                error = error + '';
                 Notification({
                     // title: '接口' + url + '错误',
-                    title: error + '',
-                    message: error + '',
+                    title: error ,
+                    message: error ,
                     type: 'error'
                 })
             })

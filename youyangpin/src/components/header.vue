@@ -4,8 +4,8 @@
         <div class="optbox">
             <div class="wd1200">
                 <span class="loginbtn">
-                    <router-link to="/order" v-if="account">
-                        {{ account.UserType }} {{ account.Account }}
+                    <router-link to="/order" v-if="userInfo">
+                        {{ userInfo.UserType }} {{ userInfo.Account }}
                     </router-link>
                     <router-link to="/login" v-else>请登录</router-link>
                 </span>
@@ -63,7 +63,8 @@
     data() {
       return {
         activeIndex: '0',
-        keywords: ''
+        keywords: '',
+        userInfo:{},
       }
     },
     watch: {
@@ -78,7 +79,9 @@
       ])
     },
     created() {
-      this.getActivityTypes()
+        this.userInfo = JSON.parse(localStorage.getItem('user'));
+        this.getActivityTypes();
+        console.log(11,this.userInfo)
     },
     methods: {
       ...mapActions([
