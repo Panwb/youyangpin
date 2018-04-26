@@ -39,11 +39,11 @@
                             <el-col :span="6" v-for="(item,index) in pageList" :key="item.GoodsId">
                                 <el-card :body-style="{ padding: '0px' }" shadow="hover">
                                     <router-link :to="'/apply?goodsId=' + item.GoodsId">
-                                        <span class="type"><i>{{ item.ActivityType }}</i></span>
+                                        <span class="type"><i>{{ item.ActivityType }}商品</i></span>
                                         <img :src="item.GoodsImgURL" class="image"/>
                                         <div class="numbox">
                                             <div class="rcprice"><div class="inner">日常价：{{ item.DailyPrice }}</div></div>
-                                            <div class="xl"><div class="inner">销量{{ item.Sales }}</div></div>
+                                            <div class="xl"><div class="inner">销量{{ item.Sales }}件</div></div>
                                         </div>
                                     </router-link>
                                         <div class="content">
@@ -268,6 +268,7 @@
     width: 30px;
     display: block;
     margin-left: 6px;
+    margin-top:2px;
 }
 .listbox .numbox{
 	position:absolute;
@@ -282,17 +283,14 @@
 .listbox .numbox .rcprice{
 	float:left;
 	width:50%;
-	background:rgba(0,0,0,0.1);
-}
-.listbox .numbox .rcprice .inner{
-	padding-left:12px;
+	background:rgba(26,27,29,.65);
+    text-align:center;
 }
 .listbox .numbox .xl{
 	float:right;
 	width:50%;
-	background:rgba(0,0,0,0.4);
-	text-align:right;
-
+	background:rgba(26,27,29,.9);
+	text-align:center;
 }
 .listbox .numbox .xl .inner{
 	padding-right:12px;
@@ -304,7 +302,7 @@
 	font-size: 14px;
     color: #333;
     padding: 12px;
-    padding-left: 35px;
+    padding-left:42px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -352,6 +350,7 @@
 .listbox .middle .money .count{
 	font-size:32px;
 	font-style:normal;
+    color:#f9513b;
 }
 .listbox .middle .price .state {
     color: #333;
