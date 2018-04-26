@@ -38,7 +38,10 @@ sync(store,router)
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.auth)) {
-        if (!store.getters.account) {
+        let userInfo = JSON.parse(localStorage.getItem('user'));
+        // console.log(userInfo)
+        // if (!store.getters.account) {
+        if (!userInfo) {
             next({
                 path: '/login',
                 query: {
