@@ -11,7 +11,9 @@ export default {
                 MerchantUserId: null,
                 ShopId: null,
                 AnchorAbilitySelfReport: null
-            }
+            },
+            isChecked: [],
+            isShowChoose: true
         }
     },
     created() {
@@ -22,16 +24,22 @@ export default {
 
         console.log(this.$route.query)
         this.goodsId = this.$route.query.goodsId
+        sessionStorage.removeItem('goodid')
         this.getGoodsDetail()
     },
     methods: {
         getGoodsDetail() {
             this.ApplicationForm.GoodIds = [];
+            this.isShowChoose = false;
             ajax.getGoodsDetail(this.goodsId)
                 .then((result) => {
                     this.applyData = result;
                     this.ApplicationForm.ShopId = result.Shop.ShopId;
                     this.ApplicationForm.MerchantUserId = result.Shop.UserId;
+                    this.applyData.RelatedGoods.forEach((item,index) => {
+                        this.$set(this.isChecked, index, false)
+                    });
+                    this.isShowChoose = true;
                     // console.log('店铺信息',this.applyData.Shop)
                     // console.log('主播信息',this.applyData.StudioHost)
                     // console.log('当前申请商品信息',this.applyData.CurrentGood)
@@ -41,11 +49,11 @@ export default {
         //提交申请
         requestApplication() {
             let GoodsIds = [];
-            if(this.applyData.RelatedGoods.length) {
-                this.applyData.RelatedGoods.forEach(item => {
-                    GoodsIds.push(item.GoodsId)
-                });
-            }
+            this.isChecked.forEach((item,index) => {
+                if(item) {
+                    GoodsIds.push(this.applyData.RelatedGoods[index].GoodsId)
+                }
+            });
             GoodsIds.push(this.applyData.CurrentGood.GoodsId);
             this.ApplicationForm.GoodIds = GoodsIds;
             ajax.requestApplication(this.ApplicationForm)
@@ -62,7 +70,8 @@ export default {
         },
         //完善收货地址
         improveAddress() {
-            this.$router.push('user')
+            sessionStorage.setItem('goodid',this.$route.query.goodsId);
+            this.$router.push('user');
         },
         handleSelect(key, keyPath) {
             console.log(key, keyPath);
@@ -72,6 +81,13 @@ export default {
         },
         handleCurrentChange(val) {
             console.log(`当前页: ${val}`);
+        },
+        formatDate(val) {
+            if(val) {
+                return `${val.substring(0,4)}年${val.substring(5,7)}月${val.substring(8,10)}日`
+            }else {
+                return null
+            }
         }
   }
 }
