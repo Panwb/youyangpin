@@ -45,6 +45,7 @@
                                             <div class="rcprice"><div class="inner">日常价：{{ item.DailyPrice }}</div></div>
                                             <div class="xl"><div class="inner">销量{{ item.Sales }}</div></div>
                                         </div>
+                                    </router-link>
                                         <div class="content">
                                             <p class="words"><span :class="item.ShopType=='淘宝店'?'icon icon-tao':'icon icon-tian'"></span>{{ item.GoodsName }}</p>
                                             <div class="middle">
@@ -61,7 +62,7 @@
                                                 <div class="moneybox">佣金：<span class="money">{{ item.CommissionRatio }}%</span></div> <el-button class="button enterbtn">进店拿样</el-button>
                                             </div>
                                         </div>
-                                    </router-link>
+                                    
                                 </el-card>
                             </el-col>
                         </el-row>
@@ -80,7 +81,7 @@
                     <li><a a href="https://www.taobao.com/" target="_blank">淘宝网</a></li>
                     <li><a a href="https://www.tmall.com/" target="_blank">天猫</a></li>
                     <li><a a href="https://ju.taobao.com/" target="_blank">聚划算</a></li>
-                    <li><a a href="https://www.aliexpress.com/" target="_blank">全球速实通</a></li>
+                    <li><a a href="https://seller.aliexpress.com/" target="_blank">全球速卖通</a></li>
                     <li><a a href="https://www.1688.com/" target="_blank">1688</a></li>
                     <li><a a href="http://pub.alimama.com/" target="_blank">阿里妈妈</a></li>
                     <li><a a href="https://m.kuaidi100.com/" target="_blank">快递查询</a></li>
@@ -349,7 +350,7 @@
 	float:left;
 }
 .listbox .middle .money .count{
-	font-size:48px;
+	font-size:32px;
 	font-style:normal;
 }
 .listbox .middle .price .state {
