@@ -1,15 +1,20 @@
 <template>
   <div id="app">  
 	<el-container>
-      <!-- header start -->
-      <main-header></main-header>
+       <!-- header start -->
+      <div class="wd1200 searchbox">
+	      <el-row>
+			  <el-col :span="8"><div class="grid-content bg-purple">
+          <router-link to="/index"><img src="~assets/images/logo.png" class="logo"></router-link></div></el-col>
+		    </el-row>
+      </div>
 	  <!-- header end -->
 
     <!-- main start -->
 	  <el-main class="maincontent">
 	    <div class="wd1200 registerbox">
            <p class="title">用户注册<span class="login">已有账号?<router-link to="/login">点击登录</router-link></span></p>
-			<el-form :model="ruleForm2"  :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
+			<el-form :model="ruleForm2"  :rules="rules2" ref="ruleForm2" label-width="100px">
 			  <el-form-item label="主播名称" prop="studioHostName">
 			    <el-input  v-model="ruleForm2.studioHostName" auto-complete="off"  placeholder="请输入主播名称"></el-input>
 			  </el-form-item>
@@ -30,7 +35,7 @@
 			    <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="请再次输入密码"></el-input>
 			  </el-form-item>
 			  <el-form-item>
-			    <el-button type="primary" @click="submitForm('ruleForm2')">立即注册</el-button>
+			    <el-button type="primary" @click="submitForm('ruleForm2')" class="registerbtn">立即注册</el-button>
 			  </el-form-item>
 			</el-form>	  
 	    </div>
@@ -146,8 +151,8 @@
   margin-right:30px;
 }
 .maincontent{
-	background:#f2f2f2;
-	min-height:600px;
+	min-height:698px;
+	border-top: 2px solid #dcdfe6;
 }
 .maincontent .wd1200{
 	height:auto;
@@ -169,6 +174,7 @@
 }
 .registerbox .title a{
 	color:#f95741;
+	text-decoration:underline;
 }
 .registerbox .codetxt{
 	width:280px;
@@ -238,5 +244,8 @@
 	width:500px;
 	padding:50px 0;
 	margin:0 auto;
+}
+.registerbtn{
+	width:100%;
 }
 </style>

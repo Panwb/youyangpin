@@ -4,7 +4,7 @@
             <li><a a href="https://www.taobao.com/" target="_blank">淘宝网</a></li>
             <li><a a href="https://www.tmall.com/" target="_blank">天猫</a></li>
             <li><a a href="https://ju.taobao.com/" target="_blank">聚划算</a></li>
-            <li><a a href="https://www.aliexpress.com/" target="_blank">全球速实通</a></li>
+            <li><a a href="https://seller.aliexpress.com/" target="_blank">全球速卖通</a></li>
             <li><a a href="https://www.1688.com/" target="_blank">1688</a></li>
             <li><a a href="http://pub.alimama.com/" target="_blank">阿里妈妈</a></li>
             <li><a a href="https://m.kuaidi100.com/" target="_blank">快递查询</a></li>
