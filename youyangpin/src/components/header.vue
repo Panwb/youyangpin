@@ -1,21 +1,6 @@
 <template>
     <div class="header">
       <!-- header start -->
-        <!--<div class="optbox">
-            <div class="wd1200">
-              <span class="loginbtn">
-                    <router-link to="/order" v-if="userInfo">
-                        {{ userInfo.UserType }} {{ userInfo.Account }}
-                    </router-link>
-                    <router-link to="/login" v-else>请登录</router-link>
-                </span>
-                <span>
-                    <a href="javascript:void(0)" style="color: #333" @click="logout" v-if="userInfo">退出</a>
-                    <router-link style="color: #333" to="/register" v-else>免费注册</router-link>
-                </span>
-                <div class="loginedbox">您好！<span class="account">173****0262</span> <span class="loginout">[退出]</span><span class="center">个人中心</span></div>
-            </div>
-        </div>-->
         <div class="optbox">
             <div class="wd1200">
                 <div class="loginedbox">
