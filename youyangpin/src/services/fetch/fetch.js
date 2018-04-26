@@ -4,7 +4,6 @@ import { rootPath, commonPath } from './config'
 import actions from '../../vuex/actions'
 import store from '../../vuex'
 import { Notification } from 'element-ui'
-
 /**
  * 检查ajax返回的状态码,如果为401,则跳转到登录页
  * @param response
@@ -16,7 +15,16 @@ const checkStatus = function(response) {
     } else {
         // 如果没有登录,则跳转到登录页面
         if (response.status == 401) {
-            window.location = '/#/login'
+            Notification({
+                // title: '接口' + url + '错误',
+                title: '登陆超时',
+                message:'将重新登陆',
+                type: 'error'
+            })
+            setTimeout(()=>{
+                window.location = '/login'
+            },1000)
+
         }
         const error = new Error(response.statusText)
         error.response = response
@@ -117,9 +125,10 @@ const ajax = ({
                     throw new Error(result.ErrorMessage)
 
                     Notification({
-                        title: '接口' + url + '错误',
+                        // title: '接口' + url + '错误',
                         // title: '错误',
-                        message: result.ErrorMessage,
+                        title:error + '',
+                        message: error + '',
                         type: 'error'
                     })
                 }
@@ -143,10 +152,12 @@ const ajax = ({
                 }
                 // 显示错误提示
                 reject(error)
+
+                error = error + '';
                 Notification({
-                    title: '接口' + url + '错误',
-                    // title: '错误',
-                    message: error.ErrorMessage,
+                    // title: '接口' + url + '错误',
+                    title: error ,
+                    message: error ,
                     type: 'error'
                 })
             })

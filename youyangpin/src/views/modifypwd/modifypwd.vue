@@ -27,13 +27,13 @@
 	                    <div class="modifypsd">
 	                         <el-form :model="ruleForm"  :rules="rules" ref="ruleForm" label-width="120px" >
 							  <el-form-item label="验证原密码" prop="prepwd" >
-							    <el-input  auto-complete="off" v-model="ruleForm.prepwd" placeholder="密码为6-25位数字+字母"></el-input>
+							    <el-input type="password" auto-complete="off" v-model="ruleForm.prepwd" placeholder="密码为6-25位数字+字母"></el-input>
 							  </el-form-item>
 							  <el-form-item label="设置新密码" prop="newpwd" >
-							    <el-input  auto-complete="off" v-model="ruleForm.newpwd" placeholder="密码为6-25位数字+字母"></el-input>
+							    <el-input type="password" auto-complete="off" v-model="ruleForm.newpwd" placeholder="密码为6-25位数字+字母"></el-input>
 							  </el-form-item>
 							   <el-form-item label="新密码确认" prop="surepwd" >
-							    <el-input  auto-complete="off" v-model="ruleForm.surepwd" placeholder="密码为6-25位数字+字母"></el-input>
+							    <el-input type="password" auto-complete="off" v-model="ruleForm.surepwd" placeholder="密码为6-25位数字+字母"></el-input>
 							  </el-form-item>
 							  <el-form-item>
 							    <el-button type="primary" @click="submitForm('ruleForm')">保&nbsp;存</el-button>
