@@ -81,7 +81,6 @@
     created() {
         this.userInfo = JSON.parse(localStorage.getItem('user'));
         this.getActivityTypes();
-        console.log(11,this.userInfo)
     },
     methods: {
       ...mapActions([
