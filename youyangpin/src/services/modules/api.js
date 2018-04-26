@@ -78,7 +78,6 @@ export default{
             localLoading
         })
     },
-    //api/Good/Search?goodsName={goodsName}&verticalFieldCode={verticalFieldCode}&activityType={activityType}&lowSales={lowSales}&highSales={highSales}&lowDailyPrice={lowDailyPrice}&highDailyPrice={highDailyPrice}&lowCommissionRatio={lowCommissionRatio}&highCommissionRatio={highCommissionRatio}&pageIndex={pageIndex}&itemsPerPage={itemsPerPage}&sortField={sortField}&sort={sort}
     /**
      * 商品详情
      */
@@ -139,6 +138,17 @@ export default{
         return ajax({
             url: '/StudioHost/GetDetail',
             localLoading
+        })
+    },
+    /**
+     * 保存个人信息
+     */
+    updateStudioHost(data, localLoading = 'updateStudioHost') {
+        return ajax({
+            url: '/StudioHost/Update',
+            method: 'post',
+            localLoading,
+            body: data
         })
     },
     /**

@@ -3,7 +3,7 @@
       <!-- header start -->
         <div class="optbox">
             <div class="wd1200">
-                <span class="loginbtn">
+              <span class="loginbtn">
                     <router-link to="/order" v-if="userInfo">
                         {{ userInfo.UserType }} {{ userInfo.Account }}
                     </router-link>
@@ -37,7 +37,7 @@
                             v-for="(menu, index) in activityTypes"
                             :index="(index + 1).toString()"
                             :key="index">
-                        {{ menu }}
+                        {{ menu+"商品" }}
                         </el-menu-item>
                     </el-menu>
                 </div>

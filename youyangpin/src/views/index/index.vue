@@ -11,7 +11,7 @@
                                 class="lab"
                                 v-for="(item, index) in statistics"
                                 :key="index"
-                                @click="clickField(item.VerticalFieldCode)">
+                                @click="clickVField(item.VerticalFieldCode)">
                                 {{ item.VerticalFieldCode }}(<i>{{item.Quantity}}</i>)
                             </span>
                         </div>
@@ -24,10 +24,10 @@
                                 <el-col :span="6">
                                     <div class="grid-content paixu"><span class="name">排序:</span>
                                         <ul>
-                                            <li @click="clickSort(0,'')" :class="sortValue===0?'active':''">默认</li>
-                                            <li @click="clickSort(1,'价格')" :class="sortValue===1?'active':''">价格</li>
-                                            <li @click="clickSort(2,'销量')" :class="sortValue===2?'active':''">销量</li>
-                                            <li @click="clickSort(3,'佣金')" :class="sortValue===3?'active':''">佣金</li>
+                                            <li @click="clickSortField(0,'')" :class="sortValue===0?'active':''">默认</li>
+                                            <li @click="clickSortField(1,'DailyPrice')" :class="sortValue===1?'active':''">价格</li>
+                                            <li @click="clickSortField(2,'Sales')" :class="sortValue===2?'active':''">销量</li>
+                                            <li @click="clickSortField(3,'CommissionRatio')" :class="sortValue===3?'active':''">佣金</li>
                                         </ul>
                                     </div>
                                 </el-col>
@@ -46,15 +46,15 @@
                                             <div class="xl"><div class="inner">销量{{ item.Sales }}</div></div>
                                         </div>
                                         <div class="content">
-                                            <p class="words"><span class="icon icon-tao"></span>{{ item.GoodsName }}</p>
+                                            <p class="words"><span :class="item.ShopType=='淘宝店'?'icon icon-tao':'icon icon-tian'"></span>{{ item.GoodsName }}</p>
                                             <div class="middle">
                                                 <span class="money">￥<i class="count">{{ item.LivePrice }}</i></span>
                                                 <div class="price">
-                                                    <p class="count">￥{{ item.LivePrice }}</p>
+                                                    <p class="count">￥{{ item.DailyPrice }}</p>
                                                     <p class="state">主播专享价</p>
                                                 </div>
                                                 <div class="youhui jian">
-                                                    <span class="num">5</span>
+                                                    <span class="num">{{ item.DailyPrice-item.LivePrice }}</span>
                                                 </div>
                                             </div>
                                             <div class="bottom clearfix">
@@ -67,7 +67,7 @@
                         </el-row>
                     </div>
                     <div class="pagebox">
-                        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="pageIndex" :page-size="itemsPerPage" layout="prev, pager, next, jumper" :total="total"></el-pagination>
+                        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="searchForm.pageIndex" :page-size="searchForm.itemsPerPage" layout="prev, pager, next, jumper" :total="total"></el-pagination>
                     </div>
                 </div>
             </el-main>
