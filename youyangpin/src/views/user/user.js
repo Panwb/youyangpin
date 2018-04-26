@@ -153,10 +153,10 @@ export default {
                     { required: true, validator: validatelinkPhone, trigger: 'blur' }
                 ],
                 qqId: [
-                    { validator: validateqqId, trigger: 'blur' }
+                    //{ validator: validateqqId, trigger: 'blur' }
                 ],
                 type: [
-                    { type: 'array', required: true, message: '请至少选择一个垂直领域', trigger: 'change' }
+                    //{ type: 'array', required: true, message: '请至少选择一个垂直领域', trigger: 'change' }
                 ]
             }
         }
@@ -173,10 +173,18 @@ export default {
         handleSelect(key, keyPath) {
             this.$router.push(this.menus[key - 1]['path'])
         },
-        submitForm(formName,formValue) {
+        submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    this.$router.go(-1);
+                    this.ruleForm.VerticalFieldCode = this.ruleForm.VerticalFieldCode.join();
+                    ajax.updateStudioHost(this.ruleForm)
+                        .then((result) => {
+                            this.$message({type:"success",message:"保存成功"});
+                            //this.$router.go(-1);
+                        })
+                        .catch(error => {
+                            this.$message({type:"warning",message: error});
+                        });
                 } else {
                     console.log('error submit!!');
                     return false;
