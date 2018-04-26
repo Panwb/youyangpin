@@ -40,27 +40,14 @@ export default {
         },
         //提交申请
         requestApplication() {
-            // {
-            //     "GoodIds": [
-            //     "sample string 1",
-            //     "sample string 2"
-            // ],
-            //     "MerchantUserId": "sample string 1",
-            //     "ShopId": "sample string 2",
-            //     "AnchorAbilitySelfReport": "sample string 3"
-            // }
-            let RelatedGoodsIds = [] , CurrentGoodsIds = [];
+            let GoodsIds = [];
             if(this.applyData.RelatedGoods.length) {
                 this.applyData.RelatedGoods.forEach(item => {
-                    RelatedGoodsIds.push(item.GoodsId)
+                    GoodsIds.push(item.GoodsId)
                 });
             }
-            if(this.applyData.CurrentGood.length) {
-                this.applyData.CurrentGood.forEach(item => {
-                    CurrentGoodsIds.GoodsId.push(item.GoodsId)
-                });
-            }
-            this.ApplicationForm.GoodIds = [...RelatedGoodsIds,...CurrentGoodsIds]
+            GoodsIds.push(this.applyData.CurrentGood.GoodsId);
+            this.ApplicationForm.GoodIds = GoodsIds;
             ajax.requestApplication(this.ApplicationForm)
                 .then((result) => {
                     this.$message({type:"success",message:"提交成功"});

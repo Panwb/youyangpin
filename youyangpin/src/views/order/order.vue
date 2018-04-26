@@ -47,24 +47,24 @@
 											<div class="date">{{ item.datetime }}</div>
 											<div class="orderId">订单号:{{ item.OrderNo }}</div>
 											<div class="shop"><img src="~assets/images/hamburger.png">{{ item.ShopGuid }}</div>
-											<div  class="wechat">微信:{{ item.WeChat }}</div>
+											<div  class="wechat">旺旺号:{{ item.WangWangNo }}</div>
 											<div class="phone">联系电话:{{ item.LinkmanPhone }}</div>
 										</div>
-										<div class="bottombox clear">
+										<div class="bottombox clear" v-for="(good,index) in item.Goods" :key="index">
 											<div class="infobox">
 												<div class="imgbox"><img src="~assets/images/hamburger.png"></div>
 												<div class="con">
-													<p class="name">{{ item.GoodsName }}</p>
-													<p class="price">直播专享价:<span class="num">{{ item.LivePrice }}</span> <span class="normal">日常价:198.00</span></p>
-													<p class="money">佣金比例:<span class="num">{{ item.CommissionRatio }}%</span></p>
-													<p class="detail">提供多色（{{ item.ColorNum }}种颜色)</p>
-													<p class="date">{{ item.NeedSendBack ==='是'? '需要退回样品':''}}</p>
+													<p class="name">{{ good.GoodsName }}</p>
+													<p class="price">直播专享价:<span class="num">{{ good.LivePrice }}</span> <span class="normal">日常价:{{ good.DailyPrice }}</span></p>
+													<p class="money">佣金比例:<span class="num">{{ good.CommissionRatio }}%</span></p>
+													<p class="detail">提供多色（{{ good.ColorNum }}种颜色)</p>
+													<p class="date">{{ good.NeedSendBack ==='是'? '需要退回样品':''}}</p>
 												</div>
 											</div>
-											<div class="salenum">{{ item.Sales }}</div>
-											<div class="leavenum">{{ item.InventoryNum }}</div>
-											<div class="quan">{{ item.PreferentialWay ==='拍下立减'?'拍下立减':item.DailyPrice-item.LivePrice+'元优惠券' }}</div>
-											<div class="planstate"><span>{{ item.OrderStatus }}</span></div>
+											<div class="salenum">{{ good.Sales }}</div>
+											<div class="leavenum">{{ good.InventoryNum }}</div>
+											<div class="quan">{{ good.PreferentialWay ==='拍下立减'?'拍下立减':good.DailyPrice-good.LivePrice+'元优惠券' }}</div>
+											<div class="planstate"><span>{{ good.DirectionalPlanStatus }}</span></div>
 											<div class="option">
 												<div class="box">
 													<el-button  class="optbtn" type="text" @click="dialogVisible2 = true">排期</el-button>
@@ -105,8 +105,8 @@
 											</el-form-item>
 										</el-form>
 										<div slot="footer" class="dialog-footer">
-											<el-button @click="dialogVisible3 = false">取 消</el-button>
-											<el-button type="primary" @click="dialogVisible3 = false">确 定</el-button>
+											<el-button @click="dialogVisible4 = false">取 消</el-button>
+											<el-button type="primary" @click="dialogVisible4 = false">确 定</el-button>
 										</div>
 									</el-dialog>
 									<!--申请定向-->
@@ -728,7 +728,7 @@
 	margin:30px auto;
 	text-align:right;
 }
-.el-date-editor.el-input, .el-date-editor.el-input__inner{
-	width:400px;
-}
+/*.el-date-editor.el-input, .el-date-editor.el-input__inner{*/
+	/*width:400px;*/
+/*}*/
 </style>
