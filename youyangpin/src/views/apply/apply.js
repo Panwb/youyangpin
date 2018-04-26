@@ -26,13 +26,17 @@ export default {
     },
     methods: {
         getGoodsDetail() {
-            ajax.getGoodsDetail(this.goodsId).then((result) => {
-                this.applyData = result;
-                this.ApplicationForm.ShopId = result.Shop.ShopId;
-                console.log('店铺信息',this.applyData.Shop)
-                console.log('主播信息',this.applyData.StudioHost)
-                console.log('当前申请商品信息',this.applyData.CurrentGood)
-            }) 
+            this.ApplicationForm.GoodIds = [];
+            ajax.getGoodsDetail(this.goodsId)
+                .then((result) => {
+                    this.applyData = result;
+                    this.ApplicationForm.ShopId = result.Shop.ShopId;
+                    this.ApplicationForm.MerchantUserId = result.Shop.UserId;
+                    // console.log('店铺信息',this.applyData.Shop)
+                    // console.log('主播信息',this.applyData.StudioHost)
+                    // console.log('当前申请商品信息',this.applyData.CurrentGood)
+                    // console.log('店铺同类商品',this.applyData.RelatedGoods)
+                })
         },
         //提交申请
         requestApplication() {
@@ -45,14 +49,24 @@ export default {
             //     "ShopId": "sample string 2",
             //     "AnchorAbilitySelfReport": "sample string 3"
             // }
+            let RelatedGoodsIds = [] , CurrentGoodsIds = [];
+            if(this.applyData.RelatedGoods.length) {
+                this.applyData.RelatedGoods.forEach(item => {
+                    RelatedGoodsIds.push(item.GoodsId)
+                });
+            }
+            if(this.applyData.CurrentGood.length) {
+                this.applyData.CurrentGood.forEach(item => {
+                    CurrentGoodsIds.GoodsId.push(item.GoodsId)
+                });
+            }
+            this.ApplicationForm.GoodIds = [...RelatedGoodsIds,...CurrentGoodsIds]
             ajax.requestApplication(this.ApplicationForm)
                 .then((result) => {
                     this.$message({type:"success",message:"提交成功"});
-                    console.log(result)
                 })
                 .catch(error => {
-                    this.$message({type:"warning",message:"提交成功"});
-                    console.log(error)
+                    this.$message({type:"warning",message:error});
                 })
         },
         //修改个人信息

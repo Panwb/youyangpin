@@ -1,149 +1,175 @@
 <template>
-  <div id="app">  
-	<el-container>
-      <!-- header start -->
-      <main-header></main-header>
-	  <!-- header end -->
+    <div id="app">
+        <el-container>
+            <!-- header start -->
+            <main-header></main-header>
+            <!-- header end -->
 
-      <!-- main start -->
-	  <el-main class="maincontent">
-	    <div class="wd1200">
-             <el-container>
-				  <el-aside class="asidebox">
-				       <p class="title">个人中心</p>
-                       <el-menu class="linklist" :default-active="asideIndex" @select="handleSelect">
-                            <el-menu-item
-                                v-for="menu in menus"
-                                :index="menu.key"
-                                :key="menu.key">
-                                {{ menu.title }}
-                            </el-menu-item>
-                        </el-menu>
-				  </el-aside>
-				  <el-main class="mainbox">
-				    <p class="title">申请记录</p>
-				    <div class="content">
-				       <!--申请记录-->
-				       <div class="myorder">
-	                       <el-tabs v-model="activeName" @tab-click="handleClick">
-                                <el-tab-pane
-                                    :label="item.name"
-                                    :name="item.key"
-                                    v-for="item in status"
-                                    :key="item.key">
-                                </el-tab-pane>
-					       </el-tabs>
-                           <div class="titlebox">
+            <!-- main start -->
+            <el-main class="maincontent">
+                <div class="wd1200">
+                    <el-container>
+                        <el-aside class="asidebox">
+                            <p class="title">个人中心</p>
+                            <el-menu class="linklist" :default-active="asideIndex" @select="handleSelect">
+                                <el-menu-item
+                                        v-for="menu in menus"
+                                        :index="menu.key"
+                                        :key="menu.key">
+                                    {{ menu.title }}
+                                </el-menu-item>
+                            </el-menu>
+                        </el-aside>
+                        <el-main class="mainbox">
+                            <p class="title">申请记录</p>
+                            <div class="content">
+                                <!--申请记录-->
+                                <div class="myorder">
+                                    <el-tabs v-model="activeName" @tab-click="handleClick">
+                                        <el-tab-pane
+                                                :label="item.name"
+                                                :name="item.key"
+                                                v-for="item in status"
+                                                :key="item.key">
+                                        </el-tab-pane>
+                                    </el-tabs>
+                                    <div class="titlebox">
                                         <div class="title1">宝贝</div>
                                         <div class="title2">销量</div>
                                         <div class="title3">库存</div>
                                         <div class="title4">优惠方式</div>
                                         <div class="title5">是否需要退样</div>
                                         <div class="title6">审核状态</div>
-                                     </div>
-                                     <div class="contentbox">
-                                         <div class="topbox">
-                                            <div class="date">2017-09-08</div>
-                                         
-                                            <div class="shop"><img src="~assets/images/hamburger.png">蕾蕾旗舰店</div>
-                                            <div  class="wechat">微信:1111</div>
-                                            <div class="phone">联系电话:17336532546</div>
-                                         </div>
-                                         <div class="bottombox clear">
-                                            <div class="infobox">
-                                               <div class="imgbox"><img src="~assets/images/hamburger.png"></div>
-                                               <div class="con">
-                                                 <p class="name">2018春季新款大V领荷叶边长袖小心机雪纺阿达</p> 
-                                                 <p class="price">直播专享价:<span class="num">168.00</span> <span class="normal">日常价:198.00</span></p> 
-                                                 <p class="money">佣金比例:<span class="num">10</span></p>
-                                                 <p class="detail">提供多色（3种颜色)</p>
-                                                 <p class="date">需要退回样品</p>
-                                               </div>
-                                            </div>
-                                            <div class="salenum">1111</div>
-                                            <div class="leavenum">501</div>
-                                            <div class="quan">30元优惠券</div>
-                                            <div class="orderstate"><span>是</span></div>
-                                            <div class="option">
-                                             <div>
-                                                  <span class="passno">待审核</span>
-                                                  <span class="passsuccess">审核通过</span>
-                                                  <span class="passfail">审核不通过</span>
-                                             </div>
-                                         </div>
+                                    </div>
+                                    <div class="contentbox" v-if="pageList.length>0" v-for="(item,index) in pageList" :key="index">
+                                        <div class="topbox">
+                                            <div class="date">{{ item.datetime }}</div>
+                                            <div class="shop"><img src="~assets/images/hamburger.png">{{ item.ShopGuid }}</div>
+                                            <div class="wechat">微信:{{ item.WeChat }}</div>
+                                            <div class="phone">联系电话:{{ item.LinkmanPhone }}</div>
                                         </div>
-                                     </div>
-                                     <div class="contentbox contentbox2">
-                                         <div class="topbox">
+                                        <div class="bottombox clear">
+                                            <div class="infobox">
+                                                <div class="imgbox"><img src="~assets/images/hamburger.png"></div>
+                                                <div class="con">
+                                                    <p class="name">{{ item.GoodsName }}</p>
+                                                    <p class="price">直播专享价:<span class="num">{{ item.LivePrice }}</span> <span class="normal">日常价:198.00</span></p>
+                                                    <p class="money">佣金比例:<span class="num">{{ item.CommissionRatio }}%</span></p>
+                                                    <p class="detail">提供多色（{{ item.ColorNum }}种颜色)</p>
+                                                    <p class="date">{{ item.NeedSendBack ==='是'? '需要退回样品':''}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="salenum">{{ item.Sales }}</div>
+                                            <div class="leavenum">{{ item.InventoryNum }}</div>
+                                            <div class="quan">{{ item.PreferentialWay ==='拍下立减'?'拍下立减':item.DailyPrice-item.LivePrice+'元优惠券' }}</div>
+                                            <div class="orderstate"><span>{{ item.NeedSendBack }}</span></div>
+                                            <div class="option">
+                                                <div>
+                                                    <span class="passno">{{ item.OrderStatus }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--<div class="contentbox">
+                                        <div class="topbox">
                                             <div class="date">2017-09-08</div>
                                             <div class="shop"><img src="~assets/images/hamburger.png">蕾蕾旗舰店</div>
                                             <div  class="wechat">微信:1111</div>
                                             <div class="phone">联系电话:17336532546</div>
-                                         </div>
-                                         <div class="bottombox clear bottombox1">
+                                        </div>
+                                        <div class="bottombox clear">
                                             <div class="infobox">
-                                               <div class="imgbox"><img src="~assets/images/hamburger.png"></div>
-                                               <div class="con">
-                                                 <p class="name">2018春季新款大V领荷叶边长袖小心机雪纺阿达</p> 
-                                                 <p class="price">直播专享价:<span class="num">168.00</span> <span class="normal">日常价:198.00</span></p> 
-                                                 <p class="money">佣金比例:<span class="num">10</span></p>
-                                                 <p class="detail">提供多色（3种颜色)</p>
-                                                 <p class="date">需要退回样品</p>
-                                               </div>
+                                                <div class="imgbox"><img src="~assets/images/hamburger.png"></div>
+                                                <div class="con">
+                                                    <p class="name">2018春季新款大V领荷叶边长袖小心机雪纺阿达</p>
+                                                    <p class="price">直播专享价:<span class="num">168.00</span> <span class="normal">日常价:198.00</span></p>
+                                                    <p class="money">佣金比例:<span class="num">10</span></p>
+                                                    <p class="detail">提供多色（3种颜色)</p>
+                                                    <p class="date">需要退回样品</p>
+                                                </div>
                                             </div>
                                             <div class="salenum">1111</div>
                                             <div class="leavenum">501</div>
                                             <div class="quan">30元优惠券</div>
                                             <div class="orderstate"><span>是</span></div>
                                             <div class="option">
-                    
+                                                <div>
+                                                    <span class="passno">待审核</span>
+                                                    <span class="passsuccess">审核通过</span>
+                                                    <span class="passfail">审核不通过</span>
+                                                </div>
                                             </div>
-                                         </div>
-                                         <div class="bottombox clear bottombox2">
+                                        </div>
+                                    </div>
+                                    <div class="contentbox contentbox2">
+                                        <div class="topbox">
+                                            <div class="date">2017-09-08</div>
+                                            <div class="shop"><img src="~assets/images/hamburger.png">蕾蕾旗舰店</div>
+                                            <div  class="wechat">微信:1111</div>
+                                            <div class="phone">联系电话:17336532546</div>
+                                        </div>
+                                        <div class="bottombox clear bottombox1">
                                             <div class="infobox">
-                                               <div class="imgbox"><img src="~assets/images/hamburger.png"></div>
-                                               <div class="con">
-                                                 <p class="name">2018春季新款大V领荷叶边长袖小心机雪纺阿达</p> 
-                                                 <p class="price">直播专享价:<span class="num">168.00</span> <span class="normal">日常价:198.00</span></p> 
-                                                 <p class="money">佣金比例:<span class="num">10</span></p>
-                                                 <p class="detail">提供多色（3种颜色)</p>
-                                                 <p class="date">需要退回样品</p>
-                                               </div>
+                                                <div class="imgbox"><img src="~assets/images/hamburger.png"></div>
+                                                <div class="con">
+                                                    <p class="name">2018春季新款大V领荷叶边长袖小心机雪纺阿达</p>
+                                                    <p class="price">直播专享价:<span class="num">168.00</span> <span class="normal">日常价:198.00</span></p>
+                                                    <p class="money">佣金比例:<span class="num">10</span></p>
+                                                    <p class="detail">提供多色（3种颜色)</p>
+                                                    <p class="date">需要退回样品</p>
+                                                </div>
                                             </div>
                                             <div class="salenum">1111</div>
                                             <div class="leavenum">501</div>
                                             <div class="quan">30元优惠券</div>
                                             <div class="orderstate"><span>是</span></div>
                                             <div class="option">
-                                              <div>
-                                                  <span class="passno">待审核</span>
-                                                  <span class="passsuccess">审核通过</span>
-                                                  <span class="passfail">审核不通过</span>
-                                              </div>
-                                         </div>
-                                         </div>
-                                     </div>
-                                      <div class="pagebox">
+
+                                            </div>
+                                        </div>
+                                        <div class="bottombox clear bottombox2">
+                                            <div class="infobox">
+                                                <div class="imgbox"><img src="~assets/images/hamburger.png"></div>
+                                                <div class="con">
+                                                    <p class="name">2018春季新款大V领荷叶边长袖小心机雪纺阿达</p>
+                                                    <p class="price">直播专享价:<span class="num">168.00</span> <span class="normal">日常价:198.00</span></p>
+                                                    <p class="money">佣金比例:<span class="num">10</span></p>
+                                                    <p class="detail">提供多色（3种颜色)</p>
+                                                    <p class="date">需要退回样品</p>
+                                                </div>
+                                            </div>
+                                            <div class="salenum">1111</div>
+                                            <div class="leavenum">501</div>
+                                            <div class="quan">30元优惠券</div>
+                                            <div class="orderstate"><span>是</span></div>
+                                            <div class="option">
+                                                <div>
+                                                    <span class="passno">待审核</span>
+                                                    <span class="passsuccess">审核通过</span>
+                                                    <span class="passfail">审核不通过</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                    <div class="pagebox">
                                         <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="pageIndex" :page-size="itemsPerPage" layout="prev, pager, next, jumper" :total="total">
                                         </el-pagination>
-                                      </div>
-					      
-							
-                       </div>
-				    </div>
-				  </el-main>
-			  </el-container>
-	    </div>
-	  </el-main>
-	  <!-- main end -->
+                                    </div>
+                                </div>
+                            </div>
+                        </el-main>
+                    </el-container>
+                </div>
+            </el-main>
+            <!-- main end -->
 
-	  <!-- footer start -->
-	  <el-footer>
-        <main-footer></main-footer>
-	  </el-footer>
-	  <!-- footer end -->
-	</el-container>
-  </div>
+            <!-- footer start -->
+            <el-footer>
+                <main-footer></main-footer>
+            </el-footer>
+            <!-- footer end -->
+        </el-container>
+    </div>
 </template>
 
 <script type="text/babel">
