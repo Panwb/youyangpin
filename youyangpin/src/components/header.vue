@@ -93,7 +93,8 @@
           this.$emit('clickType',name);
       },
       logout() {
-        this.setAccount(null)
+        this.setAccount(null);
+        localStorage.removeItem('user');
         this.$router.push('/login')
       },
       getActivityTypes() {
