@@ -19,12 +19,7 @@ const checkStatus = function(response) {
             message:'未授权，请重新登陆',
             type: 'error'
         })
-        // Notification({
-        //     // title: '接口' + url + '错误',
-        //     title: '登陆超时',
-        //     message:'将重新登陆',
-        //     type: 'error'
-        // })
+        localStorage.removeItem('user');
         setTimeout(()=>{
             window.location = '/#/login?redirect=' + window.location.hash.replace('#/','%2F')
         },1000)
@@ -132,11 +127,6 @@ const ajax = ({
                         type:'error',
                         message: errors ,
                     })
-                    // Notification({
-                    //     title:errors,
-                    //     message: errors,
-                    //     type: 'error'
-                    // })
                 }
                 // 关闭全屏动画
                 if (isShowFullLoading) {
