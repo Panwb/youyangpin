@@ -162,7 +162,7 @@ const ajax = ({
                 console.log('e',typeof error)
                 Message({
                     type:'error',
-                    message: '操作错误' ,
+                    message: '出现错误' ,
                 })
 
 
