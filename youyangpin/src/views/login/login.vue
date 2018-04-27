@@ -12,7 +12,7 @@
 
       <!-- main start -->
 	  <el-main class="maincontent">
-	    <div class="wd1000 registerbox loginbox">
+	    <div class="wd1000 loginbox">
         <el-row>
           <el-col :span="12">
             <div class="grid-content bg-purple"> 
@@ -192,7 +192,7 @@
 .registerbox .title{
   margin-bottom:20px;
 }
-.registerbox .title a{
+.loginbox .title a{
   color:#f95741;
   float:right;
 }

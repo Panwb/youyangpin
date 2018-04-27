@@ -53,7 +53,7 @@
 											<p class="price">直播专享价:<span class="num">{{ applyData.CurrentGood.LivePrice }}</span> <span class="normal">日常价:{{ applyData.CurrentGood.DailyPrice }}</span></p>
 											<p class="money">佣金比例:<span class="num">{{ applyData.CurrentGood.CommissionRatio }}%</span></p>
 											<p class="date">活动日期：{{ formatDate(applyData.CurrentGood.ActivityBeginTime) }}-{{ formatDate(applyData.CurrentGood.ActivityEndTime) }}</p>
-											<p class="detail">{{ applyData.CurrentGood.SellingPointDescribe }}</p>
+											<p class="detail">{{ applyData.CurrentGood.IsProvideMulticolor === '是' ?  '提供多色（' + applyData.CurrentGood.ColorNum + '中颜色）' : ''}}</p>
 										</div>
 									</li>
 									<li>
