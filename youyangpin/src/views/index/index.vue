@@ -7,10 +7,10 @@
                 <div class="wd1200">
                     <div class="typebox">
                         <div class="topbox">
-                            <span class="lab"
+                            <span class="lab" :class="index === vIndex ? 'active' : ''"
                                   v-for="(item, index) in statistics"
                                   :key="index"
-                                  @click="clickVField(item.VerticalFieldCode)" >
+                                  @click="clickVField(item.VerticalFieldCode,index)" >
                                 {{ item.VerticalFieldCode }}(<i>{{item.Quantity}}</i>)
                             </span>
                         </div>
