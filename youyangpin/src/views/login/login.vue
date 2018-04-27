@@ -33,7 +33,7 @@
               </el-form-item>
               <el-form-item prop="identifyCode">
                  <span class="icon identifyCode"><i></i></span>
-                <el-input  v-model="ruleForm2.identifyCode"  auto-complete="off"  placeholder="请输入图形验证码"  class="codetxt" @keyup.enter.native="submitForm('ruleForm2')></el-input>
+                <el-input  v-model="ruleForm2.identifyCode"  auto-complete="off"  placeholder="请输入图形验证码"  class="codetxt" @keyup.enter.native="submitForm('ruleForm2')"></el-input>
                 <span class="imgbox">
                   <img :src="imgCode" class="logo" @click="getImgCode">
                 </span>
