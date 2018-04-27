@@ -64,8 +64,9 @@ export default {
         },
         getStatistics(val) {
             ajax.getStatistics().then((result) => {
+                this.searchForm.activityType = val
                 this.setStatistics(result)
-            console.log(`活动类型 ${val} `);
+                console.log(`活动类型 ${val} `);
             })
         },
         handleSizeChange(val) {
