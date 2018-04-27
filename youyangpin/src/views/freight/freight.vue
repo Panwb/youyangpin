@@ -30,28 +30,26 @@
 									<div class="btnbox">
 										<el-button class="applybtn" :class="freightData.AccountBalance>100?'active':''" @click="freightData.AccountBalance<100?dialogVisible = false:dialogVisible = true">申请提现</el-button>
 										<el-dialog :visible.sync="dialogVisible" width="30%">
-											<span>确认要提现吗</span>
+											<!--<span>确认要提现吗</span>-->
+											<el-input v-model="amount" placeholder="请输入提现金额"></el-input>
 											<span slot="footer" class="dialog-footer">
-								    <el-button @click="dialogVisible = false">取 消</el-button>
-								    <el-button type="primary"  @click="dialogVisible = false">确 定</el-button>
-								  </span>
+												<el-button @click="dialogVisible = false">取 消</el-button>
+												<el-button type="primary"  @click="requestMoney">确 定</el-button>
+										    </span>
 										</el-dialog>
-
 										<span class="tipbox">（*单次提现金额需超过100元）</span>
 									</div>
-
 								</div>
 								<template>
 									<p class="txtitle">提现记录</p>
 									<el-table :data="tableData"  style="width: 100%">
-										<el-table-column prop="no" label="序号" width="60"></el-table-column>
-										<el-table-column prop="applytime" label="申请时间" width="220"></el-table-column>
-										<el-table-column prop="applymoney" label="申请金额" width="220"></el-table-column>
-										<el-table-column prop="dealtime" label="处理时间" width="220"></el-table-column>
-										<el-table-column prop="dealstate" label="处理状态" width="220"></el-table-column>
+										<!--<el-table-column prop="" label="序号" width="60"></el-table-column>-->
+										<el-table-column prop="ApplyTime" label="申请时间" width="220"></el-table-column>
+										<el-table-column prop="WithdrawalMoney" label="申请金额" width="220"></el-table-column>
+										<el-table-column prop="HandleTime" label="处理时间" width="220"></el-table-column>
+										<el-table-column prop="HandleStatus" label="处理状态" width="220"></el-table-column>
 									</el-table>
 								</template>
-
 							</div>
 						</el-main>
 					</el-container>

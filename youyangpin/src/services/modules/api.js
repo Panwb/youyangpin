@@ -113,6 +113,38 @@ export default{
             localLoading
         })
     },
+    //排期
+    setBroadcastScheduling(orderId,form,localLoading = 'setBroadcastScheduling') {
+        return ajax({
+            url: `/Order/SetBroadcastScheduling?orderId=${orderId}&date=${form.date}`,
+            method: 'put',
+            localLoading
+        })
+    },
+    //评价
+    setAssessment(orderId,form,localLoading = 'setAssessment') {
+        return ajax({
+            url: `/Order/SetAssessment?orderId=${orderId}&description=${form.description}&star=${form.star}`,
+            method: 'put',
+            localLoading
+        })
+    },
+    //申请定向
+    requestDirectionalPlan(orderId,localLoading = 'requestDirectionalPlan') {
+        return ajax({
+            url: `/Order/RequestDirectionalPlan?orderId=${orderId}`,
+            method: 'put',
+            localLoading
+        })
+    },
+    //填写物流信息
+    setLogisticsInfo(orderId,form,localLoading = 'setLogisticsInfo') {
+        return ajax({
+            url: `/Order/SetLogisticsInfo?orderId=${orderId}&logisticName=${form.logisticName}&logisticNo=${form.logisticNo}&postage=${form.postage}`,
+            method: 'put',
+            localLoading
+        })
+    },
     /**
      * 提现记录
      */
@@ -127,7 +159,8 @@ export default{
      */
     requestMoney(amount, localLoading = 'requestMoney') {
         return ajax({
-            url: '/RequestMoney?amount=' + amount,
+            url: '/Withdrawal/RequestMoney?amount=' + amount,
+            method: 'put',
             localLoading
         })
     },
