@@ -27,7 +27,7 @@ const checkStatus = function(response) {
             //     type: 'error'
             // })
             setTimeout(()=>{
-                window.location = '/login'
+                window.location = '/#/login'
             },1000)
 
         }
