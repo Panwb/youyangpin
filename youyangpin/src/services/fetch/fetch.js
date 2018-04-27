@@ -160,10 +160,10 @@ const ajax = ({
                 // 显示错误提示
                 reject(error)
                 console.log('e',typeof error)
-                Message({
-                    type:'error',
-                    message: '操作错误，将重新登陆' ,
-                })
+                //Message({
+                //    type:'error',
+                //    message: '操作错误，将重新登陆' ,
+                //})
 
 
             })

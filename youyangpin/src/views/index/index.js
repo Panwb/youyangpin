@@ -44,7 +44,7 @@ export default {
             this.searchForm.goodsName = this.$route.query.keywords
         }
         this.goodsSearch();
-        this.getStatistics()
+        this.getStatistics(this.searchForm.activityType)
     },
     computed: {
         ...mapGetters([
@@ -62,9 +62,10 @@ export default {
                 this.total = result.RecordCount
             })
         },
-        getStatistics() {
+        getStatistics(val) {
             ajax.getStatistics().then((result) => {
                 this.setStatistics(result)
+            console.log(`活动类型 ${val} `);
             })
         },
         handleSizeChange(val) {

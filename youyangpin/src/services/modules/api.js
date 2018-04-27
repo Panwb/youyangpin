@@ -65,7 +65,7 @@ export default{
     },
     getStatistics(localLoading = 'getStatistics') {
         return ajax({
-            url: '/good/getStatistics',
+            url: `/good/getStatistics?activityType=${searchForm.activityType}`,
             localLoading
         })
     },
