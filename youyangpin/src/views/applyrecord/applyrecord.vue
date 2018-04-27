@@ -63,12 +63,12 @@
                                             <div class="leavenum">{{ good.InventoryNum }}</div>
                                             <div class="quan">{{ good.PreferentialWay ==='拍下立减'?'拍下立减':good.DailyPrice-good.LivePrice+'元优惠券' }}</div>
                                             <div class="needsendback"><span>{{ good.NeedSendBack }}</span></div>
-                                        </div>
-                                        <div class="option">
-                                            <div>
-                                                <span class="passno" v-if="item.CheckStatus === '待审核'">{{ item.CheckStatus }}</span>
-                                                <span class="passsuccess" v-if="item.CheckStatus === '审核通过'">{{ item.CheckStatus }}</span>
-                                                <span class="passfail" v-if="item.CheckStatus === '审核不通过'">{{ item.CheckStatus }}</span>
+                                            <div class="option">
+                                                <div>
+                                                    <span class="passno" v-if="item.CheckStatus === '待审核'">{{ item.CheckStatus }}</span>
+                                                    <span class="passsuccess" v-if="item.CheckStatus === '审核通过'">{{ item.CheckStatus }}</span>
+                                                    <span class="passfail" v-if="item.CheckStatus === '审核不通过'">{{ item.CheckStatus }}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -343,6 +343,16 @@
 	float:left;
 	padding:15px 0;
 	border-bottom: 1px solid #ebeef5;
+}
+.bottombox .needsendback{
+    width:188px;
+    text-align:center;
+    font-size:14px;
+    height:110px;
+    line-height:110px;
+    float:left;
+    padding:15px 0;
+    border-bottom: 1px solid #ebeef5;
 }
 .bottombox .quan,.bottombox .planstate,.bottombox .orderstate{
 	width:110px;
