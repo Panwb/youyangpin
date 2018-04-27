@@ -121,10 +121,10 @@
 <style scoped>
  .personinfo{
     margin:0 !important;
-    width:650px;
+    width:720px;
  }
  .personinfo .el-textarea{
-    width:500px !important;
+    width:610px !important;
  }
  .personinfo .el-select{
      width:100px !important;
@@ -333,7 +333,7 @@
 	width:300px;
 }
 .modifypsd .el-input.time{
-	width:120px;
+	width:200px;
 }
 .modifypsd .el-textarea{
 	width:610px;
