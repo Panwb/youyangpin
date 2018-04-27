@@ -70,12 +70,12 @@
 										<div class="orderstate"><div class="outer"><div class="inner">{{ item.OrderStatus }}</div></div></div>
 										<div class="option">
 										   <div class="outer">
-											<div class="box inner">
-												<el-button  class="optbtn" type="text" @click="dialogVisible2 = true">排期</el-button>
-												<el-button  class="optbtn" type="text" @click="dialogVisible4 = true">评价</el-button>
-												<el-button  class="optbtn" type="text" @click="dialogVisible1 = true">申请定向</el-button>
-												<el-button  class="optbtn" type="text" @click="dialogVisible3 = true">填写物流信息</el-button>
-											</div>
+                        <div class="box inner">
+                          <el-button  class="optbtn" type="text" @click="showDialog2(item.OrderID)">排期</el-button>
+                          <el-button  class="optbtn" type="text" @click="showDialog4(item.OrderID)">评价</el-button>
+                          <el-button  class="optbtn" type="text" @click="showDialog1(item.OrderID)">申请定向</el-button>
+                          <el-button  class="optbtn" type="text" @click="showDialog3(item.OrderID)">填写物流信息</el-button>
+                        </div>
 											</div>
 										</div>
 										<div class="tuiaddrress">退货地址：{{ item.ShopAddress }}</div>
@@ -85,6 +85,8 @@
 										<el-form :model="form">
 											<el-form-item label="排期日期" label-width="80px">
 												<el-date-picker
+														format="yyyy/MM/dd"
+														value-format="yyyy/MM/dd"
 														v-model="form.date"
 														type="date"
 														placeholder="选择日期">
@@ -93,24 +95,24 @@
 										</el-form>
 										<div slot="footer" class="dialog-footer">
 											<el-button @click="dialogVisible2 = false">取 消</el-button>
-											<el-button type="primary" @click="dialogVisible2 = false">确 定</el-button>
+											<el-button type="primary" @click="setBroadcastScheduling">确 定</el-button>
 										</div>
 									</el-dialog>
 									<!--评价-->
 									<el-dialog :visible.sync="dialogVisible4"  width="30%">
 										<el-form :model="form4">
 											<el-form-item label="物流编号" label-width="80px">
-												<el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="form4.textarea"></el-input>
+												<el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="form4.description"></el-input>
 											</el-form-item>
 											<el-form-item>
 												<div class="block">
-													<el-rate  v-model="value" :colors="['#99A9BF', '#F7BA2A', '#FF9900']"></el-rate>
+													<el-rate  v-model="form4.star" :colors="['#99A9BF', '#F7BA2A', '#FF9900']"></el-rate>
 												</div>
 											</el-form-item>
 										</el-form>
 										<div slot="footer" class="dialog-footer">
 											<el-button @click="dialogVisible4 = false">取 消</el-button>
-											<el-button type="primary" @click="dialogVisible4 = false">确 定</el-button>
+											<el-button type="primary" @click="setAssessment">确 定</el-button>
 										</div>
 									</el-dialog>
 									<!--申请定向-->
@@ -118,25 +120,25 @@
 										<span>确认已在阿里妈妈后台生成定向计划?</span>
 										<span slot="footer" class="dialog-footer">
 											<el-button @click="dialogVisible1 = false">取 消</el-button>
-											<el-button type="primary" @click="dialogVisible1 = false">确 定</el-button>
+											<el-button type="primary" @click="requestDirectionalPlan">确 定</el-button>
 										</span>
 									</el-dialog>
 									<!--填写物流信息-->
 									<el-dialog :visible.sync="dialogVisible3"  width="30%">
 										<el-form :model="form3">
 											<el-form-item label="物流公司" label-width="80px">
-												<el-input v-model="form3.companyName" auto-complete="off"></el-input>
+												<el-input v-model="form3.logisticName" auto-complete="off"></el-input>
 											</el-form-item>
 											<el-form-item label="物流编号" label-width="80px">
-												<el-input v-model="form.wuliuid" auto-complete="off"></el-input>
+												<el-input v-model="form.logisticNo" auto-complete="off"></el-input>
 											</el-form-item>
 											<el-form-item label="邮费" label-width="80px">
-												<el-input v-model="form3.money" auto-complete="off"></el-input>
+												<el-input v-model="form3.postage" auto-complete="off"></el-input>
 											</el-form-item>
 										</el-form>
 										<div slot="footer" class="dialog-footer">
 											<el-button @click="dialogVisible3 = false">取 消</el-button>
-											<el-button type="primary" @click="dialogVisible3 = false">确 定</el-button>
+											<el-button type="primary" @click="setLogisticsInfo">确 定</el-button>
 										</div>
 									</el-dialog>
 								</div>
