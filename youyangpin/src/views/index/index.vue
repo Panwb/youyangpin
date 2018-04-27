@@ -10,7 +10,7 @@
                             <span class="lab"
                                   v-for="(item, index) in statistics"
                                   :key="index"
-                                  @click="clickVField(item.VerticalFieldCode)">
+                                  @click="clickVField(item.VerticalFieldCode)" >
                                 {{ item.VerticalFieldCode }}(<i>{{item.Quantity}}</i>)
                             </span>
                         </div>
@@ -165,6 +165,9 @@
 .typebox .topbox .lab{
 	margin-right:18px;
 	cursor:pointer;
+}
+.typebox .topbox .lab.active{
+    color:#f84933;
 }
 .typebox .topbox i{
    font-style:normal;
@@ -330,7 +333,8 @@
     overflow:hidden;
 }
 .listbox .bottom .money{
-	color:#ff2e2e;
+	color:#be0812;
+    font-size:18px;
 }
 .listbox .bottom .moneybox{
 	float:left;
@@ -352,7 +356,7 @@
     color:#f9513b;
 }
 .listbox .middle .price .state {
-    color: #333;
+    color:#f9513b;
 }
 .listbox .middle .price{
 	float:left;
@@ -364,7 +368,7 @@
 	text-decoration: line-through;
 }
 .listbox .middle .youhui{
-	width:66px;
+	width:90px;
 	height:26px;
 	float:right;
 	margin-top:15px;
@@ -374,14 +378,18 @@
 	background: url(~assets/images/quan.png) 0 0 no-repeat;
 }
 .listbox .middle .youhui.jian{
-	background: url(~assets/images/jian.png) 0 0 no-repeat;
+	background: url(~assets/images/pro.png) 0 -57px no-repeat;
 }
 .listbox .middle .youhui .num{
-	position:absolute;
-	left:15px;
-	top:5px;
-	color:#ff2e2e;
-	font-size:14px;
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    color: #ff2e2e;
+    font-size: 12px;
+    
+    text-align: center;
+    display: block;
+    width: 30px;
 }
 .listbox .bottom .enterbtn{
 	width:100px;

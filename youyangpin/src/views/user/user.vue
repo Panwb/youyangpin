@@ -25,7 +25,7 @@
 							<p class="title">个人信息</p>
 							<div class="content">
 								<!--个人信息-->
-								<div class="modifypsd">
+								<div class="modifypsd personinfo">
 									<el-form :model="ruleForm"  :rules="rules" ref="ruleForm" label-width="100px">
 										<el-form-item label="主播名称" prop="userName" >
 											<el-input v-model="ruleForm.StudioHostName" auto-complete="off"></el-input>
@@ -119,6 +119,16 @@
 </script>
 
 <style scoped>
+ .personinfo{
+    margin:0 !important;
+    width:720px;
+ }
+ .personinfo .el-textarea{
+    width:610px !important;
+ }
+ .personinfo .el-select{
+     width:100px !important;
+ }
 .optbox{
 	background-color: #f2f2f2;
     height: 40px;
@@ -323,7 +333,7 @@
 	width:300px;
 }
 .modifypsd .el-input.time{
-	width:120px;
+	width:200px;
 }
 .modifypsd .el-textarea{
 	width:610px;

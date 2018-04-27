@@ -57,21 +57,23 @@
 													<p class="name">{{ good.GoodsName }}</p>
 													<p class="price">直播专享价:<span class="num">{{ good.LivePrice }}</span> <span class="normal">日常价:{{ good.DailyPrice }}</span></p>
 													<p class="money">佣金比例:<span class="num">{{ good.CommissionRatio }}%</span></p>
-													<p class="detail">提供多色（{{ good.ColorNum }}种颜色)</p>
+													<p class="detail">{{ good.IsProvideMulticolor === '是' ?  '提供多色（' + good.ColorNum + '中颜色）' : '' }}</p>
 													<p class="date">{{ good.NeedSendBack ==='是'? '需要退回样品':''}}</p>
 												</div>
 											</div>
 											<div class="salenum">{{ good.Sales }}</div>
 											<div class="leavenum">{{ good.InventoryNum }}</div>
 											<div class="quan">{{ good.PreferentialWay ==='拍下立减'?'拍下立减':good.DailyPrice-good.LivePrice+'元优惠券' }}</div>
-											<div class="planstate"><span>{{ good.DirectionalPlanStatus }}</span></div>
-											<div class="option">
-												<div class="box">
-													<el-button  class="optbtn" type="text" @click="dialogVisible2 = true">排期</el-button>
-													<el-button  class="optbtn"  type="text" @click="dialogVisible4 = true">评价</el-button>
-													<el-button  class="optbtn" type="text" @click="dialogVisible1 = true">申请定向</el-button>
-													<el-button  class="optbtn" type="text" @click="dialogVisible3 = true">填写物流信息</el-button>
-												</div>
+									  	</div>
+										
+										<div class="planstate"><span>{{ item.DirectionalPlanStatus }}</span></div>
+										<div class="orderstate"><span>{{ item.OrderStatus }}</span></div>
+										<div class="option">
+											<div class="box">
+												<el-button  class="optbtn" type="text" @click="dialogVisible2 = true">排期</el-button>
+												<el-button  class="optbtn" type="text" @click="dialogVisible4 = true">评价</el-button>
+												<el-button  class="optbtn" type="text" @click="dialogVisible1 = true">申请定向</el-button>
+												<el-button  class="optbtn" type="text" @click="dialogVisible3 = true">填写物流信息</el-button>
 											</div>
 										</div>
 										<div class="tuiaddrress">退货地址：{{ item.ShopAddress }}</div>
@@ -135,11 +137,13 @@
 											<el-button type="primary" @click="dialogVisible3 = false">确 定</el-button>
 										</div>
 									</el-dialog>
-									<div class="pagebox">
+								</div>
+								<!--分页开始-->
+								<div class="pagebox">
 										<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="pageIndex" :page-size="itemsPerPage" layout="prev, pager, next, jumper" :total="total">
 										</el-pagination>
-									</div>
-								</div>
+							    </div>
+							    <!--分页结束-->
 							</div>
 						</el-main>
 					</el-container>
@@ -503,8 +507,7 @@
     text-decoration: line-through;
     float: right;
     color: #989898;
-    font-size: 14px;
-    margin-top: 3px;
+    font-size: 12px;
 }
 .pagebox{
 	margin:30px auto;

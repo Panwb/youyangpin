@@ -12,7 +12,7 @@
 
       <!-- main start -->
 	  <el-main class="maincontent">
-	    <div class="wd1000 registerbox loginbox">
+	    <div class="wd1000 loginbox">
         <el-row>
           <el-col :span="12">
             <div class="grid-content bg-purple"> 
@@ -33,7 +33,7 @@
               </el-form-item>
               <el-form-item prop="identifyCode">
                  <span class="icon identifyCode"><i></i></span>
-                <el-input  v-model="ruleForm2.identifyCode"  auto-complete="off"  placeholder="请输入图形验证码"  class="codetxt"></el-input>
+                <el-input  v-model="ruleForm2.identifyCode"  auto-complete="off"  placeholder="请输入图形验证码"  class="codetxt" @keyup.enter.native="submitForm('ruleForm2')"></el-input>
                 <span class="imgbox">
                   <img :src="imgCode" class="logo" @click="getImgCode">
                 </span>
@@ -192,7 +192,7 @@
 .registerbox .title{
   margin-bottom:20px;
 }
-.registerbox .title a{
+.loginbox .title a{
   color:#f95741;
   float:right;
 }

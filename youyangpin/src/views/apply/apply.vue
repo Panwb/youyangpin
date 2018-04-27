@@ -53,7 +53,7 @@
 											<p class="price">直播专享价:<span class="num">{{ applyData.CurrentGood.LivePrice }}</span> <span class="normal">日常价:{{ applyData.CurrentGood.DailyPrice }}</span></p>
 											<p class="money">佣金比例:<span class="num">{{ applyData.CurrentGood.CommissionRatio }}%</span></p>
 											<p class="date">活动日期：{{ formatDate(applyData.CurrentGood.ActivityBeginTime) }}-{{ formatDate(applyData.CurrentGood.ActivityEndTime) }}</p>
-											<p class="detail">{{ applyData.CurrentGood.SellingPointDescribe }}</p>
+											<p class="detail">{{ applyData.CurrentGood.IsProvideMulticolor === '是' ?  '提供多色（' + applyData.CurrentGood.ColorNum + '中颜色）' : ''}}</p>
 										</div>
 									</li>
 									<li>
@@ -156,7 +156,7 @@
 						</div>
 					</el-card>
 					<div class="remarkbox">
-						<el-input v-model="ApplicationForm.AnchorAbilitySelfReport" placeholder="请简要描述一下您对商品的带货能力和优势"></el-input>
+						<el-input type="textarea" v-model="ApplicationForm.AnchorAbilitySelfReport" placeholder="请简要描述一下您对商品的带货能力和优势"></el-input>
 						<!--<div>-->
 						<!--<span class="tip">(商家最多接受1000服务费)</span>-->
 						<!--<el-input></el-input> -->
@@ -195,7 +195,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .applybox{
 	margin-top:15px;
 }
@@ -298,7 +298,7 @@ export default {
 	border-radius:0;
 	margin-bottom:30px;
 }
-.el-card__header{
+.applybox .el-card__header{
 	height:48px;
 	line-height:48px;
 	padding:0;
@@ -315,7 +315,6 @@ export default {
 .el-card .txt{
     padding:5px 0;
 	overflow:hidden;
-	text-align:right;
 }
 .el-card .box,.el-card .line{
 	float:left;
@@ -373,9 +372,10 @@ export default {
 	height:120px;
 }
 .goodbox .infobox{
-	width:275px;
-	margin-right:200px;
+	width:325px;
+	margin-right:150px;
 	color:#656565;
+	text-align:left;
 }
 .goodbox .infobox p{
 	margin-bottom:5px;
@@ -395,7 +395,7 @@ export default {
 }
 .goodbox .infobox .normal{
 	text-decoration: line-through;
-    float: right;
+    margin-left:15px;
     color: #989898;
     font-size: 14px;
     margin-top: 3px;
@@ -446,7 +446,7 @@ export default {
 	top:1px;
 }
 .shopgoods .infobox{
-	margin-right:182px;
+	margin-right:120px;
 }
 .pinfobox{
 	width:500px;
@@ -524,7 +524,6 @@ export default {
 	height:100%;
 	border-radius:0;
 	padding:0;
-    margin: 15px 0;
 }
 .remarkbox{
 	float: right;
@@ -532,6 +531,9 @@ export default {
     width: 460px;
     padding: 0;
     clear: both;
+}
+.remarkbox textarea{
+	height:120px;
 }
 .remarkbox div{
 	margin-bottom:15px;

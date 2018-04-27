@@ -13,24 +13,23 @@ import { Message} from 'element-ui'
 const checkStatus = function(response) {
     if (response.status >= 200 && response.status < 300) {
         return response
-    } else {
+    } else if (response.status == 401) {
         // 如果没有登录,则跳转到登录页面
-        if (response.status == 401) {
-            Message({
-                message:'登陆超时，将重新登陆',
-                type: 'error'
-            })
-            // Notification({
-            //     // title: '接口' + url + '错误',
-            //     title: '登陆超时',
-            //     message:'将重新登陆',
-            //     type: 'error'
-            // })
-            setTimeout(()=>{
-                window.location = '/login'
-            },1000)
-
-        }
+        Message({
+            message:'未授权，请重新登陆',
+            type: 'error'
+        })
+        // Notification({
+        //     // title: '接口' + url + '错误',
+        //     title: '登陆超时',
+        //     message:'将重新登陆',
+        //     type: 'error'
+        // })
+        setTimeout(()=>{
+            window.location = '/#/login?redirect=' + window.location.hash.replace('#/','%2F')
+        },1000)
+        return response
+    } else{        
         const error = new Error(response.statusText)
         error.response = response
         throw error
@@ -162,7 +161,7 @@ const ajax = ({
                 console.log('e',typeof error)
                 Message({
                     type:'error',
-                    message: '操作错误，将重新登陆' ,
+                    message: '出现错误' ,
                 })
 
 
