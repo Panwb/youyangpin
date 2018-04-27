@@ -16,13 +16,13 @@ export default{
     /**
      * 退出登录
      */
-    logout(data, formJson = false, localLoading = 'logout') {
+    logout(formJson = false, localLoading = 'logout') {
         return ajax({
             url: '/user/logout',
             method: 'delete',
             localLoading,
-            formJson,
-            body: data
+            // formJson,
+            // body: data
         })
     },
     /**
