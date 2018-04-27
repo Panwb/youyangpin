@@ -64,16 +64,15 @@
 											<div class="salenum">{{ good.Sales }}</div>
 											<div class="leavenum">{{ good.InventoryNum }}</div>
 											<div class="quan">{{ good.PreferentialWay ==='拍下立减'?'拍下立减':good.DailyPrice-good.LivePrice+'元优惠券' }}</div>
-											
-											<div class="planstate"><span>{{ item.DirectionalPlanStatus }}</span></div>
-											<div class="planstate"><span>{{ item.OrderStatus }}</span></div>
-											<div class="option">
-												<div class="box">
-													<el-button  class="optbtn" type="text" @click="dialogVisible2 = true">排期</el-button>
-													<el-button  class="optbtn"  type="text" @click="dialogVisible4 = true">评价</el-button>
-													<el-button  class="optbtn" type="text" @click="dialogVisible1 = true">申请定向</el-button>
-													<el-button  class="optbtn" type="text" @click="dialogVisible3 = true">填写物流信息</el-button>
-												</div>
+										</div>
+										<div class="planstate"><span>{{ item.DirectionalPlanStatus }}</span></div>
+										<div class="orderstate"><span>{{ item.OrderStatus }}</span></div>
+										<div class="option">
+											<div class="box">
+												<el-button  class="optbtn" type="text" @click="dialogVisible2 = true">排期</el-button>
+												<el-button  class="optbtn" type="text" @click="dialogVisible4 = true">评价</el-button>
+												<el-button  class="optbtn" type="text" @click="dialogVisible1 = true">申请定向</el-button>
+												<el-button  class="optbtn" type="text" @click="dialogVisible3 = true">填写物流信息</el-button>
 											</div>
 										</div>
 										<div class="tuiaddrress">退货地址：{{ item.ShopAddress }}</div>
