@@ -49,7 +49,7 @@
 	  <!-- footer end -->
 
     <el-dialog title="优样品-用户注册须知" :visible.sync="dialogVisible" width="40%"
-    :before-close="handleClose" class="regisbox">
+    :before-close="handleClose" class="regisbox" :close-on-click-modal="false">
     <div class="dgcontent">
        <p>1.好单库面向各大招商淘客，暂不支持商家入驻，商家请联系淘客合作放单，请认真阅读和遵守以下规则。</p>
        <p>2.认真填写您的团队名号，名号代表着平台和别人对你的认可和信任，相当于您的身份证，请用您对外宣传和交流的名号进行注册。
@@ -58,10 +58,10 @@
        <p>4.连续30天没有发布单子或多次发布的单子被举报的已认证用户，将会自动取消认证，严重者封号并加入黑名单。</p>
        <p>5.平台对单子归属人和招商比较给力的个人或者团队进行排名榜推荐，请珍惜你的名号。发现乱用名号者，加入黑名单，拒绝注册。</p>
         <p>6.放单后台实行自主认证，为新用户提供新人专享的“新人专享认证礼包”，充值598元领取礼包可自主认证通过并获得发布积分。 已开放邀请好友注册功能，邀请6个好友并认证通过，可获得认证资格以及3000发布积分，邀请10个以上加送2万发布积分。</p>
-       <p class="agree"><el-checkbox  name="type1"></el-checkbox>已认真阅读并同意须知内容</p>
+       <p class="agree"><el-checkbox v-model="isRead" name="type1"></el-checkbox>已认真阅读并同意须知内容</p>
     </div>
     <span slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="dialogVisible = false"  disabled>确 定</el-button>
+      <el-button type="primary" @click="dialogVisible = false"  :disabled="!isRead">确 定</el-button>
     </span>
   </el-dialog>
 	</el-container>
