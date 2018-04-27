@@ -56,7 +56,7 @@ export default {
                     key: 'order6'
                 }, 
                 {
-                    name: '待退费',
+                    name: '已完成',
                     key: 'order7'
                 }, 
                 {

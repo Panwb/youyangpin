@@ -63,12 +63,12 @@
                                             <div class="leavenum">{{ good.InventoryNum }}</div>
                                             <div class="quan">{{ good.PreferentialWay ==='拍下立减'?'拍下立减':good.DailyPrice-good.LivePrice+'元优惠券' }}</div>
                                             <div class="needsendback"><span>{{ good.NeedSendBack }}</span></div>
-                                            <div class="option">
-                                                <div>
-                                                    <span class="passno" v-if="item.CheckStatus === '待审核'">{{ item.CheckStatus }}</span>
-                                                    <span class="passsuccess" v-if="item.CheckStatus === '审核通过'">{{ item.CheckStatus }}</span>
-                                                    <span class="passfail" v-if="item.CheckStatus === '审核不通过'">{{ item.CheckStatus }}</span>
-                                                </div>
+                                        </div>
+                                        <div class="option">
+                                            <div>
+                                                <span class="passno" v-if="item.CheckStatus === '待审核'">{{ item.CheckStatus }}</span>
+                                                <span class="passsuccess" v-if="item.CheckStatus === '审核通过'">{{ item.CheckStatus }}</span>
+                                                <span class="passfail" v-if="item.CheckStatus === '审核不通过'">{{ item.CheckStatus }}</span>
                                             </div>
                                         </div>
                                     </div>
