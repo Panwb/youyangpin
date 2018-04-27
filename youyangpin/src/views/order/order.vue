@@ -46,32 +46,34 @@
 										<div class="topbox">
 											<div class="date">{{ item.datetime }}</div>
 											<div class="orderId">订单号:{{ item.OrderNo }}</div>
-											<div class="shop"><img src="~assets/images/hamburger.png">{{ item.ShopGuid }}</div>
-											<div  class="wechat">微信:{{ item.WeChat }}</div>
+											<div class="shop">{{ item.ShopName }}</div>
+											<div  class="wechat">旺旺号:{{ item.WangWangNo }}</div>
 											<div class="phone">联系电话:{{ item.LinkmanPhone }}</div>
 										</div>
-										<div class="bottombox clear">
+										<div class="bottombox clear" v-for="(good,index) in item.Goods" :key="index">
 											<div class="infobox">
-												<div class="imgbox"><img src="~assets/images/hamburger.png"></div>
+												<div class="imgbox"><a :href="good.GoodsURL" target="view_window"><img :src="good.GoodsImgURL"></a></div>
 												<div class="con">
-													<p class="name">{{ item.GoodsName }}</p>
-													<p class="price">直播专享价:<span class="num">{{ item.LivePrice }}</span> <span class="normal">日常价:198.00</span></p>
-													<p class="money">佣金比例:<span class="num">{{ item.CommissionRatio }}%</span></p>
-													<p class="detail">提供多色（{{ item.ColorNum }}种颜色)</p>
-													<p class="date">{{ item.NeedSendBack ==='是'? '需要退回样品':''}}</p>
+													<p class="name">{{ good.GoodsName }}</p>
+													<p class="price">直播专享价:<span class="num">{{ good.LivePrice }}</span> <span class="normal">日常价:{{ good.DailyPrice }}</span></p>
+													<p class="money">佣金比例:<span class="num">{{ good.CommissionRatio }}%</span></p>
+													<p class="detail">{{ good.IsProvideMulticolor === '是' ?  '提供多色（' + good.ColorNum + '中颜色）' : '' }}</p>
+													<p class="date">{{ good.NeedSendBack ==='是'? '需要退回样品':''}}</p>
 												</div>
 											</div>
-											<div class="salenum">{{ item.Sales }}</div>
-											<div class="leavenum">{{ item.InventoryNum }}</div>
-											<div class="quan">{{ item.PreferentialWay ==='拍下立减'?'拍下立减':item.DailyPrice-item.LivePrice+'元优惠券' }}</div>
-											<div class="planstate"><span>{{ item.OrderStatus }}</span></div>
-											<div class="option">
-												<div class="box">
-													<el-button  class="optbtn" type="text" @click="dialogVisible2 = true">排期</el-button>
-													<el-button  class="optbtn"  type="text" @click="dialogVisible4 = true">评价</el-button>
-													<el-button  class="optbtn" type="text" @click="dialogVisible1 = true">申请定向</el-button>
-													<el-button  class="optbtn" type="text" @click="dialogVisible3 = true">填写物流信息</el-button>
-												</div>
+											<div class="salenum">{{ good.Sales }}</div>
+											<div class="leavenum">{{ good.InventoryNum }}</div>
+											<div class="quan">{{ good.PreferentialWay ==='拍下立减'?'拍下立减':good.DailyPrice-good.LivePrice+'元优惠券' }}</div>
+									  	</div>
+										
+										<div class="planstate"><span>{{ item.DirectionalPlanStatus }}</span></div>
+										<div class="orderstate"><span>{{ item.OrderStatus }}</span></div>
+										<div class="option">
+											<div class="box">
+												<el-button  class="optbtn" type="text" @click="dialogVisible2 = true">排期</el-button>
+												<el-button  class="optbtn" type="text" @click="dialogVisible4 = true">评价</el-button>
+												<el-button  class="optbtn" type="text" @click="dialogVisible1 = true">申请定向</el-button>
+												<el-button  class="optbtn" type="text" @click="dialogVisible3 = true">填写物流信息</el-button>
 											</div>
 										</div>
 										<div class="tuiaddrress">退货地址：{{ item.ShopAddress }}</div>
@@ -105,8 +107,8 @@
 											</el-form-item>
 										</el-form>
 										<div slot="footer" class="dialog-footer">
-											<el-button @click="dialogVisible3 = false">取 消</el-button>
-											<el-button type="primary" @click="dialogVisible3 = false">确 定</el-button>
+											<el-button @click="dialogVisible4 = false">取 消</el-button>
+											<el-button type="primary" @click="dialogVisible4 = false">确 定</el-button>
 										</div>
 									</el-dialog>
 									<!--申请定向-->
@@ -135,229 +137,13 @@
 											<el-button type="primary" @click="dialogVisible3 = false">确 定</el-button>
 										</div>
 									</el-dialog>
-									<!--<div class="contentbox">
-										<div class="topbox">
-											<div class="date">2017-09-08</div>
-											<div class="orderId">订单号:123456789345</div>
-											<div class="shop"><img src="~assets/images/hamburger.png">蕾蕾旗舰店</div>
-											<div  class="wechat">微信:1111</div>
-											<div class="phone">联系电话:17336532546</div>
-										</div>
-										<div class="bottombox clear">
-											<div class="infobox">
-												<div class="imgbox"><img src="~assets/images/hamburger.png"></div>
-												<div class="con">
-													<p class="name">2018春季新款大V领荷叶边长袖小心机雪纺阿达</p>
-													<p class="price">直播专享价:<span class="num">168.00</span> <span class="normal">日常价:198.00</span></p>
-													<p class="money">佣金比例:<span class="num">10</span></p>
-													<p class="detail">提供多色（3种颜色)</p>
-													<p class="date">需要退回样品</p>
-												</div>
-											</div>
-											<div class="salenum">1111</div>
-											<div class="leavenum">501</div>
-											<div class="quan">30元优惠券</div>
-											<div class="planstate"><span>待审核</span></div>
-											<div class="orderstate"><span>已发送</span></div>
-											<div class="option">
-												<div class="box">
-													&lt;!&ndash;排期&ndash;&gt;
-													<el-button  class="optbtn" type="text" @click="dialogVisible2 = true">排期</el-button>
-													<el-dialog :visible.sync="dialogVisible2"  width="30%">
-														<el-form :model="form">
-															<el-form-item label="排期日期" label-width="80px">
-
-																<el-date-picker
-																		v-model="form.date"
-																		type="date"
-																		placeholder="选择日期">
-																</el-date-picker>
-															</el-form-item>
-														</el-form>
-														<div slot="footer" class="dialog-footer">
-															<el-button @click="dialogVisible2 = false">取 消</el-button>
-															<el-button type="primary" @click="dialogVisible2 = false">确 定</el-button>
-														</div>
-													</el-dialog>
-
-													&lt;!&ndash;评价&ndash;&gt;
-													<el-button  class="optbtn"  type="text" @click="dialogVisible4 = true">评价</el-button>
-													<el-dialog :visible.sync="dialogVisible4"  width="30%">
-														<el-form :model="form4">
-															<el-form-item label="物流编号" label-width="80px">
-																<el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="form4.textarea"></el-input>
-															</el-form-item>
-															<el-form-item>
-																<div class="block">
-																	<el-rate  v-model="value" :colors="['#99A9BF', '#F7BA2A', '#FF9900']"></el-rate>
-																</div>
-															</el-form-item>
-														</el-form>
-														<div slot="footer" class="dialog-footer">
-															<el-button @click="dialogVisible3 = false">取 消</el-button>
-															<el-button type="primary" @click="dialogVisible3 = false">确 定</el-button>
-														</div>
-													</el-dialog>
-
-													&lt;!&ndash;申请定向&ndash;&gt;
-													<el-button  class="optbtn" type="text" @click="dialogVisible1 = true">申请定向</el-button>
-													<el-dialog :visible.sync="dialogVisible1" width="30%">
-														<span>确认已在阿里妈妈后台生成定向计划?</span>
-														<span slot="footer" class="dialog-footer">
-                                                            <el-button @click="dialogVisible1 = false">取 消</el-button>
-                                                            <el-button type="primary" @click="dialogVisible1 = false">确 定</el-button>
-                                                        </span>
-													</el-dialog>
-
-
-													&lt;!&ndash;填写物流信息&ndash;&gt;
-													<el-button  class="optbtn" type="text" @click="dialogVisible3 = true">填写物流信息</el-button>
-													<el-dialog :visible.sync="dialogVisible3"  width="30%">
-														<el-form :model="form3">
-															<el-form-item label="物流公司" label-width="80px">
-																<el-input v-model="form3.companyName" auto-complete="off"></el-input>
-															</el-form-item>
-															<el-form-item label="物流编号" label-width="80px">
-																<el-input v-model="form.wuliuid" auto-complete="off"></el-input>
-															</el-form-item>
-															<el-form-item label="邮费" label-width="80px">
-																<el-input v-model="form3.money" auto-complete="off"></el-input>
-															</el-form-item>
-														</el-form>
-														<div slot="footer" class="dialog-footer">
-															<el-button @click="dialogVisible3 = false">取 消</el-button>
-															<el-button type="primary" @click="dialogVisible3 = false">确 定</el-button>
-														</div>
-													</el-dialog>
-												</div>
-											</div>
-										</div>
-										<div class="tuiaddrress">退货地址：湖南省  长沙市  天心区  万博大道112号</div>
-									</div>
-									<div class="contentbox contentbox2">
-										<div class="topbox">
-											<div class="date">2017-09-08</div>
-											<div class="orderId">订单号:123456789345</div>
-											<div class="shop"><img src="~assets/images/hamburger.png">蕾蕾旗舰店</div>
-											<div  class="wechat">微信:1111</div>
-											<div class="phone">联系电话:17336532546</div>
-										</div>
-										<div class="bottombox clear bottombox1">
-											<div class="infobox">
-												<div class="imgbox"><img src="~assets/images/hamburger.png"></div>
-												<div class="con">
-													<p class="name">2018春季新款大V领荷叶边长袖小心机雪纺阿达</p>
-													<p class="price">直播专享价:<span class="num">168.00</span> <span class="normal">日常价:198.00</span></p>
-													<p class="money">佣金比例:<span class="num">10</span></p>
-													<p class="detail">提供多色（3种颜色)</p>
-													<p class="date">需要退回样品</p>
-												</div>
-											</div>
-											<div class="salenum">1111</div>
-											<div class="leavenum">501</div>
-											<div class="quan">30元优惠券</div>
-											<div class="planstate"></div>
-											<div class="orderstate"></div>
-											<div class="option">
-
-											</div>
-										</div>
-										<div class="bottombox clear bottombox2">
-											<div class="infobox">
-												<div class="imgbox"><img src="~assets/images/hamburger.png"></div>
-												<div class="con">
-													<p class="name">2018春季新款大V领荷叶边长袖小心机雪纺阿达</p>
-													<p class="price">直播专享价:<span class="num">168.00</span> <span class="normal">日常价:198.00</span></p>
-													<p class="money">佣金比例:<span class="num">10</span></p>
-													<p class="detail">提供多色（3种颜色)</p>
-													<p class="date">需要退回样品</p>
-												</div>
-											</div>
-											<div class="salenum">1111</div>
-											<div class="leavenum">501</div>
-											<div class="quan">30元优惠券</div>
-											<div class="planstate"><span>待审核</span></div>
-											<div class="orderstate"><span>已发送</span></div>
-											<div class="option">
-												<div class="box">
-													&lt;!&ndash;排期&ndash;&gt;
-													<el-button class="optbtn" type="text" @click="dialogVisible2 = true">排期</el-button>
-													<el-dialog :visible.sync="dialogVisible2"  width="30%">
-														<el-form :model="form">
-															<el-form-item label="排期日期" label-width="80px">
-																<el-date-picker
-																		v-model="form.date"
-																		type="date"
-																		placeholder="选择日期">
-																</el-date-picker>
-															</el-form-item>
-														</el-form>
-														<div slot="footer" class="dialog-footer">
-															<el-button @click="dialogVisible2 = false">取 消</el-button>
-															<el-button type="primary" @click="dialogVisible2 = false">确 定</el-button>
-														</div>
-													</el-dialog>
-
-													&lt;!&ndash;评价&ndash;&gt;
-													<el-button  class="optbtn" type="text" @click="dialogVisible4 = true">评价</el-button>
-													<el-dialog :visible.sync="dialogVisible4"  width="30%">
-														<el-form :model="form4">
-															<el-form-item label="物流编号" label-width="80px">
-																<el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="form4.textarea"></el-input>
-															</el-form-item>
-															<el-form-item>
-																<div class="block">
-																	<el-rate  v-model="value" :colors="['#99A9BF', '#F7BA2A', '#FF9900']"></el-rate>
-																</div>
-															</el-form-item>
-														</el-form>
-														<div slot="footer" class="dialog-footer">
-															<el-button @click="dialogVisible3 = false">取 消</el-button>
-															<el-button type="primary" @click="dialogVisible3 = false">确 定</el-button>
-														</div>
-													</el-dialog>
-
-													&lt;!&ndash;申请定向&ndash;&gt;
-													<el-button  class="optbtn" type="text" @click="dialogVisible1 = true">申请定向</el-button>
-													<el-dialog :visible.sync="dialogVisible1" width="30%">
-														<span>确认已在阿里妈妈后台生成定向计划?</span>
-														<span slot="footer" class="dialog-footer">
-                                                            <el-button @click="dialogVisible1 = false">取 消</el-button>
-                                                            <el-button type="primary" @click="dialogVisible1 = false">确 定</el-button>
-                                                        </span>
-													</el-dialog>
-
-
-													&lt;!&ndash;填写物流信息&ndash;&gt;
-													<el-button  class="optbtn" type="text" @click="dialogVisible3 = true">填写物流信息</el-button>
-													<el-dialog :visible.sync="dialogVisible3"  width="30%">
-														<el-form :model="form3">
-															<el-form-item label="物流公司" label-width="80px">
-																<el-input v-model="form3.companyName" auto-complete="off"></el-input>
-															</el-form-item>
-															<el-form-item label="物流编号" label-width="80px">
-																<el-input v-model="form.wuliuid" auto-complete="off"></el-input>
-															</el-form-item>
-															<el-form-item label="邮费" label-width="80px">
-																<el-input v-model="form3.money" auto-complete="off"></el-input>
-															</el-form-item>
-														</el-form>
-														<div slot="footer" class="dialog-footer">
-															<el-button @click="dialogVisible3 = false">取 消</el-button>
-															<el-button type="primary" @click="dialogVisible3 = false">确 定</el-button>
-														</div>
-													</el-dialog>
-												</div>
-											</div>
-
-										</div>
-										<div class="tuiaddrress">退货地址：湖南省  长沙市  天心区  万博大道112号</div>
-									</div>-->
-									<div class="pagebox">
+								</div>
+								<!--分页开始-->
+								<div class="pagebox">
 										<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="pageIndex" :page-size="itemsPerPage" layout="prev, pager, next, jumper" :total="total">
 										</el-pagination>
-									</div>
-								</div>
+							    </div>
+							    <!--分页结束-->
 							</div>
 						</el-main>
 					</el-container>
@@ -721,14 +507,13 @@
     text-decoration: line-through;
     float: right;
     color: #989898;
-    font-size: 14px;
-    margin-top: 3px;
+    font-size: 12px;
 }
 .pagebox{
 	margin:30px auto;
 	text-align:right;
 }
-.el-date-editor.el-input, .el-date-editor.el-input__inner{
-	width:400px;
-}
+/*.el-date-editor.el-input, .el-date-editor.el-input__inner{*/
+	/*width:400px;*/
+/*}*/
 </style>

@@ -43,114 +43,35 @@
                                     </div>
                                     <div class="contentbox" v-if="pageList.length>0" v-for="(item,index) in pageList" :key="index">
                                         <div class="topbox">
-                                            <div class="date">{{ item.datetime }}</div>
-                                            <div class="shop"><img src="~assets/images/hamburger.png">{{ item.ShopGuid }}</div>
-                                            <div class="wechat">微信:{{ item.WeChat }}</div>
+                                            <div class="date">{{ item.datetime }}</div><!--todo-->
+                                            <div class="shop">{{ item.ShopName }}</div>
+                                            <div class="wechat">旺旺号:{{ item.WangWangNo }}</div>
                                             <div class="phone">联系电话:{{ item.LinkmanPhone }}</div>
                                         </div>
-                                        <div class="bottombox clear">
+                                        <div class="bottombox clear" v-for="(good,index) in item.Goods" :key="index">
                                             <div class="infobox">
-                                                <div class="imgbox"><img src="~assets/images/hamburger.png"></div>
+                                                <div class="imgbox"><a :href="good.GoodsURL" target="view_window"><img :src="good.GoodsImgURL"></a></div>
                                                 <div class="con">
-                                                    <p class="name">{{ item.GoodsName }}</p>
-                                                    <p class="price">直播专享价:<span class="num">{{ item.LivePrice }}</span> <span class="normal">日常价:198.00</span></p>
-                                                    <p class="money">佣金比例:<span class="num">{{ item.CommissionRatio }}%</span></p>
-                                                    <p class="detail">提供多色（{{ item.ColorNum }}种颜色)</p>
-                                                    <p class="date">{{ item.NeedSendBack ==='是'? '需要退回样品':''}}</p>
+                                                    <p class="name">{{ good.GoodsName }}</p>
+                                                    <p class="price">直播专享价:<span class="num">{{ good.LivePrice }}</span> <span class="normal">日常价:{{ good.DailyPrice }}</span></p>
+                                                    <p class="money">佣金比例:<span class="num">{{ good.CommissionRatio }}%</span></p>
+                                                    <p class="detail">{{ good.IsProvideMulticolor === '是' ?  '提供多色（' + good.ColorNum + '中颜色）' : '' }}</p>
+                                                    <p class="date">{{ good.NeedSendBack ==='是'? '需要退回样品':''}}</p>
                                                 </div>
                                             </div>
-                                            <div class="salenum">{{ item.Sales }}</div>
-                                            <div class="leavenum">{{ item.InventoryNum }}</div>
-                                            <div class="quan">{{ item.PreferentialWay ==='拍下立减'?'拍下立减':item.DailyPrice-item.LivePrice+'元优惠券' }}</div>
-                                            <div class="orderstate"><span>{{ item.NeedSendBack }}</span></div>
-                                            <div class="option">
-                                                <div>
-                                                    <span class="passno">{{ item.OrderStatus }}</span>
-                                                </div>
+                                            <div class="salenum">{{ good.Sales }}</div>
+                                            <div class="leavenum">{{ good.InventoryNum }}</div>
+                                            <div class="quan">{{ good.PreferentialWay ==='拍下立减'?'拍下立减':good.DailyPrice-good.LivePrice+'元优惠券' }}</div>
+                                            <div class="needsendback"><span>{{ good.NeedSendBack }}</span></div>
+                                        </div>
+                                        <div class="option">
+                                            <div>
+                                                <span class="passno" v-if="item.CheckStatus === '待审核'">{{ item.CheckStatus }}</span>
+                                                <span class="passsuccess" v-if="item.CheckStatus === '审核通过'">{{ item.CheckStatus }}</span>
+                                                <span class="passfail" v-if="item.CheckStatus === '审核不通过'">{{ item.CheckStatus }}</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <!--<div class="contentbox">
-                                        <div class="topbox">
-                                            <div class="date">2017-09-08</div>
-                                            <div class="shop"><img src="~assets/images/hamburger.png">蕾蕾旗舰店</div>
-                                            <div  class="wechat">微信:1111</div>
-                                            <div class="phone">联系电话:17336532546</div>
-                                        </div>
-                                        <div class="bottombox clear">
-                                            <div class="infobox">
-                                                <div class="imgbox"><img src="~assets/images/hamburger.png"></div>
-                                                <div class="con">
-                                                    <p class="name">2018春季新款大V领荷叶边长袖小心机雪纺阿达</p>
-                                                    <p class="price">直播专享价:<span class="num">168.00</span> <span class="normal">日常价:198.00</span></p>
-                                                    <p class="money">佣金比例:<span class="num">10</span></p>
-                                                    <p class="detail">提供多色（3种颜色)</p>
-                                                    <p class="date">需要退回样品</p>
-                                                </div>
-                                            </div>
-                                            <div class="salenum">1111</div>
-                                            <div class="leavenum">501</div>
-                                            <div class="quan">30元优惠券</div>
-                                            <div class="orderstate"><span>是</span></div>
-                                            <div class="option">
-                                                <div>
-                                                    <span class="passno">待审核</span>
-                                                    <span class="passsuccess">审核通过</span>
-                                                    <span class="passfail">审核不通过</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="contentbox contentbox2">
-                                        <div class="topbox">
-                                            <div class="date">2017-09-08</div>
-                                            <div class="shop"><img src="~assets/images/hamburger.png">蕾蕾旗舰店</div>
-                                            <div  class="wechat">微信:1111</div>
-                                            <div class="phone">联系电话:17336532546</div>
-                                        </div>
-                                        <div class="bottombox clear bottombox1">
-                                            <div class="infobox">
-                                                <div class="imgbox"><img src="~assets/images/hamburger.png"></div>
-                                                <div class="con">
-                                                    <p class="name">2018春季新款大V领荷叶边长袖小心机雪纺阿达</p>
-                                                    <p class="price">直播专享价:<span class="num">168.00</span> <span class="normal">日常价:198.00</span></p>
-                                                    <p class="money">佣金比例:<span class="num">10</span></p>
-                                                    <p class="detail">提供多色（3种颜色)</p>
-                                                    <p class="date">需要退回样品</p>
-                                                </div>
-                                            </div>
-                                            <div class="salenum">1111</div>
-                                            <div class="leavenum">501</div>
-                                            <div class="quan">30元优惠券</div>
-                                            <div class="orderstate"><span>是</span></div>
-                                            <div class="option">
-
-                                            </div>
-                                        </div>
-                                        <div class="bottombox clear bottombox2">
-                                            <div class="infobox">
-                                                <div class="imgbox"><img src="~assets/images/hamburger.png"></div>
-                                                <div class="con">
-                                                    <p class="name">2018春季新款大V领荷叶边长袖小心机雪纺阿达</p>
-                                                    <p class="price">直播专享价:<span class="num">168.00</span> <span class="normal">日常价:198.00</span></p>
-                                                    <p class="money">佣金比例:<span class="num">10</span></p>
-                                                    <p class="detail">提供多色（3种颜色)</p>
-                                                    <p class="date">需要退回样品</p>
-                                                </div>
-                                            </div>
-                                            <div class="salenum">1111</div>
-                                            <div class="leavenum">501</div>
-                                            <div class="quan">30元优惠券</div>
-                                            <div class="orderstate"><span>是</span></div>
-                                            <div class="option">
-                                                <div>
-                                                    <span class="passno">待审核</span>
-                                                    <span class="passsuccess">审核通过</span>
-                                                    <span class="passfail">审核不通过</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>-->
                                     <div class="pagebox">
                                         <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="pageIndex" :page-size="itemsPerPage" layout="prev, pager, next, jumper" :total="total">
                                         </el-pagination>
@@ -422,6 +343,16 @@
 	float:left;
 	padding:15px 0;
 	border-bottom: 1px solid #ebeef5;
+}
+.bottombox .needsendback{
+    width:188px;
+    text-align:center;
+    font-size:14px;
+    height:110px;
+    line-height:110px;
+    float:left;
+    padding:15px 0;
+    border-bottom: 1px solid #ebeef5;
 }
 .bottombox .quan,.bottombox .planstate,.bottombox .orderstate{
 	width:110px;

@@ -58,7 +58,7 @@ export default {
         }
     },
     created() {
-        this.currentStatu = this.status[0]['name']
+        this.currentStatu = "";
         this.getPagedRequest()
     },
     methods: {
@@ -67,13 +67,14 @@ export default {
         },
         handleClick(tab, event) {
             this.pageIndex = 1
-            this.currentStatu = tab.label
+            tab.label === '所有记录'?this.currentStatu = "" : this.currentStatu = tab.label;
             this.getPagedRequest()
         },
         getPagedRequest() {
             ajax.getPagedRequest(this.currentStatu, this.pageIndex, this.itemsPerPage).then((result) => {
                 this.pageList = result.Orders
                 this.total = result.RecordCount
+                console.log(22,this.pageList)
             })
         },
         handleSizeChange(val) {

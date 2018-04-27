@@ -68,6 +68,7 @@ export default {
         };
 
         return {
+            isShowCheck: true,
             menus: [
                 {
                     title: '我的订单',
@@ -166,8 +167,11 @@ export default {
     },
      methods: {
         getUserDetail() {
+            this.isShowCheck = false;
             ajax.getUserDetail().then((result) => {
-
+                result.VerticalFieldCode = result.VerticalFieldCode.split(',')
+                this.ruleForm = result;
+                this.isShowCheck = true;
             })
         },
         handleSelect(key, keyPath) {
@@ -180,7 +184,11 @@ export default {
                     ajax.updateStudioHost(this.ruleForm)
                         .then((result) => {
                             this.$message({type:"success",message:"保存成功"});
-                            //this.$router.go(-1);
+                            if(sessionStorage.getItem('goodid')) {
+                                this.$router.go(-1);
+                            }else {
+                                this.getUserDetail();
+                            }
                         })
                         .catch(error => {
                             this.$message({type:"warning",message: error});

@@ -1,17 +1,16 @@
 <template>
     <div id="app">
-	    <el-container>
+        <el-container>
             <main-header @clickType="clickType"></main-header>
             <!-- main start -->
             <el-main>
                 <div class="wd1200">
                     <div class="typebox">
                         <div class="topbox">
-                            <span
-                                class="lab"
-                                v-for="(item, index) in statistics"
-                                :key="index"
-                                @click="clickVField(item.VerticalFieldCode)">
+                            <span class="lab"
+                                  v-for="(item, index) in statistics"
+                                  :key="index"
+                                  @click="clickVField(item.VerticalFieldCode)" >
                                 {{ item.VerticalFieldCode }}(<i>{{item.Quantity}}</i>)
                             </span>
                         </div>
@@ -38,31 +37,31 @@
                         <el-row :gutter="20">
                             <el-col :span="6" v-for="(item,index) in pageList" :key="item.GoodsId">
                                 <el-card :body-style="{ padding: '0px' }" shadow="hover">
-                                    <router-link :to="'/apply?goodsId=' + item.GoodsId">
-                                        <span class="type"><i>{{ item.ActivityType }}</i></span>
+                                    <a :href="item.GoodsURL" target="view_window">
+                                        <span class="type"><i>{{ item.ActivityType }}商品</i></span>
                                         <img :src="item.GoodsImgURL" class="image"/>
                                         <div class="numbox">
                                             <div class="rcprice"><div class="inner">日常价：{{ item.DailyPrice }}</div></div>
-                                            <div class="xl"><div class="inner">销量{{ item.Sales }}</div></div>
+                                            <div class="xl"><div class="inner">销量{{ item.Sales }}件</div></div>
                                         </div>
-                                    </router-link>
-                                        <div class="content">
-                                            <p class="words"><span :class="item.ShopType=='淘宝店'?'icon icon-tao':'icon icon-tian'"></span>{{ item.GoodsName }}</p>
-                                            <div class="middle">
-                                                <span class="money">￥<i class="count">{{ item.LivePrice }}</i></span>
-                                                <div class="price">
-                                                    <p class="count">￥{{ item.DailyPrice }}</p>
-                                                    <p class="state">主播专享价</p>
-                                                </div>
-                                                <div class="youhui jian">
-                                                    <span class="num">{{ item.DailyPrice-item.LivePrice }}</span>
-                                                </div>
+                                    </a>
+                                    <div class="content">
+                                        <p class="words"><span :class="item.ShopType=='淘宝店'?'icon icon-tao':'icon icon-tian'"></span>{{ item.GoodsName }}</p>
+                                        <div class="middle">
+                                            <span class="money">￥<i class="count">{{ item.LivePrice }}</i></span>
+                                            <div class="price">
+                                                <p class="count">￥{{ item.DailyPrice }}</p>
+                                                <p class="state">主播专享价</p>
                                             </div>
-                                            <div class="bottom clearfix">
-                                                <div class="moneybox">佣金：<span class="money">{{ item.CommissionRatio }}%</span></div> <el-button class="button enterbtn">进店拿样</el-button>
+                                            <div class="youhui jian">
+                                                <span class="num">{{ item.DailyPrice-item.LivePrice }}</span>
                                             </div>
                                         </div>
-                                    
+                                        <div class="bottom clearfix">
+                                            <div class="moneybox">佣金：<span class="money">{{ item.CommissionRatio }}%</span></div> <router-link :to="'/apply?goodsId=' + item.GoodsId"><el-button class="button enterbtn">进店拿样</el-button></router-link>
+                                        </div>
+                                    </div>
+
                                 </el-card>
                             </el-col>
                         </el-row>
@@ -78,20 +77,20 @@
             <el-footer>
                 <div class="wd1200">
                     <ul class="linklist">
-                    <li><a a href="https://www.taobao.com/" target="_blank">淘宝网</a></li>
-                    <li><a a href="https://www.tmall.com/" target="_blank">天猫</a></li>
-                    <li><a a href="https://ju.taobao.com/" target="_blank">聚划算</a></li>
-                    <li><a a href="https://seller.aliexpress.com/" target="_blank">全球速卖通</a></li>
-                    <li><a a href="https://www.1688.com/" target="_blank">1688</a></li>
-                    <li><a a href="http://pub.alimama.com/" target="_blank">阿里妈妈</a></li>
-                    <li><a a href="https://m.kuaidi100.com/" target="_blank">快递查询</a></li>
+                        <li><a a href="https://www.taobao.com/" target="_blank">淘宝网</a></li>
+                        <li><a a href="https://www.tmall.com/" target="_blank">天猫</a></li>
+                        <li><a a href="https://ju.taobao.com/" target="_blank">聚划算</a></li>
+                        <li><a a href="https://seller.aliexpress.com/" target="_blank">全球速卖通</a></li>
+                        <li><a a href="https://www.1688.com/" target="_blank">1688</a></li>
+                        <li><a a href="http://pub.alimama.com/" target="_blank">阿里妈妈</a></li>
+                        <li><a a href="https://m.kuaidi100.com/" target="_blank">快递查询</a></li>
                     </ul>
                     <p class="copyright">©copyright 2016-2018 优样品 www.youyangpin.com.<a href="http://www.beianbeian.com/beianxinxi/a40cc71f-db17-4d78-80dd-4b232dab5880.html">粤ICP备15114843号-1</a></p>
                 </div>
             </el-footer>
             <!-- footer end -->
-	    </el-container>
-  </div>
+        </el-container>
+    </div>
 </template>
 
 <script type="text/babel">
@@ -166,6 +165,9 @@
 .typebox .topbox .lab{
 	margin-right:18px;
 	cursor:pointer;
+}
+.typebox .topbox .lab.active{
+    color:#f84933;
 }
 .typebox .topbox i{
    font-style:normal;
@@ -268,6 +270,7 @@
     width: 30px;
     display: block;
     margin-left: 6px;
+    margin-top:2px;
 }
 .listbox .numbox{
 	position:absolute;
@@ -282,17 +285,14 @@
 .listbox .numbox .rcprice{
 	float:left;
 	width:50%;
-	background:rgba(0,0,0,0.1);
-}
-.listbox .numbox .rcprice .inner{
-	padding-left:12px;
+	background:rgba(26,27,29,.65);
+    text-align:center;
 }
 .listbox .numbox .xl{
 	float:right;
 	width:50%;
-	background:rgba(0,0,0,0.4);
-	text-align:right;
-
+	background:rgba(26,27,29,.9);
+	text-align:center;
 }
 .listbox .numbox .xl .inner{
 	padding-right:12px;
@@ -304,7 +304,7 @@
 	font-size: 14px;
     color: #333;
     padding: 12px;
-    padding-left: 35px;
+    padding-left:42px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -333,7 +333,8 @@
     overflow:hidden;
 }
 .listbox .bottom .money{
-	color:#ff2e2e;
+	color:#be0812;
+    font-size:18px;
 }
 .listbox .bottom .moneybox{
 	float:left;
@@ -352,9 +353,10 @@
 .listbox .middle .money .count{
 	font-size:32px;
 	font-style:normal;
+    color:#f9513b;
 }
 .listbox .middle .price .state {
-    color: #333;
+    color:#f9513b;
 }
 .listbox .middle .price{
 	float:left;
@@ -366,7 +368,7 @@
 	text-decoration: line-through;
 }
 .listbox .middle .youhui{
-	width:66px;
+	width:90px;
 	height:26px;
 	float:right;
 	margin-top:15px;
@@ -376,14 +378,18 @@
 	background: url(~assets/images/quan.png) 0 0 no-repeat;
 }
 .listbox .middle .youhui.jian{
-	background: url(~assets/images/jian.png) 0 0 no-repeat;
+	background: url(~assets/images/pro.png) 0 -57px no-repeat;
 }
 .listbox .middle .youhui .num{
-	position:absolute;
-	left:15px;
-	top:5px;
-	color:#ff2e2e;
-	font-size:14px;
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    color: #ff2e2e;
+    font-size: 12px;
+    
+    text-align: center;
+    display: block;
+    width: 30px;
 }
 .listbox .bottom .enterbtn{
 	width:100px;
