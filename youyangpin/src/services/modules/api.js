@@ -159,7 +159,7 @@ export default{
      */
     requestMoney(amount, localLoading = 'requestMoney') {
         return ajax({
-            url: '/RequestMoney?amount=' + amount,
+            url: '/Withdrawal/RequestMoney?amount=' + amount,
             method: 'put',
             localLoading
         })

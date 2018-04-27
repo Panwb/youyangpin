@@ -33,47 +33,12 @@ export default {
             ],
             asideIndex: '3',
             freightData: '1',
-            tableData: [
-                {
-                    no: '1',
-                    applytime: '2018-01-03',
-                    applymoney: '188',
-                    dealtime:'2018-09-08',
-                    dealstate:'已发送'
-                },
-                {
-                    no: '2',
-                    applytime: '2018-01-03',
-                    applymoney: '188',
-                    dealtime:'2018-09-08',
-                    dealstate:'已发送'
-                },
-                {
-                    no: '3',
-                    applytime: '2018-01-03',
-                    applymoney: '188',
-                    dealtime:'2018-09-08',
-                    dealstate:'已发送'
-                },
-                {
-                    no: '4',
-                    applytime: '2018-01-03',
-                    applymoney: '188',
-                    dealtime:'2018-09-08',
-                    dealstate:'已发送'
-                },
-                {
-                    no: '5',
-                    applytime: '2018-01-03',
-                    applymoney: '188',
-                    dealtime:'2018-09-08',
-                    dealstate:'已发送'
-                }
-            ]
+            amount: null,
+            tableData: []
         }
     },
     created() {
-        this.getUserDetail()
+        this.getUserDetail();
         this.getMyRequests()
     },
     methods: {
@@ -82,14 +47,21 @@ export default {
                 this.freightData = result
             })
         },
-        // 提现记录
         getMyRequests() {
             ajax.getMyRequests().then((result) => {
-
+                this.tableData = result;
             })
         },
         requestMoney() {
-
+            ajax.requestMoney(this.amount).then((result) => {
+                this.$message({
+                    type:'success',
+                    message:'提现成功'
+                });
+                this.dialogVisible = false;
+                this.getUserDetail();
+                this.getMyRequests();
+            })
         },
         handleSelect(key, keyPath) {
             this.$router.push(this.menus[key - 1]['path'])
