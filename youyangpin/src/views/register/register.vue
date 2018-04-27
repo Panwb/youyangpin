@@ -12,7 +12,7 @@
 
     <!-- main start -->
 	  <el-main class="maincontent">
-	    <div class="wd1200 registerbox">
+	    <div class="wd1200 registerbox regbox">
            <p class="title">用户注册<span class="login">已有账号?<router-link to="/login">点击登录</router-link></span></p>
 			<el-form :model="ruleForm2"  :rules="rules2" ref="ruleForm2" label-width="100px">
 			  <el-form-item label="主播名称" prop="studioHostName">
@@ -49,7 +49,7 @@
 	  <!-- footer end -->
 
     <el-dialog title="优样品-用户注册须知" :visible.sync="dialogVisible" width="40%"
-    :before-close="handleClose">
+    :before-close="handleClose" class="regisbox">
     <div class="dgcontent">
        <p>1.好单库面向各大招商淘客，暂不支持商家入驻，商家请联系淘客合作放单，请认真阅读和遵守以下规则。</p>
        <p>2.认真填写您的团队名号，名号代表着平台和别人对你的认可和信任，相当于您的身份证，请用您对外宣传和交流的名号进行注册。
@@ -61,7 +61,7 @@
        <p class="agree"><el-checkbox  name="type1"></el-checkbox>已认真阅读并同意须知内容</p>
     </div>
     <span slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      <el-button type="primary" @click="dialogVisible = false"  disabled>确 定</el-button>
     </span>
   </el-dialog>
 	</el-container>
@@ -75,9 +75,20 @@
   }
 </script>
 
-<style scoped>
-.el-dialog__header{
+<style>
+.regbox{
+	width:500px !important;
+}
+.regisbox .el-dialog__header{
   text-align:center;
+  border-bottom:1px solid #eee;
+}
+.regisbox .el-dialog__footer{
+  border-top:1px solid #eee;
+  text-align:center;
+}
+.regisbox .el-dialog__header .el-dialog__close{
+	display:none;
 }
 .el-dialog__header .el-dialog__title{
   color: #dd514c !important;
@@ -158,7 +169,6 @@
 	height:auto;
 }
 .registerbox{
-	width:500px;
 	margin:0 auto;
 	padding:40px 0;
 }

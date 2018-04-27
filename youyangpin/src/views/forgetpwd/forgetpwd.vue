@@ -10,7 +10,7 @@
 	    <div class="wd1200">
              <el-container>
 				  <el-main class="maincon">
-				    <p class="title">忘记密码</p>
+				    <p class="title">找回密码</p>
 				    <div class="content">
 				        <div class="titlelist">
 				           <ul> 
@@ -52,7 +52,7 @@
 	                    <!--3.设置新密码-->
 	                    <div class="modifypsd registerbox modifypsd3" v-show="active == 3">
 	                         <el-form :model="ruleForm3"  :rules="rules3" ref="ruleForm3" label-width="100px">
-	                           <el-form-item label="设置密码" prop="pass">
+	                           <el-form-item label="设置密码" prop="newPassword">
 							     <el-input type="password" v-model="ruleForm3.newPassword" auto-complete="off" placeholder="密码必须为6-25位数字 + 字母"></el-input>
 							   </el-form-item>
 							   <el-form-item label="确认密码" prop="checkPass">
@@ -93,6 +93,7 @@
 
 <style scoped>
 .maincon{
+    min-height:500px;
 	background:#fff;
 }
 .maincon .title{
@@ -393,5 +394,9 @@
     width: 150px;
     margin-left: 60px;
     margin-top: 30px;
+}
+.modifypsd4 div.tip{
+	margin-top:40px;
+	font-size:20px;
 }
 </style>

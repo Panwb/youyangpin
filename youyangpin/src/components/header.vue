@@ -180,7 +180,10 @@
   .loginout{
      margin-right:20px;
   }
-  .center:hover{
+  .center a{
+    color:#666;
+   }
+  .center a:hover{
      color:#f84933;
   }
   .loginout:hover{
