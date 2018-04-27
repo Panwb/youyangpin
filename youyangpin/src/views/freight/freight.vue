@@ -1,71 +1,71 @@
 <template>
-  <div id="app">  
-	<el-container>
-      <!-- header start -->
-      <main-header></main-header>
-	  <!-- header end -->
+	<div id="app">
+		<el-container>
+			<!-- header start -->
+			<main-header></main-header>
+			<!-- header end -->
 
-      <!-- main start -->
-	  <el-main class="maincontent">
-	    <div class="wd1200">
-             <el-container>
-				 <el-aside class="asidebox">
-				       <p class="title">个人中心</p>
-                       <el-menu class="linklist" :default-active="asideIndex" @select="handleSelect">
-                            <el-menu-item
-                                v-for="menu in menus"
-                                :index="menu.key"
-                                :key="menu.key">
-                                {{ menu.title }}
-                            </el-menu-item>
-                        </el-menu>
-				  </el-aside>
-				  <el-main class="mainbox">
-				    <p class="title">运费申请</p>
-				    <div class="content">
-                       <!--运费申请-->
-					   <div class="applybox">
-	                        <div class="zfbbox">您的支付宝账号：<span class="zfid">{{ freightData.AlipayAccount }}</span></div> 
-	                        <div class="moneybox">当前可提现金额：<span class="num">{{ freightData.AccountBalance }}元</span></div>
-	                        <div class="btnbox">
-	                           <el-button class="applybtn" :class="freightData.AccountBalance>100?'active':''" @click="freightData.AccountBalance<100?dialogVisible = false:dialogVisible = true">申请提现</el-button>
-	                           <el-dialog :visible.sync="dialogVisible" width="30%">
-								  <span>确认要提现吗</span>
-								  <span slot="footer" class="dialog-footer">
+			<!-- main start -->
+			<el-main class="maincontent">
+				<div class="wd1200">
+					<el-container>
+						<el-aside class="asidebox">
+							<p class="title">个人中心</p>
+							<el-menu class="linklist" :default-active="asideIndex" @select="handleSelect">
+								<el-menu-item
+										v-for="menu in menus"
+										:index="menu.key"
+										:key="menu.key">
+									{{ menu.title }}
+								</el-menu-item>
+							</el-menu>
+						</el-aside>
+						<el-main class="mainbox">
+							<p class="title">运费申请</p>
+							<div class="content">
+								<!--运费申请-->
+								<div class="applybox">
+									<div class="zfbbox">您的支付宝账号：<span class="zfid">{{ freightData.AlipayAccount }}</span></div>
+									<div class="moneybox">当前可提现金额：<span class="num">{{ freightData.AccountBalance }}元</span></div>
+									<div class="btnbox">
+										<el-button class="applybtn" :class="freightData.AccountBalance>100?'active':''" @click="freightData.AccountBalance<100?dialogVisible = false:dialogVisible = true">申请提现</el-button>
+										<el-dialog :visible.sync="dialogVisible" width="30%">
+											<span>确认要提现吗</span>
+											<span slot="footer" class="dialog-footer">
 								    <el-button @click="dialogVisible = false">取 消</el-button>
 								    <el-button type="primary"  @click="dialogVisible = false">确 定</el-button>
 								  </span>
-								</el-dialog>
+										</el-dialog>
 
-	                           <span class="tipbox">（*单次提现金额需超过100元）</span>
-	                        </div>
-	                        
-	                    </div>
-	                    <template>
-	                        <p class="txtitle">提现记录</p>
-						    <el-table :data="tableData"  style="width: 100%">
-						      <el-table-column prop="no" label="序号" width="60"></el-table-column>
-						      <el-table-column prop="applytime" label="申请时间" width="220"></el-table-column>
-						      <el-table-column prop="applymoney" label="申请金额" width="220"></el-table-column>
-						      <el-table-column prop="dealtime" label="处理时间" width="220"></el-table-column>
-						      <el-table-column prop="dealstate" label="处理状态" width="220"></el-table-column>
-						    </el-table>
-					    </template>
+										<span class="tipbox">（*单次提现金额需超过100元）</span>
+									</div>
 
-				    </div>
-				  </el-main>
-			  </el-container>
-	    </div>
-	  </el-main>
-	  <!-- main end -->
+								</div>
+								<template>
+									<p class="txtitle">提现记录</p>
+									<el-table :data="tableData"  style="width: 100%">
+										<el-table-column prop="no" label="序号" width="60"></el-table-column>
+										<el-table-column prop="applytime" label="申请时间" width="220"></el-table-column>
+										<el-table-column prop="applymoney" label="申请金额" width="220"></el-table-column>
+										<el-table-column prop="dealtime" label="处理时间" width="220"></el-table-column>
+										<el-table-column prop="dealstate" label="处理状态" width="220"></el-table-column>
+									</el-table>
+								</template>
 
-	  <!-- footer start -->
-	  <el-footer>
-        <main-footer></main-footer>
-	  </el-footer>
-	  <!-- footer end -->
-	</el-container>
-  </div>
+							</div>
+						</el-main>
+					</el-container>
+				</div>
+			</el-main>
+			<!-- main end -->
+
+			<!-- footer start -->
+			<el-footer>
+				<main-footer></main-footer>
+			</el-footer>
+			<!-- footer end -->
+		</el-container>
+	</div>
 </template>
 
 <script type="text/babel">

@@ -1,17 +1,16 @@
 <template>
     <div id="app">
-	    <el-container>
+        <el-container>
             <main-header @clickType="clickType"></main-header>
             <!-- main start -->
             <el-main>
                 <div class="wd1200">
                     <div class="typebox">
                         <div class="topbox">
-                            <span
-                                class="lab"
-                                v-for="(item, index) in statistics"
-                                :key="index"
-                                @click="clickVField(item.VerticalFieldCode)">
+                            <span class="lab"
+                                  v-for="(item, index) in statistics"
+                                  :key="index"
+                                  @click="clickVField(item.VerticalFieldCode)">
                                 {{ item.VerticalFieldCode }}(<i>{{item.Quantity}}</i>)
                             </span>
                         </div>
@@ -38,31 +37,31 @@
                         <el-row :gutter="20">
                             <el-col :span="6" v-for="(item,index) in pageList" :key="item.GoodsId">
                                 <el-card :body-style="{ padding: '0px' }" shadow="hover">
-                                    <router-link :to="'/apply?goodsId=' + item.GoodsId">
+                                    <a :href="item.GoodsURL" target="view_window">
                                         <span class="type"><i>{{ item.ActivityType }}商品</i></span>
                                         <img :src="item.GoodsImgURL" class="image"/>
                                         <div class="numbox">
                                             <div class="rcprice"><div class="inner">日常价：{{ item.DailyPrice }}</div></div>
                                             <div class="xl"><div class="inner">销量{{ item.Sales }}件</div></div>
                                         </div>
-                                    </router-link>
-                                        <div class="content">
-                                            <p class="words"><span :class="item.ShopType=='淘宝店'?'icon icon-tao':'icon icon-tian'"></span>{{ item.GoodsName }}</p>
-                                            <div class="middle">
-                                                <span class="money">￥<i class="count">{{ item.LivePrice }}</i></span>
-                                                <div class="price">
-                                                    <p class="count">￥{{ item.DailyPrice }}</p>
-                                                    <p class="state">主播专享价</p>
-                                                </div>
-                                                <div class="youhui jian">
-                                                    <span class="num">{{ item.DailyPrice-item.LivePrice }}</span>
-                                                </div>
+                                    </a>
+                                    <div class="content">
+                                        <p class="words"><span :class="item.ShopType=='淘宝店'?'icon icon-tao':'icon icon-tian'"></span>{{ item.GoodsName }}</p>
+                                        <div class="middle">
+                                            <span class="money">￥<i class="count">{{ item.LivePrice }}</i></span>
+                                            <div class="price">
+                                                <p class="count">￥{{ item.DailyPrice }}</p>
+                                                <p class="state">主播专享价</p>
                                             </div>
-                                            <div class="bottom clearfix">
-                                                <div class="moneybox">佣金：<span class="money">{{ item.CommissionRatio }}%</span></div> <el-button class="button enterbtn">进店拿样</el-button>
+                                            <div class="youhui jian">
+                                                <span class="num">{{ item.DailyPrice-item.LivePrice }}</span>
                                             </div>
                                         </div>
-                                    
+                                        <div class="bottom clearfix">
+                                            <div class="moneybox">佣金：<span class="money">{{ item.CommissionRatio }}%</span></div> <router-link :to="'/apply?goodsId=' + item.GoodsId"><el-button class="button enterbtn">进店拿样</el-button></router-link>
+                                        </div>
+                                    </div>
+
                                 </el-card>
                             </el-col>
                         </el-row>
@@ -78,20 +77,20 @@
             <el-footer>
                 <div class="wd1200">
                     <ul class="linklist">
-                    <li><a a href="https://www.taobao.com/" target="_blank">淘宝网</a></li>
-                    <li><a a href="https://www.tmall.com/" target="_blank">天猫</a></li>
-                    <li><a a href="https://ju.taobao.com/" target="_blank">聚划算</a></li>
-                    <li><a a href="https://seller.aliexpress.com/" target="_blank">全球速卖通</a></li>
-                    <li><a a href="https://www.1688.com/" target="_blank">1688</a></li>
-                    <li><a a href="http://pub.alimama.com/" target="_blank">阿里妈妈</a></li>
-                    <li><a a href="https://m.kuaidi100.com/" target="_blank">快递查询</a></li>
+                        <li><a a href="https://www.taobao.com/" target="_blank">淘宝网</a></li>
+                        <li><a a href="https://www.tmall.com/" target="_blank">天猫</a></li>
+                        <li><a a href="https://ju.taobao.com/" target="_blank">聚划算</a></li>
+                        <li><a a href="https://seller.aliexpress.com/" target="_blank">全球速卖通</a></li>
+                        <li><a a href="https://www.1688.com/" target="_blank">1688</a></li>
+                        <li><a a href="http://pub.alimama.com/" target="_blank">阿里妈妈</a></li>
+                        <li><a a href="https://m.kuaidi100.com/" target="_blank">快递查询</a></li>
                     </ul>
                     <p class="copyright">©copyright 2016-2018 优样品 www.youyangpin.com.<a href="http://www.beianbeian.com/beianxinxi/a40cc71f-db17-4d78-80dd-4b232dab5880.html">粤ICP备15114843号-1</a></p>
                 </div>
             </el-footer>
             <!-- footer end -->
-	    </el-container>
-  </div>
+        </el-container>
+    </div>
 </template>
 
 <script type="text/babel">

@@ -1,196 +1,191 @@
 <template>
-  <div id="app">
-	<el-container>
+	<div id="app">
+		<el-container>
+			<main-header></main-header>
+			<!-- main start -->
+			<el-main>
+				<div class="wd1200 applybox" v-if="applyData">
+					<el-card class="box-card shopbox" shadow="never">
+						<div slot="header" class="clearfix title">
+							<span>店铺信息</span>
+						</div>
+						<div  class="text item">
+							<div class="txt">
+								<div class="box">
+									<span class="tianmao"><img src="~assets/images/tianmao.png" class="image"></span>
+									<span class="name">店铺:{{ applyData.Shop.ShopName }}</span>
+									<span class="wangwang"></span>
+								</div>
+								<span class="line"></span>
+								<div class="box">
+									<span class="lab">描述 <i class="num">{{ applyData.Shop.DescriptionMatch }}</i></span>
+									<span class="lab">服务 <i class="num">{{ applyData.Shop.ServiceAttitude }}</i></span>
+									<span class="lab">物流 <i class="num">{{ applyData.Shop.LogisticsService }}</i></span>
+								</div>
+								<span class="line"></span>
+								<div class="box">
+									<span class="type">当前活动类型：{{ applyData.CurrentGood.ActivityType }}</span>
+								</div>
+							</div>
+						</div>
+					</el-card>
+					<el-card class="box-card personbox" shadow="never">
+						<div slot="header" class="clearfix title">
+							<span>对主播的要求</span>
+						</div>
+						<div  class="text item">
+							<div class="txt">
+								{{ applyData.CurrentGood.MerchantToStudioHostDemand }}
+							</div>
+						</div>
+					</el-card>
+					<el-card class="box-card goodbox" shadow="never">
+						<div slot="header" class="clearfix title">
+							<span>当前商品详情</span>
+						</div>
+						<div  class="text item">
+							<div class="txt">
+								<ul class="list">
+									<li><div class="imgbox"><img :src="applyData.CurrentGood.GoodsImgURL" class="image"></div></li>
+									<li>
+										<div class="infobox">
+											<p class="name">{{ applyData.CurrentGood.GoodsName }}</p>
+											<p class="price">直播专享价:<span class="num">{{ applyData.CurrentGood.LivePrice }}</span> <span class="normal">日常价:{{ applyData.CurrentGood.DailyPrice }}</span></p>
+											<p class="money">佣金比例:<span class="num">{{ applyData.CurrentGood.CommissionRatio }}%</span></p>
+											<p class="date">活动日期：{{ formatDate(applyData.CurrentGood.ActivityBeginTime) }}-{{ formatDate(applyData.CurrentGood.ActivityEndTime) }}</p>
+											<p class="detail">{{ applyData.CurrentGood.SellingPointDescribe }}</p>
+										</div>
+									</li>
+									<li>
+										<div class="detailbox">
+											<p class="title">销量</p>
+											<p class="num">{{ applyData.CurrentGood.Sales }}</p>
+										</div>
+									</li>
+									<li>
+										<div class="detailbox">
+											<p class="title">库存</p>
+											<p class="num">{{ applyData.CurrentGood.InventoryNum }}</p>
+										</div>
+									</li>
+									<li>
+										<div class="detailbox">
+											<p class="title">已申请数/供样数</p>
+											<p class="num">{{ applyData.CurrentGood.RequestQuantity }}/{{ applyData.CurrentGood.SupplyNum }}</p>
+										</div>
+									</li>
+									<li>
+										<div class="detailbox">
+											<p class="title">优惠方式</p>
+											<p class="num">{{applyData.CurrentGood.PreferentialWay ==='拍下立减'?'拍下立减':applyData.CurrentGood.DailyPrice-applyData.CurrentGood.LivePrice+'元优惠券'}}</p>
+										</div>
+									</li>
+									<li>
+										<div class="detailbox last">
+											<p class="title">是否需要退回样品</p>
+											<p class="num">是</p>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</el-card>
 
-      <main-header></main-header>
+					<el-card class="box-card goodbox shopgoods" shadow="never">
+						<div slot="header" class="clearfix title">
+							<span>店铺同类商品</span>
+						</div>
+						<div class="text item">
+							<div class="txt" v-for="(item,index) in applyData.RelatedGoods" :key="item.GoodsId">
+								<ul class="list">
+									<li v-if="isShowChoose" class="checkbox"> <el-checkbox size="medium" v-model="isChecked[index]"></el-checkbox></li>
+									<li><div class="imgbox"><img :src="item.GoodsImgURL" class="image"></div></li>
+									<li>
+										<div class="infobox">
+											<p class="name">{{ item.GoodsName }}</p>
+											<p class="price">直播专享价:<span class="num">{{ item.LivePrice }}</span> <span class="normal">日常价:{{ item.DailyPrice }}</span></p>
+											<p class="money">佣金比例:<span class="num">{{ item.CommissionRatio }}%</span></p>
+											<p class="date">活动日期：{{ formatDate(item.ActivityBeginTime) }}-{{ formatDate(item.ActivityEndTime) }}</p>
+											<p class="detail">{{ item.SellingPointDescribe }}</p>
+										</div>
+									</li>
+									<li>
+										<div class="detailbox">
+											<p class="title">销量</p>
+											<p class="num">{{ item.Sales }}</p>
+										</div>
+									</li>
+									<li>
+										<div class="detailbox">
+											<p class="title">库存</p>
+											<p class="num">{{ item.InventoryNum }}</p>
+										</div>
+									</li>
+									<li>
+										<div class="detailbox">
+											<p class="title">已申请数/供样数</p>
+											<p class="num">{{ item.RequestQuantity }}/{{ item.SupplyNum }}</p>
+										</div>
+									</li>
+									<li>
+										<div class="detailbox">
+											<p class="title">优惠方式</p>
+											<p class="num">{{applyData.CurrentGood.PreferentialWay ==='拍下立减'?'拍下立减':applyData.CurrentGood.DailyPrice-applyData.CurrentGood.LivePrice+'元优惠券'}}</p>
+										</div>
+									</li>
+									<li>
+										<div class="detailbox last">
+											<p class="title">是否需要退回样品</p>
+											<p class="num">是</p>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</el-card>
+					<el-card class="box-card pinfobox" shadow="never" v-if="applyData.StudioHost.LinkmanName||applyData.StudioHost.Address||applyData.StudioHost.LinkmanPhone">
+						<div slot="header" class="clearfix title">
+							<span>{{ applyData.StudioHost.LinkmanName }}</span>
+						</div>
+						<div class="text item">
+							<div class="txt address">
+								{{ applyData.StudioHost.Address }}
+							</div>
+							<div class="txt phone">{{ applyData.StudioHost.LinkmanPhone }}</div>
+							<span class="txt opt"><el-button @click="editPersonalMeg" type="text">修改</el-button></span>
+						</div>
+					</el-card>
+					<div class="remarkbox">
+						<el-input v-model="ApplicationForm.AnchorAbilitySelfReport" placeholder="请简要描述一下您对商品的带货能力和优势"></el-input>
+						<!--<div>-->
+						<!--<span class="tip">(商家最多接受1000服务费)</span>-->
+						<!--<el-input></el-input> -->
+						<!--<el-checkbox>我想要商家付费</el-checkbox>-->
+						<!--</div>-->
+						<!--<div>-->
+						<!--<span class="tip">(商家最多接受50%的返佣)</span>-->
+						<!--<el-input></el-input> -->
+						<!--<el-checkbox>我想要调整佣金比例</el-checkbox>-->
+						<!--</div>-->
+						<!--<div>-->
+						<!--<span class="tip">(商家最大接受50元的优惠力度)</span>-->
+						<!--<el-input></el-input> -->
+						<!--<el-checkbox>我想要商家调整优惠力度</el-checkbox>-->
+						<!--</div>-->
+					</div>
+					<div class="txt addaddressbox" @click="improveAddress"><el-button>+完善收货地址</el-button> </div>
+					<div class="txt applybtnbox"><el-button @click="requestApplication" type="text">提交申请</el-button></div>
+				</div>
+			</el-main>
+			<!-- main end -->
 
-      <!-- main start -->
-	  <el-main>
-	    <div class="wd1200 applybox" v-if="applyData">
-            <el-card class="box-card shopbox" shadow="never">
-			  <div slot="header" class="clearfix title">
-			    <span>店铺信息</span>
-			  </div>
-			  <div  class="text item">
-			      <div class="txt">
-			        <div class="box">
-			          <span class="tianmao"><img src="~assets/images/tianmao.png" class="image"></span>
-			          <span class="name">店铺:{{ applyData.Shop.ShopName }}</span>
-			          <span class="wangwang"></span>
-			        </div>
-			        <span class="line"></span>
-			        <div class="box">
-			           <span class="lab">描述 <i class="num">{{ applyData.Shop.DescriptionMatch }}</i></span>
-				        <span class="lab">服务 <i class="num">{{ applyData.Shop.ServiceAttitude }}</i></span>
-				        <span class="lab">物流 <i class="num">{{ applyData.Shop.LogisticsService }}</i></span>
-			        </div>
-			          <span class="line"></span>
-			        <div class="box">
-			           <span class="type">当前活动类型：{{ applyData.CurrentGood.ActivityType }}</span>
-			        </div>
-			      </div>
-			  </div>
-			</el-card>
-			<el-card class="box-card personbox" shadow="never">
-			  <div slot="header" class="clearfix title">
-			    <span>对主播的要求</span>
-			  </div>
-			  <div  class="text item">
-			      <div class="txt">
-			       {{ applyData.CurrentGood.MerchantToStudioHostDemand }}
-			      </div>
-			  </div>
-			</el-card>
-			<el-card class="box-card goodbox" shadow="never">
-			  <div slot="header" class="clearfix title">
-			    <span>当前商品详情</span>
-			  </div>
-			  <div  class="text item">
-			      <div class="txt">
-			         <ul class="list">
-			           <li><div class="imgbox"><img :src="applyData.CurrentGood.GoodsImgURL" class="image"></div></li>
-			           <li>
-                          <div class="infobox">
-                             <p class="name">{{ applyData.CurrentGood.GoodsName }}</p>
-                             <p class="price">直播专享价:<span class="num">{{ applyData.CurrentGood.LivePrice }}</span> <span class="normal">日常价:{{ applyData.CurrentGood.DailyPrice }}</span></p>
-                             <p class="money">佣金比例:<span class="num">{{ applyData.CurrentGood.CommissionRatio }}%</span></p>
-                             <p class="date">活动日期：{{ applyData.CurrentGood.ActivityBeginTime }}-{{ applyData.CurrentGood.ActivityEndTime }}</p>
-                             <p class="detail">{{ applyData.CurrentGood.SellingPointDescribe }}</p>
-                          </div>
-			           </li>
-			           <li>
-			              <div class="detailbox">
-			                 <p class="title">销量</p>
-			                 <p class="num">{{ applyData.CurrentGood.Sales }}</p>
-			              </div>
-			           </li>
-			           <li>
-			              <div class="detailbox">
-			                 <p class="title">库存</p>
-			                 <p class="num">{{ applyData.CurrentGood.InventoryNum }}</p>
-			              </div>
-			           </li>
-			           <li>
-			              <div class="detailbox">
-			                 <p class="title">已申请数/供样数</p>
-						     <p class="num">{{ applyData.CurrentGood.RequestQuantity }}/{{ applyData.CurrentGood.SupplyNum }}</p>
-			              </div>
-			           </li>
-			           <li>
-			              <div class="detailbox">
-			                 <p class="title">优惠方式</p>
-						     <p class="num">{{applyData.CurrentGood.PreferentialWay ==='拍下立减'?'拍下立减':applyData.CurrentGood.DailyPrice-applyData.CurrentGood.LivePrice+'元优惠券'}}</p>
-			              </div>
-			           </li>
-			           <li>
-			              <div class="detailbox last">
-			                 <p class="title">是否需要退回样品</p>
-			                 <p class="num">是</p>
-			              </div>
-			           </li>
-			         </ul>
-			      </div>
-			  </div>
-			</el-card>
-
-			<el-card class="box-card goodbox shopgoods" shadow="never">
-			  <div slot="header" class="clearfix title">
-			    <span>店铺同类商品</span>
-			  </div>
-			  <div  class="text item">
-			      <div
-                    class="txt"
-                    v-for="item in applyData.RelatedGoods"
-                    :key="item.GoodsId">
-			         <ul class="list">
-			           <li class="checkbox"> <el-checkbox size="medium"></el-checkbox></li>
-			           <li><div class="imgbox"><img :src="item.GoodsImgURL" class="image"></div></li>
-			           <li>
-                          <div class="infobox">
-                             <p class="name">{{ item.GoodsName }}</p>
-                             <p class="price">直播专享价:<span class="num">{{ item.LivePrice }}</span> <span class="normal">日常价:{{ item.DailyPrice }}</span></p>
-							  <p class="money">佣金比例:<span class="num">{{ item.CommissionRatio }}%</span></p>
-                             <p class="date">活动日期：{{ item.ActivityBeginTime }}-{{ item.ActivityEndTime }}</p>
-                             <p class="detail">{{ item.SellingPointDescribe }}</p>
-                          </div>
-			           </li>
-			           <li>
-			              <div class="detailbox">
-			                 <p class="title">销量</p>
-			                 <p class="num">{{ item.Sales }}</p>
-			              </div>
-			           </li>
-			           <li>
-			              <div class="detailbox">
-			                 <p class="title">库存</p>
-			                 <p class="num">{{ item.InventoryNum }}</p>
-			              </div>
-			           </li>
-			           <li>
-			              <div class="detailbox">
-			                 <p class="title">已申请数/供样数</p>
-			                 <p class="num">{{ item.RequestQuantity }}/{{ item.SupplyNum }}</p>
-			              </div>
-			           </li>
-			           <li>
-			              <div class="detailbox">
-			                 <p class="title">优惠方式</p>
-						     <p class="num">{{applyData.CurrentGood.PreferentialWay ==='拍下立减'?'拍下立减':applyData.CurrentGood.DailyPrice-applyData.CurrentGood.LivePrice+'元优惠券'}}</p>
-			              </div>
-			           </li>
-			           <li>
-			              <div class="detailbox last">
-			                 <p class="title">是否需要退回样品</p>
-			                 <p class="num">是</p>
-			              </div>
-			           </li>
-			         </ul>
-			      </div>
-			  </div>
-			</el-card>
-            <el-card class="box-card pinfobox" shadow="never" v-if="applyData.StudioHost.LinkmanName||applyData.StudioHost.Address||applyData.StudioHost.LinkmanPhone">
-			  <div slot="header" class="clearfix title">
-			    <span>{{ applyData.StudioHost.LinkmanName }}</span>
-			  </div>
-			  <div  class="text item">
-			      <div class="txt address">
-                    {{ applyData.StudioHost.Address }}
-                  </div>
-			      <div class="txt phone">{{ applyData.StudioHost.LinkmanPhone }}</div>
-			      <span class="txt opt"><el-button @click="editPersonalMeg" type="text">修改</el-button></span>
-			  </div>
-			</el-card>
-			<div class="remarkbox">
-				<el-input v-model="ApplicationForm.AnchorAbilitySelfReport" placeholder="请简要描述一下您对商品的带货能力和优势"></el-input>
-                <!--<div>-->
-                  <!--<span class="tip">(商家最多接受1000服务费)</span>-->
-                  <!--<el-input></el-input> -->
-                  <!--<el-checkbox>我想要商家付费</el-checkbox>-->
-                <!--</div>-->
-                <!--<div>-->
-                  <!--<span class="tip">(商家最多接受50%的返佣)</span>-->
-                  <!--<el-input></el-input> -->
-                  <!--<el-checkbox>我想要调整佣金比例</el-checkbox>-->
-                <!--</div>-->
-                <!--<div>-->
-                  <!--<span class="tip">(商家最大接受50元的优惠力度)</span>-->
-                  <!--<el-input></el-input> -->
-                  <!--<el-checkbox>我想要商家调整优惠力度</el-checkbox>-->
-                <!--</div>-->
-			</div>
-			<div class="txt addaddressbox" @click="improveAddress"><el-button>+完善收货地址</el-button> </div>
-			<div class="txt applybtnbox"><el-button @click="requestApplication" type="text">提交申请</el-button></div>
-	    </div>
-	  </el-main>
-	  <!-- main end -->
-
-	  <!-- footer start -->
-	  <el-footer>
-        <main-footer></main-footer>
-	  </el-footer>
-	  <!-- footer end -->
-	</el-container>
-  </div>
+			<!-- footer start -->
+			<el-footer>
+				<main-footer></main-footer>
+			</el-footer>
+			<!-- footer end -->
+		</el-container>
+	</div>
 </template>
 
 <script type="text/babel">

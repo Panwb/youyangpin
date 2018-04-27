@@ -18,7 +18,7 @@ Vue.prototype.util = util
 
 // 路由实例
 const router = new VueRouter({
-    mode: 'history', // hash: 使用 URL hash 值来作路由。支持所有浏览器，包括不支持 HTML5 History Api 的浏览器。history: 依赖 HTML5 History API 和服务器配置。
+    mode: 'hash', // hash: 使用 URL hash 值来作路由。支持所有浏览器，包括不支持 HTML5 History Api 的浏览器。history: 依赖 HTML5 History API 和服务器配置。
     scrollBehavior(to, from, savePosition) {   // 前进或后退,滚动到原来的位置
         if (savePosition) {
             return savePosition
