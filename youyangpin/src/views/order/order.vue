@@ -47,7 +47,7 @@
 											<div class="date">{{ item.datetime }}</div>
 											<div class="orderId">订单号:{{ item.OrderNo }}</div>
 											<div class="shop">{{ item.ShopName }}</div>
-											<div  class="wechat">旺旺号:{{ item.WangWangNo }}</div>
+											<div  class="wechat">微信号:{{ item.WangWangNo }}</div>
 											<div class="phone">联系电话:{{ item.LinkmanPhone }}</div>
 										</div>
 										<div class="bottombox clear" v-for="(good,index) in item.Goods" :key="index">
@@ -66,14 +66,16 @@
 											<div class="quan">{{ good.PreferentialWay ==='拍下立减'?'拍下立减':good.DailyPrice-good.LivePrice+'元优惠券' }}</div>
 									  	</div>
 										
-										<div class="planstate"><span>{{ item.DirectionalPlanStatus }}</span></div>
-										<div class="orderstate"><span>{{ item.OrderStatus }}</span></div>
+										<div class="planstate"><div class="outer"><div class="inner">{{ item.DirectionalPlanStatus }}</div></div></div>
+										<div class="orderstate"><div class="outer"><div class="inner">{{ item.OrderStatus }}</div></div></div>
 										<div class="option">
-											<div class="box">
+										   <div class="outer">
+											<div class="box inner">
 												<el-button  class="optbtn" type="text" @click="dialogVisible2 = true">排期</el-button>
 												<el-button  class="optbtn" type="text" @click="dialogVisible4 = true">评价</el-button>
 												<el-button  class="optbtn" type="text" @click="dialogVisible1 = true">申请定向</el-button>
 												<el-button  class="optbtn" type="text" @click="dialogVisible3 = true">填写物流信息</el-button>
+											</div>
 											</div>
 										</div>
 										<div class="tuiaddrress">退货地址：{{ item.ShopAddress }}</div>
@@ -359,6 +361,7 @@
 }
 .contentbox{
 	margin-top:30px;
+	position:relative;
 }
 .topbox{
 	border: 1px solid #ebeef5;
@@ -400,7 +403,6 @@
 .tuiaddrress{
 	padding:12px 0 12px 15px;
 	border: 1px solid #ebeef5;
-	border-top:none;
 	font-size:14px;
 }
 .bottombox{
@@ -417,7 +419,6 @@
 	line-height:110px;
 	float:left;
 	padding:15px 0;
-	border-bottom: 1px solid #ebeef5;
 }
 .bottombox .quan,.bottombox .planstate,.bottombox .orderstate{
 	width:110px;
@@ -427,7 +428,6 @@
 	line-height:110px;
 	float:left;
 	padding:15px 0;
-	border-bottom: 1px solid #ebeef5;
 }
 .bottombox .planstate,.bottombox .orderstate,.bottombox .option{
 	border-left:1px solid #ebeef5;
@@ -468,7 +468,6 @@
 	float:left;
 	width:305px;
 	padding:15px 0 15px 15px;
-	border-bottom: 1px solid #ebeef5;
 }
 .infobox .imgbox {
     width: 110px;
@@ -516,4 +515,54 @@
 /*.el-date-editor.el-input, .el-date-editor.el-input__inner{*/
 	/*width:400px;*/
 /*}*/
+.planstate{
+	position: absolute;
+    right: 230px;
+    width: 120px;
+    top: 37px;
+    bottom:42px;
+    border-left: 1px solid #ebeef5;
+    text-align: center;
+}
+.planstate .outer,.orderstate .outer,.option .outer{
+	height:100%;
+	width:100%;
+	display:table;
+}
+.planstate .inner,.orderstate .inner,.option .inner{
+	height:100%;
+	display:table-cell;
+	vertical-align: middle;
+}
+.orderstate{
+	position: absolute;
+    right: 121px;
+    width: 110px;
+    top: 37px;
+    bottom:42px;
+    border-left: 1px solid #ebeef5;
+    text-align: center;
+}
+.orderstate span{
+	margin-top:60px;
+	display:block;
+}
+.option{
+	position: absolute;
+    right:0px;
+    width: 120px;
+    top: 37px;
+    bottom:42px;
+    border-left: 1px solid #ebeef5;
+    text-align: center;
+}
+.option button:first-child{
+	margin-top:25px;
+}
+.option button{
+    width:100%;
+    padding:0;
+    margin:0 0 10px 0;
+	display:block;
+}
 </style>
