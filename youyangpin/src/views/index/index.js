@@ -90,6 +90,7 @@ export default {
         clickType(name) {
             this.searchForm.activityType = name;
             this.goodsSearch();
+            this.getStatistics(name)
         }
     }
 }
