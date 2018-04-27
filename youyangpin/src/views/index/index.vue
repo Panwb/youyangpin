@@ -166,6 +166,9 @@
 	margin-right:18px;
 	cursor:pointer;
 }
+.typebox .topbox .lab:hover{
+    color:#f84933;
+}
 .typebox .topbox .lab.active{
     color:#f84933;
 }
@@ -231,6 +234,9 @@
 	display:inline-block;
 	padding:0 8px;
 	cursor:pointer;
+}
+.typebox .bottombox li:hover{
+    color:#f84933;
 }
 .typebox .bottombox li.active{
 	color:#f84933;

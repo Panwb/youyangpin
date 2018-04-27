@@ -92,9 +92,12 @@
           this.$router.push('/index')
       },
       logout() {
-        this.setAccount(null);
-        localStorage.removeItem('user');
-        this.$router.push('/login')
+        ajax.logout().then((result) =>{
+            this.setAccount(null);
+            localStorage.removeItem('user');
+            this.$router.push('/login')
+        })
+
       },
       getActivityTypes() {
         if (this.activityTypes.length > 0) return
