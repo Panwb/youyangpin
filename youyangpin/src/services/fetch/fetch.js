@@ -17,7 +17,7 @@ const checkStatus = function(response) {
         // 如果没有登录,则跳转到登录页面
         if (response.status == 401) {
             Message({
-                message:'登陆超时，将重新登陆',
+                message:'未授权，请重新登陆',
                 type: 'error'
             })
             // Notification({
@@ -160,10 +160,10 @@ const ajax = ({
                 // 显示错误提示
                 reject(error)
                 console.log('e',typeof error)
-                //Message({
-                //    type:'error',
-                //    message: '操作错误，将重新登陆' ,
-                //})
+                Message({
+                    type:'error',
+                    message: '操作错误' ,
+                })
 
 
             })
