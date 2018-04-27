@@ -63,8 +63,7 @@ export default {
             })
         },
         getStatistics(val) {
-            ajax.getStatistics().then((result) => {
-                this.searchForm.activityType = val
+            ajax.getStatistics(this.searchForm).then((result) => {
                 this.setStatistics(result)
                 console.log(`活动类型 ${val} `);
             })
