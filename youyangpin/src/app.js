@@ -39,10 +39,9 @@ sync(store,router)
 router.beforeEach((to, from, next) => {
     sessionStorage.setItem('prePath',from.path);
     if (to.matched.some(record => record.meta.auth)) {
-        let userInfo = JSON.parse(localStorage.getItem('user'));
-        // console.log(userInfo)
-        // if (!store.getters.account) {
-        if (!userInfo) {
+        // let userInfo = JSON.parse(localStorage.getItem('user'));
+        console.log(util.isAuthTimeout() ? '需要登录' : '不需要登录')
+        if (util.isAuthTimeout()) {
             next({
                 path: '/login',
                 query: {
