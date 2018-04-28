@@ -90,7 +90,7 @@
 									<el-dialog :visible.sync="dialogVisible2"  width="30%">
 										<el-form :model="form" :rules="rule1" ref="form" class="form">
 											<el-form-item label="排期开始时间" label-width="120px">
-												<el-date-picker v-model="form.date" type="datetime" placeholder="请选择排期开始时间"></el-date-picker>
+												<el-date-picker v-model="form.date" format="yyyy/MM/dd HH:mm:ss" value-format="yyyy/MM/dd HH:mm:ss" type="datetime" placeholder="请选择排期开始时间"></el-date-picker>
 											</el-form-item>
 										</el-form>
 										<div slot="footer" class="dialog-footer">
