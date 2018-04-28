@@ -189,11 +189,49 @@ export default {
         getUserDetail() {
             this.isShowCheck = false;
             ajax.getUserDetail().then((result) => {
-                result.VerticalFieldCode = result.VerticalFieldCode.split(',')
+                result.VerticalFieldCode = result.VerticalFieldCode.split(',');
+                result.DailyBeginTime = this.formatDate(result.DailyBeginTime,'hm');
+                result.DailyEndTime = this.formatDate(result.DailyEndTime,'hm');
                 this.ruleForm = result;
                 this.isShowCheck = true;
             })
         },
+         formatDate(date, type) {
+             if (new Date(date) === 'Invalid Date') {
+                 return date;
+             } else if (date) {
+                 date = new Date(date);
+                 const y = date.getFullYear();
+                 let m = date.getMonth() + 1;
+                 m = m < 10 ? '0' + m : m;
+                 let d = date.getDate();
+                 d = d < 10 ? ('0' + d) : d;
+                 let h = date.getHours();
+                 h = h < 10 ? ('0' + h) : h;
+                 let M = date.getMinutes();
+                 M = M < 10 ? ('0' + M) : M;
+                 let s = date.getSeconds();
+                 s = s < 10 ? ('0' + s) : s;
+                 switch (type) {
+                     case "hms":
+                         return y + '/' + m + '/' + d + " " + h + ':' + M + ':' + s;
+                     case "timestamp":
+                         return Date.parse(date);
+                     case "ymdhM":
+                         return y + '/' + m + '/' + d + " " + h + ':' + M;
+                     case "md":
+                         return m + '/' + d;
+                     case "d":
+                         return d;
+                     case "hm":
+                         return h + ':' + M;
+                     default:
+                         return y + '/' + m + '/' + d;
+                 }
+             }else {
+                 return date
+             }
+         },
         handleSelect(key, keyPath) {
             this.$router.push(this.menus[key - 1]['path'])
         },
