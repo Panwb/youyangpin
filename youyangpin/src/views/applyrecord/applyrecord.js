@@ -74,7 +74,6 @@ export default {
             ajax.getPagedRequest(this.currentStatu, this.pageIndex, this.itemsPerPage).then((result) => {
                 this.pageList = result.Orders
                 this.total = result.RecordCount
-                console.log(22,this.pageList)
             })
         },
         handleSizeChange(val) {

@@ -71,10 +71,10 @@
 										<div class="option">
 										   <div class="outer">
                         <div class="box inner">
-                          <el-button  class="optbtn" type="text" @click="showDialog2(item.OrderID)">排期</el-button>
-                          <el-button  class="optbtn" type="text" @click="showDialog4(item.OrderID)">评价</el-button>
-                          <el-button  class="optbtn" type="text" @click="showDialog1(item.OrderID)">申请定向</el-button>
-                          <el-button  class="optbtn" type="text" @click="showDialog3(item.OrderID)">填写物流信息</el-button>
+                          <el-button  class="optbtn" type="text" @click="showDialog2(item)">排期</el-button>
+                          <el-button  class="optbtn" type="text" @click="showDialog4(item)">评价</el-button>
+                          <el-button  class="optbtn" type="text" @click="showDialog1(item)">申请定向</el-button>
+                          <el-button  class="optbtn" type="text" @click="showDialog3(item)">填写物流信息</el-button>
                         </div>
 											</div>
 										</div>
@@ -101,7 +101,7 @@
 									<!--评价-->
 									<el-dialog :visible.sync="dialogVisible4"  width="30%">
 										<el-form :model="form4">
-											<el-form-item label="物流编号" label-width="80px">
+											<el-form-item label="评价" label-width="80px">
 												<el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="form4.description"></el-input>
 											</el-form-item>
 											<el-form-item>
@@ -144,8 +144,7 @@
 								</div>
 								<!--分页开始-->
 								<div class="pagebox">
-										<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="pageIndex" :page-size="itemsPerPage" layout="prev, pager, next, jumper" :total="total">
-										</el-pagination>
+                                    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="pageIndex" :page-size="itemsPerPage" layout="prev, pager, next, jumper" :total="total"></el-pagination>
 							    </div>
 							    <!--分页结束-->
 							</div>

@@ -45,7 +45,12 @@ export default {
             this.searchForm.goodsName = this.$route.query.keywords
         }
         this.goodsSearch();
-        this.getStatistics(this.searchForm.activityType)
+        if(sessionStorage.getItem('prePath')!=='/login'&&sessionStorage.getItem('prePath')!=='/index'&&sessionStorage.getItem('prePath')!=='/') {
+            //
+        }else {
+            this.getStatistics(this.searchForm.activityType)
+        }
+
     },
     computed: {
         ...mapGetters([

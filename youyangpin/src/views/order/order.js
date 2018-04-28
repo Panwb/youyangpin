@@ -123,9 +123,9 @@ export default {
             this.$router.push(this.menus[key - 1]['path'])
         },
         //排期
-        showDialog2(orderId) {
-            this.orderId = orderId;
-            this.form.date = null;
+        showDialog2(order) {
+            this.orderId = order.OrderID;
+            this.form.date = order.BroadcastScheduling;
             this.dialogVisible2 = true;
         },
         setBroadcastScheduling() {
@@ -136,14 +136,15 @@ export default {
                     message:'保存成功'
                 });
                 this.dialogVisible2 = false;
+                this.getPagedOrder()
             })
         },
          //评价
-         showDialog4(orderId) {
-             this.orderId = orderId;
+         showDialog4(order) {
+             this.orderId = order.OrderID;
              this.dialogVisible4 = true;
-             this.form4.description = '';
-             this.form4.star = 0;
+             this.form4.description = order.StudioHosToMerchant;
+             this.form4.star = order.StudioHosGiveMerchantStars;
          },
          setAssessment() {
              ajax.setAssessment(this.orderId,this.form4)
@@ -153,11 +154,12 @@ export default {
                          message:'保存成功'
                      });
                      this.dialogVisible4 = false;
+                     this.getPagedOrder()
                  })
          },
          //申请定向
-         showDialog1(orderId) {
-             this.orderId = orderId;
+         showDialog1(order) {
+             this.orderId = order.OrderID;
              this.dialogVisible1 = true;
          },
          requestDirectionalPlan() {
@@ -168,15 +170,16 @@ export default {
                          message:'保存成功'
                      });
                      this.dialogVisible1 = false;
+                     this.getPagedOrder()
                  })
          },
          //填写物流信息
-         showDialog3(orderId) {
-             this.orderId = orderId;
+         showDialog3(order) {
+             this.orderId = order.OrderID;
              this.form3 = {
-                 logisticName:'',
-                 logisticNo:'',
-                 postage:''
+                 logisticName:order.TuiHuoLogisticName,
+                 logisticNo:order.TuiHuoLogisticNo,
+                 postage:order.TuiHuoPostage
              },
              this.dialogVisible3 = true;
          },
@@ -188,6 +191,7 @@ export default {
                          message:'保存成功'
                      });
                      this.dialogVisible3 = false;
+                     this.getPagedOrder()
                  })
          }
     }

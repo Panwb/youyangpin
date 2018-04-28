@@ -91,7 +91,7 @@
 						</div>
 					</el-card>
 
-					<el-card class="box-card goodbox shopgoods" shadow="never">
+					<el-card class="box-card goodbox shopgoods" shadow="never" v-if="applyData.RelatedGoods.length">
 						<div slot="header" class="clearfix title">
 							<span>店铺同类商品</span>
 						</div>
@@ -173,7 +173,7 @@
 						<!--<el-checkbox>我想要商家调整优惠力度</el-checkbox>-->
 						<!--</div>-->
 					</div>
-					<div class="txt addaddressbox" @click="improveAddress"><el-button>+完善收货地址</el-button> </div>
+					<div class="txt addaddressbox" @click="improveAddress" v-if="!applyData.StudioHost.Address"><el-button>+完善收货地址</el-button> </div>
 					<div class="txt applybtnbox"><el-button @click="requestApplication" type="text">提交申请</el-button></div>
 				</div>
 			</el-main>
