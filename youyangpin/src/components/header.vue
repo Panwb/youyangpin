@@ -97,7 +97,7 @@
       },
       logout() {
         ajax.logout().then((result) =>{
-            this.$message.success('将为你返回登录页面')
+            //this.$message.success('将为你返回登录页面')
 //            this.setAccount(null);
              localStorage.removeItem('user');
             this.util.clearAuthCookie()
