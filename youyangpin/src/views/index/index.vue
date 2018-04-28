@@ -214,7 +214,7 @@
 	line-height:28px;
 }
 .typebox .bottombox .title{
-	margin-top:4px;
+	margin-top:7px;
 }
 .typebox .bottombox .word{
 	margin-left:10px;
@@ -224,7 +224,7 @@
 }
 .typebox .bottombox .paixu{
 	text-align:right;
-	margin-top:5px;
+	margin-top:8px;
 }
 .typebox .bottombox ul{
 	list-style:none;
@@ -409,7 +409,7 @@
 	float:right;
 }
 .pagebox{
-	text-align:center;
+	text-align:center !important;
 }
 .pagebox .el-pager li,.pagebox{
 	margin:0 5px;

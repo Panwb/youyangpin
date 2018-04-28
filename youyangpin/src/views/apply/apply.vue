@@ -352,6 +352,7 @@ export default {
 	height:50px;
     margin:0 20px;
     position:relative;
+    padding:0 !important;
 }
 .goodbox .list{
 	overflow:hidden;
@@ -376,6 +377,7 @@ export default {
 	margin-right:150px;
 	color:#656565;
 	text-align:left;
+	padding:0 !important;
 }
 .goodbox .infobox p{
 	margin-bottom:5px;
