@@ -20,6 +20,7 @@ const checkStatus = function(response) {
             type: 'error'
         })
         localStorage.removeItem('user');
+        this.util.clearAuthCookie()
         setTimeout(()=>{
             window.location = '/#/login?redirect=' + window.location.hash.replace('#/','%2F')
         },1000)
