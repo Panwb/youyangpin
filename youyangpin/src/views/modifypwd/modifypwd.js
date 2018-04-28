@@ -57,7 +57,7 @@ export default {
             },
             rules: {
                 prepwd: [
-                    { required: true, message: '请输入原密码', trigger: 'blur' }
+                    { required: true, validator: validatePass, trigger: 'blur' }
                 ],
                 newpwd: [
                     { required: true, validator: validatePass, trigger: 'blur' }
