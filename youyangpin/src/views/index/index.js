@@ -96,6 +96,8 @@ export default {
         },
         clickType(name) {
             this.searchForm.activityType = name;
+            this.vIndex = 0;
+            this.searchForm.verticalFieldCode = "";
             this.goodsSearch();
             this.getStatistics(name)
         }

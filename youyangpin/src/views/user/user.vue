@@ -118,7 +118,7 @@
     }
 </script>
 
-<style scoped>
+<style>
  .personinfo{
     margin:0 !important;
     width:720px;
@@ -345,10 +345,10 @@
 .modifypsd .el-form-item__content{
 	line-height:35px;
 }
-.el-form-item__error{
-    padding-top:0;
+.personinfo .el-form-item__error{
+    padding-top:0px !important;
 }
-.el-form-item.desc .el-form-item__label,.el-form-item.range .el-form-item__label{
+.personinfo .el-form-item.desc .el-form-item__label,.personinfo .el-form-item.range .el-form-item__label{
 	line-height:20px;
 }
 .linebox{

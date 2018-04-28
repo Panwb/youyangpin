@@ -220,6 +220,7 @@
 .loginbox{
   width:950px;
   min-height:615px;
+  margin-top:80px;
 }
 .loginbox .login{
   width:498px;
