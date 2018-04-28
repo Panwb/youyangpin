@@ -16,7 +16,7 @@ const checkStatus = function(response) {
     } else if (response.status == 401) {
         // 如果没有登录,则跳转到登录页面
         Message({
-            message:'未授权，请重新登陆',
+            message:'未授权，请先登录',
             type: 'error'
         })
         localStorage.removeItem('user');
