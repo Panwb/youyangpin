@@ -92,20 +92,50 @@ export default {
             },
             orderId: null,
             options: [{
-              value: '选项1',
-              label: '黄金糕'
+              value: '顺丰速运',
+              label: '顺丰速运'
             }, {
-              value: '选项2',
-              label: '双皮奶'
+              value: '百世快递',
+              label: '百世快递'
             }, {
-              value: '选项3',
-              label: '蚵仔煎'
+              value: '中通快递',
+              label: '中通快递'
             }, {
-              value: '选项4',
-              label: '龙须面'
+              value: '申通快递',
+              label: '申通快递'
             }, {
-              value: '选项5',
-              label: '北京烤鸭'
+              value: '圆通速递',
+              label: '圆通速递'
+            }, {
+              value: '韵达速递',
+              label: '韵达速递'
+            }, {
+              value: '邮政快递包裹',
+              label: '邮政快递包裹'
+            }, {
+              value: 'EMS',
+              label: 'EMS'
+            }, {
+              value: '天天快递',
+              label: '天天快递'
+            }, {
+              value: '全峰快递',
+              label: '全峰快递'
+            }, {
+              value: '国通快递',
+              label: '国通快递'
+            }, {
+              value: '优速快递',
+              label: '优速快递'
+            }, {
+              value: '德邦',
+              label: '德邦'
+            }, {
+              value: '快捷快递',
+              label: '快捷快递'
+            }, {
+              value: '宅急送',
+              label: '宅急送'
             }],
             value: ''
         }
