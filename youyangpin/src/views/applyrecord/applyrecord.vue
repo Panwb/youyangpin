@@ -44,7 +44,7 @@
                                     <div class="contentbox" v-if="pageList.length>0" v-for="(item,index) in pageList" :key="index">
                                         <div class="topbox">
                                             <div class="date">{{ item.datetime }}</div><!--todo-->
-                                            <div class="shop">{{ item.ShopName }}</div>
+                                            <div class="shop"><span :class="item.ShopType=='淘宝店'?'icon icon-tao':'icon icon-tian'"></span>{{ item.ShopName }}</div>
                                             <div class="wechat">微信号:{{ item.WeChat }}</div>
                                             <div class="phone">联系电话:{{ item.LinkmanPhone }}</div>
                                         </div>
