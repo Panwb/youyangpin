@@ -75,6 +75,43 @@ export default {
             done();
           })
           .catch(_ => {});
-      }
+        },
+        format(row,column,cellValue) {
+            return this.formatDate(cellValue,'ymdhM');
+        },
+        formatDate(date, type) {
+            if (new Date(date) === 'Invalid Date') {
+                return date;
+            } else if (date) {
+                date = new Date(date);
+                const y = date.getFullYear();
+                let m = date.getMonth() + 1;
+                m = m < 10 ? '0' + m : m;
+                let d = date.getDate();
+                d = d < 10 ? ('0' + d) : d;
+                let h = date.getHours();
+                h = h < 10 ? ('0' + h) : h;
+                let M = date.getMinutes();
+                M = M < 10 ? ('0' + M) : M;
+                let s = date.getSeconds();
+                s = s < 10 ? ('0' + s) : s;
+                switch (type) {
+                    case "hms":
+                        return y + '/' + m + '/' + d + " " + h + ':' + M + ':' + s;
+                    case "timestamp":
+                        return Date.parse(date);
+                    case "ymdhM":
+                        return y + '/' + m + '/' + d + " " + h + ':' + M;
+                    case "md":
+                        return m + '/' + d;
+                    case "d":
+                        return d;
+                    default:
+                        return y + '/' + m + '/' + d;
+                }
+            }else {
+                return date
+            }
+        }
     }
 }
