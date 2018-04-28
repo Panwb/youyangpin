@@ -68,12 +68,16 @@
         'activityTypes'
       ])
     },
+    mounted(){
+
+    },
     created() {
+
         this.userInfo = JSON.parse(localStorage.getItem('user'));
+        console.log(333,this.userInfo)
         if(sessionStorage.getItem('prePath')!=='/login'&&sessionStorage.getItem('prePath')!=='/index'&&sessionStorage.getItem('prePath')!=='/') {
             this.activeIndex = sessionStorage.getItem('typekey');
             this.$emit('clickType',sessionStorage.getItem('typename'));
-            console.log(111,this.activeIndex)
         }else {
             this.getActivityTypes();
         }
@@ -93,8 +97,10 @@
       },
       logout() {
         ajax.logout().then((result) =>{
-            this.setAccount(null);
-            localStorage.removeItem('user');
+            this.$message.success('将为你返回登录页面')
+//            this.setAccount(null);
+             localStorage.removeItem('user');
+            this.util.clearAuthCookie()
             this.$router.push('/login')
         })
 

@@ -3,7 +3,7 @@ import 'whatwg-fetch'
 import { rootPath, commonPath } from './config'
 import actions from '../../vuex/actions'
 import store from '../../vuex'
-// import { Notification} from 'element-ui'
+import * as util from '../../util/common'
 import { Message} from 'element-ui'
 /**
  * 检查ajax返回的状态码,如果为401,则跳转到登录页
@@ -20,6 +20,7 @@ const checkStatus = function(response) {
             type: 'error'
         })
         localStorage.removeItem('user');
+        util.clearAuthCookie()
         setTimeout(()=>{
             window.location = '/#/login?redirect=' + window.location.hash.replace('#/','%2F')
         },1000)
