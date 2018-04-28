@@ -77,6 +77,7 @@
 
 <style>
 .regbox{
+    min-height:615px  !important;
 	width:500px !important;
 }
 .regisbox .el-dialog__header{

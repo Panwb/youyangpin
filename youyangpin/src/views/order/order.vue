@@ -63,34 +63,34 @@
 											</div>
 											<div class="salenum">{{ good.Sales }}</div>
 											<div class="leavenum">{{ good.InventoryNum }}</div>
-											<div class="quan">{{ good.PreferentialWay ==='拍下立减'?'拍下立减':good.DailyPrice-good.LivePrice+'元优惠券' }}</div>
+											<div class="quan">
+											 <div class="outer">
+												 <div class="inner">
+												 {{ good.PreferentialWay ==='拍下立减'?'拍下立减':good.DailyPrice-good.LivePrice+'元优惠券' }}
+												 </div>
+											 </div>
+											</div>
 									  	</div>
 										
 										<div class="planstate"><div class="outer"><div class="inner">{{ item.DirectionalPlanStatus }}</div></div></div>
 										<div class="orderstate"><div class="outer"><div class="inner">{{ item.OrderStatus }}</div></div></div>
 										<div class="option">
 										   <div class="outer">
-                        <div class="box inner">
-                          <el-button  class="optbtn" type="text" @click="showDialog2(item)">排期</el-button>
-                          <el-button  class="optbtn" type="text" @click="showDialog4(item)">评价</el-button>
-                          <el-button  class="optbtn" type="text" @click="showDialog1(item)">申请定向</el-button>
-                          <el-button  class="optbtn" type="text" @click="showDialog3(item)">填写物流信息</el-button>
-                        </div>
+		                        <div class="box inner">
+		                          <el-button  class="optbtn" type="text" @click="showDialog2(item)">排期</el-button>
+		                          <el-button  class="optbtn" type="text" @click="showDialog4(item)">评价</el-button>
+		                          <el-button  class="optbtn" type="text" @click="showDialog1(item)">申请定向</el-button>
+		                          <el-button  class="optbtn" type="text" @click="showDialog3(item)">填写物流信息</el-button>
+		                        </div>
 											</div>
 										</div>
 										<div class="tuiaddrress">退货地址：{{ item.ShopAddress }}</div>
 									</div>
 									<!--排期-->
 									<el-dialog :visible.sync="dialogVisible2"  width="30%">
-										<el-form :model="form">
-											<el-form-item label="排期日期" label-width="80px">
-												<el-date-picker
-														format="yyyy/MM/dd"
-														value-format="yyyy/MM/dd"
-														v-model="form.date"
-														type="date"
-														placeholder="选择日期">
-												</el-date-picker>
+										<el-form :model="form" :rules="rule1" ref="form" class="form">
+											<el-form-item label="排期开始时间" label-width="120px">
+												<el-date-picker v-model="form.date" type="datetime" placeholder="请选择排期开始时间"></el-date-picker>
 											</el-form-item>
 										</el-form>
 										<div slot="footer" class="dialog-footer">
@@ -100,13 +100,13 @@
 									</el-dialog>
 									<!--评价-->
 									<el-dialog :visible.sync="dialogVisible4"  width="30%">
-										<el-form :model="form4">
+										<el-form :model="form4" class="form4">
 											<el-form-item label="评价" label-width="80px">
 												<el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="form4.description"></el-input>
 											</el-form-item>
 											<el-form-item>
 												<div class="block">
-													<el-rate  v-model="form4.star" :colors="['#99A9BF', '#F7BA2A', '#FF9900']"></el-rate>
+													<el-rate  v-model="form4.star" :colors="['#99A9BF', '#F7BA2A', '#FF9900']" show-text></el-rate>
 												</div>
 											</el-form-item>
 										</el-form>
@@ -116,7 +116,7 @@
 										</div>
 									</el-dialog>
 									<!--申请定向-->
-									<el-dialog :visible.sync="dialogVisible1" width="30%">
+									<el-dialog :visible.sync="dialogVisible1" width="30%" class="sqdxdialog">
 										<span>确认已在阿里妈妈后台生成定向计划?</span>
 										<span slot="footer" class="dialog-footer">
 											<el-button @click="dialogVisible1 = false">取 消</el-button>
@@ -125,9 +125,11 @@
 									</el-dialog>
 									<!--填写物流信息-->
 									<el-dialog :visible.sync="dialogVisible3"  width="30%">
-										<el-form :model="form3">
+										<el-form :model="form3" class="form3">
 											<el-form-item label="物流公司" label-width="80px">
-												<el-input v-model="form3.logisticName" auto-complete="off"></el-input>
+												<el-select v-model="value" placeholder="请选择">
+                                                          <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+                                                </el-select>
 											</el-form-item>
 											<el-form-item label="物流编号" label-width="80px">
 												<el-input v-model="form.logisticNo" auto-complete="off"></el-input>
@@ -170,7 +172,7 @@
 	}
 </script>
 
-<style scoped>
+<style>
 .clear:after{content:'';display:block;clear:both;height:0;overflow:hidden;visibility:hidden;}
 .clear{zoom:1;}
 .optbox{
@@ -349,16 +351,16 @@
 	width:80px;
 }
 .titlebox > div.title4{
-	width:110px;
+	width:100px;
 }
 .titlebox > div.title5{
-	width:110px;
+	width:100px;
 }
 .titlebox > div.title6{
-	width:110px;
+	width:100px;
 }
 .titlebox > div.title7{
-	width:130px;
+	width:120px;
 }
 .contentbox{
 	margin-top:30px;
@@ -416,19 +418,16 @@
 	width:80px;
 	text-align:center;
 	font-size:14px;
-	height:110px;
-	line-height:110px;
+	height:140px;
+	line-height:140px;
 	float:left;
-	padding:15px 0;
 }
-.bottombox .quan,.bottombox .planstate,.bottombox .orderstate{
-	width:110px;
+.bottombox .quan{
+	width:100px;
 	text-align:center;
 	font-size:14px;
-	height:110px;
-	line-height:110px;
+	height:140px;
 	float:left;
-	padding:15px 0;
 }
 .bottombox .planstate,.bottombox .orderstate,.bottombox .option{
 	border-left:1px solid #ebeef5;
@@ -441,23 +440,7 @@
 	padding:15px 0;
 	border-bottom: 1px solid #ebeef5;
 }
-.contentbox2 .bottombox1 .planstate,.contentbox2 .bottombox1 .orderstate,.contentbox2 .bottombox1 .option{
-	border-bottom:none;
-}
-.contentbox2 .bottombox2{
-	border-bottom: 1px solid #ebeef5;
-}
-.contentbox2 .bottombox2 .salenum,.contentbox2 .bottombox2 .leavenum,.contentbox2 .bottombox2 .quan,.contentbox2 .bottombox2 .infobox{
-	border:none
-}
 
-.contentbox2 .bottombox2 .planstate span,.contentbox2 .bottombox2 .orderstate span{
-	margin-top:-70px;
-	display:block;
-}
-.contentbox2 .bottombox2 .option div.box{
-	margin-top:-70px;
-}
 .bottombox .option button.optbtn{
 	display:block;
 	width:100%;
@@ -483,6 +466,7 @@
 .infobox .con{
 	float:left;
 	width:180px;
+	font-size:14px;
 }
 .infobox .con p {
     margin-bottom:4px;
@@ -519,7 +503,7 @@
 .planstate{
 	position: absolute;
     right: 230px;
-    width: 120px;
+    width: 100px;
     top: 37px;
     bottom:42px;
     border-left: 1px solid #ebeef5;
@@ -530,7 +514,12 @@
 	width:100%;
 	display:table;
 }
-.planstate .inner,.orderstate .inner,.option .inner{
+.quan .outer{
+	height:100%;
+	width:100px;
+	display:table;
+}
+.planstate .inner,.orderstate .inner,.option .inner,.quan .inner{
 	height:100%;
 	display:table-cell;
 	vertical-align: middle;
@@ -558,12 +547,60 @@
     text-align: center;
 }
 .option button:first-child{
-	margin-top:25px;
+	margin-top:15px;
 }
 .option button{
     width:100%;
     padding:0;
     margin:0 0 10px 0;
+    margin-left:0 !important;
 	display:block;
+}
+.topbox>div.shop{
+    padding-left:40px;
+    position:relative;
+}
+.topbox>div.shop .icon{
+    position: absolute;
+    top: 6px;
+    left: 13px;
+    width: 22px;
+    height: 22px;
+}
+.topbox>div.shop .icon-tian{
+    background: url(~assets/images/pro.png) -162px 0 no-repeat;
+}
+.topbox>div.shop .icon-tao{
+    background: url(~assets/images/pro.png) -162px -28px no-repeat;
+}
+.form4 .el-rate{
+	margin-left:80px;
+}
+.form4 .el-textarea{
+   width:410px;
+}
+.form4 .el-textarea__inner{
+	width:100%;
+	height:80px !important;
+}
+.form3 .el-select{
+	width:410px;
+}
+.form3 .el-input{
+	width:410px;
+}
+.form .el-date-editor{
+	width:300px !important;
+}
+.el-dialog__body{
+	padding:20px !important;
+}
+.el-dialog__footer{
+    text-align:center !important;
+	border-top:1px solid #eee;
+	padding:15px !important;
+}
+.sqdxdialog .el-dialog__body{
+	padding: 20px 20px 40px 20px!important;
 }
 </style>
