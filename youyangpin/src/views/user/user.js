@@ -159,7 +159,7 @@ export default {
                     { required: true, validator: validateshoeSize, trigger: 'blur' }
                 ],
                 ClothesSize: [
-                    { type: 'array', required: true, message: '请选择尺码', trigger: 'change' }
+                    { required: true, message: '请选择尺码', trigger: 'change' }
                 ],
                 Address: [
                     { required: true, validator: validateaddress, trigger: 'blur' }
@@ -170,8 +170,11 @@ export default {
                 LinkmanPhone: [
                     { required: true, validator: validatelinkPhone, trigger: 'blur' }
                 ],
-                TKName: [
-                    { required: true, validator: validatetkName, trigger: 'blur' }
+                DailyBeginTime: [
+                    { required: true, message: '请选择时间', trigger: 'change' }
+                ],
+                DailyEndTime: [
+                    { required: true, message: '请选择时间', trigger: 'change' }
                 ],
                 WeChat: [
                     { required: true, validator: validatewechatId, trigger: 'blur' }

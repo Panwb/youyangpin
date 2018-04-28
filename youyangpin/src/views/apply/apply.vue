@@ -35,7 +35,7 @@
 						</div>
 						<div  class="text item">
 							<div class="txt">
-								{{ applyData.CurrentGood.MerchantToStudioHostDemand }}
+								{{ applyData.CurrentGood.MerchantToStudioHostDemand || '无' }}
 							</div>
 						</div>
 					</el-card>

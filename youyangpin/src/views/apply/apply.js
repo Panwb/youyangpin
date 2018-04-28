@@ -67,6 +67,7 @@ export default {
         },
         //修改个人信息
         editPersonalMeg() {
+            sessionStorage.setItem('goodid',this.$route.query.goodsId);
             this.$router.push('user')
         },
         //完善收货地址
