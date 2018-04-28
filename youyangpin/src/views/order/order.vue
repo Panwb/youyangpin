@@ -89,9 +89,11 @@
 									<!--排期-->
 									<el-dialog :visible.sync="dialogVisible2"  width="30%">
 										<el-form :model="form" :rules="rule1" ref="form" class="form">
-											<el-form-item label="排期开始时间" label-width="120px">
-												<el-date-picker v-model="form.date" format="yyyy/MM/dd HH:mm:ss" value-format="yyyy/MM/dd HH:mm:ss" type="datetime" placeholder="请选择排期开始时间"></el-date-picker>
+											<el-form :model="form" :rules="rules1" ref="form" class="form">
+											<el-form-item label="排期开始时间" label-width="120px" prop="date">
+												<el-date-picker v-model="form.date" type="datetime" placeholder="请选择排期开始时间"></el-date-picker>
 											</el-form-item>
+										</el-form>
 										</el-form>
 										<div slot="footer" class="dialog-footer">
 											<el-button @click="dialogVisible2 = false">取 消</el-button>
@@ -125,16 +127,16 @@
 									</el-dialog>
 									<!--填写物流信息-->
 									<el-dialog :visible.sync="dialogVisible3"  width="30%">
-										<el-form :model="form3" class="form3">
-											<el-form-item label="物流公司" label-width="80px">
-												<el-select v-model="value" placeholder="请选择">
-                                                          <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+										<el-form :model="form3" class="form3"  :rules="rules3" ref="form3" >
+											<el-form-item label="物流公司" label-width="80px"  prop="logisticName">
+												<el-select v-model="form3.logisticName" placeholder="请选择">
+                                                          <el-option label="申通快递"></el-option>
                                                 </el-select>
 											</el-form-item>
-											<el-form-item label="物流编号" label-width="80px">
-												<el-input v-model="form.logisticNo" auto-complete="off"></el-input>
+											<el-form-item label="物流编号" label-width="80px"  prop="logisticNo">
+												<el-input v-model="form3.logisticNo" auto-complete="off"></el-input>
 											</el-form-item>
-											<el-form-item label="邮费" label-width="80px">
+											<el-form-item label="邮费" label-width="80px"  prop="postage">
 												<el-input v-model="form3.postage" auto-complete="off"></el-input>
 											</el-form-item>
 										</el-form>
