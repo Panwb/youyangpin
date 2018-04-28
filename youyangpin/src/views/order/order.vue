@@ -47,7 +47,7 @@
 											<div class="date">{{ item.datetime }}</div>
 											<div class="orderId">订单号:{{ item.OrderNo }}</div>
 											<div class="shop">{{ item.ShopName }}</div>
-											<div  class="wechat">微信号:{{ item.WangWangNo }}</div>
+											<div  class="wechat">微信号:{{ item.WeChat }}</div>
 											<div class="phone">联系电话:{{ item.LinkmanPhone }}</div>
 										</div>
 										<div class="bottombox clear" v-for="(good,index) in item.Goods" :key="index">
