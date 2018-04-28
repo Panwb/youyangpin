@@ -79,16 +79,18 @@ export default {
             dialogVisible4: false,
             activeIndex: '2',
             form: {
-                date: ''
+                date: null
             },
             form3: {
-                companyName:'',
-                wuliuid:'',
-                money:''
+                logisticName:'',
+                logisticNo:'',
+                postage:''
             },
             form4: {
-                textarea:''
-            }
+                description:'',
+                star: 0
+            },
+            orderId: null
         }
     },
     created() {
@@ -103,7 +105,7 @@ export default {
         },
         getPagedOrder() {
             ajax.getPagedOrder(this.currentStatu, this.pageIndex, this.itemsPerPage).then((result) => {
-                this.pageList = result.Orders
+                this.pageList = result.Orders;
                 this.total = result.RecordCount
             })
         },
@@ -119,6 +121,78 @@ export default {
         },
         handleSelect(key, keyPath) {
             this.$router.push(this.menus[key - 1]['path'])
-        }
+        },
+        //排期
+        showDialog2(order) {
+            this.orderId = order.OrderID;
+            this.form.date = order.BroadcastScheduling;
+            this.dialogVisible2 = true;
+        },
+        setBroadcastScheduling() {
+            ajax.setBroadcastScheduling(this.orderId,this.form)
+            .then((result) => {
+                this.$message({
+                    type:'success',
+                    message:'保存成功'
+                });
+                this.dialogVisible2 = false;
+                this.getPagedOrder()
+            })
+        },
+         //评价
+         showDialog4(order) {
+             this.orderId = order.OrderID;
+             this.dialogVisible4 = true;
+             this.form4.description = order.StudioHosToMerchant;
+             this.form4.star = order.StudioHosGiveMerchantStars;
+         },
+         setAssessment() {
+             ajax.setAssessment(this.orderId,this.form4)
+                 .then((result) => {
+                     this.$message({
+                         type:'success',
+                         message:'保存成功'
+                     });
+                     this.dialogVisible4 = false;
+                     this.getPagedOrder()
+                 })
+         },
+         //申请定向
+         showDialog1(order) {
+             this.orderId = order.OrderID;
+             this.dialogVisible1 = true;
+         },
+         requestDirectionalPlan() {
+             ajax.requestDirectionalPlan(this.orderId)
+                 .then((result) => {
+                     this.$message({
+                         type:'success',
+                         message:'保存成功'
+                     });
+                     this.dialogVisible1 = false;
+                     this.getPagedOrder()
+                 })
+         },
+         //填写物流信息
+         showDialog3(order) {
+             this.orderId = order.OrderID;
+             this.form3 = {
+                 logisticName:order.TuiHuoLogisticName,
+                 logisticNo:order.TuiHuoLogisticNo,
+                 postage:order.TuiHuoPostage
+             },
+             this.dialogVisible3 = true;
+         },
+         setLogisticsInfo() {
+             ajax.setLogisticsInfo(this.orderId,this.form3)
+                 .then((result) => {
+                     this.$message({
+                         type:'success',
+                         message:'保存成功'
+                     });
+                     this.dialogVisible3 = false;
+                     this.getPagedOrder()
+                 })
+         }
     }
 }

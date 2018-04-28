@@ -55,22 +55,11 @@
 
   export default {
     name: 'MainHeader',
-    props: {
-      active: {
-        type: String,
-        default: '1'
-      }
-    },
     data() {
       return {
         activeIndex: '0',
         keywords: '',
         userInfo:{},
-      }
-    },
-    watch: {
-      active() {
-        this.activeIndex = this.active
       }
     },
     computed: {
@@ -81,7 +70,13 @@
     },
     created() {
         this.userInfo = JSON.parse(localStorage.getItem('user'));
-        this.getActivityTypes();
+        if(sessionStorage.getItem('prePath')!=='/login'&&sessionStorage.getItem('prePath')!=='/index'&&sessionStorage.getItem('prePath')!=='/') {
+            this.activeIndex = sessionStorage.getItem('typekey');
+            this.$emit('clickType',sessionStorage.getItem('typename'));
+            console.log(111,this.activeIndex)
+        }else {
+            this.getActivityTypes();
+        }
     },
     methods: {
       ...mapActions([
@@ -92,6 +87,8 @@
           let name = "";
           key === '0'?name = "":name = this.activityTypes[key-1];
           this.$emit('clickType',name);
+          sessionStorage.setItem('typekey',key);
+          sessionStorage.setItem('typename',name);
           this.$router.push('/index')
       },
       logout() {

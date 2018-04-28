@@ -47,7 +47,7 @@
 											<div class="date">{{ item.datetime }}</div>
 											<div class="orderId">订单号:{{ item.OrderNo }}</div>
 											<div class="shop">{{ item.ShopName }}</div>
-											<div  class="wechat">旺旺号:{{ item.WangWangNo }}</div>
+											<div  class="wechat">微信号:{{ item.WangWangNo }}</div>
 											<div class="phone">联系电话:{{ item.LinkmanPhone }}</div>
 										</div>
 										<div class="bottombox clear" v-for="(good,index) in item.Goods" :key="index">
@@ -66,14 +66,16 @@
 											<div class="quan">{{ good.PreferentialWay ==='拍下立减'?'拍下立减':good.DailyPrice-good.LivePrice+'元优惠券' }}</div>
 									  	</div>
 										
-										<div class="planstate"><span>{{ item.DirectionalPlanStatus }}</span></div>
-										<div class="orderstate"><span>{{ item.OrderStatus }}</span></div>
+										<div class="planstate"><div class="outer"><div class="inner">{{ item.DirectionalPlanStatus }}</div></div></div>
+										<div class="orderstate"><div class="outer"><div class="inner">{{ item.OrderStatus }}</div></div></div>
 										<div class="option">
-											<div class="box">
-												<el-button  class="optbtn" type="text" @click="dialogVisible2 = true">排期</el-button>
-												<el-button  class="optbtn" type="text" @click="dialogVisible4 = true">评价</el-button>
-												<el-button  class="optbtn" type="text" @click="dialogVisible1 = true">申请定向</el-button>
-												<el-button  class="optbtn" type="text" @click="dialogVisible3 = true">填写物流信息</el-button>
+										   <div class="outer">
+                        <div class="box inner">
+                          <el-button  class="optbtn" type="text" @click="showDialog2(item)">排期</el-button>
+                          <el-button  class="optbtn" type="text" @click="showDialog4(item)">评价</el-button>
+                          <el-button  class="optbtn" type="text" @click="showDialog1(item)">申请定向</el-button>
+                          <el-button  class="optbtn" type="text" @click="showDialog3(item)">填写物流信息</el-button>
+                        </div>
 											</div>
 										</div>
 										<div class="tuiaddrress">退货地址：{{ item.ShopAddress }}</div>
@@ -83,6 +85,8 @@
 										<el-form :model="form">
 											<el-form-item label="排期日期" label-width="80px">
 												<el-date-picker
+														format="yyyy/MM/dd"
+														value-format="yyyy/MM/dd"
 														v-model="form.date"
 														type="date"
 														placeholder="选择日期">
@@ -91,24 +95,24 @@
 										</el-form>
 										<div slot="footer" class="dialog-footer">
 											<el-button @click="dialogVisible2 = false">取 消</el-button>
-											<el-button type="primary" @click="dialogVisible2 = false">确 定</el-button>
+											<el-button type="primary" @click="setBroadcastScheduling">确 定</el-button>
 										</div>
 									</el-dialog>
 									<!--评价-->
 									<el-dialog :visible.sync="dialogVisible4"  width="30%">
 										<el-form :model="form4">
-											<el-form-item label="物流编号" label-width="80px">
-												<el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="form4.textarea"></el-input>
+											<el-form-item label="评价" label-width="80px">
+												<el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="form4.description"></el-input>
 											</el-form-item>
 											<el-form-item>
 												<div class="block">
-													<el-rate  v-model="value" :colors="['#99A9BF', '#F7BA2A', '#FF9900']"></el-rate>
+													<el-rate  v-model="form4.star" :colors="['#99A9BF', '#F7BA2A', '#FF9900']"></el-rate>
 												</div>
 											</el-form-item>
 										</el-form>
 										<div slot="footer" class="dialog-footer">
 											<el-button @click="dialogVisible4 = false">取 消</el-button>
-											<el-button type="primary" @click="dialogVisible4 = false">确 定</el-button>
+											<el-button type="primary" @click="setAssessment">确 定</el-button>
 										</div>
 									</el-dialog>
 									<!--申请定向-->
@@ -116,32 +120,31 @@
 										<span>确认已在阿里妈妈后台生成定向计划?</span>
 										<span slot="footer" class="dialog-footer">
 											<el-button @click="dialogVisible1 = false">取 消</el-button>
-											<el-button type="primary" @click="dialogVisible1 = false">确 定</el-button>
+											<el-button type="primary" @click="requestDirectionalPlan">确 定</el-button>
 										</span>
 									</el-dialog>
 									<!--填写物流信息-->
 									<el-dialog :visible.sync="dialogVisible3"  width="30%">
 										<el-form :model="form3">
 											<el-form-item label="物流公司" label-width="80px">
-												<el-input v-model="form3.companyName" auto-complete="off"></el-input>
+												<el-input v-model="form3.logisticName" auto-complete="off"></el-input>
 											</el-form-item>
 											<el-form-item label="物流编号" label-width="80px">
-												<el-input v-model="form.wuliuid" auto-complete="off"></el-input>
+												<el-input v-model="form.logisticNo" auto-complete="off"></el-input>
 											</el-form-item>
 											<el-form-item label="邮费" label-width="80px">
-												<el-input v-model="form3.money" auto-complete="off"></el-input>
+												<el-input v-model="form3.postage" auto-complete="off"></el-input>
 											</el-form-item>
 										</el-form>
 										<div slot="footer" class="dialog-footer">
 											<el-button @click="dialogVisible3 = false">取 消</el-button>
-											<el-button type="primary" @click="dialogVisible3 = false">确 定</el-button>
+											<el-button type="primary" @click="setLogisticsInfo">确 定</el-button>
 										</div>
 									</el-dialog>
 								</div>
 								<!--分页开始-->
 								<div class="pagebox">
-										<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="pageIndex" :page-size="itemsPerPage" layout="prev, pager, next, jumper" :total="total">
-										</el-pagination>
+                                    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="pageIndex" :page-size="itemsPerPage" layout="prev, pager, next, jumper" :total="total"></el-pagination>
 							    </div>
 							    <!--分页结束-->
 							</div>
@@ -359,6 +362,7 @@
 }
 .contentbox{
 	margin-top:30px;
+	position:relative;
 }
 .topbox{
 	border: 1px solid #ebeef5;
@@ -400,7 +404,6 @@
 .tuiaddrress{
 	padding:12px 0 12px 15px;
 	border: 1px solid #ebeef5;
-	border-top:none;
 	font-size:14px;
 }
 .bottombox{
@@ -417,7 +420,6 @@
 	line-height:110px;
 	float:left;
 	padding:15px 0;
-	border-bottom: 1px solid #ebeef5;
 }
 .bottombox .quan,.bottombox .planstate,.bottombox .orderstate{
 	width:110px;
@@ -427,7 +429,6 @@
 	line-height:110px;
 	float:left;
 	padding:15px 0;
-	border-bottom: 1px solid #ebeef5;
 }
 .bottombox .planstate,.bottombox .orderstate,.bottombox .option{
 	border-left:1px solid #ebeef5;
@@ -468,7 +469,6 @@
 	float:left;
 	width:305px;
 	padding:15px 0 15px 15px;
-	border-bottom: 1px solid #ebeef5;
 }
 .infobox .imgbox {
     width: 110px;
@@ -516,4 +516,54 @@
 /*.el-date-editor.el-input, .el-date-editor.el-input__inner{*/
 	/*width:400px;*/
 /*}*/
+.planstate{
+	position: absolute;
+    right: 230px;
+    width: 120px;
+    top: 37px;
+    bottom:42px;
+    border-left: 1px solid #ebeef5;
+    text-align: center;
+}
+.planstate .outer,.orderstate .outer,.option .outer{
+	height:100%;
+	width:100%;
+	display:table;
+}
+.planstate .inner,.orderstate .inner,.option .inner{
+	height:100%;
+	display:table-cell;
+	vertical-align: middle;
+}
+.orderstate{
+	position: absolute;
+    right: 121px;
+    width: 110px;
+    top: 37px;
+    bottom:42px;
+    border-left: 1px solid #ebeef5;
+    text-align: center;
+}
+.orderstate span{
+	margin-top:60px;
+	display:block;
+}
+.option{
+	position: absolute;
+    right:0px;
+    width: 120px;
+    top: 37px;
+    bottom:42px;
+    border-left: 1px solid #ebeef5;
+    text-align: center;
+}
+.option button:first-child{
+	margin-top:25px;
+}
+.option button{
+    width:100%;
+    padding:0;
+    margin:0 0 10px 0;
+	display:block;
+}
 </style>

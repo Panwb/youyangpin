@@ -7,10 +7,10 @@
                 <div class="wd1200">
                     <div class="typebox">
                         <div class="topbox">
-                            <span class="lab"
+                            <span class="lab" :class="index === vIndex ? 'active' : ''"
                                   v-for="(item, index) in statistics"
                                   :key="index"
-                                  @click="clickVField(item.VerticalFieldCode)" >
+                                  @click="clickVField(item.VerticalFieldCode,index)" >
                                 {{ item.VerticalFieldCode }}(<i>{{item.Quantity}}</i>)
                             </span>
                         </div>
@@ -166,6 +166,9 @@
 	margin-right:18px;
 	cursor:pointer;
 }
+.typebox .topbox .lab:hover{
+    color:#f84933;
+}
 .typebox .topbox .lab.active{
     color:#f84933;
 }
@@ -231,6 +234,9 @@
 	display:inline-block;
 	padding:0 8px;
 	cursor:pointer;
+}
+.typebox .bottombox li:hover{
+    color:#f84933;
 }
 .typebox .bottombox li.active{
 	color:#f84933;

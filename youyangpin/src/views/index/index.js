@@ -22,7 +22,8 @@ export default {
                 sortField: '',
                 sort: ''
             },
-            sortValue: 0
+            sortValue: 0,
+            vIndex: 0
         }
     },
     watch: {
@@ -44,7 +45,12 @@ export default {
             this.searchForm.goodsName = this.$route.query.keywords
         }
         this.goodsSearch();
-        this.getStatistics(this.searchForm.activityType)
+        if(sessionStorage.getItem('prePath')!=='/login'&&sessionStorage.getItem('prePath')!=='/index'&&sessionStorage.getItem('prePath')!=='/') {
+            //
+        }else {
+            this.getStatistics(this.searchForm.activityType)
+        }
+
     },
     computed: {
         ...mapGetters([
@@ -83,7 +89,8 @@ export default {
             this.searchForm.sortField = name;
             this.goodsSearch();
         },
-        clickVField(name) {
+        clickVField(name,index) {
+            this.vIndex = index;
             name === '全部' ? this.searchForm.verticalFieldCode = "" : this.searchForm.verticalFieldCode = name;
             this.goodsSearch();
         },

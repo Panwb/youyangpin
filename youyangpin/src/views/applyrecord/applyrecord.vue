@@ -45,7 +45,7 @@
                                         <div class="topbox">
                                             <div class="date">{{ item.datetime }}</div><!--todo-->
                                             <div class="shop">{{ item.ShopName }}</div>
-                                            <div class="wechat">旺旺号:{{ item.WangWangNo }}</div>
+                                            <div class="wechat">微信号:{{ item.WangWangNo }}</div>
                                             <div class="phone">联系电话:{{ item.LinkmanPhone }}</div>
                                         </div>
                                         <div class="bottombox clear" v-for="(good,index) in item.Goods" :key="index">
@@ -65,10 +65,12 @@
                                             <div class="needsendback"><span>{{ good.NeedSendBack }}</span></div>
                                         </div>
                                         <div class="option">
-                                            <div>
+                                          <div class="outer">
+                                            <div class="box inner">
                                                 <span class="passno" v-if="item.CheckStatus === '待审核'">{{ item.CheckStatus }}</span>
                                                 <span class="passsuccess" v-if="item.CheckStatus === '审核通过'">{{ item.CheckStatus }}</span>
                                                 <span class="passfail" v-if="item.CheckStatus === '审核不通过'">{{ item.CheckStatus }}</span>
+                                            </div>
                                             </div>
                                         </div>
                                     </div>
@@ -290,6 +292,7 @@
 
 .contentbox{
 	margin-top:30px;
+    position:relative;
 }
 .topbox{
 	border: 1px solid #ebeef5;
@@ -464,5 +467,34 @@
 .pagebox{
 	margin:30px auto;
 	text-align:right;
+}
+.option{
+    position: absolute;
+    right: 0;
+    width: 162px;
+    top: 37px;
+    bottom: 0px;
+    border-left: 1px solid #ebeef5;
+    text-align: center;
+    border-bottom: 1px solid #ebeef5;
+}
+.option button:first-child{
+    margin-top:25px;
+}
+.option button{
+    width:100%;
+    padding:0;
+    margin:0 0 10px 0;
+    display:block;
+}
+.option .outer{
+    height:100%;
+    width:100%;
+    display:table;
+}
+.option .inner{
+    height:100%;
+    display:table-cell;
+    vertical-align: middle;
 }
 </style>

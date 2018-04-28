@@ -58,6 +58,20 @@ export default {
                 callback();
             }
         };
+        var validatewechatId= (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('请输入微信号'));
+            }else {
+                callback();
+            }
+        };
+        var validatetkName= (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('请输入淘客名称'));
+            }else {
+                callback();
+            }
+        };
         var validateqqId= (rule, value, callback) => {
             var qqreg=/[1-9]\\d{4,14}/;  
             if (!qqreg.test(value)) {
@@ -129,35 +143,38 @@ export default {
                 DailyEndTime: ''
             },
             rules: {
-                userName: [
+                StudioHostName: [
                     { required: true, validator: validateuserName, trigger: 'blur' }
                  ],
-                zhifuId: [
+                AlipayAccount: [
                     { required: true, validator: validateuserzhifuId, trigger: 'blur' }
                 ],
-                height: [
+                Height: [
                     { required: true, validator: validateheight, trigger: 'blur' }
                 ],
-                weight: [
+                Weight: [
                     { required: true, validator: validateweight, trigger: 'blur' }
                 ],
-                shoeSize: [
+                ShoeSize: [
                     { required: true, validator: validateshoeSize, trigger: 'blur' }
                 ],
-                address: [
+                ClothesSize: [
+                    { type: 'array', required: true, message: '请选择尺码', trigger: 'change' }
+                ],
+                Address: [
                     { required: true, validator: validateaddress, trigger: 'blur' }
                 ],
-                linkName: [
+                LinkmanName: [
                     { required: true, validator: validatelinkName, trigger: 'blur' }
                 ],
-                linkPhone: [
+                LinkmanPhone: [
                     { required: true, validator: validatelinkPhone, trigger: 'blur' }
                 ],
-                qqId: [
-                    //{ validator: validateqqId, trigger: 'blur' }
+                TKName: [
+                    { required: true, validator: validatetkName, trigger: 'blur' }
                 ],
-                type: [
-                    //{ type: 'array', required: true, message: '请至少选择一个垂直领域', trigger: 'change' }
+                WeChat: [
+                    { required: true, validator: validatewechatId, trigger: 'blur' }
                 ]
             }
         }

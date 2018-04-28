@@ -56,6 +56,7 @@ export default {
         return {
             dialogVisible:true,
             imgCode: '',
+            isRead: false,
             ruleForm2: {
                 telphone: '',
                 password: '',

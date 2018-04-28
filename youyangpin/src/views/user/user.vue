@@ -26,23 +26,23 @@
 							<div class="content">
 								<!--个人信息-->
 								<div class="modifypsd personinfo">
-									<el-form :model="ruleForm"  :rules="rules" ref="ruleForm" label-width="100px">
-										<el-form-item label="主播名称" prop="userName" >
+									<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px">
+										<el-form-item label="主播名称" prop="StudioHostName" >
 											<el-input v-model="ruleForm.StudioHostName" auto-complete="off"></el-input>
 										</el-form-item>
-										<el-form-item label="支付宝账号" prop="zhifuId" >
+										<el-form-item label="支付宝账号" prop="AlipayAccount" >
 											<el-input v-model="ruleForm.AlipayAccount" auto-complete="off"></el-input>
 										</el-form-item>
-										<el-form-item label="身高" prop="height" class="linebox">
+										<el-form-item label="身高" prop="Height" class="linebox">
 											<el-input v-model="ruleForm.Height" auto-complete="off" placeholder="CM"></el-input>
 										</el-form-item>
-										<el-form-item label="体重" prop="weight" class="linebox">
+										<el-form-item label="体重" prop="Weight" class="linebox">
 											<el-input v-model="ruleForm.Weight" auto-complete="off" placeholder="KG"></el-input>
 										</el-form-item>
-										<el-form-item label="鞋码" prop="shoeSize" class="linebox">
+										<el-form-item label="鞋码" prop="ShoeSize" class="linebox">
 											<el-input v-model="ruleForm.ShoeSize" auto-complete="off" placeholder="码数"></el-input>
 										</el-form-item>
-										<el-form-item label="尺码" prop="size"  class="linebox">
+										<el-form-item label="尺码" prop="ClothesSize"  class="linebox">
 											<el-select v-model="ruleForm.ClothesSize" placeholder="请选择">
 												<el-option label="S" value="S"></el-option>
 												<el-option label="M" value="M"></el-option>
@@ -53,19 +53,19 @@
 												<el-option label="XXXXL" value="XXXXL"></el-option>
 											</el-select>
 										</el-form-item>
-										<el-form-item label="收货地址" prop="address" class="addressbox">
+										<el-form-item label="收货地址" prop="Address" class="addressbox">
 											<el-input :autosize="{ minRows:3, maxRows: 6}" type="textarea" v-model="ruleForm.Address"></el-input>
 										</el-form-item>
-										<el-form-item label="收货人姓名" prop="linkName" >
+										<el-form-item label="收货人姓名" prop="LinkmanName" >
 											<el-input v-model="ruleForm.LinkmanName" auto-complete="off"></el-input>
 										</el-form-item>
-										<el-form-item label="收货人电话" prop="linkPhone" >
+										<el-form-item label="收货人电话" prop="LinkmanPhone" >
 											<el-input v-model="ruleForm.LinkmanPhone" auto-complete="off"></el-input>
 										</el-form-item>
-										<el-form-item label="淘客名称" prop="tkName" >
+										<el-form-item label="淘客名称" prop="TKName" >
 											<el-input v-model="ruleForm.TKName" auto-complete="off"></el-input>
 										</el-form-item>
-										<el-form-item label="微信" prop="wechatId" >
+										<el-form-item label="微信" prop="WeChat" >
 											<el-input v-model="ruleForm.WeChat" auto-complete="off"></el-input>
 										</el-form-item>
 										<el-form-item label="QQ" prop="qqId" >

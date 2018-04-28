@@ -23,10 +23,10 @@
 	                    <!--1.输入手机号-->
 	                    <div class="modifypsd registerbox  modifypsd1" v-show="active == 1">
 	                         <el-form :model="ruleForm1"  :rules="rules1" ref="ruleForm1" label-width="100px">
-							  <el-form-item label="手机号码" prop="mobilePhone" >
+							  <el-form-item label="手机号码" prop="telphone" >
 							    <el-input  v-model="ruleForm1.telphone" auto-complete="off"  placeholder="请输入手机号码"></el-input>
 							  </el-form-item>
-							  <el-form-item label="验证码" prop="yzCode">
+							  <el-form-item label="验证码" prop="imageIdentifyCode">
 							    <el-input  v-model="ruleForm1.imageIdentifyCode"  auto-complete="off"  placeholder="请输入图形验证码"  class="codetxt"></el-input>
 								  <span class="imgbox" @click="getImgCode"><img :src="imgCode" class="logo"></span>
 							  </el-form-item>
@@ -41,11 +41,11 @@
 	                           <el-form-item label="手机号码">
 								  <span>{{ ruleForm1.telphone }}</span>
 							   </el-form-item>
-							   <el-form-item label="短信验证码" prop="mobileYzCode">
-							    <el-input  v-model="ruleForm2.imageIdentifyCode"  auto-complete="off"  placeholder="请输入6位数字短信验证码"  class="codetxt"></el-input><el-button class="getcode" @click="getCode">获取验证码</el-button>
+							   <el-form-item label="短信验证码" prop="smsIdentifyCode">
+							    <el-input  v-model="ruleForm2.smsIdentifyCode"  auto-complete="off"  placeholder="请输入6位数字短信验证码"  class="codetxt"></el-input><el-button class="getcode" @click="getCode">获取验证码</el-button>
 							   </el-form-item>
 							   <el-form-item>
-								    <el-button type="primary" @click="submitForm('ruleForm2',ruleForm2.imageIdentifyCode)">下一步</el-button>
+								    <el-button type="primary" @click="submitForm('ruleForm2',ruleForm2.smsIdentifyCode)">下一步</el-button>
 							   </el-form-item>
 							</el-form>
 	                    </div>

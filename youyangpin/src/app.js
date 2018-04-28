@@ -37,6 +37,7 @@ const router = new VueRouter({
 sync(store,router)
 
 router.beforeEach((to, from, next) => {
+    sessionStorage.setItem('prePath',from.path);
     if (to.matched.some(record => record.meta.auth)) {
         let userInfo = JSON.parse(localStorage.getItem('user'));
         // console.log(userInfo)
