@@ -67,10 +67,11 @@ export default {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     ajax.login(this.ruleForm2).then((result) => {
+                        // 登录成功
+                        this.util.setAuthCookie()
                         result = JSON.stringify(result);
                         localStorage.setItem('user',result);
-                        this.setAccount(result)
-
+                        // this.setAccount(result)
                         const redirect = decodeURIComponent(this.$route.query.redirect || '/index');
                         this.$router.push(redirect);
                     })
