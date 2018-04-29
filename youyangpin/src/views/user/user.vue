@@ -28,7 +28,9 @@
 								<div class="modifypsd personinfo">
 									<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="110px">
 									    <el-form-item label="账号状态" >
-											<div class="accountstate stateno">待审核</div>
+											<div v-if="ruleForm.CheckStatus === '待审核'" class="accountstate stateno">{{ ruleForm.CheckStatus }}</div>
+											<div v-if="ruleForm.CheckStatus === '审核通过'" class="accountstate statesuccess">{{ ruleForm.CheckStatus }}</div>
+											<div v-if="ruleForm.CheckStatus === '审核不通过'" class="accountstate statefail">{{ ruleForm.CheckStatus }}</div>
 										</el-form-item>
 										<el-form-item label="主播名称" prop="StudioHostName" >
 											<el-input v-model="ruleForm.StudioHostName" auto-complete="off"></el-input>
@@ -90,14 +92,14 @@
                                                 <el-time-select
                                                         placeholder="起始时间"
                                                         v-model="ruleForm.DailyBeginTime"
-                                                        :picker-options="{ start: '08:30',step: '00:15',end: '18:30'}">
+                                                        :picker-options="{ start: '06:00',step: '00:15',end: '24:00'}">
                                                 </el-time-select>
                                             </el-form-item>
                                             <el-form-item label="" prop="DailyEndTime" class="end-time">
                                                 <el-time-select
                                                         placeholder="结束时间"
                                                         v-model="ruleForm.DailyEndTime"
-                                                        :picker-options="{start: '08:30',step: '00:15',end: '18:30',minTime: startTime}">
+                                                        :picker-options="{start: '06:00',step: '00:15',end: '24:00',minTime: startTime}">
                                                 </el-time-select>
                                             </el-form-item>
                                         </div>

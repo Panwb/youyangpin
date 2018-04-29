@@ -263,7 +263,7 @@ export default {
                  .then((result) => {
                      this.$message({
                          type:'success',
-                         message:'保存成功'
+                         message:'操作成功'
                      });
                      this.dialogVisible1 = false;
                      this.getPagedOrder()

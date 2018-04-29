@@ -77,10 +77,10 @@
 										<div class="option">
 										   <div class="outer">
 												<div class="box inner">
-												  <el-button  class="optbtn" type="text" @click="showDialog2(item)">排期</el-button>
-												  <el-button  class="optbtn" type="text" @click="showDialog4(item)">评价</el-button>
-												  <el-button  class="optbtn" type="text" @click="showDialog1(item)">申请定向</el-button>
-												  <el-button  class="optbtn" type="text" @click="showDialog3(item)">填写物流信息</el-button>
+												  <el-button v-if="item.OrderStatus === '已到货' || item.OrderStatus === '待退货'" class="optbtn" type="text" @click="showDialog2(item)">排期</el-button>
+												  <el-button v-if="item.OrderStatus === '已完成' && !item.StudioHosToMerchant && !item.StudioHosGiveMerchantStars" class="optbtn" type="text" @click="showDialog4(item)">评价</el-button>
+												  <el-button v-if="item.OrderStatus === '已到货' || item.OrderStatus === '待退货'" class="optbtn" type="text" @click="showDialog1(item)">申请定向</el-button>
+												  <el-button v-if="item.OrderStatus === '待退货' && item.NeedSendBack" class="optbtn" type="text" @click="showDialog3(item)">填写物流信息</el-button>
 												</div>
 											</div>
 										</div>
