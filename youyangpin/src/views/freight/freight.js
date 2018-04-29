@@ -77,7 +77,7 @@ export default {
           .catch(_ => {});
         },
         format(row,column,cellValue) {
-            return this.formatDate(cellValue,'ymdhM');
+            return this.formatDate(cellValue,'hms');
         },
         formatDate(date, type) {
             if (new Date(date) === 'Invalid Date') {
