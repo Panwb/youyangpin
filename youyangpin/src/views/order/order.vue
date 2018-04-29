@@ -87,7 +87,7 @@
 										<div class="tuiaddrress">退货地址：{{ item.ShopAddress }}</div>
 									</div>
 									<!--排期-->
-									<el-dialog :visible.sync="dialogVisible2" width="30%">
+									<el-dialog :visible.sync="dialogVisible2" width="500px">
 										<el-form :model="form" :rules="rule1" ref="form" class="form">
 											<el-form-item label="排期开始时间" prop="date" label-width="120px">
 												<el-date-picker v-model="form.date" format="yyyy/MM/dd HH:mm:ss" value-format="yyyy/MM/dd HH:mm:ss" type="datetime" placeholder="请选择排期开始时间"></el-date-picker>
@@ -99,7 +99,7 @@
 										</div>
 									</el-dialog>
 									<!--评价-->
-									<el-dialog :visible.sync="dialogVisible4" width="30%">
+									<el-dialog :visible.sync="dialogVisible4" width="500px">
 										<el-form :model="form4" class="form4">
 											<el-form-item label="评价" label-width="80px">
 												<el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="form4.description"></el-input>
@@ -116,7 +116,7 @@
 										</div>
 									</el-dialog>
 									<!--申请定向-->
-									<el-dialog :visible.sync="dialogVisible1" width="30%" class="sqdxdialog">
+									<el-dialog :visible.sync="dialogVisible1" width="500px" class="sqdxdialog">
 										<span>确认已在阿里妈妈后台生成定向计划?</span>
 										<span slot="footer" class="dialog-footer">
 											<el-button @click="dialogVisible1 = false">取 消</el-button>
@@ -124,7 +124,7 @@
 										</span>
 									</el-dialog>
 									<!--填写物流信息-->
-									<el-dialog :visible.sync="dialogVisible3"  width="30%">
+									<el-dialog :visible.sync="dialogVisible3"  width="500px">
 										<el-form :model="form3" :rules="rule3" ref="form3" class="form3">
 											<el-form-item label="物流公司" label-width="80px" prop="logisticName">
 												<el-select v-model="form3.logisticName" placeholder="请选择">
@@ -577,17 +577,17 @@
 	margin-left:80px;
 }
 .form4 .el-textarea{
-   width:410px;
+   width:350px;
 }
 .form4 .el-textarea__inner{
 	width:100%;
 	height:80px !important;
 }
 .form3 .el-select{
-	width:410px;
+	width:350px;
 }
 .form3 .el-input{
-	width:410px;
+	width:350px;
 }
 .form .el-date-editor{
 	width:300px !important;
