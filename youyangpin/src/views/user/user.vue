@@ -27,6 +27,9 @@
 								<!--个人信息-->
 								<div class="modifypsd personinfo">
 									<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="110px">
+									    <el-form-item label="账号状态" >
+											<div class="accountstate stateno">待审核</div>
+										</el-form-item>
 										<el-form-item label="主播名称" prop="StudioHostName" >
 											<el-input v-model="ruleForm.StudioHostName" auto-complete="off"></el-input>
 										</el-form-item>
@@ -127,6 +130,18 @@
 </script>
 
 <style>
+.accountstate{
+  line-height:40px;
+}
+.stateno{
+   color:#333;
+}
+.statefail{
+   color:red;
+}
+.statesuccess{
+	color:green;
+}
  .personinfo{
     margin:0 !important;
     width:720px;

@@ -471,4 +471,13 @@
 .topbox>div.shop .icon-tao{
     background: url(~assets/images/pro.png) -162px -28px no-repeat;
 }
+.passno{
+   color:#333;
+}
+.passfail{
+   color:red;
+}
+.passsuccess{
+    color:green;
+}
 </style>
