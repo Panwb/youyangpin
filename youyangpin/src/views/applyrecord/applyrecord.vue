@@ -44,8 +44,8 @@
                                     <div class="contentbox" v-if="pageList.length>0" v-for="(item,index) in pageList" :key="index">
                                         <div class="topbox">
                                             <div class="date">{{ item.datetime }}</div><!--todo-->
-                                            <div class="shop">{{ item.ShopName }}</div>
-                                            <div class="wechat">微信号:{{ item.WangWangNo }}</div>
+                                            <div class="shop"><span :class="item.ShopType=='淘宝店'?'icon icon-tao':'icon icon-tian'"></span>{{ item.ShopName }}</div>
+                                            <div class="wechat">微信号:{{ item.WeChat }}</div>
                                             <div class="phone">联系电话:{{ item.LinkmanPhone }}</div>
                                         </div>
                                         <div class="bottombox clear" v-for="(good,index) in item.Goods" :key="index">
@@ -61,7 +61,13 @@
                                             </div>
                                             <div class="salenum">{{ good.Sales }}</div>
                                             <div class="leavenum">{{ good.InventoryNum }}</div>
-                                            <div class="quan">{{ good.PreferentialWay ==='拍下立减'?'拍下立减':good.DailyPrice-good.LivePrice+'元优惠券' }}</div>
+                                            <div class="quan">
+                                               <div class="outer">
+                                                 <div class="inner">
+                                                  {{ good.PreferentialWay ==='拍下立减'?'拍下立减':good.DailyPrice-good.LivePrice+'元优惠券' }}
+                                                  </div>
+                                                </div>
+                                            </div>
                                             <div class="needsendback"><span>{{ good.NeedSendBack }}</span></div>
                                         </div>
                                         <div class="option">
@@ -341,81 +347,27 @@
 	width:80px;
 	text-align:center;
 	font-size:14px;
-	height:110px;
-	line-height:110px;
+	height:147px;
+	line-height:147px;
 	float:left;
-	padding:15px 0;
 	border-bottom: 1px solid #ebeef5;
 }
 .bottombox .needsendback{
     width:188px;
     text-align:center;
     font-size:14px;
-    height:110px;
-    line-height:110px;
+    height:147px;
+    line-height:147px;
     float:left;
-    padding:15px 0;
     border-bottom: 1px solid #ebeef5;
 }
-.bottombox .quan,.bottombox .planstate,.bottombox .orderstate{
-	width:110px;
-	text-align:center;
-	font-size:14px;
-	height:110px;
-	line-height:110px;
-	float:left;
-	padding:15px 0;
-	border-bottom: 1px solid #ebeef5;
-}
-.bottombox .orderstate{
-   width:180px;
- }
-.bottombox .option{
-	border-left:1px solid #ebeef5;
-}
-.bottombox .option span:first-child{
-	margin-top:20px;
-}
-.bottombox .option .passno{
-	
-}
-.bottombox .option .passfail{
-	color:red;
-}
-.bottombox .option .passsuccess{
-	color:green;
-}
-.bottombox .option span{
-	display:block;
-	text-align:center;
-	margin-bottom:10px;
-}
-.bottombox .option{
-	float:left;
-	width:160px;
-	text-align:center;
-	height:110px;
-	padding:15px 0;
-	border-bottom: 1px solid #ebeef5;
-}
-.contentbox2 .bottombox1 .option{
-	border-bottom:none;
-}
-.contentbox2 .bottombox2{
-	border-bottom: 1px solid #ebeef5;
-}
-.contentbox2 .bottombox2 .salenum,.contentbox2 .bottombox2 .leavenum,.contentbox2 .bottombox2 .quan,.contentbox2 .bottombox2 .infobox{
-	border:none
-}
-
-.contentbox2 .bottombox2 .option div{
-	margin-top:-70px;
-}
-.bottombox .option button{
-	display:block;
-	width:100%;
-	margin:10px 0;
-	padding:0;
+.bottombox .quan{
+    width:100px;
+    text-align:center;
+    font-size:14px;
+    height:147px;
+    float:left;
+    border-bottom: 1px solid #ebeef5;
 }
 .infobox{
 	overflow:hidden;
@@ -471,7 +423,7 @@
 .option{
     position: absolute;
     right: 0;
-    width: 162px;
+    width: 172px;
     top: 37px;
     bottom: 0px;
     border-left: 1px solid #ebeef5;
@@ -492,9 +444,40 @@
     width:100%;
     display:table;
 }
-.option .inner{
+.quan .outer{
+    height:100%;
+    width:100px;
+    display:table;
+}
+.option .inner,.quan .inner{
     height:100%;
     display:table-cell;
     vertical-align: middle;
+}
+.topbox>div.shop{
+    padding-left:40px;
+    margin-left:0;
+}
+.topbox>div.shop .icon{
+    position: absolute;
+    top: 6px;
+    left: 13px;
+    width: 22px;
+    height: 22px;
+}
+.topbox>div.shop .icon-tian{
+    background: url(~assets/images/pro.png) -162px 0 no-repeat;
+}
+.topbox>div.shop .icon-tao{
+    background: url(~assets/images/pro.png) -162px -28px no-repeat;
+}
+.passno{
+   color:#333;
+}
+.passfail{
+   color:red;
+}
+.passsuccess{
+    color:green;
 }
 </style>

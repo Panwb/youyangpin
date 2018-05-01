@@ -24,7 +24,7 @@
 				    <p class="title">修改密码</p>
 				    <div class="content">
 	                    <!--修改密码-->
-	                    <div class="modifypsd">
+	                    <div class="modifypsd modifybox">
 	                         <el-form :model="ruleForm"  :rules="rules" ref="ruleForm" label-width="120px" >
 							  <el-form-item label="验证原密码" prop="prepwd" >
 							    <el-input type="password" auto-complete="off" v-model="ruleForm.prepwd" placeholder="密码为6-25位数字+字母"></el-input>
@@ -64,6 +64,9 @@
 </script>
 
 <style scoped>
+.modifybox{
+	width:430px !important;
+}
 .optbox{
 	background-color: #f2f2f2;
     height: 40px;

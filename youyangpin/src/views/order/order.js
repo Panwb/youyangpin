@@ -2,6 +2,34 @@ import { api as ajax } from 'services'
 
 export default {
     data () {
+         var validateDate = (rule, value, callback) => {
+            if (value === '') {
+              callback(new Error('请选择日期'));
+            } else {
+              callback();
+            }
+        };
+         var validateName = (rule, value, callback) => {
+            if (value === '') {
+              callback(new Error('请选择物流公司'));
+            } else {
+              callback();
+            }
+        };
+        var validateNo = (rule, value, callback) => {
+            if (value === '') {
+              callback(new Error('请输入物流编号'));
+            } else {
+              callback();
+            }
+        };
+        var validatePostage = (rule, value, callback) => {
+            if (value === '') {
+              callback(new Error('请输入邮费'));
+            } else {
+              callback();
+            }
+        };
         return {
             menus: [
                 {
@@ -71,7 +99,6 @@ export default {
             pageList: [],
             asideIndex: '1',
             textarea: '',
-            value: null,
             activeName: 'order1',
             dialogVisible1: false,
             dialogVisible2: false,
@@ -79,7 +106,7 @@ export default {
             dialogVisible4: false,
             activeIndex: '2',
             form: {
-                date: null
+                date: ''
             },
             form3: {
                 logisticName:'',
@@ -90,7 +117,70 @@ export default {
                 description:'',
                 star: 0
             },
-            orderId: null
+            orderId: null,
+            options: [{
+              value: '顺丰速运',
+              label: '顺丰速运'
+            }, {
+              value: '百世快递',
+              label: '百世快递'
+            }, {
+              value: '中通快递',
+              label: '中通快递'
+            }, {
+              value: '申通快递',
+              label: '申通快递'
+            }, {
+              value: '圆通速递',
+              label: '圆通速递'
+            }, {
+              value: '韵达速递',
+              label: '韵达速递'
+            }, {
+              value: '邮政快递包裹',
+              label: '邮政快递包裹'
+            }, {
+              value: 'EMS',
+              label: 'EMS'
+            }, {
+              value: '天天快递',
+              label: '天天快递'
+            }, {
+              value: '全峰快递',
+              label: '全峰快递'
+            }, {
+              value: '国通快递',
+              label: '国通快递'
+            }, {
+              value: '优速快递',
+              label: '优速快递'
+            }, {
+              value: '德邦',
+              label: '德邦'
+            }, {
+              value: '快捷快递',
+              label: '快捷快递'
+            }, {
+              value: '宅急送',
+              label: '宅急送'
+            }],
+            value: '',
+            rule1: {
+                date: [
+                    { required: true, message: '请选择日期', trigger: 'change' }
+                ]
+            },
+            rule3: {
+                logisticName: [
+                    { required: true,  message: '请选择物流公司', trigger: 'change' }
+                ],
+                logisticNo: [
+                    { required: true, message: '请输入物流编号', trigger: 'blur' }
+                ],
+                postage: [
+                    { required: true, message: '请输入邮费', trigger: 'blur' }
+                ]
+            }
         }
     },
     created() {
@@ -129,14 +219,20 @@ export default {
             this.dialogVisible2 = true;
         },
         setBroadcastScheduling() {
-            ajax.setBroadcastScheduling(this.orderId,this.form)
-            .then((result) => {
-                this.$message({
-                    type:'success',
-                    message:'保存成功'
-                });
-                this.dialogVisible2 = false;
-                this.getPagedOrder()
+            this.$refs['form'].validate(valid => {
+                if(valid) {
+                    ajax.setBroadcastScheduling(this.orderId,this.form)
+                        .then((result) => {
+                            this.$message({
+                                type:'success',
+                                message:'保存成功'
+                            });
+                            this.dialogVisible2 = false;
+                            this.getPagedOrder()
+                        })
+                }else {
+                    return false
+                }
             })
         },
          //评价
@@ -167,7 +263,7 @@ export default {
                  .then((result) => {
                      this.$message({
                          type:'success',
-                         message:'保存成功'
+                         message:'操作成功'
                      });
                      this.dialogVisible1 = false;
                      this.getPagedOrder()
@@ -184,15 +280,22 @@ export default {
              this.dialogVisible3 = true;
          },
          setLogisticsInfo() {
-             ajax.setLogisticsInfo(this.orderId,this.form3)
-                 .then((result) => {
-                     this.$message({
-                         type:'success',
-                         message:'保存成功'
-                     });
-                     this.dialogVisible3 = false;
-                     this.getPagedOrder()
-                 })
+            this.$refs['form3'].validate(valid => {
+                if(valid) {
+                    ajax.setLogisticsInfo(this.orderId,this.form3)
+                        .then((result) => {
+                            this.$message({
+                                type:'success',
+                                message:'保存成功'
+                            });
+                            this.dialogVisible3 = false;
+                            this.getPagedOrder()
+                        })
+                }else {
+                    return false
+                }
+            })
+
          }
     }
 }

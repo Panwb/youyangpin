@@ -74,6 +74,8 @@ export default {
                         // this.setAccount(result)
                         const redirect = decodeURIComponent(this.$route.query.redirect || '/index');
                         this.$router.push(redirect);
+                    }).catch(error => {
+                        this.getImgCode()
                     })
                 } else {
                     console.log('error submit!!');

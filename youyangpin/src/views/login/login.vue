@@ -1,18 +1,18 @@
 <template>
   <div id="app">  
-	<el-container>
+  <el-container>
     <!-- header start -->
       <div class="wd1200 searchbox">
-	      <el-row>
-			  <el-col :span="8"><div class="grid-content bg-purple">
+        <el-row>
+        <el-col :span="8"><div class="grid-content bg-purple">
           <router-link to="/index"><img src="~assets/images/logo.png" class="logo"></router-link></div></el-col>
-		    </el-row>
+        </el-row>
       </div>
-	  <!-- header end -->
+    <!-- header end -->
 
       <!-- main start -->
-	  <el-main class="maincontent">
-	    <div class="wd1000 loginbox">
+    <el-main class="maincontent loginmaincontent">
+      <div class="wd1000 loginbox">
         <el-row>
           <el-col :span="12">
             <div class="grid-content bg-purple"> 
@@ -47,17 +47,17 @@
             </div>  
           </el-col>
         </el-row>
-	        
-	    </div>
-	  </el-main>
-	  <!-- main end -->
+          
+      </div>
+    </el-main>
+    <!-- main end -->
 
-	  <!-- footer start -->
-	  <el-footer>
+    <!-- footer start -->
+    <el-footer>
       <main-footer></main-footer>
-	  </el-footer>
-	  <!-- footer end -->
-	</el-container>
+    </el-footer>
+    <!-- footer end -->
+  </el-container>
   </div>
 </template>
 
@@ -69,6 +69,9 @@
 </script>
 
 <style>
+.loginmaincontent{
+  background:#fff !important;
+}
 .demo-ruleForm{
   padding:20px 20px 0;
 }
@@ -220,6 +223,7 @@
 .loginbox{
   width:950px;
   min-height:615px;
+  margin-top:80px;
 }
 .loginbox .login{
   width:498px;
@@ -252,7 +256,12 @@
 }
 .logininbox .imgbox{
   width:85px;
+  height:38px;
   float:left;
+}
+.logininbox .imgbox img{
+  width:100%;
+  height:100%;
 }
 .logininbox button{
   width:100%;

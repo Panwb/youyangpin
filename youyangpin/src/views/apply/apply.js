@@ -58,7 +58,7 @@ export default {
             this.ApplicationForm.GoodIds = GoodsIds;
             ajax.requestApplication(this.ApplicationForm)
                 .then((result) => {
-                    this.$message({type:"success",message:"提交成功"});
+                    this.$message({type:"success",message:"提交成功，等待商家审核"});
                     this.$router.push('/applyrecord')
                 })
                 .catch(error => {
@@ -67,6 +67,7 @@ export default {
         },
         //修改个人信息
         editPersonalMeg() {
+            sessionStorage.setItem('goodid',this.$route.query.goodsId);
             this.$router.push('user')
         },
         //完善收货地址

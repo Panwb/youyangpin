@@ -11,7 +11,7 @@
 	  <!-- header end -->
 
     <!-- main start -->
-	  <el-main class="maincontent">
+	  <el-main class="maincontent regmaincontent">
 	    <div class="wd1200 registerbox regbox">
            <p class="title">用户注册<span class="login">已有账号?<router-link to="/login">点击登录</router-link></span></p>
 			<el-form :model="ruleForm2"  :rules="rules2" ref="ruleForm2" label-width="100px">
@@ -76,7 +76,11 @@
 </script>
 
 <style>
+.regmaincontent{
+	background:#fff  !important;
+}
 .regbox{
+    min-height:615px  !important;
 	width:500px !important;
 }
 .regisbox .el-dialog__header{

@@ -125,7 +125,7 @@ export default {
                 // WeChat: '',
                 // QQ: '',
                 // DailyBeginTime: '',
-                // DailyEndTime: ''
+                CheckStatus: '',
                 StudioHostName: '',
                 AlipayAccount:'',
                 Height:'',
@@ -159,7 +159,7 @@ export default {
                     { required: true, validator: validateshoeSize, trigger: 'blur' }
                 ],
                 ClothesSize: [
-                    { type: 'array', required: true, message: '请选择尺码', trigger: 'change' }
+                    { required: true, message: '请选择尺码', trigger: 'change' }
                 ],
                 Address: [
                     { required: true, validator: validateaddress, trigger: 'blur' }
@@ -170,8 +170,11 @@ export default {
                 LinkmanPhone: [
                     { required: true, validator: validatelinkPhone, trigger: 'blur' }
                 ],
-                TKName: [
-                    { required: true, validator: validatetkName, trigger: 'blur' }
+                DailyBeginTime: [
+                    { required: true, message: '请选择时间', trigger: 'change' }
+                ],
+                DailyEndTime: [
+                    { required: true, message: '请选择时间', trigger: 'change' }
                 ],
                 WeChat: [
                     { required: true, validator: validatewechatId, trigger: 'blur' }
@@ -186,11 +189,49 @@ export default {
         getUserDetail() {
             this.isShowCheck = false;
             ajax.getUserDetail().then((result) => {
-                result.VerticalFieldCode = result.VerticalFieldCode.split(',')
+                result.VerticalFieldCode = result.VerticalFieldCode && result.VerticalFieldCode.split(',');
+                result.DailyBeginTime = result.DailyBeginTime && this.formatDate(result.DailyBeginTime,'hm');
+                result.DailyEndTime = result.DailyEndTime && this.formatDate(result.DailyEndTime,'hm');
                 this.ruleForm = result;
                 this.isShowCheck = true;
             })
         },
+         formatDate(date, type) {
+             if (new Date(date) === 'Invalid Date') {
+                 return date;
+             } else if (date) {
+                 date = new Date(date);
+                 const y = date.getFullYear();
+                 let m = date.getMonth() + 1;
+                 m = m < 10 ? '0' + m : m;
+                 let d = date.getDate();
+                 d = d < 10 ? ('0' + d) : d;
+                 let h = date.getHours();
+                 h = h < 10 ? ('0' + h) : h;
+                 let M = date.getMinutes();
+                 M = M < 10 ? ('0' + M) : M;
+                 let s = date.getSeconds();
+                 s = s < 10 ? ('0' + s) : s;
+                 switch (type) {
+                     case "hms":
+                         return y + '/' + m + '/' + d + " " + h + ':' + M + ':' + s;
+                     case "timestamp":
+                         return Date.parse(date);
+                     case "ymdhM":
+                         return y + '/' + m + '/' + d + " " + h + ':' + M;
+                     case "md":
+                         return m + '/' + d;
+                     case "d":
+                         return d;
+                     case "hm":
+                         return h + ':' + M;
+                     default:
+                         return y + '/' + m + '/' + d;
+                 }
+             }else {
+                 return date
+             }
+         },
         handleSelect(key, keyPath) {
             this.$router.push(this.menus[key - 1]['path'])
         },

@@ -2,6 +2,16 @@ import { api as ajax } from 'services'
 
 export default {
     data() {
+        var validatePass = (rule, value, callback) => {
+            var newpwd=/^[a-zA-Z0-9]{6,25}$/;
+            if (value === '') {
+                callback(new Error('请输入新密码'));
+            } else if(!newpwd.test(value)){
+                callback(new Error('密码格式不正确'));
+            }else {
+                callback();
+            }
+        };
         var validatesurepwd = (rule, value, callback) => {
             if (value === '') {
                 callback(new Error('请再次输入密码'));
@@ -47,10 +57,10 @@ export default {
             },
             rules: {
                 prepwd: [
-                    { required: true, message: '请输入原密码', trigger: 'blur' }
+                    { required: true, validator: validatePass, trigger: 'blur' }
                 ],
                 newpwd: [
-                    { required: true, message: '请输入新密码', trigger: 'blur' }
+                    { required: true, validator: validatePass, trigger: 'blur' }
                 ],
                 surepwd: [
                     { required: true, validator: validatesurepwd, trigger: 'blur' }

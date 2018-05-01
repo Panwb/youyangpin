@@ -42,11 +42,11 @@
 								</div>
 								<template>
 									<p class="txtitle">提现记录</p>
-									<el-table :data="tableData"  style="width: 100%">
+									<el-table :data="tableData"  style="width: 100%" class="freightbox">
 										<!--<el-table-column prop="" label="序号" width="60"></el-table-column>-->
-										<el-table-column prop="ApplyTime" label="申请时间" width="220"></el-table-column>
+										<el-table-column prop="ApplyTime" :formatter="format" label="申请时间" width="220"></el-table-column>
 										<el-table-column prop="WithdrawalMoney" label="申请金额" width="220"></el-table-column>
-										<el-table-column prop="HandleTime" label="处理时间" width="220"></el-table-column>
+										<el-table-column prop="HandleTime" :formatter="format" label="处理时间" width="220"></el-table-column>
 										<el-table-column prop="HandleStatus" label="处理状态" width="220"></el-table-column>
 									</el-table>
 								</template>
@@ -74,6 +74,9 @@
 </script>
 
 <style scoped>
+.freightbox{
+	margin-bottom:40px;
+}
 .optbox{
 	background-color: #f2f2f2;
     height: 40px;
