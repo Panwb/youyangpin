@@ -77,7 +77,7 @@
 									<li>
 										<div class="detailbox">
 											<p class="title">优惠方式</p>
-											<p class="num">{{applyData.CurrentGood.PreferentialWay ==='拍下立减'?'拍下立减':applyData.CurrentGood.DailyPrice-applyData.CurrentGood.LivePrice+'元优惠券'}}</p>
+											<p class="num">{{applyData.CurrentGood.PreferentialWay ==='拍下立减'?'拍下立减':(applyData.CurrentGood.DailyPrice-applyData.CurrentGood.LivePrice).toFixed(2)+'元优惠券'}}</p>
 										</div>
 									</li>
 									<li>
@@ -130,7 +130,7 @@
 									<li>
 										<div class="detailbox">
 											<p class="title">优惠方式</p>
-											<p class="num">{{applyData.CurrentGood.PreferentialWay ==='拍下立减'?'拍下立减':applyData.CurrentGood.DailyPrice-applyData.CurrentGood.LivePrice+'元优惠券'}}</p>
+											<p class="num">{{applyData.CurrentGood.PreferentialWay ==='拍下立减'?'拍下立减':(applyData.CurrentGood.DailyPrice-applyData.CurrentGood.LivePrice).toFixed(2)+'元优惠券'}}</p>
 										</div>
 									</li>
 									<li>

@@ -20,7 +20,7 @@
         <div class="wd1200 searchbox">
             <el-row>
                 <el-col :span="8"><div class="grid-content bg-purple">
-                <router-link to="/index"><img src="~assets/images/logo.png" class="logo"></router-link></div></el-col>
+                <img src="~assets/images/logo.png" class="logo" @click="goIndex"></div></el-col>
                 <el-col :span="16">
                     <div class="grid-content bg-purple-light seabox">
                         <el-input placeholder="关键词搜索" prefix-icon="el-icon-search" v-model="keywords" @keyup.enter.native="search"></el-input>
@@ -35,6 +35,7 @@
                     <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" background-color="#261f1e" text-color="#fff" active-text-color="#f9513b">
                         <el-menu-item index="0">首页</el-menu-item>
                         <el-menu-item
+                            v-if="isShowHead"
                             v-for="(menu, index) in activityTypes"
                             :index="(index + 1).toString()"
                             :key="index">
@@ -49,73 +50,86 @@
 </template>
 
 <script>
-  import { mapGetters, mapActions } from 'vuex'
+    import { mapGetters, mapActions } from 'vuex'
 
-  import { api as ajax } from 'services'
+    import { api as ajax } from 'services'
 
-  export default {
-    name: 'MainHeader',
-    data() {
-      return {
-        activeIndex: '0',
-        keywords: '',
-        userInfo:{},
-      }
-    },
-    computed: {
-      ...mapGetters([
-        'account',
-        'activityTypes'
-      ])
-    },
-    mounted(){
+    export default {
+        name: 'MainHeader',
+        data() {
+            return {
+                activeIndex: '0',
+                keywords: '',
+                userInfo:{},
+                isShowHead: true
+            }
+        },
+        computed: {
+            ...mapGetters([
+                'account',
+                'activityTypes'
+            ])
+        },
+        mounted(){
 
-    },
-    created() {
+        },
+        created() {
+            this.userInfo = JSON.parse(localStorage.getItem('user'));
+            if(sessionStorage.getItem('prePath')!=='/login'&&sessionStorage.getItem('prePath')!=='/index'&&sessionStorage.getItem('prePath')!=='/') {
+                this.activeIndex = sessionStorage.getItem('typekey');
+                this.$emit('clickType',sessionStorage.getItem('typename'));
+            }else {
+                this.getActivityTypes();
+            }
+        },
+        methods: {
+            ...mapActions([
+                'setAccount',
+                'setActivityTypes'
+            ]),
+            handleSelect(key, keyPath) {
+                let name = "";
+                key === '0'?name = "":name = this.activityTypes[key-1];
+                this.$emit('clickType',name);
+                sessionStorage.setItem('typekey',key);
+                sessionStorage.setItem('typename',name);
+                this.$router.push('/index')
+            },
+            logout() {
+                ajax.logout().then((result) =>{
+                    //this.$message.success('将为你返回登录页面')
+                    //this.setAccount(null);
+                    localStorage.removeItem('user');
+                    this.util.clearAuthCookie()
+                    this.$router.push('/login')
+                })
 
-        this.userInfo = JSON.parse(localStorage.getItem('user'));
-        console.log(333,this.userInfo)
-        if(sessionStorage.getItem('prePath')!=='/login'&&sessionStorage.getItem('prePath')!=='/index'&&sessionStorage.getItem('prePath')!=='/') {
-            this.activeIndex = sessionStorage.getItem('typekey');
-            this.$emit('clickType',sessionStorage.getItem('typename'));
-        }else {
-            this.getActivityTypes();
+            },
+            getActivityTypes() {
+                if (this.activityTypes.length > 0) return
+                ajax.getActivityTypes().then((result) => {
+                    this.setActivityTypes(result)
+                })
+            },
+            search() {
+                this.$router.push('/index?keywords=' + this.keywords)
+            },
+            goIndex() {
+                sessionStorage.setItem('typekey','0');
+                sessionStorage.setItem('typename','');
+                if(this.$route.path ==='/index') {
+                    this.isShowHead = false;
+                    this.activeIndex = '0';
+                    this.$nextTick(() => {
+                        this.isShowHead = true;
+                    });
+                    this.$emit('clickType','');
+                }else {
+                    this.$router.push('/index');
+                }
+            }
         }
-    },
-    methods: {
-      ...mapActions([
-        'setAccount',
-        'setActivityTypes'
-      ]),
-      handleSelect(key, keyPath) {
-          let name = "";
-          key === '0'?name = "":name = this.activityTypes[key-1];
-          this.$emit('clickType',name);
-          sessionStorage.setItem('typekey',key);
-          sessionStorage.setItem('typename',name);
-          this.$router.push('/index')
-      },
-      logout() {
-        ajax.logout().then((result) =>{
-            //this.$message.success('将为你返回登录页面')
-//            this.setAccount(null);
-             localStorage.removeItem('user');
-            this.util.clearAuthCookie()
-            this.$router.push('/login')
-        })
-
-      },
-      getActivityTypes() {
-        if (this.activityTypes.length > 0) return
-          ajax.getActivityTypes().then((result) => {
-              this.setActivityTypes(result)
-          })
-      },
-      search() {
-        this.$router.push('/index?keywords=' + this.keywords)
-      }
     }
-  }
 </script>
 
 <style scoped>

@@ -66,7 +66,7 @@
 											<div class="quan">
 											 <div class="outer">
 												 <div class="inner">
-												 {{ good.PreferentialWay ==='拍下立减'?'拍下立减':good.DailyPrice-good.LivePrice+'元优惠券' }}
+												 {{ good.PreferentialWay ==='拍下立减'?'拍下立减':(good.DailyPrice-good.LivePrice).toFixed(2)+'元优惠券' }}
 												 </div>
 											 </div>
 											</div>
