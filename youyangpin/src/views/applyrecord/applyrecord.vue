@@ -55,8 +55,8 @@
                                                     <p class="name">{{ good.GoodsName }}</p>
                                                     <p class="price">直播专享价:<span class="num">{{ good.LivePrice }}</span> <span class="normal">日常价:{{ good.DailyPrice }}</span></p>
                                                     <p class="money">佣金比例:<span class="num">{{ good.CommissionRatio }}%</span></p>
+                                                    <p class="date">活动日期：{{ formatDate(good.ActivityBeginTime) }}-{{ formatDate(good.ActivityEndTime) }}</p>
                                                     <p class="detail">{{ good.IsProvideMulticolor === '是' ?  '提供多色（' + good.ColorNum + '中颜色）' : '' }}</p>
-                                                    <p class="date">{{ good.NeedSendBack ==='是'? '需要退回样品':''}}</p>
                                                 </div>
                                             </div>
                                             <div class="salenum">{{ good.Sales }}</div>
