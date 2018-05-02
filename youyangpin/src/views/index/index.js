@@ -85,7 +85,8 @@ export default {
         },
         handleCurrentChange(val) {
             this.searchForm.pageIndex = val
-            this.goodsSearch()
+            this.goodsSearch();
+            scrollTo(0,0);
             console.log(`当前页: ${val}`);
         },
         clickSortField(val,name) {
