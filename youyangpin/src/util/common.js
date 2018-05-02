@@ -41,7 +41,7 @@ export const setCookie = (cname, cvalue, days = 1) => {
     d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
     var expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + "; " + expires;
-    console.log(222,document.cookie);
+    // console.log(222,document.cookie);
 }
 //获取cookie
 export const getCookie = (name) => {
@@ -57,7 +57,7 @@ export const getCookie = (name) => {
 //清除cookie
 export const clearCookie = (cname) => {
     this.setCookie(cname, "", -1);
-    console.log(11,document.cookie)
+    // console.log(11,document.cookie)
 }
 export const checkCookie =(cname) => {
     var user = this.getCookie(cname);
