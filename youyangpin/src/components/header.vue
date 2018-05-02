@@ -23,7 +23,7 @@
                 <router-link to="/index"><img src="~assets/images/logo.png" class="logo"></router-link></div></el-col>
                 <el-col :span="16">
                     <div class="grid-content bg-purple-light seabox">
-                        <el-input placeholder="关键词搜索" prefix-icon="el-icon-search" v-model="keywords"></el-input>
+                        <el-input placeholder="关键词搜索" prefix-icon="el-icon-search" v-model="keywords" @keyup.enter.native="search"></el-input>
                         <el-button class="sea-btn" @click="search">搜索</el-button>
                     </div>
                 </el-col>
@@ -97,7 +97,7 @@
       },
       logout() {
         ajax.logout().then((result) =>{
-            this.$message.success('将为你返回登录页面')
+            //this.$message.success('将为你返回登录页面')
 //            this.setAccount(null);
              localStorage.removeItem('user');
             this.util.clearAuthCookie()

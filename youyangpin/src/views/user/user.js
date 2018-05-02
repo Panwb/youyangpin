@@ -125,7 +125,7 @@ export default {
                 // WeChat: '',
                 // QQ: '',
                 // DailyBeginTime: '',
-                // DailyEndTime: ''
+                CheckStatus: '',
                 StudioHostName: '',
                 AlipayAccount:'',
                 Height:'',
@@ -189,9 +189,9 @@ export default {
         getUserDetail() {
             this.isShowCheck = false;
             ajax.getUserDetail().then((result) => {
-                result.VerticalFieldCode = result.VerticalFieldCode.split(',');
-                result.DailyBeginTime = this.formatDate(result.DailyBeginTime,'hm');
-                result.DailyEndTime = this.formatDate(result.DailyEndTime,'hm');
+                result.VerticalFieldCode = result.VerticalFieldCode && result.VerticalFieldCode.split(',');
+                result.DailyBeginTime = result.DailyBeginTime && this.formatDate(result.DailyBeginTime,'hm');
+                result.DailyEndTime = result.DailyEndTime && this.formatDate(result.DailyEndTime,'hm');
                 this.ruleForm = result;
                 this.isShowCheck = true;
             })
@@ -238,7 +238,7 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    this.ruleForm.VerticalFieldCode = this.ruleForm.VerticalFieldCode.join();
+                    this.ruleForm.VerticalFieldCode = this.ruleForm.VerticalFieldCode && this.ruleForm.VerticalFieldCode.join();
                     ajax.updateStudioHost(this.ruleForm)
                         .then((result) => {
                             this.$message({type:"success",message:"保存成功"});

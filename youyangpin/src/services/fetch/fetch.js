@@ -15,15 +15,15 @@ const checkStatus = function(response) {
         return response
     } else if (response.status == 401) {
         // 如果没有登录,则跳转到登录页面
-        Message({
-            message:'未授权，请先登录',
-            type: 'error'
-        })
+        //Message({
+        //    message:'未授权，请先登录',
+        //    type: 'error'
+        //})
         localStorage.removeItem('user');
         util.clearAuthCookie()
         setTimeout(()=>{
             window.location = '/#/login?redirect=' + window.location.hash.replace('#/','%2F')
-        },1000)
+        })
         return response
     } else{        
         const error = new Error(response.statusText)

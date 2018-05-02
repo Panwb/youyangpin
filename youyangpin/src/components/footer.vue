@@ -7,9 +7,9 @@
             <li><a a href="https://seller.aliexpress.com/" target="_blank">全球速卖通</a></li>
             <li><a a href="https://www.1688.com/" target="_blank">1688</a></li>
             <li><a a href="http://pub.alimama.com/" target="_blank">阿里妈妈</a></li>
-            <li><a a href="https://m.kuaidi100.com/" target="_blank">快递查询</a></li>
+            <li><a a href="https://v.taobao.com/" target="_blank">阿里V任务</a></li>
          </ul>
-         <p class="copyright">©copyright 2016-2018 优样品 www.youyangpin.com.<a href="http://www.beianbeian.com/beianxinxi/a40cc71f-db17-4d78-80dd-4b232dab5880.html">粤ICP备15114843号-1</a></p>
+         <p class="copyright">©copyright 2016-2018 优样品 www.youyangpin.com.<a href="http://www.beianbeian.com/beianxinxi/a40cc71f-db17-4d78-80dd-4b232dab5880.html" target="_blank">粤ICP备15114843号-1 </a>深圳驼师傅网络有限公司</p>
          </div>
 </template>
 
