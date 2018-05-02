@@ -19,8 +19,8 @@ const checkStatus = function(response) {
         //    message:'未授权，请先登录',
         //    type: 'error'
         //})
-        localStorage.removeItem('user');
-        util.clearAuthCookie()
+        // localStorage.removeItem('user');
+        util.clearCookie('user')
         setTimeout(()=>{
             window.location = '/#/login?redirect=' + window.location.hash.replace('#/','%2F')
         })

@@ -72,9 +72,8 @@
 
     },
     created() {
-
-        this.userInfo = JSON.parse(localStorage.getItem('user'));
-        console.log(333,this.userInfo)
+        this.userInfo = JSON.parse(this.util.getCookie('user').slice(1));
+//        console.log(this.userInfo)
         if(sessionStorage.getItem('prePath')!=='/login'&&sessionStorage.getItem('prePath')!=='/index'&&sessionStorage.getItem('prePath')!=='/') {
             this.activeIndex = sessionStorage.getItem('typekey');
             this.$emit('clickType',sessionStorage.getItem('typename'));
@@ -98,9 +97,8 @@
       logout() {
         ajax.logout().then((result) =>{
             //this.$message.success('将为你返回登录页面')
-//            this.setAccount(null);
-             localStorage.removeItem('user');
-            this.util.clearAuthCookie()
+//             localStorage.removeItem('user');
+            this.util.clearCookie('user')
             this.$router.push('/login')
         })
 
