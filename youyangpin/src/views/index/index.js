@@ -94,8 +94,8 @@ export default {
             name === '全部' ? this.searchForm.verticalFieldCode = "" : this.searchForm.verticalFieldCode = name;
             this.goodsSearch();
         },
-        clickType(name) {
-            this.searchForm.activityType = name;
+        clickType(name) {debugger;
+            this.searchForm.activityType = name || '';
             this.vIndex = 0;
             this.searchForm.verticalFieldCode = "";
             this.goodsSearch();
