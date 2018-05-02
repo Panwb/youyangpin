@@ -12,7 +12,7 @@
 						<div  class="text item">
 							<div class="txt">
 								<div class="box">
-									<span class="tianmao"><img src="~assets/images/tianmao.png" class="image"></span>
+									<span class="tianmao"><img :src="applyData.Shop.ShopType === '天猫店' ? '~assets/images/tianmao.png' : '~assets/images/taobao.png'" class="image" ></span>
 									<span class="name">店铺:{{ applyData.Shop.ShopName }}</span>
 									<span class="wangwang"></span>
 								</div>
@@ -49,7 +49,7 @@
 									<li><div class="imgbox"><img :src="applyData.CurrentGood.GoodsImgURL" class="image"></div></li>
 									<li>
 										<div class="infobox">
-											<p class="name">{{ applyData.CurrentGood.GoodsName }}</p>
+											<p class="name"><a :href="applyData.CurrentGood.GoodsURL" target="view_window">{{ applyData.CurrentGood.GoodsName }}</a></p>
 											<p class="price">直播专享价:<span class="num">{{ applyData.CurrentGood.LivePrice }}</span> <span class="normal">日常价:{{ applyData.CurrentGood.DailyPrice }}</span></p>
 											<p class="money">佣金比例:<span class="num">{{ applyData.CurrentGood.CommissionRatio }}%</span></p>
 											<p class="date">活动日期：{{ formatDate(applyData.CurrentGood.ActivityBeginTime) }}-{{ formatDate(applyData.CurrentGood.ActivityEndTime) }}</p>
@@ -83,7 +83,7 @@
 									<li>
 										<div class="detailbox last">
 											<p class="title">是否需要退回样品</p>
-											<p class="num">是</p>
+											<p class="num">{{applyData.CurrentGood.NeedSendBack}}</p>
 										</div>
 									</li>
 								</ul>
