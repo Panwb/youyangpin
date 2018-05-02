@@ -72,8 +72,9 @@
 
     },
     created() {
-        this.userInfo = JSON.parse(this.util.getCookie('user').slice(1));
-//        console.log(this.userInfo)
+        let cookieInfo = this.util.getCookie('user')?JSON.parse(this.util.getCookie('user').slice(1)):'';
+        this.userInfo = cookieInfo;
+        console.log(this.userInfo)
         if(sessionStorage.getItem('prePath')!=='/login'&&sessionStorage.getItem('prePath')!=='/index'&&sessionStorage.getItem('prePath')!=='/') {
             this.activeIndex = sessionStorage.getItem('typekey');
             this.$emit('clickType',sessionStorage.getItem('typename'));
