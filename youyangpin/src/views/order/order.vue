@@ -47,7 +47,7 @@
 											<div class="date">{{ item.datetime }}</div>
 											<div class="orderId">订单号:{{ item.OrderNo }}</div>
 											<div class="shop"><span :class="item.ShopType=='淘宝店'?'icon icon-tao':'icon icon-tian'"></span>{{ item.ShopName }}</div>
-											<div  class="wechat">微信号:{{ item.WeChat }}</div>
+											<div class="wechat">微信号:{{ item.WeChat }}</div>
 											<div class="phone">联系电话:{{ item.LinkmanPhone }}</div>
 										</div>
 										<div class="bottombox clear" v-for="(good,index) in item.Goods" :key="index">
@@ -79,7 +79,7 @@
 												<div class="box inner">
 												  <el-button v-if="item.OrderStatus === '已到货' || item.OrderStatus === '待退货'" class="optbtn" type="text" @click="showDialog2(item)">排期</el-button>
 												  <el-button v-if="item.OrderStatus === '已完成' && !item.StudioHosToMerchant && !item.StudioHosGiveMerchantStars" class="optbtn" type="text" @click="showDialog4(item)">评价</el-button>
-												  <el-button v-if="item.OrderStatus === '已到货' || item.OrderStatus === '待退货'" class="optbtn" type="text" @click="showDialog1(item)">申请定向</el-button>
+												  <el-button v-if="item.OrderStatus === '待发货' || item.OrderStatus === '已发货' || item.OrderStatus === '已到货' || item.OrderStatus === '待退货'" class="optbtn" type="text" @click="showDialog1(item)">申请定向</el-button>
 												  <el-button v-if="item.OrderStatus === '待退货' && item.NeedSendBack" class="optbtn" type="text" @click="showDialog3(item)">填写物流信息</el-button>
 												</div>
 											</div>
@@ -90,7 +90,7 @@
 									<el-dialog :visible.sync="dialogVisible2" width="500px">
 										<el-form :model="form" :rules="rule1" ref="form" class="form">
 											<el-form-item label="排期开始时间" prop="date" label-width="120px">
-												<el-date-picker v-model="form.date" format="yyyy/MM/dd HH:mm:ss" value-format="yyyy/MM/dd HH:mm:ss" type="datetime" placeholder="请选择排期开始时间"></el-date-picker>
+												<el-date-picker v-model="form.date" format="yyyy/MM/dd" value-format="yyyy/MM/dd" type="date" :picker-options="pickerOptions0" placeholder="请选择排期开始时间"></el-date-picker>
 											</el-form-item>
 										</el-form>
 										<div slot="footer" class="dialog-footer">
