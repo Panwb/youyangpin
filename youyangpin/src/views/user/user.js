@@ -238,7 +238,7 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    this.ruleForm.VerticalFieldCode = this.ruleForm.VerticalFieldCode.join();
+                    this.ruleForm.VerticalFieldCode = this.ruleForm.VerticalFieldCode && this.ruleForm.VerticalFieldCode.join();
                     ajax.updateStudioHost(this.ruleForm)
                         .then((result) => {
                             this.$message({type:"success",message:"保存成功"});

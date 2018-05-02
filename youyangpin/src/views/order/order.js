@@ -163,6 +163,9 @@ export default {
             }, {
               value: '宅急送',
               label: '宅急送'
+            }, {
+              value: '汇通快递',
+              label: '汇通快递'
             }],
             value: '',
             rule1: {
@@ -180,7 +183,12 @@ export default {
                 postage: [
                     { required: true, message: '请输入邮费', trigger: 'blur' }
                 ]
-            }
+            },
+            pickerOptions0: {
+              disabledDate(time) {
+                    return time.getTime() < Date.now() - 8.64e7;
+                }
+            },
         }
     },
     created() {
