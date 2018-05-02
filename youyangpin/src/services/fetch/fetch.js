@@ -23,7 +23,7 @@ const checkStatus = function(response) {
         util.clearAuthCookie()
         setTimeout(()=>{
             window.location = '/#/login?redirect=' + window.location.hash.replace('#/','%2F')
-        },1000)
+        })
         return response
     } else{        
         const error = new Error(response.statusText)

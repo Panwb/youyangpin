@@ -95,7 +95,7 @@ export default {
             this.goodsSearch();
         },
         clickType(name) {
-            this.searchForm.activityType = name;
+            this.searchForm.activityType = name || '';
             this.vIndex = 0;
             this.searchForm.verticalFieldCode = "";
             this.goodsSearch();

@@ -33,13 +33,15 @@ export default {
             this.isShowChoose = false;
             ajax.getGoodsDetail(this.goodsId)
                 .then((result) => {
-                    this.applyData = result;
-                    this.ApplicationForm.ShopId = result.Shop.ShopId;
-                    this.ApplicationForm.MerchantUserId = result.Shop.UserId;
-                    this.applyData.RelatedGoods.forEach((item,index) => {
-                        this.$set(this.isChecked, index, false)
-                    });
-                    this.isShowChoose = true;
+                    if(result){
+                        this.applyData = result;
+                        this.ApplicationForm.ShopId = result.Shop.ShopId;
+                        this.ApplicationForm.MerchantUserId = result.Shop.UserId;
+                        this.applyData.RelatedGoods.forEach((item,index) => {
+                            this.$set(this.isChecked, index, false)
+                        });
+                        this.isShowChoose = true;
+                    }
                     // console.log('店铺信息',this.applyData.Shop)
                     // console.log('主播信息',this.applyData.StudioHost)
                     // console.log('当前申请商品信息',this.applyData.CurrentGood)
