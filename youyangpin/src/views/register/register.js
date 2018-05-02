@@ -54,6 +54,8 @@ export default {
             }
         };
         return {
+            time: 300,
+            sendMsgDisabled: false,
             dialogVisible:true,
             imgCode: '',
             isRead: false,
@@ -112,12 +114,21 @@ export default {
                 this.$message.error('请输入正确的手机号码')
                 return
             }else{
-                ajax.getSmsCode(this.ruleForm2.telphone).then((result) => {
-                    console.log(result)
-                })
+                if(!this.sendMsgDisabled) {
+                    ajax.getSmsCode(this.ruleForm2.telphone).then((result) => {
+                        console.log(result)
+                    })
+                }
+                this.sendMsgDisabled = true;
+                let that = this;
+                let interval = window.setInterval(function() {
+                    if ((that.time--) <= 0) {
+                        that.time = 300;
+                        that.sendMsgDisabled = false;
+                        window.clearInterval(interval);
+                    }
+                }, 1000);
             }
-
-
         },
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {

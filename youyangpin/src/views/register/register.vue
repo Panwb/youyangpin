@@ -1,71 +1,75 @@
 <template>
-  <div id="app">  
-	<el-container>
-       <!-- header start -->
-      <div class="wd1200 searchbox">
-	      <el-row>
-			  <el-col :span="8"><div class="grid-content bg-purple">
-          <router-link to="/index"><img src="~assets/images/logo.png" class="logo"></router-link></div></el-col>
-		    </el-row>
-      </div>
-	  <!-- header end -->
+	<div id="app">
+		<el-container>
+			<!-- header start -->
+			<div class="wd1200 searchbox">
+				<el-row>
+					<el-col :span="8"><div class="grid-content bg-purple">
+						<router-link to="/index"><img src="~assets/images/logo.png" class="logo"></router-link></div></el-col>
+				</el-row>
+			</div>
+			<!-- header end -->
 
-    <!-- main start -->
-	  <el-main class="maincontent regmaincontent">
-	    <div class="wd1200 registerbox regbox">
-           <p class="title">用户注册<span class="login">已有账号?<router-link to="/login">点击登录</router-link></span></p>
-			<el-form :model="ruleForm2"  :rules="rules2" ref="ruleForm2" label-width="100px">
-			  <el-form-item label="主播名称" prop="studioHostName">
-			    <el-input  v-model="ruleForm2.studioHostName" auto-complete="off"  placeholder="请输入主播名称"></el-input>
-			  </el-form-item>
-			  <el-form-item label="账号" prop="telphone" >
-			    <el-input  v-model="ruleForm2.telphone" auto-complete="off"  placeholder="请输入手机号码"></el-input>
-			  </el-form-item>
-			  <el-form-item label="验证码" prop="ImageIdentifyCode">
-			    <el-input  v-model="ruleForm2.ImageIdentifyCode"  auto-complete="off"  placeholder="请输入图形验证码"  class="codetxt"></el-input>
-				  <span class="imgbox"><img :src="imgCode" class="logo" @click="getImgCode"></span>
-			  </el-form-item>
-			  <el-form-item label="短信验证码" prop="SmsIdentifyCode">
-			    <el-input  v-model="ruleForm2.SmsIdentifyCode"  auto-complete="off"  placeholder="请输入短信验证码"  class="codetxt"></el-input><el-button class="getcode" @click="getCode">获取验证码</el-button>
-			  </el-form-item>
-			  <el-form-item label="设置密码" prop="password">
-			    <el-input type="password" v-model="ruleForm2.password" auto-complete="off" placeholder="密码必须为6-25位数字 + 字母"></el-input>
-			  </el-form-item>
-			  <el-form-item label="确认密码" prop="checkPass">
-			    <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="请再次输入密码"></el-input>
-			  </el-form-item>
-			  <el-form-item>
-			    <el-button type="primary" @click="submitForm('ruleForm2')" class="registerbtn">立即注册</el-button>
-			  </el-form-item>
-			</el-form>	  
-	    </div>
-	  </el-main>
-	  <!-- main end -->
+			<!-- main start -->
+			<el-main class="maincontent regmaincontent">
+				<div class="wd1200 registerbox regbox">
+					<p class="title">用户注册<span class="login">已有账号?<router-link to="/login">点击登录</router-link></span></p>
+					<el-form :model="ruleForm2"  :rules="rules2" ref="ruleForm2" label-width="100px">
+						<el-form-item label="主播名称" prop="studioHostName">
+							<el-input  v-model="ruleForm2.studioHostName" auto-complete="off"  placeholder="请输入主播名称"></el-input>
+						</el-form-item>
+						<el-form-item label="账号" prop="telphone" >
+							<el-input  v-model="ruleForm2.telphone" auto-complete="off"  placeholder="请输入手机号码"></el-input>
+						</el-form-item>
+						<el-form-item label="验证码" prop="ImageIdentifyCode">
+							<el-input  v-model="ruleForm2.ImageIdentifyCode"  auto-complete="off"  placeholder="请输入图形验证码"  class="codetxt"></el-input>
+							<span class="imgbox"><img :src="imgCode" class="logo" @click="getImgCode"></span>
+						</el-form-item>
+						<el-form-item label="短信验证码" prop="SmsIdentifyCode">
+							<el-input  v-model="ruleForm2.SmsIdentifyCode"  auto-complete="off"  placeholder="请输入短信验证码"  class="codetxt"></el-input>
+							<el-button type="primary" class="getcode" :disabled="sendMsgDisabled" @click="getCode">
+								<span v-if="sendMsgDisabled">重发:{{time+'秒'}}</span>
+								<span v-if="!sendMsgDisabled">获取验证码</span>
+							</el-button>
+						</el-form-item>
+						<el-form-item label="设置密码" prop="password">
+							<el-input type="password" v-model="ruleForm2.password" auto-complete="off" placeholder="密码必须为6-25位数字 + 字母"></el-input>
+						</el-form-item>
+						<el-form-item label="确认密码" prop="checkPass">
+							<el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="请再次输入密码"></el-input>
+						</el-form-item>
+						<el-form-item>
+							<el-button type="primary" @click="submitForm('ruleForm2')" class="registerbtn">立即注册</el-button>
+						</el-form-item>
+					</el-form>
+				</div>
+			</el-main>
+			<!-- main end -->
 
-	  <!-- footer start -->
-	  <el-footer>
-      <main-footer></main-footer>
-	  </el-footer>
-	  <!-- footer end -->
+			<!-- footer start -->
+			<el-footer>
+				<main-footer></main-footer>
+			</el-footer>
+			<!-- footer end -->
 
-    <el-dialog title="优样品-用户注册须知" :visible.sync="dialogVisible" width="40%"
-    :before-close="handleClose" class="regisbox" :close-on-click-modal="false">
-    <div class="dgcontent">
-       <p>1.好单库面向各大招商淘客，暂不支持商家入驻，商家请联系淘客合作放单，请认真阅读和遵守以下规则。</p>
-       <p>2.认真填写您的团队名号，名号代表着平台和别人对你的认可和信任，相当于您的身份证，请用您对外宣传和交流的名号进行注册。
-         <span class="tip">（严禁使用他人或知名团队名号，除非是该团队创始人，严禁盗用名号）</span> </p>
-       <p>3.联系QQ必须填写经常使用的大号，小号不审核不通过，并且保证单子出问题，能第一时间出面处理，严重伤害淘客利益的封号处理。</p>
-       <p>4.连续30天没有发布单子或多次发布的单子被举报的已认证用户，将会自动取消认证，严重者封号并加入黑名单。</p>
-       <p>5.平台对单子归属人和招商比较给力的个人或者团队进行排名榜推荐，请珍惜你的名号。发现乱用名号者，加入黑名单，拒绝注册。</p>
-        <p>6.放单后台实行自主认证，为新用户提供新人专享的“新人专享认证礼包”，充值598元领取礼包可自主认证通过并获得发布积分。 已开放邀请好友注册功能，邀请6个好友并认证通过，可获得认证资格以及3000发布积分，邀请10个以上加送2万发布积分。</p>
-       <p class="agree"><el-checkbox v-model="isRead" name="type1"></el-checkbox>已认真阅读并同意须知内容</p>
-    </div>
-    <span slot="footer" class="dialog-footer">
+			<el-dialog title="优样品-用户注册须知" :visible.sync="dialogVisible" width="40%"
+					   :before-close="handleClose" class="regisbox" :close-on-click-modal="false">
+				<div class="dgcontent">
+					<p>1.好单库面向各大招商淘客，暂不支持商家入驻，商家请联系淘客合作放单，请认真阅读和遵守以下规则。</p>
+					<p>2.认真填写您的团队名号，名号代表着平台和别人对你的认可和信任，相当于您的身份证，请用您对外宣传和交流的名号进行注册。
+						<span class="tip">（严禁使用他人或知名团队名号，除非是该团队创始人，严禁盗用名号）</span> </p>
+					<p>3.联系QQ必须填写经常使用的大号，小号不审核不通过，并且保证单子出问题，能第一时间出面处理，严重伤害淘客利益的封号处理。</p>
+					<p>4.连续30天没有发布单子或多次发布的单子被举报的已认证用户，将会自动取消认证，严重者封号并加入黑名单。</p>
+					<p>5.平台对单子归属人和招商比较给力的个人或者团队进行排名榜推荐，请珍惜你的名号。发现乱用名号者，加入黑名单，拒绝注册。</p>
+					<p>6.放单后台实行自主认证，为新用户提供新人专享的“新人专享认证礼包”，充值598元领取礼包可自主认证通过并获得发布积分。 已开放邀请好友注册功能，邀请6个好友并认证通过，可获得认证资格以及3000发布积分，邀请10个以上加送2万发布积分。</p>
+					<p class="agree"><el-checkbox v-model="isRead" name="type1"></el-checkbox>已认真阅读并同意须知内容</p>
+				</div>
+				<span slot="footer" class="dialog-footer">
       <el-button type="primary" @click="dialogVisible = false"  :disabled="!isRead">确 定</el-button>
     </span>
-  </el-dialog>
-	</el-container>
-  </div>
+			</el-dialog>
+		</el-container>
+	</div>
 </template>
 
 <script type="text/babel">
