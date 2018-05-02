@@ -85,6 +85,13 @@ export default {
             console.log(`当前页: ${val}`);
             this.pageIndex = val
             this.getPagedRequest()
+        },
+        formatDate(val) {
+            if(val) {
+                return `${val.substring(0,4)}年${val.substring(5,7)}月${val.substring(8,10)}日`
+            }else {
+                return null
+            }
         }
     }
 }
