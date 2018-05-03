@@ -3,70 +3,70 @@ import { api as ajax } from 'services'
 export default {
     data() {
         var validateuserName = (rule, value, callback) => {
-            if (value === '') {
+            if (!value) {
                 callback(new Error('请输入主播名称'));
             }else {
                 callback();
             }
         };
         var validateuserzhifuId= (rule, value, callback) => {
-            if (value === '') {
+            if (!value) {
                 callback(new Error('请输入支付宝账号'));
             }else {
                 callback();
             }
         };
         var validateheight= (rule, value, callback) => {
-            if (value === '') {
+            if (!value) {
                 callback(new Error('请输入身高'));
             }else {
                 callback();
             }
         };
         var validateweight= (rule, value, callback) => {
-            if (value === '') {
+            if (!value) {
                 callback(new Error('请输入体重'));
             }else {
                 callback();
             }
         };
         var validateshoeSize= (rule, value, callback) => {
-            if (value === '') {
+            if (!value) {
                 callback(new Error('请输入鞋码'));
             }else {
                 callback();
             }
         };
         var validateaddress= (rule, value, callback) => {
-            if (value === '') {
+            if (!value) {
                 callback(new Error('请输入收货地址'));
             }else {
                 callback();
             }
         };
         var validatelinkName= (rule, value, callback) => {
-            if (value === '') {
+            if (!value) {
                 callback(new Error('请输入联系人姓名'));
             }else {
                 callback();
             }
         };
         var validatelinkPhone= (rule, value, callback) => {
-            if (value === '') {
+            if (!value) {
                 callback(new Error('请输入联系人电话'));
             }else {
                 callback();
             }
         };
         var validatewechatId= (rule, value, callback) => {
-            if (value === '') {
+            if (!value) {
                 callback(new Error('请输入微信号'));
             }else {
                 callback();
             }
         };
         var validatetkName= (rule, value, callback) => {
-            if (value === '') {
+            if (!value) {
                 callback(new Error('请输入淘客名称'));
             }else {
                 callback();
