@@ -3,7 +3,7 @@
         <el-container>
             <main-header @clickType="clickType" ref="head" @goToIndex="goToIndex"></main-header>
             <!-- main start -->
-            <el-main>
+            <el-main class="indexcontent">
                 <div class="wd1200">
                     <div class="typebox">
                         <div class="topbox">
@@ -51,7 +51,7 @@
                                             <span class="money">￥<i class="count">{{ item.LivePrice }}</i></span>
                                             <div class="price">
                                                 <p class="count">￥{{ item.DailyPrice }}</p>
-                                                <p class="state">直播专享价</p>
+                                                <p class="state">直播价</p>
                                             </div>
                                             <div class="youhui jian">
                                                 <span class="num">{{ item.DailyPrice-item.LivePrice }}</span>
@@ -101,6 +101,9 @@
 </script>
 
 <style>
+.indexcontent{
+   background-color: #f2f2f2; 
+}
 .optbox{
 	background-color: #f2f2f2;
     height: 40px;
@@ -245,12 +248,9 @@
 	font-style:normal;
 	color:#999;
 }
-.listbox .el-col-6{
-  margin-bottom:20px;
-
-}
 .listbox .el-card{
 	position:relative;
+    margin-bottom: 30px;
 }
 .listbox .el-card:hover{
 	border:1px solid #f35f17;
