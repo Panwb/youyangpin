@@ -68,10 +68,9 @@ export default {
                 if (valid) {
                     ajax.login(this.ruleForm2).then((result) => {
                         // 登录成功
-                        this.util.setAuthCookie()
                         result = JSON.stringify(result);
-                        localStorage.setItem('user',result);
-                        // this.setAccount(result)
+                        this.util.setCookie('user',result,1);
+                        // localStorage.setItem('user',result);
                         const redirect = decodeURIComponent(this.$route.query.redirect || '/index');
                         this.$router.push(redirect);
                     }).catch(error => {
