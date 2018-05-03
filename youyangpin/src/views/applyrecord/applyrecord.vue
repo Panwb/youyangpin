@@ -347,8 +347,8 @@
 	width:80px;
 	text-align:center;
 	font-size:14px;
-	height:147px;
-	line-height:147px;
+	height:143px;
+	line-height:143px;
 	float:left;
 	border-bottom: 1px solid #ebeef5;
 }
@@ -356,8 +356,8 @@
     width:188px;
     text-align:center;
     font-size:14px;
-    height:147px;
-    line-height:147px;
+    height:143px;
+    line-height:143px;
     float:left;
     border-bottom: 1px solid #ebeef5;
 }
@@ -365,7 +365,7 @@
     width:100px;
     text-align:center;
     font-size:14px;
-    height:147px;
+    height:143px;
     float:left;
     border-bottom: 1px solid #ebeef5;
 }

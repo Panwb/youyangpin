@@ -85,6 +85,8 @@
 .demo-ruleForm .el-input__inner{
   border-radius:0;
   padding-left:50px;
+  height:40px;
+  line-height:40px;
 }
 .demo-ruleForm  .icon{
     position: absolute;

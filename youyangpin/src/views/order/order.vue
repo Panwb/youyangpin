@@ -493,6 +493,7 @@
     float: right;
     color: #989898;
     font-size: 12px;
+    margin-top:2px;
 }
 .pagebox{
 	margin:30px auto;
