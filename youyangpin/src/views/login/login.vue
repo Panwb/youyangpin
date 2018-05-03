@@ -90,10 +90,10 @@
 }
 .demo-ruleForm  .icon{
     position: absolute;
-    top:1px;
+    top:2px;
     left:1px;
-    width:38px;
-    height:38px;
+    width:37px;
+    height:37px;
     border-right: 1px solid #ddd;
     background-color: #f5f5f5;
     display:inline-block;

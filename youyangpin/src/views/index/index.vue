@@ -346,7 +346,7 @@
 	float:left;
 }
 .listbox .middle .money .count{
-	font-size:32px;
+	font-size:28px;
 	font-style:normal;
     color:#f9513b;
 }
