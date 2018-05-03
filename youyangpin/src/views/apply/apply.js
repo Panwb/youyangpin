@@ -88,7 +88,7 @@ export default {
         },
         formatDate(val) {
             if(val) {
-                return `${val.substring(0,4)}年${val.substring(5,7)}月${val.substring(8,10)}日`
+                return `${val.substring(0,4)}/${val.substring(5,7)}/${val.substring(8,10)}`
             }else {
                 return null
             }

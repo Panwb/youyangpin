@@ -39,13 +39,13 @@
 											<el-input v-model="ruleForm.AlipayAccount" auto-complete="off"></el-input>
 										</el-form-item>
 										<el-form-item label="身高" prop="Height" class="linebox">
-											<el-input v-model="ruleForm.Height" auto-complete="off" placeholder="CM"></el-input>
+											<el-input v-model="ruleForm.Height" auto-complete="off" placeholder="CM" onkeypress="return event.keyCode>=48&&event.keyCode<=57" :maxlength="3"></el-input>
 										</el-form-item>
 										<el-form-item label="体重" prop="Weight" class="linebox">
-											<el-input v-model="ruleForm.Weight" auto-complete="off" placeholder="KG"></el-input>
+											<el-input v-model="ruleForm.Weight" auto-complete="off" placeholder="KG" onkeypress="return event.keyCode>=48&&event.keyCode<=57" :maxlength="3"></el-input>
 										</el-form-item>
 										<el-form-item label="鞋码" prop="ShoeSize" class="linebox">
-											<el-input v-model="ruleForm.ShoeSize" auto-complete="off" placeholder="码数"></el-input>
+											<el-input v-model="ruleForm.ShoeSize" auto-complete="off" placeholder="码数" onkeypress="return event.keyCode>=48&&event.keyCode<=57" :maxlength="3"></el-input>
 										</el-form-item>
 										<el-form-item label="尺码" prop="ClothesSize"  class="linebox">
 											<el-select v-model="ruleForm.ClothesSize" placeholder="请选择">

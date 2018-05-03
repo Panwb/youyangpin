@@ -60,6 +60,10 @@ export default {
             ],
             status: [
                 {
+                    name: '所有订单',
+                    key: 'order0'
+                },
+                {
                     name: '待发货',
                     key: 'order1'
                 },
@@ -99,7 +103,7 @@ export default {
             pageList: [],
             asideIndex: '1',
             textarea: '',
-            activeName: 'order1',
+            activeName: 'order0',
             dialogVisible1: false,
             dialogVisible2: false,
             dialogVisible3: false,
@@ -192,13 +196,13 @@ export default {
         }
     },
     created() {
-        this.currentStatu = this.status[0]['name']
+        this.currentStatu = this.status[0]['name'] === '所有订单' ? '' : this.status[0]['name']
         this.getPagedOrder()
     },
      methods: {
         handleClick(tab, event) {
             this.pageIndex = 1
-            this.currentStatu = tab.label
+            this.currentStatu = (tab.label === '所有订单' ? '' : tab.label)
             this.getPagedOrder()
         },
         getPagedOrder() {

@@ -41,20 +41,20 @@
                                         <span class="type"><i>{{ item.ActivityType }}商品</i></span>
                                         <img :src="item.GoodsImgURL" class="image"/>
                                         <div class="numbox">
-                                            <div class="rcprice"><div class="inner">日常价：{{ item.DailyPrice }}</div></div>
+                                            <div class="rcprice"><div class="inner">日常价：{{ item.DailyPrice.toFixed(2) }}</div></div>
                                             <div class="xl"><div class="inner">销量{{ item.Sales }}件</div></div>
                                         </div>
                                     </a>
                                     <div class="content">
                                         <p class="words"><span :class="item.ShopType=='淘宝店'?'icon icon-tao':'icon icon-tian'"></span>{{ item.GoodsName }}</p>
                                         <div class="middle">
-                                            <span class="money">￥<i class="count">{{ item.LivePrice }}</i></span>
+                                            <span class="money">￥<i class="count">{{ item.LivePrice.toFixed(2) }}</i></span>
                                             <div class="price">
-                                                <p class="count">￥{{ item.DailyPrice }}</p>
+                                                <p class="count">￥{{ item.DailyPrice.toFixed(2) }}</p>
                                                 <p class="state">直播专享价</p>
                                             </div>
                                             <div class="youhui jian">
-                                                <span class="num">{{ item.DailyPrice-item.LivePrice }}</span>
+                                                <span class="num">{{ (item.DailyPrice-item.LivePrice).toFixed(2) }}</span>
                                             </div>
                                         </div>
                                         <div class="bottom clearfix">
@@ -75,18 +75,7 @@
 
             <!-- footer start -->
             <el-footer>
-                <div class="wd1200">
-                    <ul class="linklist">
-                        <li><a a href="https://www.taobao.com/" target="_blank">淘宝网</a></li>
-                        <li><a a href="https://www.tmall.com/" target="_blank">天猫</a></li>
-                        <li><a a href="https://ju.taobao.com/" target="_blank">聚划算</a></li>
-                        <li><a a href="https://seller.aliexpress.com/" target="_blank">全球速卖通</a></li>
-                        <li><a a href="https://www.1688.com/" target="_blank">1688</a></li>
-                        <li><a a href="http://pub.alimama.com/" target="_blank">阿里妈妈</a></li>
-                        <li><a a href="https://m.kuaidi100.com/" target="_blank">快递查询</a></li>
-                    </ul>
-                    <p class="copyright">©copyright 2016-2018 优样品 www.youyangpin.com.<a href="http://www.beianbeian.com/beianxinxi/a40cc71f-db17-4d78-80dd-4b232dab5880.html">粤ICP备15114843号-1</a></p>
-                </div>
+              <main-footer></main-footer>
             </el-footer>
             <!-- footer end -->
         </el-container>
