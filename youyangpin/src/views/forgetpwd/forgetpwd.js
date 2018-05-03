@@ -46,6 +46,8 @@ export default {
             }
         };
         return {
+            time: 90,
+            sendMsgDisabled: false,
             imgCode: '',
             active: 1,
             ruleForm1: {
@@ -92,10 +94,26 @@ export default {
             })
         },
         getCode() {
-            ajax.getSmsCode(this.ruleForm1.telphone).then((result) => {
-                this.$message('验证码已发送你手机上');
-               // this.ruleForm2.mobileYzCode = result
-            })
+            var phonereg=/^[1][3,4,5,7,8][0-9]{9}$/
+            if (this.ruleForm1.telphone == '' || !phonereg.test(this.ruleForm1.telphone)) {
+                this.$message.error('请输入正确的手机号码')
+                return
+            }else{
+                if(!this.sendMsgDisabled) {
+                    ajax.getSmsCode(this.ruleForm1.telphone).then((result) => {
+                        this.$message('验证码已发送你手机上');
+                    })
+                }
+                this.sendMsgDisabled = true;
+                let that = this;
+                let interval = window.setInterval(function() {
+                    if ((that.time--) <= 0) {
+                        that.time = 90;
+                        that.sendMsgDisabled = false;
+                        window.clearInterval(interval);
+                    }
+                }, 1000);
+            }
         },
         handleSelect(key, keyPath) {
             console.log(key, keyPath);

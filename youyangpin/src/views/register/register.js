@@ -54,7 +54,7 @@ export default {
             }
         };
         return {
-            time: 300,
+            time: 90,
             sendMsgDisabled: false,
             dialogVisible:true,
             imgCode: '',
@@ -123,7 +123,7 @@ export default {
                 let that = this;
                 let interval = window.setInterval(function() {
                     if ((that.time--) <= 0) {
-                        that.time = 300;
+                        that.time = 90;
                         that.sendMsgDisabled = false;
                         window.clearInterval(interval);
                     }
