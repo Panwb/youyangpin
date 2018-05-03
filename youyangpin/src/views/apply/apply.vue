@@ -103,7 +103,7 @@
 									<li>
 										<div class="infobox">
 											<p class="name">{{ item.GoodsName }}</p>
-											<p class="price">直播专享价:<span class="num">{{ item.LivePrice }}</span> <span class="normal">日常价:{{ item.DailyPrice }}</span></p>
+											<p class="price">直播专享价:<span class="num">{{ item.LivePrice }}</span> <span class="normal">日常价:{{ item.DailyPrice.toFixed(2) }}</span></p>
 											<p class="money">佣金比例:<span class="num">{{ item.CommissionRatio }}%</span></p>
 											<p class="date">活动日期：{{ formatDate(item.ActivityBeginTime) }}-{{ formatDate(item.ActivityEndTime) }}</p>
 											<p class="detail">{{ item.IsProvideMulticolor === '是' ?  '提供多色（' + item.ColorNum + '中颜色）' : ''}}</p>

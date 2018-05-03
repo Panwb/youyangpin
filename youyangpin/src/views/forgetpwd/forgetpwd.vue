@@ -42,7 +42,11 @@
 								  <span>{{ ruleForm1.telphone }}</span>
 							   </el-form-item>
 							   <el-form-item label="短信验证码" prop="smsIdentifyCode">
-							    <el-input  v-model="ruleForm2.smsIdentifyCode"  auto-complete="off"  placeholder="请输入6位数字短信验证码"  class="codetxt"></el-input><el-button class="getcode" @click="getCode">获取验证码</el-button>
+							    <el-input  v-model="ruleForm2.smsIdentifyCode"  auto-complete="off"  placeholder="请输入6位数字短信验证码"  class="codetxt"></el-input>
+								<el-button type="primary" class="getcode" :disabled="sendMsgDisabled" @click="getCode">
+									<span v-if="sendMsgDisabled">重发:{{time+'秒'}}</span>
+									<span v-if="!sendMsgDisabled">获取验证码</span>
+								</el-button>
 							   </el-form-item>
 							   <el-form-item>
 								    <el-button type="primary" @click="submitForm('ruleForm2',ruleForm2.smsIdentifyCode)">下一步</el-button>

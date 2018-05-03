@@ -53,7 +53,7 @@
                                                 <div class="imgbox"><a :href="good.GoodsURL" target="view_window"><img :src="good.GoodsImgURL"></a></div>
                                                 <div class="con">
                                                     <p class="name">{{ good.GoodsName }}</p>
-                                                    <p class="price">直播专享价:<span class="num">{{ good.LivePrice }}</span> <span class="normal">日常价:{{ good.DailyPrice }}</span></p>
+                                                    <p class="price">直播专享价:<span class="num">{{ good.LivePrice }}</span> <span class="normal">日常价:{{ good.DailyPrice.toFixed(2) }}</span></p>
                                                     <p class="money">佣金比例:<span class="num">{{ good.CommissionRatio }}%</span></p>
                                                     <p class="date">活动日期：{{ formatDate(good.ActivityBeginTime) }}-{{ formatDate(good.ActivityEndTime) }}</p>
                                                     <p class="detail">{{ good.IsProvideMulticolor === '是' ?  '提供多色（' + good.ColorNum + '中颜色）' : '' }}</p>
