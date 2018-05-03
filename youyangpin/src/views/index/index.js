@@ -40,17 +40,8 @@ export default {
             }
         }
     },
-    created() {
-        if (this.$route.query.keywords) {
-            this.searchForm.goodsName = this.$route.query.keywords
-        }
-        this.goodsSearch();
-        if(sessionStorage.getItem('prePath')!=='/login'&&sessionStorage.getItem('prePath')!=='/index'&&sessionStorage.getItem('prePath')!=='/') {
-            //
-        }else {
-            this.getStatistics(this.searchForm.activityType)
-        }
-
+    mounted() {
+        this.goToIndex();
     },
     computed: {
         ...mapGetters([
@@ -61,6 +52,19 @@ export default {
         ...mapActions([
             'setStatistics'
         ]),
+        goToIndex() {
+            if (this.$route.query.keywords) {
+                this.searchForm.goodsName = this.$route.query.keywords
+            }
+            if(sessionStorage.getItem('prePath')!=='/login'&&sessionStorage.getItem('prePath')!=='/') {
+                //
+            }else {
+                sessionStorage.setItem('typekey','0');
+                sessionStorage.setItem('typename','');
+                this.getStatistics(this.searchForm.activityType);
+                this.goodsSearch();
+            }
+        },
         goodsSearch() {
             ajax.goodSearch(this.searchForm).then((result) => {
                 console.log(result);
@@ -81,7 +85,8 @@ export default {
         },
         handleCurrentChange(val) {
             this.searchForm.pageIndex = val
-            this.goodsSearch()
+            this.goodsSearch();
+            scrollTo(0,0);
             console.log(`当前页: ${val}`);
         },
         clickSortField(val,name) {
