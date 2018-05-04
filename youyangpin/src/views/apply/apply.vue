@@ -12,7 +12,10 @@
 						<div  class="text item">
 							<div class="txt">
 								<div class="box">
-									<span class="tianmao"><img :src="applyData.Shop.ShopType === '天猫店' ? '~assets/images/tianmao.png' : '~assets/images/taobao.png'" class="image" ></span>
+									<span class="tianmao">
+										<img v-if="applyData.Shop.ShopType === '天猫店'" src="~assets/images/tianmao.png" class="image" >
+										<img v-if="applyData.Shop.ShopType === '淘宝店'" src="~assets/images/taobao.png" class="image" >
+									</span>
 									<span class="name">店铺:{{ applyData.Shop.ShopName }}</span>
 									<span class="wangwang"></span>
 								</div>
