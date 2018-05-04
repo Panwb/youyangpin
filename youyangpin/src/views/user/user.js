@@ -112,19 +112,6 @@ export default {
             ],
             asideIndex:'4',
             ruleForm: {
-                // StudioHostName: '',
-                // AlipayAccount: '',
-                // Height: '',
-                // Weight: '',
-                // ShoeSize: '', // 鞋码
-                // ClothesSize: '', // 尺码
-                // Address: '',
-                // LinkmanName: '',
-                // LinkmanPhone: '',
-                // TKName: '',
-                // WeChat: '',
-                // QQ: '',
-                // DailyBeginTime: '',
                 CheckStatus: '',
                 StudioHostName: '',
                 AlipayAccount:'',
@@ -189,7 +176,7 @@ export default {
         getUserDetail() {
             this.isShowCheck = false;
             ajax.getUserDetail().then((result) => {
-                result.VerticalFieldCode = result.VerticalFieldCode ? result.VerticalFieldCode.split(',') : '';  
+                result.VerticalFieldCode = result.VerticalFieldCode ? result.VerticalFieldCode.split(',') : [];  
                 result.DailyBeginTime = result.DailyBeginTime && this.formatDate(result.DailyBeginTime,'hm');
                 result.DailyEndTime = result.DailyEndTime && this.formatDate(result.DailyEndTime,'hm');
                 this.ruleForm = result;
@@ -238,7 +225,7 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    this.ruleForm.VerticalFieldCode = this.ruleForm.VerticalFieldCode && this.ruleForm.VerticalFieldCode.join();
+                    this.ruleForm.VerticalFieldCode = this.ruleForm.VerticalFieldCode ? this.ruleForm.VerticalFieldCode.join(',') : '';
                     ajax.updateStudioHost(this.ruleForm)
                         .then((result) => {
                             this.$message({type:"success",message:"保存成功"});
