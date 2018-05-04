@@ -33,7 +33,7 @@
                                                 :key="item.key">
                                         </el-tab-pane>
                                     </el-tabs>
-                                    <div class="titlebox">
+                                    <div class="titlebox recordtitlebox">
                                         <div class="title1">宝贝</div>
                                         <div class="title2">销量</div>
                                         <div class="title3">库存</div>
@@ -41,7 +41,7 @@
                                         <div class="title5">是否需要退样</div>
                                         <div class="title6">审核状态</div>
                                     </div>
-                                    <div class="contentbox" v-if="pageList.length>0" v-for="(item,index) in pageList" :key="index">
+                                    <div class="contentbox recordlistbox" v-if="pageList.length>0" v-for="(item,index) in pageList" :key="index">
                                         <div class="topbox">
                                             <div class="date">{{ item.datetime }}</div><!--todo-->
                                             <div class="shop"><span :class="item.ShopType=='淘宝店'?'icon icon-tao':'icon icon-tian'"></span>{{ item.ShopName }}</div>
@@ -280,6 +280,9 @@
 .titlebox > div.title1{
 	width:320px;
 }
+.recordtitlebox > div.title1{
+    width:360px;
+}
 .titlebox > div.title2{
 	width:80px;
 }
@@ -291,6 +294,9 @@
 }
 .titlebox > div.title5{
 	width:180px;
+}
+.recordtitlebox > div.title5{
+    width:140px;
 }
 .titlebox > div.title6{
 	width:170px;
@@ -347,17 +353,17 @@
 	width:80px;
 	text-align:center;
 	font-size:14px;
-	height:143px;
-	line-height:143px;
+	height:140px;
+	line-height:140px;
 	float:left;
 	border-bottom: 1px solid #ebeef5;
 }
 .bottombox .needsendback{
-    width:188px;
+    width:144px;
     text-align:center;
     font-size:14px;
-    height:143px;
-    line-height:143px;
+    height:140px;
+    line-height:140px;
     float:left;
     border-bottom: 1px solid #ebeef5;
 }
@@ -365,7 +371,7 @@
     width:100px;
     text-align:center;
     font-size:14px;
-    height:143px;
+    height:140px;
     float:left;
     border-bottom: 1px solid #ebeef5;
 }
@@ -395,6 +401,9 @@
 }
 .infobox .con .date, .infobox .con .detail {
     color: #333;
+}
+.recordlistbox .infobox .con .detail {
+    margin-bottom:0;
 }
 .infobox .con p.name {
     height: 25px;
@@ -479,5 +488,14 @@
 }
 .passsuccess{
     color:green;
+}
+.recordlistbox .infobox{
+    width:350px;
+}
+.recordlistbox .infobox .con{
+    width:205px;
+}
+.recordlistbox .infobox .date{
+    font-size:12px;
 }
 </style>
