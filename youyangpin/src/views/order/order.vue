@@ -384,6 +384,7 @@
 .topbox > div.orderId{
 	margin-left:10px;
 	color:#666;
+	width:190px;
 }
 .topbox > div.shop{
 	margin-left:165px;
@@ -492,6 +493,7 @@
     float: right;
     color: #989898;
     font-size: 12px;
+    margin-top:2px;
 }
 .pagebox{
 	margin:30px auto;
@@ -557,13 +559,18 @@
 	display:block;
 }
 .topbox>div.shop{
-    padding-left:40px;
-    position:relative;
+    padding-left: 25px;
+    position: relative;
+    width: 68px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-left:150px;
 }
 .topbox>div.shop .icon{
     position: absolute;
     top: 6px;
-    left: 13px;
+    left:0px;
     width: 22px;
     height: 22px;
 }

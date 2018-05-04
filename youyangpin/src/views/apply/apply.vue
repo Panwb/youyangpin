@@ -4,7 +4,7 @@
 			<main-header></main-header>
 			<!-- main start -->
 			<el-main>
-				<div class="wd1200 applybox" v-if="applyData">
+				<div class="wd1200 applybox applyenterbox" v-if="applyData">
 					<el-card class="box-card shopbox" shadow="never">
 						<div slot="header" class="clearfix title">
 							<span>店铺信息</span>
@@ -199,6 +199,12 @@ export default {
 .applybox{
 	margin-top:15px;
 }
+.applyenterbox div{
+	margin-bottom:0 !important;
+}
+.applyenterbox div.el-card{
+	margin-bottom:30px !important;
+}
 .optbox{
 	background-color: #f2f2f2;
     height: 40px;
@@ -306,6 +312,7 @@ export default {
 	background:#f5f5f5;
 	font-size:18px;
 	color:#333;
+	margin-bottom:0;
 }
 .el-card .txt span{
 	display:inline-block;
@@ -373,8 +380,8 @@ export default {
 	height:120px;
 }
 .goodbox .infobox{
-	width:325px;
-	margin-right:150px;
+	width:300px;
+	margin-right:120px;
 	color:#656565;
 	text-align:left;
 	padding:0 !important;
@@ -465,7 +472,6 @@ export default {
 	padding:0;
 	height:35px;
 	line-height:35px;
-	text-align:right;
 }
 .pinfobox .el-card__body{
 	padding:10px 0;
@@ -477,7 +483,6 @@ export default {
 }
 .pinfobox .el-card__body .phone{
 	margin-bottom:20px;
-	text-align:right;
 }
 .pinfobox .el-card__body .opt button{
 	padding:0;
@@ -500,6 +505,7 @@ export default {
     color: #fff;
     padding: 0;
     clear:both;
+    margin-top:15px !important;
 }
 .applybtnbox .el-button--text {
     color: #fff;
@@ -530,12 +536,12 @@ export default {
 .remarkbox{
 	float: right;
     margin-top: 10px;
-    width: 460px;
+    width:540px;
     padding: 0;
     clear: both;
 }
 .remarkbox textarea{
-	height:120px;
+	height:90px;
 }
 .remarkbox div{
 	margin-bottom:15px;
@@ -559,5 +565,25 @@ export default {
 	font-size:12px;
 	margin-top:1px;
 	float:right;
+}
+.applybox .personbox .el-card__body{
+	margin:0;
+}
+
+.applybox .shopbox .el-card__body{
+	margin:0;
+}
+.applybox .shopbox.el-card .box{
+	margin:0;
+}
+.applybox .shopbox.el-card .text{
+	margin:0;
+}
+.applybox .shopbox .txt{
+	margin:0;
+	padding:0;
+}
+.applybox .personbox .el-card__body .text{
+	margin:0;
 }
 </style>
