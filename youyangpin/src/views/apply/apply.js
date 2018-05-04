@@ -62,8 +62,7 @@ export default {
                 .then((result) => {
                     this.$message({type:"success",message:"提交成功，等待商家审核"});
                     this.$router.push('/applyrecord')
-                })
-                .catch(error => {
+                },error => {
                     this.$message({type:"warning",message:error});
                 })
         },
