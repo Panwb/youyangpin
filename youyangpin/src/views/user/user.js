@@ -17,21 +17,21 @@ export default {
             }
         };
         var validateheight= (rule, value, callback) => {
-            if (!value) {
+            if (!value && value !== 0) {
                 callback(new Error('请输入身高'));
             }else {
                 callback();
             }
         };
         var validateweight= (rule, value, callback) => {
-            if (!value) {
+            if (!value && value !== 0) {
                 callback(new Error('请输入体重'));
             }else {
                 callback();
             }
         };
         var validateshoeSize= (rule, value, callback) => {
-            if (!value) {
+            if (!value && value !== 0) {
                 callback(new Error('请输入鞋码'));
             }else {
                 callback();
@@ -189,7 +189,7 @@ export default {
         getUserDetail() {
             this.isShowCheck = false;
             ajax.getUserDetail().then((result) => {
-                result.VerticalFieldCode = result.VerticalFieldCode && result.VerticalFieldCode.split(',');
+                result.VerticalFieldCode = result.VerticalFieldCode ? result.VerticalFieldCode.split(',') : '';  
                 result.DailyBeginTime = result.DailyBeginTime && this.formatDate(result.DailyBeginTime,'hm');
                 result.DailyEndTime = result.DailyEndTime && this.formatDate(result.DailyEndTime,'hm');
                 this.ruleForm = result;
