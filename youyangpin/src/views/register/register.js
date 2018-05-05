@@ -96,7 +96,7 @@ export default {
         };
     },
     mounted() {
-        this.getImgCode()
+        //this.getImgCode()
     },
     methods: {
         getImgCode(){
@@ -115,26 +115,34 @@ export default {
                 return
             }else{
                 if(!this.sendMsgDisabled) {
-                    ajax.getSmsCode(this.ruleForm2.telphone).then((result) => {
-                        console.log(result)
+                    ajax.getByAccount(this.ruleForm2.telphone).then((result) => {
+                        if(result){
+                            this.$message.warning('账号已存在')
+                        }
+                        else{
+                            ajax.getSmsCode(this.ruleForm2.telphone, 1).then((result) => {
+                                this.$message('验证码已发送你手机上');
+                                console.log(result)
+                            })                         
+                        }
+                        this.sendMsgDisabled = true;
+                        let that = this;
+                        let interval = window.setInterval(function() {
+                            if ((that.time--) <= 0) {
+                                that.time = 90;
+                                that.sendMsgDisabled = false;
+                                window.clearInterval(interval);
+                            }
+                        }, 1000);   
                     })
                 }
-                this.sendMsgDisabled = true;
-                let that = this;
-                let interval = window.setInterval(function() {
-                    if ((that.time--) <= 0) {
-                        that.time = 90;
-                        that.sendMsgDisabled = false;
-                        window.clearInterval(interval);
-                    }
-                }, 1000);
             }
         },
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                    ajax.register(this.ruleForm2).then(result =>{
-                       this.$message.success('注册成功')
+                       this.$message.success('您已成功注册优样品账号，请及时登录主播个人中心，完善个人信息，账号信息需由客服人员审核通过后，方可在本平台申请拿样')
                        setTimeout(() => {
                         this.$router.push('/login')
                        }, 1000)

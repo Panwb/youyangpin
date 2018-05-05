@@ -100,7 +100,8 @@ export default {
                 return
             }else{
                 if(!this.sendMsgDisabled) {
-                    ajax.getSmsCode(this.ruleForm1.telphone).then((result) => {
+                    
+                    ajax.getSmsCode(this.ruleForm1.telphone, 2).then((result) => {
                         this.$message('验证码已发送你手机上');
                     })
                 }
@@ -141,7 +142,7 @@ export default {
                                 });
                             break;
                         case 'ruleForm2':
-                            ajax.validateSmsIdentifyCode(formValue)
+                            ajax.validateSmsIdentifyCode(formValue, "ForgetPwdSmsIdentifyCode")
                                 .then((result) => {
                                     that.active = 3;
                                 })

@@ -45,8 +45,8 @@
                                         <div class="topbox">
                                             <div class="date">{{ item.datetime }}</div><!--todo-->
                                             <div class="shop"><span :class="item.ShopType=='淘宝店'?'icon icon-tao':'icon icon-tian'"></span>{{ item.ShopName }}</div>
-                                            <div class="wechat">微信号:{{ item.WeChat }}</div>
-                                            <div class="phone">联系电话:{{ item.LinkmanPhone }}</div>
+                                            <div class="wechat">申请时间:{{ item.CreateTime }}</div>
+                                            <div class="phone">审核时间:{{ item.CheckTime }}</div>
                                         </div>
                                         <div class="bottombox clear" v-for="(good,index) in item.Goods" :key="index">
                                             <div class="infobox">

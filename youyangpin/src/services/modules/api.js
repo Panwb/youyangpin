@@ -26,6 +26,15 @@ export default{
         })
     },
     /**
+     * 根据账号获取用户信息
+     */
+    getByAccount(account, localLoading = 'getByAccount') {
+        return ajax({
+            url: '/user/getByAccount?account='+account,
+            localLoading
+        })
+    },
+    /**
      * 注册
      */
     register(data, localLoading = 'login') {
@@ -48,9 +57,9 @@ export default{
     /**
      * 短信验证码
      */
-    getSmsCode(tel,isCommon = true, localLoading = 'getSmsCode') {
+    getSmsCode(tel, type,isCommon = true, localLoading = 'getSmsCode') {
         return ajax({
-            url: '/common/SendSms?telphone=' + tel,
+            url: `/common/SendSms?telphone=${tel}&smsType=${type}`,
             localLoading
         })
     },
@@ -203,9 +212,9 @@ export default{
             localLoading
         })
     },
-    validateSmsIdentifyCode(smsIdentifyCode, localLoading = 'validateSmsIdentifyCode') {
+    validateSmsIdentifyCode(smsIdentifyCode, sessionKey, localLoading = 'validateSmsIdentifyCode') {
         return ajax({
-            url: `/Common/ValidateSmsIdentifyCode?smsIdentifyCode=${smsIdentifyCode}`,
+            url: `/Common/ValidateSmsIdentifyCode?smsIdentifyCode=${smsIdentifyCode}&sessionKey=${sessionKey}`,
             localLoading
         })
     },

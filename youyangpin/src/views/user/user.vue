@@ -27,17 +27,17 @@
 								<!--个人信息-->
 								<div class="modifypsd personinfo">
 									<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="110px">
-									    <el-form-item label="账号状态" >
+									    <!--<el-form-item label="账号状态" >
 											<div v-if="ruleForm.CheckStatus === '待审核'" class="accountstate stateno">{{ ruleForm.CheckStatus }}</div>
 											<div v-if="ruleForm.CheckStatus === '审核通过'" class="accountstate statesuccess">{{ ruleForm.CheckStatus }}</div>
 											<div v-if="ruleForm.CheckStatus === '审核不通过'" class="accountstate statefail">{{ ruleForm.CheckStatus }}</div>
-										</el-form-item>
+										</el-form-item>-->
 										<el-form-item label="主播名称" prop="StudioHostName" >
 											<el-input v-model="ruleForm.StudioHostName" auto-complete="off"></el-input>
 										</el-form-item>
-										<el-form-item label="支付宝账号" prop="AlipayAccount" >
+										<!--<el-form-item label="支付宝账号" prop="AlipayAccount" >
 											<el-input v-model="ruleForm.AlipayAccount" auto-complete="off"></el-input>
-										</el-form-item>
+										</el-form-item>-->
 										<el-form-item label="身高" prop="Height" class="linebox">
 											<el-input v-model="ruleForm.Height" auto-complete="off" placeholder="CM" onkeypress="return event.keyCode>=48&&event.keyCode<=57" :maxlength="3"></el-input>
 										</el-form-item>
@@ -76,7 +76,7 @@
 										<el-form-item label="QQ" prop="qqId" >
 											<el-input v-model="ruleForm.QQ" auto-complete="off"></el-input>
 										</el-form-item>
-										<el-form-item label="垂直领域" prop="type" v-if="isShowCheck">
+										<!--<el-form-item label="垂直领域" prop="type" v-if="isShowCheck">
 											<el-checkbox-group v-model="ruleForm.VerticalFieldCode">
 												<el-checkbox label="美搭" name="type1"></el-checkbox>
 												<el-checkbox label="美妆个护" name="type2"></el-checkbox>
@@ -86,20 +86,20 @@
 												<el-checkbox label="型男" name="type6"></el-checkbox>
 												<el-checkbox label="其他" name="type7"></el-checkbox>
 											</el-checkbox-group>
-										</el-form-item>
+										</el-form-item>-->
                                         <div class="time-div">
                                             <el-form-item label="每天开播时段" prop="DailyBeginTime">
                                                 <el-time-select
                                                         placeholder="起始时间"
                                                         v-model="ruleForm.DailyBeginTime"
-                                                        :picker-options="{ start: '06:00',step: '00:15',end: '24:00'}">
+                                                        :picker-options="{ start: '01:00',step: '01:00',end: '24:00'}">
                                                 </el-time-select>
                                             </el-form-item>
                                             <el-form-item label="" prop="DailyEndTime" class="end-time">
                                                 <el-time-select
                                                         placeholder="结束时间"
                                                         v-model="ruleForm.DailyEndTime"
-                                                        :picker-options="{start: '06:00',step: '00:15',end: '24:00',minTime: startTime}">
+                                                        :picker-options="{start: '01:00',step: '01:00',end: '24:00',minTime: startTime}">
                                                 </el-time-select>
                                             </el-form-item>
                                         </div>

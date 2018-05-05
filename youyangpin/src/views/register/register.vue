@@ -21,10 +21,10 @@
 						<el-form-item label="账号" prop="telphone" >
 							<el-input  v-model="ruleForm2.telphone" auto-complete="off"  placeholder="请输入手机号码"></el-input>
 						</el-form-item>
-						<el-form-item label="验证码" prop="ImageIdentifyCode">
+						<!--<el-form-item label="验证码" prop="ImageIdentifyCode">
 							<el-input  v-model="ruleForm2.ImageIdentifyCode"  auto-complete="off"  placeholder="请输入图形验证码"  class="codetxt"></el-input>
 							<span class="imgbox"><img :src="imgCode" class="logo" @click="getImgCode"></span>
-						</el-form-item>
+						</el-form-item>-->
 						<el-form-item label="短信验证码" prop="SmsIdentifyCode">
 							<el-input  v-model="ruleForm2.SmsIdentifyCode"  auto-complete="off"  placeholder="请输入短信验证码"  class="codetxt"></el-input>
 							<el-button type="primary" class="getcode" :disabled="sendMsgDisabled" @click="getCode">
