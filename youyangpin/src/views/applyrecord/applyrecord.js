@@ -86,12 +86,57 @@ export default {
             this.pageIndex = val
             this.getPagedRequest()
         },
-        formatDate(val) {
-            if(val) {
-                return `${val.substring(0,4)}/${val.substring(5,7)}/${val.substring(8,10)}`
-            }else {
-                return null
+         formatDate(date, type) {
+             if (new Date(date) === 'Invalid Date') {
+                 return date;
+             } else if (date) {
+                 date = new Date(date);
+                 const y = date.getFullYear();
+                 let m = date.getMonth() + 1;
+                 m = m < 10 ? '0' + m : m;
+                 let d = date.getDate();
+                 d = d < 10 ? ('0' + d) : d;
+                 let h = date.getHours();
+                 h = h < 10 ? ('0' + h) : h;
+                 let M = date.getMinutes();
+                 M = M < 10 ? ('0' + M) : M;
+                 let s = date.getSeconds();
+                 s = s < 10 ? ('0' + s) : s;
+                 switch (type) {
+                     case "hms":
+                         return y + '/' + m + '/' + d + " " + h + ':' + M + ':' + s;
+                     case "timestamp":
+                         return Date.parse(date);
+                     case "ymdhM":
+                         return y + '/' + m + '/' + d + " " + h + ':' + M;
+                     case "md":
+                         return m + '/' + d;
+                     case "d":
+                         return d;
+                     case "hm":
+                         return h + ':' + M;
+                     default:
+                         return y + '/' + m + '/' + d;
+                 }
+             }else {
+                 return date
+             }
+         },
+        cutString(str, len) {
+            if(!str || str.length <= len) {
+                return str;
             }
+            var strlen = 0;
+            var s = "";
+            for(var i = 0;i < str.length; i++) {
+                s = s + str.charAt(i);
+                
+                strlen = strlen + 1;
+                if(strlen >= len){
+                    return s.substring(0,s.length-2) + "...";
+                }
+            }
+            return s;
         }
     }
 }

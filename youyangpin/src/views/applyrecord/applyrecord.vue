@@ -45,8 +45,8 @@
                                         <div class="topbox">
                                             <div class="date">{{ item.datetime }}</div><!--todo-->
                                             <div class="shop"><span :class="item.ShopType=='淘宝店'?'icon icon-tao':'icon icon-tian'"></span>{{ item.ShopName }}</div>
-                                            <div class="wechat">申请时间:{{ item.CreateTime }}</div>
-                                            <div class="phone">审核时间:{{ item.CheckTime }}</div>
+                                            <div class="wechat">申请时间:{{ formatDate(item.CreateTime, 'hms') }}</div>
+                                            <div class="phone">审核时间:{{ formatDate(item.CheckTime, 'hms') }}</div>
                                         </div>
                                         <div class="bottombox clear" v-for="(good,index) in item.Goods" :key="index">
                                             <div class="infobox">
@@ -75,7 +75,7 @@
                                             <div class="box inner">
                                                 <span class="passno" v-if="item.CheckStatus === '待审核'">{{ item.CheckStatus }}</span>
                                                 <span class="passsuccess" v-if="item.CheckStatus === '审核通过'">{{ item.CheckStatus }}</span>
-                                                <span class="passfail" v-if="item.CheckStatus === '审核不通过'">{{ item.CheckStatus }}<div class="reason">(<span class="inner" title="不通过原因是没有完善信息">不通过原因</span>)</div></span>
+                                                <span class="passfail" v-if="item.CheckStatus === '审核不通过'">{{ item.CheckStatus }}<div class="reason"><span class="inner" v-if="item.CheckFailReason" :title="item.CheckFailReason">{{ '（' + cutString(item.CheckFailReason) + '）' }}</span></div></span>
                                             </div>
                                             </div>
                                         </div>
