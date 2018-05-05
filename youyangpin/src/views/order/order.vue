@@ -33,6 +33,25 @@
 												:key="item.key">
 										</el-tab-pane>
 									</el-tabs>
+									<div class="selectbox">
+									    <el-row>
+                                            <el-col :span="5"><span class="name">排期</span>
+											   <el-select v-model="value" placeholder="请选择">
+											     <el-option>1111</el-option>
+											    </el-select>
+											</el-col>
+                                           <el-col :span="6"><span class="name">订单状态</span>
+											   <el-select v-model="value" placeholder="请选择">
+											     <el-option>1111</el-option>
+											    </el-select>
+											</el-col>
+                                            <el-col :span="6">
+											   <el-input placeholder="请输入商品标题或快递单号搜索" v-model="input5" class="input-with-select">
+											    <el-button slot="append" type="text">订单搜索</el-button>
+											  </el-input>
+                                            </el-col>
+                                        </el-row>
+									</div>
 									<div class="titlebox">
 										<div class="title1">宝贝</div>
 										<div class="title2">销量</div>
@@ -717,5 +736,28 @@
 	cursor:default;
 	margin-bottom:10px;
 	display:block;
+}
+.myorder .el-tabs__header{
+	padding:0 !important;
+}
+.selectbox{
+	margin:10px 0 20px;
+}
+.selectbox .el-select{
+	width:120px;
+}
+.selectbox .el-select .el-input__inner{
+	height:30px;
+	line-height:30px;
+}
+.selectbox .el-input-group--append{
+	width:320px;
+}
+.selectbox .el-input-group--append .el-input__inner{
+	height:30px;
+	line-height:30px;
+}
+.selectbox .el-input-group--append .el-button{
+	padding:0 10px;
 }
 </style>
