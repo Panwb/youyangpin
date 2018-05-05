@@ -71,8 +71,14 @@
 											 </div>
 											</div>
 									  	</div>
-										
-										<div class="planstate"><div class="outer"><div class="inner">{{ item.DirectionalPlanStatus }}</div></div></div>
+										<!--申请计划状态-->
+										<div class="planstate">
+											<div class="outer">
+											   <div class="inner" >{{ item.DirectionalPlanStatus }} 
+											    <el-button type="text" class="copybox">复制定向链接</el-button>
+											   </div>
+											 </div>
+									    </div>
 										<div class="orderstate">
 										  <div class="outer">
 										   <div class="inner ycstate" v-if="item.OrderStatus === '异常订单'">{{item.OrderStatus}}<div class="reason">(<span class="words" title="异常原因原因异常原因原因">异常原因原因</span>)</div></div>  
@@ -685,5 +691,13 @@
 }
 .dxtip a{
 	color:#f84933;
+}
+.planstate .copybox{
+	margin-top:0px;
+    display: inline-block;
+    font-size:12px;
+    color:#f96d5c;
+    cursor:pointer;
+    padding:8px;
 }
 </style>
