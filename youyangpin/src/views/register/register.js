@@ -57,6 +57,7 @@ export default {
             time: 90,
             sendMsgDisabled: false,
             dialogVisible:true,
+            dialogVisible1:true,
             imgCode: '',
             isRead: false,
             ruleForm2: {
