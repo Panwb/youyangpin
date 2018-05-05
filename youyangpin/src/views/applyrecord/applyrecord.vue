@@ -487,13 +487,14 @@
    color:red;
 }
 .passfail .reason{
-    color:#666;
+    color:red;
     cursor:default;
+    font-size:12px;
    
 }
 .passfail .reason .inner{
     display:inline-block;
-    width:68px;
+    width:58px;
     overflow: hidden;
     text-overflow:ellipsis;
     white-space: nowrap;

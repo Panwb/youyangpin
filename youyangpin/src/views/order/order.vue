@@ -92,6 +92,7 @@
 											<el-form-item label="排期开始时间" prop="date" label-width="120px">
 												<el-date-picker v-model="form.date" format="yyyy/MM/dd" value-format="yyyy/MM/dd" type="date" :picker-options="pickerOptions0" placeholder="请选择排期开始时间"></el-date-picker>
 											</el-form-item>
+											<div class="pqtip">直播前请与商家联系确认优惠的方式</div>
 										</el-form>
 										<div slot="footer" class="dialog-footer">
 											<el-button @click="dialogVisible2 = false">取 消</el-button>
@@ -609,5 +610,10 @@
 }
 .sqdxdialog .el-dialog__body{
 	padding: 20px 20px 40px 20px!important;
+}
+.pqtip{
+	padding-left: 120px;
+    color: red;
+    margin-top: -12px;
 }
 </style>
