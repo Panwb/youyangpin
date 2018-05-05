@@ -82,7 +82,7 @@
 										<div class="orderstate">
 										  <div class="outer">
 										   <div class="inner ycstate" v-if="item.OrderStatus === '异常订单'">{{item.OrderStatus}}<div class="reason">(<span class="words" title="异常原因原因异常原因原因">异常原因原因</span>)</div></div>  
-										    <div class="inner fhstate" v-if="item.OrderStatus === '已发货'">{{item.OrderStatus}}<div class="wlnum">(<span class="words" title="物流公司名称">物流单号</span>)</div></div>
+										    <div class="inner fhstate" v-else-if="item.OrderStatus === '已发货'">{{item.OrderStatus}}<div class="wlnum">(<span class="words" title="物流公司名称">物流单号</span>)</div></div>
 										   <div class="inner wcstate" v-else-if="item.OrderStatus === '已完成'">{{item.OrderStatus}}</div>  
 										   <div class="inner" v-else>{{item.OrderStatus}}</div> 
 										  </div>
@@ -96,6 +96,7 @@
 												  <el-button v-if="item.OrderStatus === '待发货' || item.OrderStatus === '已发货' || item.OrderStatus === '已到货' || item.OrderStatus === '待退货'" class="optbtn" type="text" @click="showDialog1(item)">申请定向</el-button>
 												  <el-button v-if="item.OrderStatus === '待退货' && item.NeedSendBack" class="optbtn" type="text" @click="showDialog3(item)">填写物流信息</el-button>
                                                    <el-button v-if="item.OrderStatus === '已到货' || item.OrderStatus === '待退货'" class="optbtn" type="text" @click="showDialog5(item)">卖点介绍</el-button>
+                                                    <el-button v-else class="optbtn" type="text" >复制宝贝地址</el-button>
 												</div>
 											</div>
 										</div>
