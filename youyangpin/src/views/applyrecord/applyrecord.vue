@@ -75,7 +75,7 @@
                                             <div class="box inner">
                                                 <span class="passno" v-if="item.CheckStatus === '待审核'">{{ item.CheckStatus }}</span>
                                                 <span class="passsuccess" v-if="item.CheckStatus === '审核通过'">{{ item.CheckStatus }}</span>
-                                                <span class="passfail" v-if="item.CheckStatus === '审核不通过'">{{ item.CheckStatus }}</span>
+                                                <span class="passfail" v-if="item.CheckStatus === '审核不通过'">{{ item.CheckStatus }}<div class="reason">(<span class="inner" title="不通过原因是没有完善信息">不通过原因</span>)</div></span>
                                             </div>
                                             </div>
                                         </div>
@@ -485,6 +485,18 @@
 }
 .passfail{
    color:red;
+}
+.passfail .reason{
+    color:#666;
+    cursor:default;
+   
+}
+.passfail .reason .inner{
+    display:inline-block;
+    width:68px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
 }
 .passsuccess{
     color:green;
