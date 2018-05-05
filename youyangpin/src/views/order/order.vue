@@ -67,6 +67,7 @@
 											 <div class="outer">
 												 <div class="inner">
 												 {{ good.PreferentialWay ==='拍下立减'?'拍下立减':(good.DailyPrice-good.LivePrice).toFixed(2)+'元优惠券' }}
+												  <el-button type="text" class="copybox">复制优惠券链接</el-button>
 												 </div>
 											 </div>
 											</div>
@@ -693,7 +694,7 @@
 .dxtip a{
 	color:#f84933;
 }
-.planstate .copybox{
+.copybox{
 	margin-top:0px;
     display: inline-block;
     font-size:12px;
