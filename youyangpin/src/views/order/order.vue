@@ -77,10 +77,12 @@
 										<div class="option">
 										   <div class="outer">
 												<div class="box inner">
+                                                  
 												  <el-button v-if="item.OrderStatus === '已到货' || item.OrderStatus === '待退货'" class="optbtn" type="text" @click="showDialog2(item)">排期</el-button>
 												  <el-button v-if="item.OrderStatus === '已完成' && !item.StudioHosToMerchant && !item.StudioHosGiveMerchantStars" class="optbtn" type="text" @click="showDialog4(item)">评价</el-button>
 												  <el-button v-if="item.OrderStatus === '待发货' || item.OrderStatus === '已发货' || item.OrderStatus === '已到货' || item.OrderStatus === '待退货'" class="optbtn" type="text" @click="showDialog1(item)">申请定向</el-button>
 												  <el-button v-if="item.OrderStatus === '待退货' && item.NeedSendBack" class="optbtn" type="text" @click="showDialog3(item)">填写物流信息</el-button>
+                                                   <el-button v-if="item.OrderStatus === '已到货' || item.OrderStatus === '待退货'" class="optbtn" type="text" @click="showDialog5(item)">卖点介绍</el-button>
 												</div>
 											</div>
 										</div>
@@ -142,6 +144,29 @@
 										<div slot="footer" class="dialog-footer">
 											<el-button @click="dialogVisible3 = false">取 消</el-button>
 											<el-button type="primary" @click="setLogisticsInfo">确 定</el-button>
+										</div>
+									</el-dialog>
+									<!--卖点介绍-->
+									<el-dialog :visible.sync="dialogVisible5" width="500px" class="dialog5">
+									    <div class="digcontent">
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
 										</div>
 									</el-dialog>
 								</div>
@@ -615,5 +640,9 @@
 	padding-left: 120px;
     color: red;
     margin-top: -12px;
+}
+.dialog5 .el-dialog__body{
+	height:260px;
+	overflow:auto;
 }
 </style>
