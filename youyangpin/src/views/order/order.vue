@@ -126,8 +126,9 @@
 										</div>
 									</el-dialog>
 									<!--申请定向-->
-									<el-dialog :visible.sync="dialogVisible1" width="500px" class="sqdxdialog">
-										<span>确认已在阿里妈妈后台生成定向计划?</span>
+									<el-dialog :visible.sync="dialogVisible1" width="400px" class="sqdxdialog">
+										<span>确认已在淘宝联盟申请计划?</span>
+										<div class="dxtip">还未申请?<a href="">点这</a>现在去申请</div>
 										<span slot="footer" class="dialog-footer">
 											<el-button @click="dialogVisible1 = false">取 消</el-button>
 											<el-button type="primary" @click="requestDirectionalPlan">确 定</el-button>
@@ -676,5 +677,13 @@
     display: inline-block;
     font-size: 12px;
     vertical-align: middle;
+}
+.dxtip{
+	text-align: center;
+    margin-top: 10px;
+    color: #000;
+}
+.dxtip a{
+	color:#f84933;
 }
 </style>
