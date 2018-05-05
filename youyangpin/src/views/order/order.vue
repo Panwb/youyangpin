@@ -33,6 +33,25 @@
 												:key="item.key">
 										</el-tab-pane>
 									</el-tabs>
+									<div class="selectbox">
+									    <el-row>
+                                            <el-col :span="5"><span class="name">排期</span>
+											   <el-select v-model="value" placeholder="请选择">
+											     <el-option>1111</el-option>
+											    </el-select>
+											</el-col>
+                                           <el-col :span="6"><span class="name">订单状态</span>
+											   <el-select v-model="value" placeholder="请选择">
+											     <el-option>1111</el-option>
+											    </el-select>
+											</el-col>
+                                            <el-col :span="6">
+											   <el-input placeholder="请输入商品标题或快递单号搜索" v-model="input5" class="input-with-select">
+											    <el-button slot="append" type="text">订单搜索</el-button>
+											  </el-input>
+                                            </el-col>
+                                        </el-row>
+									</div>
 									<div class="titlebox">
 										<div class="title1">宝贝</div>
 										<div class="title2">销量</div>
@@ -44,7 +63,7 @@
 									</div>
 									<div class="contentbox" v-if="pageList.length>0" v-for="(item,index) in pageList" :key="index">
 										<div class="topbox">
-											<div class="date">{{ item.datetime }}</div>
+											<div class="date">2018-05-05</div>
 											<div class="orderId">订单号:{{ item.OrderNo }}</div>
 											<div class="shop"><span :class="item.ShopType=='淘宝店'?'icon icon-tao':'icon icon-tian'"></span>{{ item.ShopName }}</div>
 											<div class="wechat">微信号:{{ item.WeChat }}</div>
@@ -67,20 +86,41 @@
 											 <div class="outer">
 												 <div class="inner">
 												 {{ good.PreferentialWay ==='拍下立减'?'拍下立减':(good.DailyPrice-good.LivePrice).toFixed(2)+'元优惠券' }}
+												  <el-button type="text" class="copybox">复制优惠券链接</el-button>
 												 </div>
 											 </div>
 											</div>
 									  	</div>
-										
-										<div class="planstate"><div class="outer"><div class="inner">{{ item.DirectionalPlanStatus }}</div></div></div>
-										<div class="orderstate"><div class="outer"><div class="inner">{{ item.OrderStatus }}</div></div></div>
+										<!--申请计划状态-->
+										<div class="planstate">
+											<div class="outer">
+											   <div class="inner" >{{ item.DirectionalPlanStatus }} 
+											    <el-button type="text" class="copybox">复制定向链接</el-button>
+											   </div>
+											 </div>
+									    </div>
+										<div class="orderstate">
+										  <div class="outer">
+										   <div class="inner ycstate" v-if="item.OrderStatus === '异常订单'">{{item.OrderStatus}}<div class="reason">(<span class="words" title="异常原因原因异常原因原因">异常原因原因</span>)</div></div>  
+										    <div class="inner fhstate" v-else-if="item.OrderStatus === '已发货'">{{item.OrderStatus}}<div class="wlnum">(<span class="words" title="物流公司名称">物流单号</span>)</div>
+										    <div class="wldate">(<span class="time" title="发货时间">2017-09-08</span>)</div>
+										    </div>
+										    <div class="inner dhstate" v-else-if="item.OrderStatus === '已到货'">{{item.OrderStatus}}<div class="wldate">(<span class="time" title="到货时间">2017-09-08</span>)</div></div>  
+										    <div class="inner thstate" v-else-if="item.OrderStatus === '已退货'">{{item.OrderStatus}}<div class="wldate">(<span class="time" title="退货时间">2017-09-08</span>)</div></div>  
+										    <div class="inner wcstate" v-else-if="item.OrderStatus === '已完成'">{{item.OrderStatus}}<div class="wldate">(<span class="time" title="完成时间">2017-09-08</span>)</div></div>  
+										    <div class="inner" v-else>{{item.OrderStatus}}</div> 
+										  </div>
+										</div>
 										<div class="option">
 										   <div class="outer">
 												<div class="box inner">
+                                                  <span class="date" title="2015-09-08 11:00">2015-09-08</span>
 												  <el-button v-if="item.OrderStatus === '已到货' || item.OrderStatus === '待退货'" class="optbtn" type="text" @click="showDialog2(item)">排期</el-button>
 												  <el-button v-if="item.OrderStatus === '已完成' && !item.StudioHosToMerchant && !item.StudioHosGiveMerchantStars" class="optbtn" type="text" @click="showDialog4(item)">评价</el-button>
 												  <el-button v-if="item.OrderStatus === '待发货' || item.OrderStatus === '已发货' || item.OrderStatus === '已到货' || item.OrderStatus === '待退货'" class="optbtn" type="text" @click="showDialog1(item)">申请定向</el-button>
 												  <el-button v-if="item.OrderStatus === '待退货' && item.NeedSendBack" class="optbtn" type="text" @click="showDialog3(item)">填写物流信息</el-button>
+                                                   <el-button v-if="item.OrderStatus === '已到货' || item.OrderStatus === '待退货'" class="optbtn" type="text" @click="showDialog5(item)">卖点介绍</el-button>
+                                                    <el-button v-else class="optbtn" type="text" >复制宝贝地址</el-button>
 												</div>
 											</div>
 										</div>
@@ -92,6 +132,7 @@
 											<el-form-item label="排期开始时间" prop="date" label-width="120px">
 												<el-date-picker v-model="form.date" format="yyyy/MM/dd" value-format="yyyy/MM/dd" type="date" :picker-options="pickerOptions0" placeholder="请选择排期开始时间"></el-date-picker>
 											</el-form-item>
+											<div class="pqtip">直播前请与商家联系确认优惠的方式</div>
 										</el-form>
 										<div slot="footer" class="dialog-footer">
 											<el-button @click="dialogVisible2 = false">取 消</el-button>
@@ -116,8 +157,9 @@
 										</div>
 									</el-dialog>
 									<!--申请定向-->
-									<el-dialog :visible.sync="dialogVisible1" width="500px" class="sqdxdialog">
-										<span>确认已在阿里妈妈后台生成定向计划?</span>
+									<el-dialog :visible.sync="dialogVisible1" width="400px" class="sqdxdialog">
+										<span>确认已在淘宝联盟申请计划?</span>
+										<div class="dxtip">还未申请?<a href="">点这</a>现在去申请</div>
 										<span slot="footer" class="dialog-footer">
 											<el-button @click="dialogVisible1 = false">取 消</el-button>
 											<el-button type="primary" @click="requestDirectionalPlan">确 定</el-button>
@@ -141,6 +183,29 @@
 										<div slot="footer" class="dialog-footer">
 											<el-button @click="dialogVisible3 = false">取 消</el-button>
 											<el-button type="primary" @click="setLogisticsInfo">确 定</el-button>
+										</div>
+									</el-dialog>
+									<!--卖点介绍-->
+									<el-dialog :visible.sync="dialogVisible5" width="500px" class="dialog5">
+									    <div class="digcontent">
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
+										<p>1.卖点介绍1</p>
 										</div>
 									</el-dialog>
 								</div>
@@ -565,7 +630,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin-left:150px;
+    margin-left:80px;
 }
 .topbox>div.shop .icon{
     position: absolute;
@@ -609,5 +674,90 @@
 }
 .sqdxdialog .el-dialog__body{
 	padding: 20px 20px 40px 20px!important;
+}
+.pqtip{
+	padding-left: 120px;
+    color: red;
+    margin-top: -12px;
+}
+.dialog5 .el-dialog__body{
+	height:260px;
+	overflow:auto;
+}
+.orderstate .inner.ycstate{
+	color:red;
+}
+.orderstate .inner.ycstate .reason,.orderstate .inner.fhstate .wlnum,.orderstate .inner .wldate{
+	cursor:default;
+}
+.orderstate .inner.ycstate .reason span{
+	margin-top: -3px;
+    display: inline-block;
+    font-size: 12px;
+    width: 58px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+.orderstate .inner.wcstate{
+	color:green;
+}
+.orderstate .inner .wldate{
+	color:#333;
+}
+.orderstate .inner.fhstate .wlnum span,.orderstate .inner .wldate span{
+	margin-top: -3px;
+    display: inline-block;
+    font-size: 12px;
+    vertical-align: middle;
+}
+.dxtip{
+	text-align: center;
+    margin-top: 10px;
+    color: #000;
+}
+.dxtip a{
+	color:#f84933;
+}
+.copybox{
+	margin-top:0px;
+    display: inline-block;
+    font-size:12px;
+    color:#f96d5c;
+    cursor:pointer;
+    padding:8px;
+}
+.topbox>div.wechat,.topbox>div.phone{
+	margin-left:60px;
+}
+.option .date{
+	color:green;
+	cursor:default;
+	margin-bottom:10px;
+	display:block;
+}
+.myorder .el-tabs__header{
+	padding:0 !important;
+}
+.selectbox{
+	margin:10px 0 20px;
+}
+.selectbox .el-select{
+	width:120px;
+}
+.selectbox .el-select .el-input__inner{
+	height:30px;
+	line-height:30px;
+}
+.selectbox .el-input-group--append{
+	width:320px;
+}
+.selectbox .el-input-group--append .el-input__inner{
+	height:30px;
+	line-height:30px;
+}
+.selectbox .el-input-group--append .el-button{
+	padding:0 10px;
 }
 </style>

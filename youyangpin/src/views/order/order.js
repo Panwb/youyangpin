@@ -108,6 +108,7 @@ export default {
             dialogVisible2: false,
             dialogVisible3: false,
             dialogVisible4: false,
+            dialogVisible5: false,
             activeIndex: '2',
             form: {
                 date: ''
@@ -269,6 +270,10 @@ export default {
          showDialog1(order) {
              this.orderId = order.OrderID;
              this.dialogVisible1 = true;
+         },
+          //卖点介绍
+         showDialog5() {
+             this.dialogVisible5 = true;
          },
          requestDirectionalPlan() {
              ajax.requestDirectionalPlan(this.orderId)

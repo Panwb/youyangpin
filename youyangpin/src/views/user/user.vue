@@ -33,7 +33,11 @@
 											<div v-if="ruleForm.CheckStatus === '审核不通过'" class="accountstate statefail">{{ ruleForm.CheckStatus }}</div>
 										</el-form-item>-->
 										<el-form-item label="主播名称" prop="StudioHostName" >
-											<el-input v-model="ruleForm.StudioHostName" auto-complete="off"></el-input>
+											 <span class="zbname">{{ruleForm.StudioHostName}}</span>
+											 <span class="shstate">
+											    <i class="el-icon-error" title="审核不通过,信息未完善"></i>
+											    <i class="el-icon-success" title="审核通过"></i>
+											  </span>
 										</el-form-item>
 										<!--<el-form-item label="支付宝账号" prop="AlipayAccount" >
 											<el-input v-model="ruleForm.AlipayAccount" auto-complete="off"></el-input>
@@ -394,5 +398,18 @@
 }
 .el-form-item__label{
 	line-height:35px;
+}
+.zbname{
+	line-height:40px;
+}
+.shstate i{
+	cursor:default;
+	margin-left:10px;
+}
+.shstate .el-icon-success{
+	color:green;
+}
+.shstate .el-icon-error{
+	color:red;
 }
 </style>
