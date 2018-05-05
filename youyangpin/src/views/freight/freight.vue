@@ -25,7 +25,7 @@
 							<div class="content">
 								<!--运费申请-->
 								<div class="applybox">
-									<div class="zfbbox">您的支付宝账号：<span class="zfid">{{ freightData.AlipayAccount }}</span></div>
+									<div class="zfbbox">您的支付宝账号：<span class="zfid"><el-input v-model="freightData.AlipayAccount" placeholder="请输入内容"></el-input></span></div>
 									<div class="moneybox">当前可提现金额：<span class="num">{{ freightData.AccountBalance }}元</span></div>
 									<div class="btnbox">
 										<el-button class="applybtn" :class="freightData.AccountBalance>100?'active':''" @click="freightData.AccountBalance<100?dialogVisible = false:dialogVisible = true">申请提现</el-button>
@@ -37,7 +37,7 @@
 												<el-button type="primary"  @click="requestMoney">确 定</el-button>
 										    </span>
 										</el-dialog>
-										<span class="tipbox">（*单次提现金额需超过100元）</span>
+										<span class="tipbox">（*可提现金额超过100元才能提现）</span>
 									</div>
 								</div>
 								<template>
@@ -47,6 +47,7 @@
 										<el-table-column prop="WithdrawalMoney" label="申请金额"></el-table-column>
 										<el-table-column prop="HandleTime" :formatter="format" label="处理时间"></el-table-column>
 										<el-table-column prop="HandleStatus" label="处理状态"></el-table-column>
+										<el-table-column prop="HandleStatus" label="操作"></el-table-column>
 									</el-table>
 								</template>
 							</div>
@@ -72,7 +73,7 @@
     }
 </script>
 
-<style scoped>
+<style>
 .freightbox{
 	margin-bottom:40px;
 }
@@ -298,5 +299,18 @@
     margin: 0 auto 15px;
     padding: 20px;
     margin-bottom:15px;
+}
+.zfid{
+	width: 120px;
+    display: inline-block;
+    vertical-align: middle;
+    height: 30px;
+}
+.zfid .el-input__inner{
+	height: 30px;
+    line-height: 30px;
+}
+.freightbox.el-table td, .freightbox.el-table th{
+	text-align:left;
 }
 </style>
