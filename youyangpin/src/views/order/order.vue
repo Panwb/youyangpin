@@ -73,7 +73,14 @@
 									  	</div>
 										
 										<div class="planstate"><div class="outer"><div class="inner">{{ item.DirectionalPlanStatus }}</div></div></div>
-										<div class="orderstate"><div class="outer"><div class="inner">{{ item.OrderStatus }}</div></div></div>
+										<div class="orderstate">
+										  <div class="outer">
+										   <div class="inner ycstate" v-if="item.OrderStatus === '异常订单'">{{item.OrderStatus}}<div class="reason">(<span class="words" title="异常原因原因异常原因原因">异常原因原因</span>)</div></div>  
+										    <div class="inner fhstate" v-if="item.OrderStatus === '已发货'">{{item.OrderStatus}}<div class="wlnum">(<span class="words" title="物流公司名称">物流单号</span>)</div></div>
+										   <div class="inner wcstate" v-else-if="item.OrderStatus === '已完成'">{{item.OrderStatus}}</div>  
+										   <div class="inner" v-else>{{item.OrderStatus}}</div> 
+										  </div>
+										</div>
 										<div class="option">
 										   <div class="outer">
 												<div class="box inner">
@@ -644,5 +651,30 @@
 .dialog5 .el-dialog__body{
 	height:260px;
 	overflow:auto;
+}
+.orderstate .inner.ycstate{
+	color:red;
+}
+.orderstate .inner.ycstate .reason,.orderstate .inner.fhstate .wlnum{
+	cursor:default;
+}
+.orderstate .inner.ycstate .reason span{
+	margin-top: -3px;
+    display: inline-block;
+    font-size: 12px;
+    width: 58px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+.orderstate .inner.wcstate{
+	color:green;
+}
+.orderstate .inner.fhstate .wlnum span{
+	margin-top: -3px;
+    display: inline-block;
+    font-size: 12px;
+    vertical-align: middle;
 }
 </style>
