@@ -75,7 +75,7 @@
                                             <div class="box inner">
                                                 <span class="passno" v-if="item.CheckStatus === '待审核'">{{ item.CheckStatus }}</span>
                                                 <span class="passsuccess" v-if="item.CheckStatus === '审核通过'">{{ item.CheckStatus }}</span>
-                                                <span class="passfail" v-if="item.CheckStatus === '审核不通过'">{{ item.CheckStatus }}<div class="reason"><span class="inner" v-if="item.CheckFailReason" :title="item.CheckFailReason">{{ '（' + cutString(item.CheckFailReason) + '）' }}</span></div></span>
+                                                <span class="passfail" v-if="item.CheckStatus === '审核不通过'">{{ item.CheckStatus }}<div class="reason"><span class="inner" v-if="item.CheckFailReason" :title="item.CheckFailReason">{{ '（' + cutString(item.CheckFailReason, 4) + '）' }}</span></div></span>
                                             </div>
                                             </div>
                                         </div>

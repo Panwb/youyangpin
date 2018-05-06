@@ -86,7 +86,7 @@ export default {
             this.pageIndex = val
             this.getPagedRequest()
         },
-         formatDate(date, type) {
+        formatDate(date, type) {
              if (new Date(date) === 'Invalid Date') {
                  return date;
              } else if (date) {
@@ -122,21 +122,13 @@ export default {
                  return date
              }
          },
-        cutString(str, len) {
+         cutString(str, len) {
+            //length属性读出来的汉字长度为1
             if(!str || str.length <= len) {
                 return str;
             }
-            var strlen = 0;
-            var s = "";
-            for(var i = 0;i < str.length; i++) {
-                s = s + str.charAt(i);
-                
-                strlen = strlen + 1;
-                if(strlen >= len){
-                    return s.substring(0,s.length-2) + "...";
-                }
-            }
-            return s;
+
+            return str.substring(0, len) + '...';
         }
     }
 }
