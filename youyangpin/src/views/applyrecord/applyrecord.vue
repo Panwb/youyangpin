@@ -494,10 +494,6 @@
 }
 .passfail .reason .inner{
     display:inline-block;
-    width:58px;
-    overflow: hidden;
-    text-overflow:ellipsis;
-    white-space: nowrap;
 }
 .passsuccess{
     color:green;
