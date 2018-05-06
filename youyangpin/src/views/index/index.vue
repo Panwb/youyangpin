@@ -330,6 +330,7 @@
     font-size:16px;
     color:#000;
     overflow:hidden;
+    border-bottom:1px solid #d5d6d6;
 }
 .listbox .bottom .money{
 	color:#be0812;

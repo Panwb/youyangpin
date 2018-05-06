@@ -335,7 +335,7 @@
 	font-size:16px;
 }
 .mainbox{
-	padding:0 0 0 10px;
+	padding:0 0 0 10px !important;
 }
 .mainbox .title{
 	height: 38px;
