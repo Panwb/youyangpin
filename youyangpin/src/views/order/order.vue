@@ -63,7 +63,7 @@
 									</div>
 									<div class="contentbox" v-if="pageList.length>0" v-for="(item,index) in pageList" :key="index">
 										<div class="topbox">
-											<div class="date">2018-05-05</div>
+											<div class="date">{{ formatDate(item.CreateTime) }}</div>
 											<div class="orderId">订单号:{{ item.OrderNo }}</div>
 											<div class="shop"><span :class="item.ShopType=='淘宝店'?'icon icon-tao':'icon icon-tian'"></span>{{ item.ShopName }}</div>
 											<div class="wechat">微信号:{{ item.WeChat }}</div>
@@ -86,7 +86,8 @@
 											 <div class="outer">
 												 <div class="inner">
 												 {{ good.PreferentialWay ==='拍下立减'?'拍下立减':(good.DailyPrice-good.LivePrice).toFixed(2)+'元优惠券' }}
-												  <el-button type="text" class="copybox">复制优惠券链接</el-button>
+												 <el-button type="text" class="copybox">复制优惠券链接</el-button>
+												 <el-button class="optbtn" type="text" @click="showDialog5(good)">卖点介绍</el-button>
 												 </div>
 											 </div>
 											</div>
@@ -101,26 +102,49 @@
 									    </div>
 										<div class="orderstate">
 										  <div class="outer">
-										   <div class="inner ycstate" v-if="item.OrderStatus === '异常订单'">{{item.OrderStatus}}<div class="reason">(<span class="words" title="异常原因原因异常原因原因">异常原因原因</span>)</div></div>  
-										    <div class="inner fhstate" v-else-if="item.OrderStatus === '已发货'">{{item.OrderStatus}}<div class="wlnum">(<span class="words" title="物流公司名称">物流单号</span>)</div>
-										    <div class="wldate">(<span class="time" title="发货时间">2017-09-08</span>)</div>
+										   	<div class="inner ycstate" v-if="item.OrderStatus === '异常订单'">{{item.OrderStatus}}
+											   	<div class="reason">
+											   		<span class="words" v-if="item.CheckFailReason" :title="item.CheckFailReason">{{ '（' + cutString(item.CheckFailReason, 4) + '）' }}</span>
+											   	</div>
+										   	</div>  
+										    <div class="inner fhstate" v-else-if="item.OrderStatus === '已发货'">
+										    	<div class="wldate">
+										    		<span class="time" title="发货时间">{{ formatDate(item.FaHuoTime) }}</span>
+										    	</div>
+										    	{{item.OrderStatus}}
+										    	<div class="wlnum">
+										    		<span class="words" :title="item.LogisticName">{{ '（' + item.LogisticNo  + '）' }}</span>
+										    	</div>
 										    </div>
-										    <div class="inner dhstate" v-else-if="item.OrderStatus === '已到货'">{{item.OrderStatus}}<div class="wldate">(<span class="time" title="到货时间">2017-09-08</span>)</div></div>  
-										    <div class="inner thstate" v-else-if="item.OrderStatus === '已退货'">{{item.OrderStatus}}<div class="wldate">(<span class="time" title="退货时间">2017-09-08</span>)</div></div>  
-										    <div class="inner wcstate" v-else-if="item.OrderStatus === '已完成'">{{item.OrderStatus}}<div class="wldate">(<span class="time" title="完成时间">2017-09-08</span>)</div></div>  
+										    <div class="inner dhstate" v-else-if="item.OrderStatus === '已到货'">
+										    	<div class="wldate">
+										    		<span class="time" title="到货时间">{{  formatDate(item.DaoHuoTime)  }}</span>
+										    	</div>
+										    	{{item.OrderStatus}}
+										    </div>  
+										    <div class="inner thstate" v-else-if="item.OrderStatus === '已退货'">
+										    	<div>
+										    		<span class="time" title="退货时间">{{  formatDate(item.TuiHuoTime) }}</span>
+										    	</div>
+										    	{{item.OrderStatus}}
+										    </div>  
+										    <div class="inner wcstate" v-else-if="item.OrderStatus === '已完成'">
+										    	<div>
+										    		<span class="time" title="完成时间">{{  formatDate(item.TuiFeiTime) }}</span>
+										    	</div>
+										    	{{item.OrderStatus}}
+										    </div>  
 										    <div class="inner" v-else>{{item.OrderStatus}}</div> 
 										  </div>
 										</div>
 										<div class="option">
 										   <div class="outer">
 												<div class="box inner">
-                                                  <span class="date" title="2015-09-08 11:00">2015-09-08</span>
-												  <el-button v-if="item.OrderStatus === '已到货' || item.OrderStatus === '待退货'" class="optbtn" type="text" @click="showDialog2(item)">排期</el-button>
+												  <el-button v-if="item.OrderStatus === '已到货' || item.OrderStatus === '待退货'" :title="item.BroadcastScheduling && formatDate(item.BroadcastScheduling)" class="optbtn" type="text" @click="showDialog2(item)">排期</el-button>
 												  <el-button v-if="item.OrderStatus === '已完成' && !item.StudioHosToMerchant && !item.StudioHosGiveMerchantStars" class="optbtn" type="text" @click="showDialog4(item)">评价</el-button>
 												  <el-button v-if="item.OrderStatus === '待发货' || item.OrderStatus === '已发货' || item.OrderStatus === '已到货' || item.OrderStatus === '待退货'" class="optbtn" type="text" @click="showDialog1(item)">申请定向</el-button>
 												  <el-button v-if="item.OrderStatus === '待退货' && item.NeedSendBack" class="optbtn" type="text" @click="showDialog3(item)">填写物流信息</el-button>
-                                                   <el-button v-if="item.OrderStatus === '已到货' || item.OrderStatus === '待退货'" class="optbtn" type="text" @click="showDialog5(item)">卖点介绍</el-button>
-                                                    <el-button v-else class="optbtn" type="text" >复制宝贝地址</el-button>
+                                                  <el-button class="optbtn" type="text" >复制宝贝地址</el-button>
 												</div>
 											</div>
 										</div>
@@ -187,25 +211,8 @@
 									</el-dialog>
 									<!--卖点介绍-->
 									<el-dialog :visible.sync="dialogVisible5" width="500px" class="dialog5">
-									    <div class="digcontent">
-										<p>1.卖点介绍1</p>
-										<p>1.卖点介绍1</p>
-										<p>1.卖点介绍1</p>
-										<p>1.卖点介绍1</p>
-										<p>1.卖点介绍1</p>
-										<p>1.卖点介绍1</p>
-										<p>1.卖点介绍1</p>
-										<p>1.卖点介绍1</p>
-										<p>1.卖点介绍1</p>
-										<p>1.卖点介绍1</p>
-										<p>1.卖点介绍1</p>
-										<p>1.卖点介绍1</p>
-										<p>1.卖点介绍1</p>
-										<p>1.卖点介绍1</p>
-										<p>1.卖点介绍1</p>
-										<p>1.卖点介绍1</p>
-										<p>1.卖点介绍1</p>
-										<p>1.卖点介绍1</p>
+									    <div :model="good" class="digcontent">
+											<p>{{ good.SellingPointDescribe }}</p>
 										</div>
 									</el-dialog>
 								</div>
@@ -694,9 +701,6 @@
 	margin-top: -3px;
     display: inline-block;
     font-size: 12px;
-    width: 58px;
-    overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
     vertical-align: middle;
 }

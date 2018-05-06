@@ -122,6 +122,7 @@ export default {
                 description:'',
                 star: 0
             },
+            good: {},
             orderId: null,
             options: [{
               value: '顺丰速运',
@@ -272,8 +273,9 @@ export default {
              this.dialogVisible1 = true;
          },
           //卖点介绍
-         showDialog5() {
+         showDialog5(good) {
              this.dialogVisible5 = true;
+             this.good = good;
          },
          requestDirectionalPlan() {
              ajax.requestDirectionalPlan(this.orderId)
@@ -313,6 +315,50 @@ export default {
                 }
             })
 
-         }
+         },
+         formatDate(date, type) {
+             if (new Date(date) === 'Invalid Date') {
+                 return date;
+             } else if (date) {
+                 date = new Date(date);
+                 const y = date.getFullYear();
+                 let m = date.getMonth() + 1;
+                 m = m < 10 ? '0' + m : m;
+                 let d = date.getDate();
+                 d = d < 10 ? ('0' + d) : d;
+                 let h = date.getHours();
+                 h = h < 10 ? ('0' + h) : h;
+                 let M = date.getMinutes();
+                 M = M < 10 ? ('0' + M) : M;
+                 let s = date.getSeconds();
+                 s = s < 10 ? ('0' + s) : s;
+                 switch (type) {
+                     case "hms":
+                         return y + '/' + m + '/' + d + " " + h + ':' + M + ':' + s;
+                     case "timestamp":
+                         return Date.parse(date);
+                     case "ymdhM":
+                         return y + '/' + m + '/' + d + " " + h + ':' + M;
+                     case "md":
+                         return m + '/' + d;
+                     case "d":
+                         return d;
+                     case "hm":
+                         return h + ':' + M;
+                     default:
+                         return y + '/' + m + '/' + d;
+                 }
+             }else {
+                 return date
+             }
+         },
+         cutString(str, len) {
+            //length属性读出来的汉字长度为1
+            if(!str || str.length <= len) {
+                return str;
+            }
+
+            return str.substring(0, len) + '...';
+        }
     }
 }
