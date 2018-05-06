@@ -36,18 +36,21 @@
 									<div class="selectbox">
 									    <el-row>
                                             <el-col :span="5"><span class="name">排期</span>
-											   <el-select v-model="value" placeholder="请选择">
-											     <el-option>1111</el-option>
+											   <el-select v-model="searchCondition.BroadcastSchedulingStatus" placeholder="请选择">
+											     <el-option label="全部" value="全部"></el-option>
+											     <el-option label="待排期" value="待排期"></el-option>
+											     <el-option label="已排期" value="已排期"></el-option>
 											    </el-select>
 											</el-col>
                                            <el-col :span="6"><span class="name">订单状态</span>
-											   <el-select v-model="value" placeholder="请选择">
-											     <el-option>1111</el-option>
+											   <el-select v-model="searchCondition.OrderStatus" placeholder="请选择">
+											     <el-option label="全部" value="全部"></el-option>
+											     <el-option v-for="item in status.slice(1)" :key="item.key" :label="item.name" :value="item.name"></el-option>
 											    </el-select>
 											</el-col>
                                             <el-col :span="6">
-											   <el-input placeholder="请输入商品标题或快递单号搜索" v-model="input5" class="input-with-select">
-											    <el-button slot="append" type="text">订单搜索</el-button>
+											   <el-input placeholder="请输入商品标题或快递单号搜索" v-model="searchCondition.GoodsNameOrExpressNumber" class="input-with-select">
+											    <el-button slot="append" type="text" @click="search">订单搜索</el-button>
 											  </el-input>
                                             </el-col>
                                         </el-row>

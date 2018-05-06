@@ -97,6 +97,7 @@ export default {
                     key: 'order8'
                 },
             ],
+            searchCondition: {},
             pageIndex: 1,
             itemsPerPage: 10,
             total: 0,
@@ -208,8 +209,8 @@ export default {
             this.currentStatu = (tab.label === '所有订单' ? '' : tab.label)
             this.getPagedOrder()
         },
-        getPagedOrder() {
-            ajax.getPagedOrder(this.currentStatu, this.pageIndex, this.itemsPerPage).then((result) => {
+        getPagedOrder(orderStatus, broadcastSchedulingStatus, goodsNameOrExpressNumber) {
+            ajax.getPagedOrder(orderStatus || this.currentStatu, broadcastSchedulingStatus || '', goodsNameOrExpressNumber || '', this.pageIndex, this.itemsPerPage).then((result) => {
                 this.pageList = result.Orders;
                 this.total = result.RecordCount
             })
@@ -317,6 +318,13 @@ export default {
                 }
             })
 
+         },
+         search(){
+            this.getPagedOrder(
+              this.searchCondition.OrderStatus === "全部" ? '' : this.searchCondition.OrderStatus, 
+              this.searchCondition.BroadcastSchedulingStatus === "全部" ? '' : this.searchCondition.BroadcastSchedulingStatus, 
+              this.searchCondition.GoodsNameOrExpressNumber
+            );
          },
          formatDate(date, type) {
              if (new Date(date) === 'Invalid Date') {
