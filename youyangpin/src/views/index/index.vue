@@ -346,11 +346,11 @@
 }
 .listbox .middle .money{
 	color:#ff2e2e;
-	font-size:24px;
+	font-size:16px;
 	float:left;
 }
 .listbox .middle .money .count{
-	font-size:28px;
+	font-size:22px;
 	font-style:normal;
     color:#f9513b;
 }
@@ -359,8 +359,8 @@
 }
 .listbox .middle .price{
 	float:left;
-	margin-left:10px;
-	margin-top:6px;
+	margin-left:5px;
+	margin-top:-2px;
 }
 .listbox .middle .price .count{
 	color:#989898;
@@ -370,7 +370,7 @@
 	width:90px;
 	height:26px;
 	float:right;
-	margin-top:15px;
+	margin-top:5px;
 	position:relative;
 }
 .listbox .middle .youhui.quan{
