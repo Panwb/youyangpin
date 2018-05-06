@@ -700,7 +700,7 @@
 .orderstate .inner.ycstate .reason span{
 	margin-top: -3px;
     display: inline-block;
-    font-size: 12px
+    font-size: 12px;
     vertical-align: middle;
 }
 .orderstate .inner.wcstate{
