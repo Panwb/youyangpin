@@ -694,10 +694,6 @@
 	margin-top: -3px;
     display: inline-block;
     font-size: 12px;
-    width: 58px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     vertical-align: middle;
 }
 .orderstate .inner.wcstate{
