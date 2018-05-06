@@ -35,8 +35,8 @@
 										<el-form-item label="主播名称" prop="StudioHostName" >
 											 <span class="zbname">{{ruleForm.StudioHostName}}</span>
 											 <span class="shstate">
-											    <i class="el-icon-error" title="审核不通过,信息未完善"></i>
-											    <i class="el-icon-success" title="审核通过"></i>
+											    <i class="el-icon-error" v-if="ruleForm.CheckStatus === '审核不通过'" :title="'审核不通过原因：' + ruleForm.CheckFailReason"></i>
+											    <i class="el-icon-success" v-if="ruleForm.CheckStatus === '审核通过'" title="审核通过"></i>
 											  </span>
 										</el-form-item>
 										<!--<el-form-item label="支付宝账号" prop="AlipayAccount" >

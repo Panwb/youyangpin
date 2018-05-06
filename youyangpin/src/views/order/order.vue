@@ -84,11 +84,13 @@
 											<div class="leavenum">{{ good.InventoryNum }}</div>
 											<div class="quan">
 											 <div class="outer">
-												 <div class="inner">
+												<div class="inner">
 												 {{ good.PreferentialWay ==='拍下立减'?'拍下立减':(good.DailyPrice-good.LivePrice).toFixed(2)+'元优惠券' }}
-												 <el-button type="text" class="copybox">复制优惠券链接</el-button>
-												 <el-button class="optbtn" type="text" @click="showDialog5(good)">卖点介绍</el-button>
-												 </div>
+													<el-button type="text" v-if="good.PreferentialWay ==='优惠券'" class="copybox copyBtn" :data-clipboard-text="good.CouponsURL">复制优惠券链接</el-button>
+												    <el-button class="copybox copyBtn" type="text" :data-clipboard-text="good.CommissionURL" >复制定向链接</el-button>
+                                                  	<el-button class="optbtn copyBtn" type="text"  :data-clipboard-text="good.GoodsURL">复制宝贝地址</el-button>
+													<el-button class="optbtn" type="text" @click="showDialog5(good)">卖点介绍</el-button>
+												</div>
 											 </div>
 											</div>
 									  	</div>
@@ -96,7 +98,6 @@
 										<div class="planstate">
 											<div class="outer">
 											   <div class="inner" >{{ item.DirectionalPlanStatus }} 
-											    <el-button type="text" class="copybox">复制定向链接</el-button>
 											   </div>
 											 </div>
 									    </div>
@@ -142,9 +143,8 @@
 												<div class="box inner">
 												  <el-button v-if="item.OrderStatus === '已到货' || item.OrderStatus === '待退货'" :title="item.BroadcastScheduling && formatDate(item.BroadcastScheduling)" class="optbtn" type="text" @click="showDialog2(item)">排期</el-button>
 												  <el-button v-if="item.OrderStatus === '已完成' && !item.StudioHosToMerchant && !item.StudioHosGiveMerchantStars" class="optbtn" type="text" @click="showDialog4(item)">评价</el-button>
-												  <el-button v-if="item.OrderStatus === '待发货' || item.OrderStatus === '已发货' || item.OrderStatus === '已到货' || item.OrderStatus === '待退货'" class="optbtn" type="text" @click="showDialog1(item)">申请定向</el-button>
+												  <el-button class="optbtn" type="text" @click="showDialog1(item)">申请定向</el-button>
 												  <el-button v-if="item.OrderStatus === '待退货' && item.NeedSendBack" class="optbtn" type="text" @click="showDialog3(item)">填写物流信息</el-button>
-                                                  <el-button class="optbtn" type="text" >复制宝贝地址</el-button>
 												</div>
 											</div>
 										</div>
@@ -183,7 +183,7 @@
 									<!--申请定向-->
 									<el-dialog :visible.sync="dialogVisible1" width="400px" class="sqdxdialog">
 										<span>确认已在淘宝联盟申请计划?</span>
-										<div class="dxtip">还未申请?<a href="">点这</a>现在去申请</div>
+										<div class="dxtip" :model="good" v-if="good.CommissionURL">还未申请?<a :href="good.CommissionURL" target="view_window">点这</a>现在去申请</div>
 										<span slot="footer" class="dialog-footer">
 											<el-button @click="dialogVisible1 = false">取 消</el-button>
 											<el-button type="primary" @click="requestDirectionalPlan">确 定</el-button>

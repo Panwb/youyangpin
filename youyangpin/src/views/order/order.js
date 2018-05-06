@@ -1,5 +1,6 @@
 import { api as ajax } from 'services'
-
+import Clipboard from 'clipboard'
+let clipboard = new Clipboard('.copyBtn')
 export default {
     data () {
          var validateDate = (rule, value, callback) => {
@@ -271,6 +272,7 @@ export default {
          showDialog1(order) {
              this.orderId = order.OrderID;
              this.dialogVisible1 = true;
+             this.good = order.Goods[0];
          },
           //卖点介绍
          showDialog5(good) {
