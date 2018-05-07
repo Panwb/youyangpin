@@ -67,18 +67,9 @@
 					<p class="agree"><el-checkbox v-model="isRead" name="type1"></el-checkbox>已认真阅读并同意须知内容</p>
 				</div>
 				<span slot="footer" class="dialog-footer">
-			      <el-button type="primary" @click="dialogVisible = false"  :disabled="!isRead">确 定</el-button>
-			    </span>
+      <el-button type="primary" @click="dialogVisible = false"  :disabled="!isRead">确 定</el-button>
+    </span>
 			</el-dialog>
-
-			<!--注册成功弹窗-->
-			<el-dialog  :visible.sync="dialogVisible1"  class="tipbox">
-			  <span>您已成功注册优样品账号，请及时登录主播个人中心，完善个人信息，账号信息需由客服人员审核通过后，方可在本平台申请拿样</span>
-			  <span slot="footer" class="dialog-footer">
-			    <el-button type="primary" @click="dialogVisible1 = false">确 定</el-button>
-			  </span>
-			</el-dialog>
-			
 		</el-container>
 	</div>
 </template>
@@ -107,12 +98,6 @@
   text-align:center;
 }
 .regisbox .el-dialog__header .el-dialog__close{
-	display:none;
-}
-.tipbox .el-dialog{
-	width:480px;
-}
-.tipbox .el-dialog__headerbtn{
 	display:none;
 }
 .el-dialog__header .el-dialog__title{
