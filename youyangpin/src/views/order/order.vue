@@ -345,7 +345,7 @@
 	font-size:16px;
 }
 .mainbox{
-	padding:0 0 0 10px;
+	padding:0 0 0 10px !important;
 }
 .mainbox .title{
 	height: 38px;
@@ -704,7 +704,6 @@
 	margin-top: -3px;
     display: inline-block;
     font-size: 12px;
-    white-space: nowrap;
     vertical-align: middle;
 }
 .orderstate .inner.wcstate{

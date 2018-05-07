@@ -96,7 +96,7 @@
 
 					<el-card class="box-card goodbox shopgoods" shadow="never" v-if="applyData.RelatedGoods.length">
 						<div slot="header" class="clearfix title">
-							<span>店铺同类商品</span>
+							 <el-checkbox size="medium" class="totalcheck"></el-checkbox><span>店铺同类商品</span>
 						</div>
 						<div class="text item">
 							<div class="txt" v-for="(item,index) in applyData.RelatedGoods" :key="item.GoodsId">
@@ -588,5 +588,12 @@ export default {
 }
 .applybox .personbox .el-card__body .text{
 	margin:0;
+}
+.totalcheck{
+	margin-right:5px;
+}
+.totalcheck .el-checkbox__inner{
+	width:18px;
+	height:18px;
 }
 </style>
