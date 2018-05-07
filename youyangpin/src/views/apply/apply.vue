@@ -105,7 +105,7 @@
 									<li><div class="imgbox"><img :src="item.GoodsImgURL" class="image"></div></li>
 									<li>
 										<div class="infobox">
-											<p class="name">{{ item.GoodsName }}</p>
+											<p class="name"><a :href="item.GoodsURL" target="view_window">{{ item.GoodsName }}</a></p>
 											<p class="price">直播专享价:<span class="num">{{ item.LivePrice }}</span> <span class="normal">日常价:{{ item.DailyPrice.toFixed(2) }}</span></p>
 											<p class="money">佣金比例:<span class="num">{{ item.CommissionRatio }}%</span></p>
 											<p class="date">活动日期：{{ formatDate(item.ActivityBeginTime) }}-{{ formatDate(item.ActivityEndTime) }}</p>
