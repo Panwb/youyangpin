@@ -17,9 +17,32 @@
                         <div class="bottombox">
                             <el-row>
                                 <el-col :span="1"><div class="grid-content title">筛选:</div></el-col>
-                                <el-col :span="5"><div class="grid-content"><span class="name">价格:</span> <el-input v-model="searchForm.lowDailyPrice"></el-input><span class="fuhao">~</span><el-input v-model="searchForm.highDailyPrice"></el-input></div></el-col>
-                                <el-col :span="5"><div class="grid-content"><span class="name">销量:</span> <el-input v-model="searchForm.lowSales"></el-input><span class="fuhao">~</span><el-input v-model="searchForm.highSales"></el-input></div></el-col>
-                                <el-col :span="8"><div class="grid-content"><span class="name">佣金比例:</span><el-input v-model="searchForm.lowCommissionRatio"></el-input><span class="fuhao">~</span><el-input v-model="searchForm.highCommissionRatio"></el-input> <el-button @click="goodsSearch" class="sxbtn">筛选</el-button><el-button @click="goodsSearch" class="sxbtn resetbtn">重置</el-button></div></el-col>
+                                <el-col :span="5">
+                                    <div class="grid-content">
+                                        <span class="name">价格:</span> 
+                                        <el-input v-model="searchForm.lowDailyPrice"></el-input>
+                                        <span class="fuhao">~</span>
+                                        <el-input v-model="searchForm.highDailyPrice"></el-input>
+                                    </div>
+                                </el-col>
+                                <el-col :span="5">
+                                    <div class="grid-content">
+                                        <span class="name">销量:</span> 
+                                        <el-input v-model="searchForm.lowSales"></el-input>
+                                        <span class="fuhao">~</span>
+                                        <el-input v-model="searchForm.highSales"></el-input>
+                                    </div>
+                                </el-col>
+                                <el-col :span="8">
+                                    <div class="grid-content">
+                                        <span class="name">佣金比例:</span>
+                                        <el-input v-model="searchForm.lowCommissionRatio"></el-input>
+                                        <span class="fuhao">~</span>
+                                        <el-input v-model="searchForm.highCommissionRatio"></el-input> 
+                                        <el-button @click="goodsSearch" class="sxbtn">筛选</el-button>
+                                        <el-button @click="reset" class="sxbtn resetbtn">重置</el-button>
+                                    </div>
+                                </el-col>
                                 <el-col :span="5">
                                     <div class="grid-content paixu"><span class="name">排序:</span>
                                         <ul>

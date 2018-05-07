@@ -46,7 +46,7 @@
                                             <div class="date">{{ item.datetime }}</div><!--todo-->
                                             <div class="shop"><span :class="item.ShopType=='淘宝店'?'icon icon-tao':'icon icon-tian'"></span>{{ item.ShopName }}</div>
                                             <div class="wechat">申请时间：{{ formatDate(item.CreateTime, 'hms') }}</div>
-                                            <div class="phone">审核时间：{{ formatDate(item.CheckTime, 'hms') }}</div>
+                                            <div class="phone" v-if="item.CheckTime">审核时间：{{ formatDate(item.CheckTime, 'hms') }}</div>
                                         </div>
                                         <div class="bottombox clear" v-for="(good,index) in item.Goods" :key="index">
                                             <div class="infobox">

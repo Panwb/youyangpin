@@ -72,6 +72,14 @@ export default {
                 this.total = result.RecordCount
             })
         },
+        reset(){
+            this.searchForm.lowDailyPrice = "";
+            this.searchForm.highDailyPrice = "";
+            this.searchForm.lowSales = "";
+            this.searchForm.highSales = "";
+            this.searchForm.lowCommissionRatio = "";
+            this.searchForm.highCommissionRatio = "";
+        },
         getStatistics(val) {
             ajax.getStatistics(this.searchForm).then((result) => {
                 this.setStatistics(result)

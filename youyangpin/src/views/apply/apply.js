@@ -37,15 +37,12 @@ export default {
                         this.applyData = result;
                         this.ApplicationForm.ShopId = result.Shop.ShopId;
                         this.ApplicationForm.MerchantUserId = result.Shop.UserId;
+                        this.ApplicationForm.AnchorAbilitySelfReport = this.applyData.StudioHost.Remark;
                         this.applyData.RelatedGoods.forEach((item,index) => {
                             this.$set(this.isChecked, index, false)
                         });
                         this.isShowChoose = true;
                     }
-                    // console.log('店铺信息',this.applyData.Shop)
-                    // console.log('主播信息',this.applyData.StudioHost)
-                    // console.log('当前申请商品信息',this.applyData.CurrentGood)
-                    // console.log('店铺同类商品',this.applyData.RelatedGoods)
                 })
         },
         //提交申请
@@ -75,6 +72,11 @@ export default {
         improveAddress() {
             sessionStorage.setItem('goodid',this.$route.query.goodsId);
             this.$router.push('user');
+        },
+        handleCheckAllChange(val) {
+            this.applyData.RelatedGoods.forEach((item,index) => {
+                this.$set(this.isChecked, index, val)
+            });
         },
         handleSelect(key, keyPath) {
             console.log(key, keyPath);

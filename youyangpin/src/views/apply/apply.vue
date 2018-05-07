@@ -49,7 +49,7 @@
 						<div  class="text item">
 							<div class="txt">
 								<ul class="list">
-									<li><div class="imgbox"><img :src="applyData.CurrentGood.GoodsImgURL" class="image"></div></li>
+									<li><div class="imgbox"><a :href="applyData.CurrentGood.GoodsURL" target="view_window"><img :src="applyData.CurrentGood.GoodsImgURL" class="image"></a></div></li>
 									<li>
 										<div class="infobox">
 											<p class="name"><a :href="applyData.CurrentGood.GoodsURL" target="view_window">{{ applyData.CurrentGood.GoodsName }}</a></p>
@@ -96,13 +96,13 @@
 
 					<el-card class="box-card goodbox shopgoods" shadow="never" v-if="applyData.RelatedGoods.length">
 						<div slot="header" class="clearfix title">
-							 <el-checkbox size="medium" class="totalcheck"></el-checkbox><span>店铺同类商品</span>
+							 <el-checkbox size="medium" class="totalcheck" @change="handleCheckAllChange"></el-checkbox><span>店铺同类商品</span>
 						</div>
 						<div class="text item">
 							<div class="txt" v-for="(item,index) in applyData.RelatedGoods" :key="item.GoodsId">
 								<ul class="list">
 									<li v-if="isShowChoose" class="checkbox"> <el-checkbox size="medium" v-model="isChecked[index]"></el-checkbox></li>
-									<li><div class="imgbox"><img :src="item.GoodsImgURL" class="image"></div></li>
+									<li><div class="imgbox"><a :href="item.GoodsURL" target="view_window"><img :src="item.GoodsImgURL" class="image"></a></div></li>
 									<li>
 										<div class="infobox">
 											<p class="name"><a :href="item.GoodsURL" target="view_window">{{ item.GoodsName }}</a></p>

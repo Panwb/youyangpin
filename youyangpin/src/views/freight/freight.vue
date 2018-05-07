@@ -25,18 +25,30 @@
 							<div class="content">
 								<!--运费申请-->
 								<div class="applybox">
-									<div class="zfbbox">您的支付宝账号：<span class="zfid"><el-input v-model="freightData.AlipayAccount" placeholder="请输入内容"></el-input></span></div>
-									<div class="moneybox">当前可提现金额：<span class="num">{{ freightData.AccountBalance }}元</span></div>
+									<el-form :model="freightData" :rules="rules" ref="freightData" label-width="150px">
+										<el-form-item label="您的支付宝账号：" :rules="{ required: true, message: '请输入支付宝账号', trigger: 'blur' }" prop="AlipayAccount">
+											<el-input v-model="freightData.AlipayAccount" placeholder="请输入内容"></el-input>
+										</el-form-item>	
+										<el-form-item label="当前可提现金额：" prop="AccountBalance">
+											<span class="num">{{ freightData.AccountBalance }}元</span>
+										</el-form-item>									
+										<el-form-item>
+											<div class="btnbox">
+												<el-button class="applybtn" 
+													:class="freightData.AccountBalance>100?'active':''" 
+													@click="freightData.AccountBalance<100?dialogVisible = false:dialogVisible = true">申请提现
+												</el-button>
+												<el-dialog :visible.sync="dialogVisible" width="30%">
+													<span>确认要提现吗？</span>
+													<span slot="footer" class="dialog-footer">
+														<el-button @click="dialogVisible = false">取 消</el-button>
+														<el-button type="primary"  @click="requestMoney('freightData')">确 定</el-button>
+												    </span>
+												</el-dialog>
+											</div>
+										</el-form-item>
+									</el-form>
 									<div class="btnbox">
-										<el-button class="applybtn" :class="freightData.AccountBalance>100?'active':''" @click="freightData.AccountBalance<100?dialogVisible = false:dialogVisible = true">申请提现</el-button>
-										<el-dialog :visible.sync="dialogVisible" width="30%">
-											<!--<span>确认要提现吗</span>-->
-											<el-input v-model="amount" placeholder="请输入提现金额"></el-input>
-											<span slot="footer" class="dialog-footer">
-												<el-button @click="dialogVisible = false">取 消</el-button>
-												<el-button type="primary"  @click="requestMoney">确 定</el-button>
-										    </span>
-										</el-dialog>
 										<span class="tipbox">（*可提现金额超过100元才能提现）</span>
 									</div>
 								</div>
@@ -200,11 +212,6 @@
 }
 .applybox{
   margin-bottom:40px;
-}
-.applybox div{
-	margin-bottom:15px;
-	overflow:hidden;
-	font-size:16px;
 }
 .applybox div span{
 	font-size:14px;

@@ -32,8 +32,7 @@ export default {
                 }
             ],
             asideIndex: '3',
-            freightData: '1',
-            amount: null,
+            freightData: {},
             tableData: []
         }
     },
@@ -52,16 +51,27 @@ export default {
                 this.tableData = result;
             })
         },
-        requestMoney() {
-            ajax.requestMoney(this.amount).then((result) => {
-                this.$message({
-                    type:'success',
-                    message:'提现成功'
-                });
-                this.dialogVisible = false;
-                this.getUserDetail();
-                this.getMyRequests();
-            })
+        requestMoney(formName) {
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    ajax.requestMoney(this.freightData.AlipayAccount, this.freightData.AccountBalance)
+                        .then((result) => {
+                            this.$message({
+                                type:'success',
+                                message:'提现成功'
+                            });
+                            this.dialogVisible = false;
+                            this.getUserDetail();
+                            this.getMyRequests();
+                        })                        
+                        .catch(error => {
+                            this.$message({type:"warning",message: error});
+                        });
+                } else {
+                    console.log('error submit!!');
+                    return false;
+                }
+            });
         },
         handleSelect(key, keyPath) {
             this.$router.push(this.menus[key - 1]['path'])

@@ -166,9 +166,9 @@ export default{
     /**
      * 申请提现
      */
-    requestMoney(amount, localLoading = 'requestMoney') {
+    requestMoney(alipayAccount, amount, localLoading = 'requestMoney') {
         return ajax({
-            url: '/Withdrawal/RequestMoney?amount=' + amount,
+            url: `/Withdrawal/RequestMoney?alipayAccount=${alipayAccount}&amount=${amount}`,
             method: 'put',
             localLoading
         })
