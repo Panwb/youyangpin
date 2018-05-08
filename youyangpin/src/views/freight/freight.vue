@@ -52,6 +52,7 @@
 										<span class="tipbox">（*可提现金额超过100元才能提现）</span>
 									</div>
 								</div>
+								
 								<template>
 									<p class="txtitle">提现记录</p>
 									<el-table :data="tableData"  style="width: 100%" class="freightbox">
@@ -59,7 +60,14 @@
 										<el-table-column prop="WithdrawalMoney" label="申请金额"></el-table-column>
 										<el-table-column prop="HandleTime" :formatter="format" label="处理时间"></el-table-column>
 										<el-table-column prop="HandleStatus" label="处理状态"></el-table-column>
-										<el-table-column prop="HandleStatus" label="操作"></el-table-column>
+										<el-table-column
+									      fixed="right"
+									      label="操作"
+									      width="100">
+									      <template slot-scope="scope">
+									        <a :href="'/api/Withdrawal/ExportDetail?withdrawalId=' + scope.row.WithdrawalId" target="view_window">下载明细</a>
+									      </template>
+									  	</el-table-column>
 									</el-table>
 								</template>
 							</div>
