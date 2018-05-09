@@ -96,14 +96,14 @@
                                                 <el-time-select
                                                         placeholder="起始时间"
                                                         v-model="ruleForm.DailyBeginTime"
-                                                        :picker-options="{ start: '01:00',step: '01:00',end: '24:00'}">
+                                                        :picker-options="{ start: '00:00',step: '01:00',end: '23:00'}">
                                                 </el-time-select>
                                             </el-form-item>
                                             <el-form-item label="" prop="DailyEndTime" class="end-time">
                                                 <el-time-select
                                                         placeholder="结束时间"
                                                         v-model="ruleForm.DailyEndTime"
-                                                        :picker-options="{start: '01:00',step: '01:00',end: '24:00',minTime: startTime}">
+                                                        :picker-options="{start: '00:00',step: '01:00',end: '23:00',minTime: startTime}">
                                                 </el-time-select>
                                             </el-form-item>
                                         </div>

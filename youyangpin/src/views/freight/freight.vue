@@ -27,7 +27,7 @@
 								<div class="applybox">
 									<el-form :model="freightData" :rules="rules" ref="freightData" label-width="150px">
 										<el-form-item class="myitem" label="您的支付宝账号：" :rules="{ required: true, message: '请输入支付宝账号', trigger: 'blur' }" prop="AlipayAccount">
-											<el-input v-model="freightData.AlipayAccount" placeholder="请输入内容"></el-input>
+											<el-input v-model="freightData.AlipayAccount" placeholder="请输入支付宝账号"></el-input>
 										</el-form-item>	
 										<el-form-item class="myitem" label="当前可提现金额：" prop="AccountBalance">
 											<span class="num">{{ freightData.AccountBalance }}元</span>
