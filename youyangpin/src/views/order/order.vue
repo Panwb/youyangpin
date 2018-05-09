@@ -426,7 +426,7 @@
 	width:80px;
 }
 .titlebox > div.title4{
-	width:100px;
+	width:120px;
 }
 .titlebox > div.title5{
 	width:100px;
@@ -636,10 +636,6 @@
 .topbox>div.shop{
     padding-left: 25px;
     position: relative;
-    width: 68px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     margin-left:80px;
 }
 .topbox>div.shop .icon{
