@@ -33,17 +33,17 @@
 												:key="item.key">
 										</el-tab-pane>
 									</el-tabs>
-									<div class="selectbox">
+									<div v-if="currentStatu === ''" class="selectbox">
 									    <el-row>
                                             <el-col :span="5"><span class="name">排期</span>
-											   <el-select v-model="searchCondition.BroadcastSchedulingStatus" placeholder="请选择">
+											   <el-select v-model="searchCondition.BroadcastSchedulingStatus" @change="search" placeholder="请选择">
 											     <el-option label="全部" value="全部"></el-option>
 											     <el-option label="待排期" value="待排期"></el-option>
 											     <el-option label="已排期" value="已排期"></el-option>
 											    </el-select>
 											</el-col>
                                            <el-col :span="6"><span class="name">订单状态</span>
-											   <el-select v-model="searchCondition.OrderStatus" placeholder="请选择">
+											   <el-select v-model="searchCondition.OrderStatus" @change="search" placeholder="请选择">
 											     <el-option label="全部" value="全部"></el-option>
 											     <el-option v-for="item in status.slice(1)" :key="item.key" :label="item.name" :value="item.name"></el-option>
 											    </el-select>
@@ -68,7 +68,7 @@
 										<div class="topbox">
 											<div class="date">{{ formatDate(item.CreateTime) }}</div>
 											<div class="orderId">订单号:{{ item.OrderNo }}</div>
-											<div class="shop"><span :class="item.ShopType=='淘宝店'?'icon icon-tao':'icon icon-tian'"></span>{{ item.ShopName }}</div>
+											<div class="shop" :title="item.ShopName"><span :class="item.ShopType=='淘宝店'?'icon icon-tao':'icon icon-tian'"></span>{{ item.ShopName }}</div>
 											<div class="wechat">微信号:{{ item.WeChat }}</div>
 											<div class="phone">联系电话:{{ item.LinkmanPhone }}</div>
 										</div>
@@ -108,7 +108,7 @@
 										  <div class="outer">
 										   	<div class="inner ycstate" v-if="item.OrderStatus === '异常订单'">{{item.OrderStatus}}
 											   	<div class="reason">
-											   		<span class="words" v-if="item.CheckFailReason" :title="item.CheckFailReason">{{ '（' + cutString(item.CheckFailReason, 4) + '）' }}</span>
+											   		<span class="words" v-if="item.AbnormalReason" :title="item.AbnormalReason">{{ '（' + cutString(item.AbnormalReason, 4) + '）' }}</span>
 											   	</div>
 										   	</div>  
 										    <div class="inner fhstate" v-else-if="item.OrderStatus === '已发货'">
