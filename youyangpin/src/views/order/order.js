@@ -199,7 +199,14 @@ export default {
             },
         }
     },
-    created() {
+    created() {        
+        clipboard.on('success', e => {  
+          this.$message({type:'success', message:'复制成功' });
+        })  
+        clipboard.on('error', e => {  
+          // 不支持复制  
+          this.$message({type:'error', message:'该浏览器不支持自动复制' });
+        }) 
         this.currentStatu = this.status[0]['name'] === '所有订单' ? '' : this.status[0]['name']
         this.getPagedOrder()
     },
