@@ -26,13 +26,13 @@
 								<!--运费申请-->
 								<div class="applybox">
 									<el-form :model="freightData" :rules="rules" ref="freightData" label-width="150px">
-										<el-form-item label="您的支付宝账号：" :rules="{ required: true, message: '请输入支付宝账号', trigger: 'blur' }" prop="AlipayAccount">
+										<el-form-item class="myitem" label="您的支付宝账号：" :rules="{ required: true, message: '请输入支付宝账号', trigger: 'blur' }" prop="AlipayAccount">
 											<el-input v-model="freightData.AlipayAccount" placeholder="请输入内容"></el-input>
 										</el-form-item>	
-										<el-form-item label="当前可提现金额：" prop="AccountBalance">
+										<el-form-item class="myitem" label="当前可提现金额：" prop="AccountBalance">
 											<span class="num">{{ freightData.AccountBalance }}元</span>
 										</el-form-item>									
-										<el-form-item>
+										<el-form-item class="myitem btnitem" >
 											<div class="btnbox">
 												<el-button class="applybtn" 
 													:class="freightData.AccountBalance>100?'active':''" 
@@ -327,5 +327,22 @@
 }
 .freightbox.el-table td, .freightbox.el-table th{
 	text-align:left;
+}
+.applybox .el-form-item.myitem{
+	margin-bottom:5px !important;
+}
+.applybox .el-form-item.myitem .el-form-item__content{
+	margin-bottom:0 !important;
+}
+.applybox .el-form-item.btnitem .el-form-item__content{
+	margin-left:0 !important;
+}
+.applybox .el-form-item.myitem  .el-input{
+	margin-bottom:0 !important;
+}
+.applybox .tipbox{
+	position: relative;
+    top: -37px;
+    left: 120px;
 }
 </style>
