@@ -139,7 +139,7 @@
 									<li>
 										<div class="detailbox last">
 											<p class="title">是否需要退回样品</p>
-											<p class="num">是</p>
+											<p class="num">{{item.NeedSendBack}}</p>
 										</div>
 									</li>
 								</ul>
