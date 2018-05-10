@@ -90,7 +90,7 @@
 												<div class="inner">
 												 {{ good.PreferentialWay ==='拍下立减'?'拍下立减':(good.DailyPrice-good.LivePrice).toFixed(2)+'元优惠券' }}
 													<el-button type="text" v-if="good.PreferentialWay ==='优惠券'" class="copybox copyBtn" :data-clipboard-text="good.CouponsURL">复制优惠券链接</el-button>
-												    <el-button class="copybox copyBtn" type="text" :data-clipboard-text="good.CommissionURL" >复制定向链接</el-button>
+												   
                                                   	<el-button class="optbtn copyBtn" type="text"  :data-clipboard-text="good.GoodsURL">复制宝贝地址</el-button>
 													<el-button class="optbtn" v-if="good.SellingPointDescribe" type="text" @click="showDialog5(good)">卖点介绍</el-button>
 												</div>
@@ -101,6 +101,7 @@
 										<div class="planstate">
 											<div class="outer">
 											   <div class="inner" >{{ item.DirectionalPlanStatus }} 
+											    <el-button class="copybox copyBtn" type="text" :data-clipboard-text="good.CommissionURL" >复制定向链接</el-button>
 											   </div>
 											 </div>
 									    </div>
