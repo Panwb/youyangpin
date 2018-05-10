@@ -12,7 +12,7 @@
          <p class="copyright">©copyright 2016-2018 优样品 www.youyangpin.com.<a href="http://www.beianbeian.com/beianxinxi/a40cc71f-db17-4d78-80dd-4b232dab5880.html" target="_blank">粤ICP备15114843号-1 </a>深圳驼师傅网络有限公司</p>
          </div>
 </template>
-
+<script src="https://s22.cnzz.com/z_stat.php?id=1266355073&web_id=1266355073" language="JavaScript"></script>
 <script>
   export default {
     name: 'MainFooter'
