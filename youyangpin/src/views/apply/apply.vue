@@ -59,33 +59,33 @@
 											<p class="detail">{{ applyData.CurrentGood.IsProvideMulticolor === '是' ?  '提供多色（' + applyData.CurrentGood.ColorNum + '中颜色）' : ''}}</p>
 										</div>
 									</li>
-									<li>
+									<li class="xiaoliang">
 										<div class="detailbox">
 											<p class="title">销量</p>
 											<p class="num">{{ applyData.CurrentGood.Sales }}</p>
 										</div>
 									</li>
-									<li>
+									<li class="kucun">
 										<div class="detailbox">
 											<p class="title">库存</p>
 											<p class="num">{{ applyData.CurrentGood.InventoryNum }}</p>
 										</div>
 									</li>
-									<li>
+									<li class="shenqing">
 										<div class="detailbox">
 											<p class="title">已申请数/供样数</p>
 											<p class="num">{{ applyData.CurrentGood.RequestQuantity }}/{{ applyData.CurrentGood.SupplyNum }}</p>
 										</div>
 									</li>
-									<li>
+									<li class="youhui">
 										<div class="detailbox">
 											<p class="title">优惠方式</p>
 											<p class="num">{{applyData.CurrentGood.PreferentialWay ==='拍下立减'?'拍下立减':(applyData.CurrentGood.DailyPrice-applyData.CurrentGood.LivePrice).toFixed(2)+'元优惠券'}}</p>
 										</div>
 									</li>
-									<li>
+									<li class="last">
 										<div class="detailbox last">
-											<p class="title">是否需要退回样品</p>
+											<p class="title">需要退样</p>
 											<p class="num">{{applyData.CurrentGood.NeedSendBack}}</p>
 										</div>
 									</li>
@@ -112,33 +112,33 @@
 											<p class="detail">{{ item.IsProvideMulticolor === '是' ?  '提供多色（' + item.ColorNum + '中颜色）' : ''}}</p>
 										</div>
 									</li>
-									<li>
+									<li class="xiaoliang">
 										<div class="detailbox">
 											<p class="title">销量</p>
 											<p class="num">{{ item.Sales }}</p>
 										</div>
 									</li>
-									<li>
+									<li class="kucun">
 										<div class="detailbox">
 											<p class="title">库存</p>
 											<p class="num">{{ item.InventoryNum }}</p>
 										</div>
 									</li>
-									<li>
+									<li class="shenqing">
 										<div class="detailbox">
 											<p class="title">已申请数/供样数</p>
 											<p class="num">{{ item.RequestQuantity }}/{{ item.SupplyNum }}</p>
 										</div>
 									</li>
-									<li>
+									<li class="youhui">
 										<div class="detailbox">
 											<p class="title">优惠方式</p>
 											<p class="num">{{item.PreferentialWay ==='拍下立减'?'拍下立减':(item.DailyPrice-item.LivePrice).toFixed(2)+'元优惠券'}}</p>
 										</div>
 									</li>
-									<li>
+									<li class="last">
 										<div class="detailbox last">
-											<p class="title">是否需要退回样品</p>
+											<p class="title">需要退样</p>
 											<p class="num">{{item.NeedSendBack}}</p>
 										</div>
 									</li>
@@ -373,6 +373,22 @@ export default {
 .goodbox .list li{
 	float:left
 }
+.goodbox .list li.last{
+	float:right;
+	width:100px;
+}
+.goodbox .list li.xiaoliang{
+	width:100px;
+}
+.goodbox .list li.kucun{
+	width:100px;
+}
+.goodbox .list li.shenqing{
+	width:150px;
+}
+.goodbox .list li.youhui{
+	width:180px;
+}
 .goodbox .imgbox{
 	width:120px;
 	height:120px;
@@ -384,7 +400,7 @@ export default {
 }
 .goodbox .infobox{
 	width:300px;
-	margin-right:120px;
+	margin-right:70px;
 	color:#656565;
 	text-align:left;
 	padding:0 !important;
@@ -399,6 +415,9 @@ export default {
     text-overflow:ellipsis;
     white-space: nowrap;
     margin-bottom:0;
+}
+.goodbox .infobox p.name a{
+	color:#333;
 }
 .goodbox .infobox .price .num{
 	font-size:16px;
@@ -420,9 +439,6 @@ export default {
 	color:#333;
 }
 
-.goodbox .detailbox{
-	padding:0 21px;
-}
 .goodbox .detailbox.last{
 	padding-right:0;
 }
@@ -437,11 +453,16 @@ export default {
 }
 .shopgoods .el-card__body{
 	padding:0 10px;
+	max-height: 490px;
+    overflow: auto;
 }
 .shopgoods .txt{
 	border-bottom:1px solid #e3e3e3;
 	padding:20px 0 20px 10px;
 	margin-bottom:-1px;
+}
+.shopgoods .txt:last-child{
+	border:none;
 }
 .shopgoods .checkbox{
 	padding:50px 10px 50px 0px;
@@ -458,7 +479,7 @@ export default {
 	top:1px;
 }
 .shopgoods .infobox{
-	margin-right:120px;
+	margin-right:45px;
 }
 .pinfobox{
 	width:500px;
