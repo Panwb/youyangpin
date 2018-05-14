@@ -45,8 +45,8 @@
                                         <div class="topbox">
                                             <div class="date">{{ item.datetime }}</div><!--todo-->
                                             <div class="shop" :title="item.ShopName"><span :class="item.ShopType=='淘宝店'?'icon icon-tao':'icon icon-tian'"></span>{{ item.ShopName }}</div>
-                                            <div class="wechat">申请时间：{{ formatDate(item.CreateTime, 'hms') }}</div>
-                                            <div class="phone" v-if="item.CheckTime">审核时间：{{ formatDate(item.CheckTime, 'hms') }}</div>
+                                            <div class="applytime">申请时间：{{ formatDate(item.CreateTime, 'hms') }}</div>
+                                            <div class="checktime" v-if="item.CheckTime">审核时间：{{ formatDate(item.CheckTime, 'hms') }}</div>
                                         </div>
                                         <div class="bottombox clear" v-for="(good,index) in item.Goods" :key="index">
                                             <div class="infobox">
@@ -335,11 +335,11 @@
     vertical-align: middle;
     margin-right: 5px;
 }
-.topbox > div.wechat{
-	margin-left:180px;
+.topbox > div.applytime{
+	margin-left:120px;
 }
-.topbox > div.phone{
-	margin-left:180px;
+.topbox > div.checktime{
+	margin-left:120px;
 	color:#000;
 	font-size:14px;
 }

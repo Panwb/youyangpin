@@ -69,7 +69,7 @@
 											<div class="date">{{ formatDate(item.CreateTime) }}</div>
 											<div class="orderId">订单号:{{ item.OrderNo }}</div>
 											<div class="shop" :title="item.ShopName"><span :class="item.ShopType=='淘宝店'?'icon icon-tao':'icon icon-tian'"></span>{{ item.ShopName }}</div>
-											<div class="wechat">微信号:{{ item.WeChat }}</div>
+											<div class="wechat" :title="item.WeChat">微信号:{{ item.WeChat }}</div>
 											<div class="phone">联系电话:{{ item.LinkmanPhone }}</div>
 										</div>
 										<div class="bottombox clear" v-for="(good,index) in item.Goods" :key="index">
@@ -455,13 +455,13 @@
 	color:#000;
 }
 .topbox > div.date{
-	margin-left:20px;
+	margin-left:15px;
 	
 }
 .topbox > div.orderId{
 	margin-left:10px;
 	color:#666;
-	width:190px;
+	width:205px;
 }
 .topbox > div.shop{
 	margin-left:165px;
@@ -638,7 +638,11 @@
 .topbox>div.shop{
     padding-left: 25px;
     position: relative;
-    margin-left:80px;
+    margin-left: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 138px;
 }
 .topbox>div.shop .icon{
     position: absolute;
@@ -733,7 +737,13 @@
     padding:8px;
 }
 .topbox>div.wechat,.topbox>div.phone{
-	margin-left:60px;
+	margin-left:20px;
+}
+.topbox>div.wechat{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 150px;
 }
 .option .date{
 	color:green;
