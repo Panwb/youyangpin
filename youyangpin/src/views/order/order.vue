@@ -101,7 +101,7 @@
 										<div class="planstate">
 											<div class="outer">
 											   <div class="inner" >{{ item.DirectionalPlanStatus }} 
-											    <el-button class="copybox copyBtn" type="text" :data-clipboard-text="good.CommissionURL" >复制定向链接</el-button>
+											    <el-button class="copybox copyBtn" type="text" :data-clipboard-text="item.Goods[0].CommissionURL" >复制定向链接</el-button>
 											   </div>
 											 </div>
 									    </div>
