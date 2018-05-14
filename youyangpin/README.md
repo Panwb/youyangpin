@@ -1,4 +1,4 @@
-# 有样品
+# 优样品
 ## 常用指令
  * npm install 初次启动时,需要运行npm install 安装所有开发依赖
  * npm run mb mac打包指令
