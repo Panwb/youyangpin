@@ -20,50 +20,49 @@ export default {
                 lowCommissionRatio: '',
                 highCommissionRatio: '',
                 sortField: '',
-                sort: ''
+                sort: '',
             },
             sortValue: 0,
-            vIndex: 0
-        }
+            vIndex: 0,
+        };
     },
     watch: {
         '$route'() {
             if (this.$route.query.keywords) {
                 this.searchForm.goodsName = this.$route.query.keywords;
                 this.searchForm.pageIndex = 1;
-                this.goodsSearch()
-            }
-            else {
+                this.goodsSearch();
+            } else {
                 this.searchForm.goodsName = '';
                 this.searchForm.pageIndex = 1;
-                this.goodsSearch()
+                this.goodsSearch();
             }
-        }
+        },
     },
     mounted() {
         this.goToIndex();
     },
     computed: {
         ...mapGetters([
-            'statistics'
-        ])
+            'statistics',
+        ]),
     },
     methods: {
         ...mapActions([
-            'setStatistics'
+            'setStatistics',
         ]),
         goToIndex() {
             if (this.$route.query.keywords) {
-                this.searchForm.goodsName = this.$route.query.keywords
+                this.searchForm.goodsName = this.$route.query.keywords;
             }
-            if(sessionStorage.getItem('prePath')!=='/login'&&sessionStorage.getItem('prePath')!=='/') {
+            if (sessionStorage.getItem('prePath') !== '/login' && sessionStorage.getItem('prePath') !== '/') {
                 //
-            }else {
-                sessionStorage.setItem('typekey','0');
-                sessionStorage.setItem('typename','');
-                this.getStatistics(this.searchForm.activityType);
-                this.goodsSearch();
+            } else {
+                sessionStorage.setItem('typekey', '0');
+                sessionStorage.setItem('typename', '');
             }
+            this.getStatistics(this.searchForm.activityType);
+            this.goodsSearch();
         },
         goodsSearch() {
             ajax.goodSearch(this.searchForm).then((result) => {
@@ -92,7 +91,7 @@ export default {
             console.log(`每页 ${val} 条`);
         },
         handleCurrentChange(val) {
-            this.searchForm.pageIndex = val
+            this.searchForm.pageIndex = val;
             this.goodsSearch();
             scrollTo(0,0);
             console.log(`当前页: ${val}`);
@@ -110,9 +109,9 @@ export default {
         clickType(name) {
             this.searchForm.activityType = name || '';
             this.vIndex = 0;
-            this.searchForm.verticalFieldCode = "";
+            this.searchForm.verticalFieldCode = '';
             this.goodsSearch();
-            this.getStatistics(name)
+            this.getStatistics(name);
         }
     }
 }
