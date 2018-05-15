@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <el-container>
-            <main-header @clickType="clickType" ref="head" @goToIndex="goToIndex"></main-header>
+            <main-header ref="head" @goToIndex="goToIndex"></main-header>
             <!-- main start -->
             <el-main class="indexcontent">
                 <div class="wd1200">
