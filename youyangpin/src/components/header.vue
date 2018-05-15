@@ -79,7 +79,7 @@
     //        console.log(this.userInfo)
             if(sessionStorage.getItem('prePath')!=='/login'&&sessionStorage.getItem('prePath')!=='/index'&&sessionStorage.getItem('prePath')!=='/') {
                 this.activeIndex = sessionStorage.getItem('typekey');
-                this.$emit('clickType',sessionStorage.getItem('typename'));
+                //this.$emit('clickType',sessionStorage.getItem('typename'));
             }else {
                 this.getActivityTypes();
             }
