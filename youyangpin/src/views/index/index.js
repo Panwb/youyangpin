@@ -1,6 +1,6 @@
-import { api as ajax } from 'services'
+import { api as ajax } from 'services';
 
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
     data() {
@@ -27,7 +27,7 @@ export default {
         };
     },
     watch: {
-        '$route' () {
+        '$route'() {
             if (this.$route.query.keywords) {
                 this.searchForm.goodsName = this.$route.query.keywords;
                 this.searchForm.pageIndex = 1;
@@ -68,26 +68,26 @@ export default {
             ajax.goodSearch(this.searchForm).then((result) => {
                 console.log(result);
                 this.pageList = result.Goods;
-                this.total = result.RecordCount
-            })
+                this.total = result.RecordCount;
+            });
         },
         reset() {
-            this.searchForm.lowDailyPrice = "";
-            this.searchForm.highDailyPrice = "";
-            this.searchForm.lowSales = "";
-            this.searchForm.highSales = "";
-            this.searchForm.lowCommissionRatio = "";
-            this.searchForm.highCommissionRatio = "";
+            this.searchForm.lowDailyPrice = '';
+            this.searchForm.highDailyPrice = '';
+            this.searchForm.lowSales = '';
+            this.searchForm.highSales = '';
+            this.searchForm.lowCommissionRatio = '';
+            this.searchForm.highCommissionRatio = '';
         },
         getStatistics(val) {
             ajax.getStatistics(this.searchForm).then((result) => {
-                this.setStatistics(result)
+                this.setStatistics(result);
                 console.log(`活动类型 ${val} `);
-            })
+            });
         },
         handleSizeChange(val) {
             this.searchForm.itemsPerPage = val;
-            this.goodSearch()
+            this.goodSearch();
             console.log(`每页 ${val} 条`);
         },
         handleCurrentChange(val) {
@@ -103,7 +103,7 @@ export default {
         },
         clickVField(name, index) {
             this.vIndex = index;
-            name === '全部' ? this.searchForm.verticalFieldCode = "" : this.searchForm.verticalFieldCode = name;
+            name === '全部' ? this.searchForm.verticalFieldCode = '' : this.searchForm.verticalFieldCode = name;
             this.goodsSearch();
         },
         clickType(name) {
@@ -113,5 +113,5 @@ export default {
             this.goodsSearch();
             this.getStatistics(name);
         },
-    }
-}
+    },
+};

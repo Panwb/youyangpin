@@ -1,16 +1,16 @@
-import promisePolyfill from 'es6-promise' // es6 promise polyfill
-import Vue from 'vue'
-import Vuex from 'vuex'
-import actions from './actions'
-import getters from './getters'
-import * as types from './mutationTypes'
+import promisePolyfill from 'es6-promise';// es6 promise polyfill
+import Vue from 'vue';
+import Vuex from 'vuex';
+import actions from './actions';
+import getters from './getters';
+import * as types from './mutationTypes';
 
-promisePolyfill.polyfill()
-Vue.use(Vuex)
+promisePolyfill.polyfill();
+Vue.use(Vuex);
 
-import demo from './modules/demo'
-import loading from './modules/loading'
-import config from './modules/config'
+import demo from './modules/demo';
+import loading from './modules/loading';
+import config from './modules/config';
 
 export default new Vuex.Store({
 	actions,
@@ -18,6 +18,6 @@ export default new Vuex.Store({
 	modules: {
 		demo,
 		loading,
-		config
-	}
-})
+		config,
+	},
+});

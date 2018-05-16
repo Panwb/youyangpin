@@ -1,4 +1,4 @@
-import ajax from './fetch'
+import ajax from './fetch';
 
 /**
  * Ajax请求接口定义

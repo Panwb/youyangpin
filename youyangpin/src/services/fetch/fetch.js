@@ -1,15 +1,15 @@
 // 引入window.fetch polyfill
-import 'whatwg-fetch'
+import 'whatwg-fetch';
 import {
     rootPath,
-    commonPath
-} from './config'
-import actions from '../../vuex/actions'
-import store from '../../vuex'
-import * as util from '../../util/common'
+    commonPath,
+} from './config';
+import actions from '../../vuex/actions';
+import store from '../../vuex';
+import * as util from '../../util/common';
 import {
-    Message
-} from 'element-ui'
+    Message,
+} from 'element-ui';
 /**
  * 检查ajax返回的状态码,如果为401,则跳转到登录页
  * @param response
@@ -17,32 +17,32 @@ import {
  */
 const checkStatus = function(response) {
     if (response.status >= 200 && response.status < 300) {
-        return response
-    } else if (response.status == 401) {
+        return response;
+    } else if (response.status === 401) {
         // 如果没有登录,则跳转到登录页面
         //Message({
         //    message:'未授权，请先登录',
         //    type: 'error'
         //})
         // localStorage.removeItem('user');
-        util.clearCookie('user')
+        util.clearCookie('user');
         setTimeout(() => {
-            window.location = '/#/login?redirect=' + window.location.hash.replace('#/', '%2F')
-        })
-        return response
+            window.location = '/#/login?redirect=' + window.location.hash.replace('#/', '%2F');
+        });
+        return response;
     } else {
-        const error = new Error(response.statusText)
-        error.response = response
-        throw error
+        const error = new Error(response.statusText);
+        error.response = response;
+        throw error;
     }
-}
+};
 /**
  * 参数为空时报错
  * @param param {string} 参数名
  */
-const throwIfMissing = function(param) {
-    throw new Error(param + '不能为空')
-}
+const throwIfMissing = function (param) {
+    throw new Error(param + '不能为空');
+};
 /**
  *
  * @param url {string}  接口路径,必填
@@ -69,20 +69,20 @@ const ajax = ({
     auth = false,
     localLoading = false,
     isShowErrorTip = true,
-    isCommon = false
+    isCommon = false,
 }) => {
-    let headers = {}
+    let headers = {};
     if (auth && formJson) {
         headers = {
             ...headersData,
-            Authorization: 'Bearer ' + store.getters.authToken
-        }
+            Authorization: 'Bearer ' + store.getters.authToken,
+        };
     } else {
-        headers = headersData
+        headers = headersData;
     }
 
     if (isCommon) {
-        path = commonPath
+        path = commonPath;
     }
 
     const options = {
@@ -91,28 +91,28 @@ const ajax = ({
         // withCredentials: true,  // cross-origin cookie  调试用 上线删
         method,
         headers,
-    }
+    };
 
-    let bodyString = ''
+    let bodyString = '';
     if (formJson) {
-        bodyString = JSON.stringify(body)
+        bodyString = JSON.stringify(body);
     } else {
         bodyString = Object.keys(body).map((key) => {
-            return encodeURIComponent(key) + '=' + encodeURIComponent(body[key])
-        }).join('&')
+            return encodeURIComponent(key) + '=' + encodeURIComponent(body[key]);
+        }).join('&');
     }
     if (bodyString !== 'null') {
-        options.body = bodyString
+        options.body = bodyString;
     }
 
     return new Promise((resolve, reject) => {
         // 显示全屏动画
         if (isShowFullLoading) {
-            actions.showFullLoading(store, true)
+            actions.showFullLoading(store, true);
         }
         // 显示局部动画
         if (localLoading) {
-            actions.showLocalLoading(store, localLoading)
+            actions.showLocalLoading(store, localLoading);
         }
         fetch(path + url, options)
             .then(checkStatus)
@@ -123,46 +123,44 @@ const ajax = ({
                 // }
                 // 返回正确数据
                 if (!result.HasViolation) {
-                    resolve(result.Data)
+                    resolve(result.Data);
                 } else {
                     // 返回错误的数据
-                    reject(result.ErrorMessage)
+                    reject(result.ErrorMessage);
                     // throw new Error(result.ErrorMessage)
-                    let errors = result.ErrorMessage
+                    let errors = result.ErrorMessage;
                     Message({
                         type: 'error',
                         message: errors,
-                    })
+                    });
                 }
                 // 关闭全屏动画
                 if (isShowFullLoading) {
-                    actions.showFullLoading(store, false)
+                    actions.showFullLoading(store, false);
                 }
                 // 关闭局部动画
                 if (localLoading) {
-                    actions.showLocalLoading(store, '')
+                    actions.showLocalLoading(store, '');
                 }
             })
             .catch((error) => {
                 // 关闭全屏动画
                 if (isShowFullLoading) {
-                    actions.showFullLoading(store, false)
+                    actions.showFullLoading(store, false);
                 }
                 // 关闭局部动画
                 if (localLoading) {
-                    actions.showLocalLoading(store, '')
+                    actions.showLocalLoading(store, '');
                 }
                 // 显示错误提示
-                reject(error)
-                console.log('e', typeof error)
+                reject(error);
+                console.log('e', typeof error);
                 Message({
                     type: 'error',
                     message: '出现错误',
-                })
+                });
+            });
+    });
+};
 
-
-            })
-    })
-}
-
-export default ajax
+export default ajax;

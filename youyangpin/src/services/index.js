@@ -1,5 +1,5 @@
-import api from './modules/api'
+import api from './modules/api';
 
 export {
-	api
+	api,
 }

@@ -1,6 +1,6 @@
 import {
-    api as ajax
-} from 'services'
+    api as ajax,
+} from 'services';
 
 export default {
     data() {
@@ -12,22 +12,22 @@ export default {
                 GoodIds: [],
                 MerchantUserId: null,
                 ShopId: null,
-                AnchorAbilitySelfReport: null
+                AnchorAbilitySelfReport: null,
             },
             isChecked: [],
-            isShowChoose: true
-        }
+            isShowChoose: true,
+        };
     },
     created() {
         if (!this.$route.query.goodsId) {
-            this.$router.go(-1)
-            return
+            this.$router.go(-1);
+            return;
         }
 
-        console.log(this.$route.query)
-        this.goodsId = this.$route.query.goodsId
-        sessionStorage.removeItem('goodid')
-        this.getGoodsDetail()
+        console.log(this.$route.query);
+        this.goodsId = this.$route.query.goodsId;
+        sessionStorage.removeItem('goodid');
+        this.getGoodsDetail();
     },
     methods: {
         getGoodsDetail() {
@@ -45,14 +45,14 @@ export default {
                         });
                         this.isShowChoose = true;
                     }
-                })
+                });
         },
-        //提交申请
+        // 提交申请
         requestApplication() {
             let GoodsIds = [];
             this.isChecked.forEach((item, index) => {
                 if (item) {
-                    GoodsIds.push(this.applyData.RelatedGoods[index].GoodsId)
+                    GoodsIds.push(this.applyData.RelatedGoods[index].GoodsId);
                 }
             });
             GoodsIds.push(this.applyData.CurrentGood.GoodsId);
@@ -60,30 +60,30 @@ export default {
             ajax.requestApplication(this.ApplicationForm)
                 .then((result) => {
                     this.$message({
-                        type: "success",
-                        message: "提交成功，等待商家审核"
+                        type: 'success',
+                        message: '提交成功，等待商家审核',
                     });
-                    this.$router.push('/applyrecord')
+                    this.$router.push('/applyrecord');
                 }, error => {
                     this.$message({
-                        type: "warning",
-                        message: error
+                        type: 'warning',
+                        message: error,
                     });
-                })
+                });
         },
-        //修改个人信息
+        // 修改个人信息
         editPersonalMeg() {
             sessionStorage.setItem('goodid', this.$route.query.goodsId);
-            this.$router.push('user')
+            this.$router.push('user');
         },
-        //完善收货地址
+        // 完善收货地址
         improveAddress() {
             sessionStorage.setItem('goodid', this.$route.query.goodsId);
             this.$router.push('user');
         },
         handleCheckAllChange(val) {
             this.applyData.RelatedGoods.forEach((item, index) => {
-                this.$set(this.isChecked, index, val)
+                this.$set(this.isChecked, index, val);
             });
         },
         handleSelect(key, keyPath) {
@@ -97,10 +97,9 @@ export default {
         },
         formatDate(val) {
             if (val) {
-                return `${val.substring(0,4)}/${val.substring(5,7)}/${val.substring(8,10)}`
-            } else {
-                return null
+                return `${val.substring(0, 4)}/${val.substring(5, 7)}/${val.substring(8, 10)}`;
             }
-        }
-    }
-}
+            return null;
+        },
+    },
+};

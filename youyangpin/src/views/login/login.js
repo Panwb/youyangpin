@@ -1,11 +1,11 @@
-import { api as ajax } from 'services'
+import { api as ajax } from 'services';
 
-import { mapActions } from 'vuex'
+import { mapActions } from 'vuex';
 
 export default {
     data() {
-        var validatePass = (rule, value, callback) => {
-            var passwordreg = /^[a-zA-Z0-9]{6,25}$/;
+        const validatePass = (rule, value, callback) => {
+            const passwordreg = /^[a-zA-Z0-9]{6,25}$/;
             if (value === '') {
                 callback(new Error('请输入密码'));
             } else if (!passwordreg.test(value)) {
@@ -14,8 +14,8 @@ export default {
                 callback();
             }
         };
-        var validatemobilePhone = (rule, value, callback) => {
-            var phonereg = /^[1][3,4,5,7,8][0-9]{9}$/;
+        const validatemobilePhone = (rule, value, callback) => {
+            const phonereg = /^[1][3,4,5,7,8][0-9]{9}$/;
             if (value === '') {
                 callback(new Error('请输入手机号码'));
             } else if (!phonereg.test(value)) {
@@ -24,7 +24,7 @@ export default {
                 callback();
             }
         };
-        var validateyzCode = (rule, value, callback) => {
+        const validateyzCode = (rule, value, callback) => {
             if (value === '') {
                 callback(new Error('请输入验证码'));
             } else {
@@ -42,32 +42,32 @@ export default {
                 password: [{
                     required: true,
                     validator: validatePass,
-                    trigger: 'blur'
+                    trigger: 'blur',
                 }],
                 accountName: [{
                     required: true,
                     validator: validatemobilePhone,
-                    trigger: 'blur'
+                    trigger: 'blur',
                 }],
                 identifyCode: [{
                     required: true,
                     validator: validateyzCode,
-                    trigger: 'blur'
-                }]
-            }
+                    trigger: 'blur',
+                }],
+            },
         };
     },
     created() {
-        this.getImgCode()
+        this.getImgCode();
     },
     methods: {
         ...mapActions([
-            'setAccount'
+            'setAccount',
         ]),
         getImgCode() {
             ajax.getImgCode().then((result) => {
-                this.imgCode = result
-            })
+                this.imgCode = result;
+            });
         },
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
@@ -80,13 +80,14 @@ export default {
                         const redirect = decodeURIComponent(this.$route.query.redirect || '/index');
                         this.$router.push(redirect);
                     }).catch(error => {
-                        this.getImgCode()
-                    })
-                } else {
-                    console.log('error submit!!');
-                    return false;
+                        this.getImgCode();
+                    });
+
+                    return true;
                 }
+                console.log('error submit!!');
+                return false;
             });
-        }
-    }
-}
+        },
+    },
+};

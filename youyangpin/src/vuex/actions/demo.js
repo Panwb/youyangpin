@@ -1,9 +1,7 @@
-import * as types from '../mutationTypes'
+import * as types from '../mutationTypes';
 
 export default {
-	setDemo: ({
-		commit
-	}, data) => {
-		commit(types.DEMO_SET, data)
-	}
-}
+	setDemo: ({ commit }, data) => {
+		commit(types.DEMO_SET, data);
+	},
+};

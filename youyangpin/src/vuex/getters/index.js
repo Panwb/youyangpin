@@ -4,5 +4,5 @@ export default {
 	localLoading: (state) => state.loading.localLoading, // 显示局部加载动画
 	account: (state) => state.config.account,
 	activityTypes: (state) => state.config.activityTypes,
-	statistics: (state) => state.config.statistics
-}
+	statistics: (state) => state.config.statistics,
+};

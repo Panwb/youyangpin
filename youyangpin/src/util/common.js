@@ -1,15 +1,15 @@
-import cookie from 'js-cookie'
+import cookie from 'js-cookie';
 /**
  * 判断对象是否有值
  * @param  {object}  e 对象
  */
-export const isEmptyObject = function(e) {
-    var t
+export const isEmptyObject = function (e) {
+    var t;
     for (t in e) {
-        return !1
+        return !1;
     }
-    return !0
-}
+    return !0;
+};
 // export const setAuthCookie = () => {
 //     let timestamp = Date.parse(new Date())
 //     cookie.set('AuthTime', timestamp)
@@ -35,39 +35,35 @@ export const isEmptyObject = function(e) {
 //     }
 //
 // }
-//设置cookie
+// 设置cookie
 export const setCookie = (cname, cvalue, days = 1) => {
-    var d = new Date();
+    let d = new Date();
     d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
-    var expires = "expires=" + d.toUTCString();
-    document.cookie = cname + "=" + cvalue + "; " + expires;
+    let expires = 'expires=' + d.toUTCString();
+    document.cookie = cname + '=' + cvalue + '; ' + expires;
     // console.log(222,document.cookie);
-}
-//获取cookie
+};
+// 获取cookie
 export const getCookie = (name) => {
-    var getName = name + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') c = c.substring(1);
-        if (c.indexOf(getName) != -1) return c.substring(name.length, c.length);
+    let getName = name + '=';
+    let ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1);
+        if (c.indexOf(getName) !== -1) return c.substring(name.length, c.length);
     }
-    return "";
-}
-//清除cookie
+    return '';
+};
+// 清除cookie
 export const clearCookie = (cname) => {
-    this.setCookie(cname, "", -1);
+    this.setCookie(cname, '', -1);
     // console.log(11,document.cookie)
-}
+};
 export const checkCookie = (cname) => {
     var user = this.getCookie(cname);
-    if (user != "") {
-        console.log("Welcome again " + user);
-        return false
-    } else {
-        return true
-        // if (user != "" && user != null) {
-        //     this.setCookie(cname, user, 1);
-        // }
+    if (user !== '') {
+        console.log('Welcome again ' + user);
+        return false;
     }
-}
+    return true;
+};

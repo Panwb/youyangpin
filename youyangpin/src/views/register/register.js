@@ -1,5 +1,5 @@
 import {
-    api as ajax
+    api as ajax,
 } from 'services';
 
 export default {

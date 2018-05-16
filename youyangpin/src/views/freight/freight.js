@@ -1,4 +1,4 @@
-import { api as ajax } from 'services'
+import { api as ajax } from 'services';
 
 export default {
     data() {
@@ -7,43 +7,43 @@ export default {
             menus: [{
                 title: '我的订单',
                 key: '1',
-                path: '/order'
+                path: '/order',
             }, {
                 title: '申请记录',
                 key: '2',
-                path: '/applyrecord'
+                path: '/applyrecord',
             }, {
                 title: '运费提现',
                 key: '3',
-                path: '/freight'
+                path: '/freight',
             }, {
                 title: '个人信息',
                 key: '4',
-                path: '/user'
+                path: '/user',
             }, {
                 title: '修改密码',
                 key: '5',
-                path: '/modifypwd'
+                path: '/modifypwd',
             }],
             asideIndex: '3',
             freightData: {},
-            tableData: []
-        }
+            tableData: [],
+        };
     },
     created() {
         this.getUserDetail();
-        this.getMyRequests()
+        this.getMyRequests();
     },
     methods: {
         getUserDetail() {
             ajax.getUserDetail().then((result) => {
-                this.freightData = result
-            })
+                this.freightData = result;
+            });
         },
         getMyRequests() {
             ajax.getMyRequests().then((result) => {
                 this.tableData = result;
-            })
+            });
         },
         requestMoney(formName) {
             this.$refs[formName].validate((valid) => {
@@ -52,7 +52,7 @@ export default {
                         .then((result) => {
                             this.$message({
                                 type: 'success',
-                                message: '提现成功'
+                                message: '提现成功',
                             });
                             this.dialogVisible = false;
                             this.getUserDetail();
@@ -60,18 +60,18 @@ export default {
                         })
                         .catch(error => {
                             this.$message({
-                                type: "warning",
-                                message: error
+                                type: 'warning',
+                                message: error,
                             });
                         });
-                } else {
-                    console.log('error submit!!');
-                    return false;
+                    return true;
                 }
+                console.log('error submit!!');
+                return false;
             });
         },
         handleSelect(key, keyPath) {
-            this.$router.push(this.menus[key - 1]['path'])
+            this.$router.push(this.menus[key - 1].path);
         },
         handleClick(tab, event) {
             console.log(tab, event);
@@ -90,35 +90,37 @@ export default {
             if (new Date(date) === 'Invalid Date') {
                 return date;
             } else if (date) {
-                date = new Date(date);
-                const y = date.getFullYear();
-                let m = date.getMonth() + 1;
-                m = m < 10 ? '0' + m : m;
-                let d = date.getDate();
-                d = d < 10 ? ('0' + d) : d;
-                let h = date.getHours();
-                h = h < 10 ? ('0' + h) : h;
-                let M = date.getMinutes();
-                M = M < 10 ? ('0' + M) : M;
-                let s = date.getSeconds();
-                s = s < 10 ? ('0' + s) : s;
+                const datetime = new Date(date);
+                const y = datetime.getFullYear();
+                let m = datetime.getMonth() + 1;
+                m = m < 10 ? `0${m}` : m;
+                let d = datetime.getDate();
+                d = d < 10 ? `0${d}` : d;
+                let h = datetime.getHours();
+                h = h < 10 ? `0${h}` : h;
+                let M = datetime.getMinutes();
+                M = M < 10 ? `0${M}` : M;
+                let s = datetime.getSeconds();
+                s = s < 10 ? `0${s}` : s;
                 switch (type) {
-                    case "hms":
-                        return y + '/' + m + '/' + d + " " + h + ':' + M + ':' + s;
-                    case "timestamp":
-                        return Date.parse(date);
-                    case "ymdhM":
-                        return y + '/' + m + '/' + d + " " + h + ':' + M;
-                    case "md":
-                        return m + '/' + d;
-                    case "d":
+                    case 'hms':
+                        return `${y}/${m}/${d} ${h}:${M}:${s}`;
+                    case 'timestamp':
+                        return Date.parse(datetime);
+                    case 'ymdhM':
+                        return `${y}/${m}/${d} ${h}:${M}`;
+                    case 'md':
+                        return `${m}/${d}`;
+                    case 'd':
                         return d;
+                    case 'hm':
+                        return `${h}:${M}`;
                     default:
-                        return y + '/' + m + '/' + d;
+                        return `${y}/${m}/${d}`;
                 }
             } else {
-                return date
+                return date;
             }
-        }
-    }
-}
+        },
+    },
+};

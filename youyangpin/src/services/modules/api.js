@@ -1,4 +1,4 @@
-import ajax from '../fetch'
+import ajax from '../fetch';
 
 export default {
     /**
@@ -10,8 +10,8 @@ export default {
             method: 'post',
             localLoading,
             // formJson,
-            body: data
-        })
+            body: data,
+        });
     },
     /**
      * 退出登录
@@ -23,7 +23,7 @@ export default {
             localLoading,
             // formJson,
             // body: data
-        })
+        });
     },
     /**
      * 根据账号获取用户信息
@@ -31,8 +31,8 @@ export default {
     getByAccount(account, localLoading = 'getByAccount') {
         return ajax({
             url: '/user/getByAccount?account=' + account,
-            localLoading
-        })
+            localLoading,
+        });
     },
     /**
      * 注册
@@ -42,8 +42,8 @@ export default {
             url: '/studiohost/register',
             method: 'post',
             localLoading,
-            body: data
-        })
+            body: data,
+        });
     },
     /**
      * 获取图形验证码
@@ -51,8 +51,8 @@ export default {
     getImgCode(isCommon = true, localLoading = 'getImgCode') {
         return ajax({
             url: '/common/getimgcode',
-            localLoading
-        })
+            localLoading,
+        });
     },
     /**
      * 短信验证码
@@ -60,8 +60,8 @@ export default {
     getSmsCode(tel, type, isCommon = true, localLoading = 'getSmsCode') {
         return ajax({
             url: `/common/SendSms?telphone=${tel}&smsType=${type}`,
-            localLoading
-        })
+            localLoading,
+        });
     },
     /**
      * 获取类型
@@ -69,14 +69,14 @@ export default {
     getActivityTypes(localLoading = 'getActivityTypes') {
         return ajax({
             url: '/good/GetActivityTypes',
-            localLoading
-        })
+            localLoading,
+        });
     },
     getStatistics(searchForm, localLoading = 'getStatistics') {
         return ajax({
             url: `/good/getStatistics?activityType=${searchForm.activityType}`,
-            localLoading
-        })
+            localLoading,
+        });
     },
     /**
      * 首页商品搜索
@@ -84,8 +84,8 @@ export default {
     goodSearch(searchForm, localLoading = 'goodsSearch') {
         return ajax({
             url: `/Good/Search?goodsName=${searchForm.goodsName}&verticalFieldCode=${searchForm.verticalFieldCode}&activityType=${searchForm.activityType}&lowSales=${searchForm.lowSales}&highSales=${searchForm.highSales}&lowDailyPrice=${searchForm.lowDailyPrice}&highDailyPrice=${searchForm.highDailyPrice}&lowCommissionRatio=${searchForm.lowCommissionRatio}&highCommissionRatio=${searchForm.highCommissionRatio}&pageIndex=${searchForm.pageIndex}&itemsPerPage=${searchForm.itemsPerPage}&sortField=${searchForm.sortField}&sort=${searchForm.sort}`,
-            localLoading
-        })
+            localLoading,
+        });
     },
     /**
      * 商品详情
@@ -93,16 +93,16 @@ export default {
     getGoodsDetail(goodsId, localLoading = 'getGoodsDetail') {
         return ajax({
             url: '/good/getdetail?goodsId=' + goodsId,
-            localLoading
-        })
+            localLoading,
+        });
     },
     requestApplication(data, localLoading = 'requestApplication') {
         return ajax({
             url: '/Order/Add',
             method: 'post',
             localLoading,
-            body: data
-        })
+            body: data,
+        });
     },
     /**
      * 我的订单
@@ -110,8 +110,8 @@ export default {
     getPagedOrder(orderStatus, broadcastSchedulingStatus, goodsNameOrExpressNumber, pageIndex = 1, itemsPerPage = 10, localLoading = 'getPagedOrder') {
         return ajax({
             url: `/Order/GetPagedOrder?orderStatus=${orderStatus}&broadcastSchedulingStatus=${broadcastSchedulingStatus}&goodsNameOrExpressNumber=${goodsNameOrExpressNumber}&pageIndex=${pageIndex}&itemsPerPage=${itemsPerPage}`,
-            localLoading
-        })
+            localLoading,
+        });
     },
     /**
      * 我的申请记录
@@ -119,40 +119,40 @@ export default {
     getPagedRequest(checkStatus, pageIndex, itemsPerPage, localLoading = 'getPagedRequest') {
         return ajax({
             url: `/Order/GetPagedRequest?checkStatus=${checkStatus}&pageIndex=${pageIndex}&itemsPerPage=${itemsPerPage}`,
-            localLoading
-        })
+            localLoading,
+        });
     },
-    //排期
+    // 排期
     setBroadcastScheduling(orderId, form, localLoading = 'setBroadcastScheduling') {
         return ajax({
             url: `/Order/SetBroadcastScheduling?orderId=${orderId}&date=${form.date}`,
             method: 'put',
-            localLoading
-        })
+            localLoading,
+        });
     },
-    //评价
+    // 评价
     setAssessment(orderId, form, localLoading = 'setAssessment') {
         return ajax({
             url: `/Order/SetAssessment?orderId=${orderId}&description=${form.description}&star=${form.star}`,
             method: 'put',
-            localLoading
-        })
+            localLoading,
+        });
     },
-    //申请定向
+    // 申请定向
     requestDirectionalPlan(orderId, localLoading = 'requestDirectionalPlan') {
         return ajax({
             url: `/Order/RequestDirectionalPlan?orderId=${orderId}`,
             method: 'put',
-            localLoading
-        })
+            localLoading,
+        });
     },
-    //填写物流信息
+    // 填写物流信息
     setLogisticsInfo(orderId, form, localLoading = 'setLogisticsInfo') {
         return ajax({
             url: `/Order/SetLogisticsInfo?orderId=${orderId}&logisticName=${form.logisticName}&logisticNo=${form.logisticNo}&postage=${form.postage}`,
             method: 'put',
-            localLoading
-        })
+            localLoading,
+        });
     },
     /**
      * 提现记录
@@ -160,8 +160,8 @@ export default {
     getMyRequests(localLoading = 'getMyRequests') {
         return ajax({
             url: '/Withdrawal/GetMyRequests',
-            localLoading
-        })
+            localLoading,
+        });
     },
     /**
      * 申请提现
@@ -170,8 +170,8 @@ export default {
         return ajax({
             url: `/Withdrawal/RequestMoney?alipayAccount=${alipayAccount}&amount=${amount}`,
             method: 'put',
-            localLoading
-        })
+            localLoading,
+        });
     },
     /**
      * 获取个人信息以及提现余额
@@ -179,8 +179,8 @@ export default {
     getUserDetail(localLoading = 'getUserDetail') {
         return ajax({
             url: '/StudioHost/GetDetail',
-            localLoading
-        })
+            localLoading,
+        });
     },
     /**
      * 保存个人信息
@@ -190,8 +190,8 @@ export default {
             url: '/StudioHost/Update',
             method: 'post',
             localLoading,
-            body: data
-        })
+            body: data,
+        });
     },
     /**
      * 修改密码
@@ -200,8 +200,8 @@ export default {
         return ajax({
             url: `/User/ChangePassword?oldpassword=${data.oldpassword}&newpassword=${data.newpassword}`,
             method: 'put',
-            localLoading
-        })
+            localLoading,
+        });
     },
     /**
      * 忘记密码
@@ -209,21 +209,20 @@ export default {
     retrievePassword(data, localLoading = 'retrievePassword') {
         return ajax({
             url: `/User/RetrievePassword?telphone=${data.telphone}&imageIdentifyCode=${data.imageIdentifyCode}`,
-            localLoading
-        })
+            localLoading,
+        });
     },
     validateSmsIdentifyCode(smsIdentifyCode, sessionKey, localLoading = 'validateSmsIdentifyCode') {
         return ajax({
             url: `/Common/ValidateSmsIdentifyCode?smsIdentifyCode=${smsIdentifyCode}&sessionKey=${sessionKey}`,
-            localLoading
-        })
+            localLoading,
+        });
     },
     resetPassword(newPassword, localLoading = 'resetPassword') {
         return ajax({
             url: `/User/ResetPassword?newPassword=${newPassword}`,
             method: 'put',
-            localLoading
-        })
+            localLoading,
+        });
     },
-
-}
+};

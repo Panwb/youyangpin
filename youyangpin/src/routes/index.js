@@ -1,5 +1,5 @@
-import Router from './map/router'
+import Router from './map/router';
 
 export default [
-	...Router
-]
+	...Router,
+];

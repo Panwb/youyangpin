@@ -1,9 +1,9 @@
-import { api as ajax } from 'services'
+import { api as ajax } from 'services';
 
 export default {
     data() {
-        var validatemobilePhone = (rule, value, callback) => {
-            var phonereg = /^[1][3,4,5,7,8][0-9]{9}$/;
+        const validatemobilePhone = (rule, value, callback) => {
+            const phonereg = /^[1][3,4,5,7,8][0-9]{9}$/;
             if (value === '') {
                 callback(new Error('请输入手机号码'));
             } else if (!phonereg.test(value)) {
@@ -12,22 +12,22 @@ export default {
                 callback();
             }
         };
-        var validateyzCode = (rule, value, callback) => {
+        const validateyzCode = (rule, value, callback) => {
             if (value === '') {
                 callback(new Error('请输入图形证码'));
             } else {
                 callback();
             }
         };
-        var validatemobileYzCode = (rule, value, callback) => {
+        const validatemobileYzCode = (rule, value, callback) => {
             if (value === '') {
                 callback(new Error('请输入6位数字短信验证码'));
             } else {
                 callback();
             }
         };
-        var validatePass = (rule, value, callback) => {
-            var passwordreg = /^[a-zA-Z0-9]{6,25}$/;
+        const validatePass = (rule, value, callback) => {
+            const passwordreg = /^[a-zA-Z0-9]{6,25}$/;
             if (value === '') {
                 callback(new Error('请输入密码'));
             } else if (!passwordreg.test(value)) {
@@ -36,7 +36,7 @@ export default {
                 callback();
             }
         };
-        var validatePass2 = (rule, value, callback) => {
+        const validatePass2 = (rule, value, callback) => {
             if (value === '') {
                 callback(new Error('请再次输入密码'));
             } else if (value !== this.ruleForm3.newPassword) {
@@ -52,79 +52,76 @@ export default {
             active: 1,
             ruleForm1: {
                 telphone: '',
-                imageIdentifyCode: ''
+                imageIdentifyCode: '',
             },
             ruleForm2: {
-                smsIdentifyCode: ''
+                smsIdentifyCode: '',
             },
             ruleForm3: {
                 newPassword: '',
-                checkPass: ''
+                checkPass: '',
             },
             rules1: {
                 imageIdentifyCode: [{
                     required: true,
                     validator: validateyzCode,
-                    trigger: 'blur'
+                    trigger: 'blur',
                 }],
                 telphone: [{
                     required: true,
                     validator: validatemobilePhone,
-                    trigger: 'blur'
-                }]
+                    trigger: 'blur',
+                }],
             },
             rules2: {
                 smsIdentifyCode: [{
                     required: true,
                     validator: validatemobileYzCode,
-                    trigger: 'blur'
-                }]
+                    trigger: 'blur',
+                }],
             },
             rules3: {
                 newPassword: [{
                     required: true,
                     validator: validatePass,
-                    trigger: 'blur'
+                    trigger: 'blur',
                 }],
                 checkPass: [{
                     required: true,
                     validator: validatePass2,
-                    trigger: 'blur'
-                }]
-            }
-        }
+                    trigger: 'blur',
+                }],
+            },
+        };
     },
     created() {
-        this.getImgCode()
+        this.getImgCode();
     },
     methods: {
         getImgCode() {
             ajax.getImgCode().then((result) => {
-                this.imgCode = result
-            })
+                this.imgCode = result;
+            });
         },
         getCode() {
-            var phonereg = /^[1][3,4,5,7,8][0-9]{9}$/
-            if (this.ruleForm1.telphone == '' || !phonereg.test(this.ruleForm1.telphone)) {
-                this.$message.error('请输入正确的手机号码')
-                return
-            } else {
-                if (!this.sendMsgDisabled) {
-
-                    ajax.getSmsCode(this.ruleForm1.telphone, 2).then((result) => {
-                        this.$message('验证码已发送你手机上');
-                    })
-                }
-                this.sendMsgDisabled = true;
-                let that = this;
-                let interval = window.setInterval(function() {
-                    if ((that.time--) <= 0) {
-                        that.time = 90;
-                        that.sendMsgDisabled = false;
-                        window.clearInterval(interval);
-                    }
-                }, 1000);
+            const phonereg = /^[1][3,4,5,7,8][0-9]{9}$/;
+            if (this.ruleForm1.telphone === '' || !phonereg.test(this.ruleForm1.telphone)) {
+                this.$message.error('请输入正确的手机号码');
+                return;
+            } else if (!this.sendMsgDisabled) {
+                ajax.getSmsCode(this.ruleForm1.telphone, 2).then((result) => {
+                    this.$message('验证码已发送你手机上');
+                });
             }
+            this.sendMsgDisabled = true;
+            const that = this;
+            const interval = window.setInterval(function() {
+                if ((that.time--) <= 0) {
+                    that.time = 90;
+                    that.sendMsgDisabled = false;
+                    window.clearInterval(interval);
+                }
+            }, 1000);
         },
         handleSelect(key, keyPath) {
             console.log(key, keyPath);
@@ -133,7 +130,7 @@ export default {
             console.log(tab, event);
         },
         submitForm(formName, formValue) {
-            let that = this;
+            const that = this;
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     switch (formName) {
@@ -145,22 +142,22 @@ export default {
                                 .catch(error => {
                                     that.active = 1;
                                     this.$message({
-                                        type: "warning",
-                                        message: error
-                                    })
+                                        type: 'warning',
+                                        message: error,
+                                    });
                                 });
                             break;
                         case 'ruleForm2':
-                            ajax.validateSmsIdentifyCode(formValue, "ForgetPwdSmsIdentifyCode")
+                            ajax.validateSmsIdentifyCode(formValue, 'ForgetPwdSmsIdentifyCode')
                                 .then((result) => {
                                     that.active = 3;
                                 })
                                 .catch(error => {
                                     that.active = 2;
                                     this.$message({
-                                        type: "warning",
-                                        message: error
-                                    })
+                                        type: 'warning',
+                                        message: error,
+                                    });
                                 });
                             break;
                         case 'ruleForm3':
@@ -171,20 +168,20 @@ export default {
                                 .catch(error => {
                                     that.active = 3;
                                     this.$message({
-                                        type: "warning",
-                                        message: error
-                                    })
+                                        type: 'warning',
+                                        message: error,
+                                    });
                                 });
                             break;
                     }
                     if (that.active >= 4) {
-                        that.active = 4
+                        that.active = 4;
                     }
-                } else {
-                    console.log('error submit!!');
-                    return false;
+                    return true;
                 }
+                console.log('error submit!!');
+                return false;
             });
-        }
-    }
-}
+        },
+    },
+};

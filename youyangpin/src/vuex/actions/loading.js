@@ -1,4 +1,4 @@
-import * as types from '../mutationTypes'
+import * as types from '../mutationTypes';
 
 export default {
     /**
@@ -8,7 +8,7 @@ export default {
      * @return {[type]}                    [description]
      */
     showFullLoading: ({ commit }, isShowFillLoading) => {
-        commit(types.SHOW_FULL_LOADING, isShowFillLoading)
+        commit(types.SHOW_FULL_LOADING, isShowFillLoading);
     },
     /**
      * 局部显示加载动画
@@ -17,6 +17,6 @@ export default {
      * @return {[type]}                [description]
      */
     showLocalLoading: ({ commit }, localLoading) => {
-        commit(types.SHOW_LOCAL_LOADING, localLoading)
-    }
-}
+        commit(types.SHOW_LOCAL_LOADING, localLoading);
+    },
+};

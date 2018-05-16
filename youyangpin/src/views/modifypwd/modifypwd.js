@@ -1,11 +1,11 @@
 import {
-    api as ajax
-} from 'services'
+    api as ajax,
+} from 'services';
 
 export default {
     data() {
-        var validatePass = (rule, value, callback) => {
-            var newpwd = /^[a-zA-Z0-9]{6,25}$/;
+        const validatePass = (rule, value, callback) => {
+            const newpwd = /^[a-zA-Z0-9]{6,25}$/;
             if (value === '') {
                 callback(new Error('请输入新密码'));
             } else if (!newpwd.test(value)) {
@@ -14,7 +14,7 @@ export default {
                 callback();
             }
         };
-        var validatesurepwd = (rule, value, callback) => {
+        const validatesurepwd = (rule, value, callback) => {
             if (value === '') {
                 callback(new Error('请再次输入密码'));
             } else if (value !== this.ruleForm.newpwd) {
@@ -27,71 +27,70 @@ export default {
             menus: [{
                 title: '我的订单',
                 key: '1',
-                path: '/order'
+                path: '/order',
             }, {
                 title: '申请记录',
                 key: '2',
-                path: '/applyrecord'
+                path: '/applyrecord',
             }, {
                 title: '运费提现',
                 key: '3',
-                path: '/freight'
+                path: '/freight',
             }, {
                 title: '个人信息',
                 key: '4',
-                path: '/user'
+                path: '/user',
             }, {
                 title: '修改密码',
                 key: '5',
-                path: '/modifypwd'
+                path: '/modifypwd',
             }],
             asideIndex: '5',
             ruleForm: {
                 prepwd: '',
                 newpwd: '',
-                surepwd: ''
+                surepwd: '',
             },
             rules: {
                 prepwd: [{
                     required: true,
                     validator: validatePass,
-                    trigger: 'blur'
+                    trigger: 'blur',
                 }],
                 newpwd: [{
                     required: true,
                     validator: validatePass,
-                    trigger: 'blur'
+                    trigger: 'blur',
                 }],
                 surepwd: [{
                     required: true,
                     validator: validatesurepwd,
-                    trigger: 'blur'
-                }]
-            }
-        }
+                    trigger: 'blur',
+                }],
+            },
+        };
     },
     methods: {
         handleSelect(key, keyPath) {
-            this.$router.push(this.menus[key - 1]['path'])
+            this.$router.push(this.menus[key - 1].path);
         },
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     ajax.changePassword({
                         oldpassword: this.ruleForm.prepwd,
-                        newpassword: this.ruleForm.newpwd
+                        newpassword: this.ruleForm.newpwd,
                     }).then((result) => {
                         this.$message({
                             type: 'success',
-                            message: '修改密码成功！'
+                            message: '修改密码成功！',
                         });
-                        this.$router.push('login')
-                    })
-                } else {
-                    console.log('error submit!!');
-                    return false;
+                        this.$router.push('login');
+                    });
+                    return true;
                 }
+                return false;
             });
-        }
-    }
-}
+        },
+    },
+};
