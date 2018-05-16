@@ -76,6 +76,7 @@
         created() {
             let cookieInfo = this.util.getCookie('user')?JSON.parse(this.util.getCookie('user').slice(1)):'';
             this.userInfo = cookieInfo;
+            this.keywords = this.$route.query.keywords;
     //        console.log(this.userInfo)
             if(sessionStorage.getItem('prePath')!=='/login'&&sessionStorage.getItem('prePath')!=='/index'&&sessionStorage.getItem('prePath')!=='/') {
                 this.activeIndex = sessionStorage.getItem('typekey');
@@ -128,7 +129,7 @@
                 }else {
                     this.$router.push('/index');
                 }
-            }
+            },
         }
     }
 </script>
