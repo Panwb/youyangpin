@@ -76,7 +76,7 @@
         created() {
             let cookieInfo = this.util.getCookie('user')?JSON.parse(this.util.getCookie('user').slice(1)):'';
             this.userInfo = cookieInfo;
-            this.keywords = this.$route.query.keywords;
+            //this.keywords = this.$route.query.keywords;
     //        console.log(this.userInfo)
             if(sessionStorage.getItem('prePath')!=='/login'&&sessionStorage.getItem('prePath')!=='/index'&&sessionStorage.getItem('prePath')!=='/') {
                 this.activeIndex = sessionStorage.getItem('typekey');
@@ -97,7 +97,7 @@
                 this.$emit('clickType',name);
                 sessionStorage.setItem('typekey',key);
                 sessionStorage.setItem('typename',name);
-                this.$router.push('/index?keywords=' + this.keywords);
+                this.$router.push('/index');
             },
             logout() {
                 ajax.logout().then((result) =>{
