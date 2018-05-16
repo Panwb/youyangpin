@@ -3,7 +3,7 @@ import { api as ajax } from 'services'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-    data () {
+    data() {
         return {
             pageList: [],
             total: 0,
@@ -27,7 +27,7 @@ export default {
         };
     },
     watch: {
-        '$route'() {
+        '$route' () {
             if (this.$route.query.keywords) {
                 this.searchForm.goodsName = this.$route.query.keywords;
                 this.searchForm.pageIndex = 1;
@@ -71,7 +71,7 @@ export default {
                 this.total = result.RecordCount
             })
         },
-        reset(){
+        reset() {
             this.searchForm.lowDailyPrice = "";
             this.searchForm.highDailyPrice = "";
             this.searchForm.lowSales = "";
@@ -93,15 +93,15 @@ export default {
         handleCurrentChange(val) {
             this.searchForm.pageIndex = val;
             this.goodsSearch();
-            scrollTo(0,0);
+            scrollTo(0, 0);
             console.log(`当前页: ${val}`);
         },
-        clickSortField(val,name) {
+        clickSortField(val, name) {
             this.sortValue = val;
             this.searchForm.sortField = name;
             this.goodsSearch();
         },
-        clickVField(name,index) {
+        clickVField(name, index) {
             this.vIndex = index;
             name === '全部' ? this.searchForm.verticalFieldCode = "" : this.searchForm.verticalFieldCode = name;
             this.goodsSearch();

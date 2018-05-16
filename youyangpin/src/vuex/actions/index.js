@@ -4,7 +4,7 @@ import loading from './loading' // 列表加载动画
 import config from './config'
 
 export default {
-    ...demo,
-    ...loading,
-    ...config
+	...demo,
+	...loading,
+	...config
 }

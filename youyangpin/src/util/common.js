@@ -3,7 +3,7 @@ import cookie from 'js-cookie'
  * 判断对象是否有值
  * @param  {object}  e 对象
  */
-export const isEmptyObject = function (e) {
+export const isEmptyObject = function(e) {
     var t
     for (t in e) {
         return !1
@@ -59,7 +59,7 @@ export const clearCookie = (cname) => {
     this.setCookie(cname, "", -1);
     // console.log(11,document.cookie)
 }
-export const checkCookie =(cname) => {
+export const checkCookie = (cname) => {
     var user = this.getCookie(cname);
     if (user != "") {
         console.log("Welcome again " + user);

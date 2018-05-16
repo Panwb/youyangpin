@@ -1,16 +1,16 @@
 import * as types from '../mutationTypes'
 
 const state = {
-    demoList: []
+	demoList: []
 }
 
 const mutations = {
-    [types.DEMO_SET](state, data){
-        state.demoList = data
-    }
+	[types.DEMO_SET](state, data) {
+		state.demoList = data
+	}
 }
 
-export default{
-    state,
-    mutations
+export default {
+	state,
+	mutations
 }

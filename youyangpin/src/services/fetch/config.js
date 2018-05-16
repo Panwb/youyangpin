@@ -4,5 +4,5 @@ export const rootPath = '/api'
 export const commonPath = '/common'
 
 export const errHandler = (e) => {
-    console.log(e)
+	console.log(e)
 };

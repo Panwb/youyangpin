@@ -4,33 +4,27 @@ export default {
     data() {
         return {
             dialogVisible: false,
-            menus: [
-                {
-                    title: '我的订单',
-                    key: '1',
-                    path: '/order'
-                },
-                {
-                    title: '申请记录',
-                    key: '2',
-                    path: '/applyrecord'
-                },
-                {
-                    title: '运费提现',
-                    key: '3',
-                    path: '/freight'
-                },
-                {
-                    title: '个人信息',
-                    key: '4',
-                    path: '/user'
-                },
-                {
-                    title: '修改密码',
-                    key: '5',
-                    path: '/modifypwd'
-                }
-            ],
+            menus: [{
+                title: '我的订单',
+                key: '1',
+                path: '/order'
+            }, {
+                title: '申请记录',
+                key: '2',
+                path: '/applyrecord'
+            }, {
+                title: '运费提现',
+                key: '3',
+                path: '/freight'
+            }, {
+                title: '个人信息',
+                key: '4',
+                path: '/user'
+            }, {
+                title: '修改密码',
+                key: '5',
+                path: '/modifypwd'
+            }],
             asideIndex: '3',
             freightData: {},
             tableData: []
@@ -57,15 +51,18 @@ export default {
                     ajax.requestMoney(this.freightData.AlipayAccount, this.freightData.AccountBalance)
                         .then((result) => {
                             this.$message({
-                                type:'success',
-                                message:'提现成功'
+                                type: 'success',
+                                message: '提现成功'
                             });
                             this.dialogVisible = false;
                             this.getUserDetail();
                             this.getMyRequests();
-                        })                        
+                        })
                         .catch(error => {
-                            this.$message({type:"warning",message: error});
+                            this.$message({
+                                type: "warning",
+                                message: error
+                            });
                         });
                 } else {
                     console.log('error submit!!');
@@ -80,14 +77,14 @@ export default {
             console.log(tab, event);
         },
         handleClose(done) {
-        this.$confirm('确认关闭？')
-          .then(_ => {
-            done();
-          })
-          .catch(_ => {});
+            this.$confirm('确认关闭？')
+                .then(_ => {
+                    done();
+                })
+                .catch(_ => {});
         },
-        format(row,column,cellValue) {
-            return this.formatDate(cellValue,'hms');
+        format(row, column, cellValue) {
+            return this.formatDate(cellValue, 'hms');
         },
         formatDate(date, type) {
             if (new Date(date) === 'Invalid Date') {
@@ -119,7 +116,7 @@ export default {
                     default:
                         return y + '/' + m + '/' + d;
                 }
-            }else {
+            } else {
                 return date
             }
         }

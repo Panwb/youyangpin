@@ -1,6 +1,6 @@
 import ajax from '../fetch'
 
-export default{
+export default {
     /**
      * 登录
      */
@@ -30,7 +30,7 @@ export default{
      */
     getByAccount(account, localLoading = 'getByAccount') {
         return ajax({
-            url: '/user/getByAccount?account='+account,
+            url: '/user/getByAccount?account=' + account,
             localLoading
         })
     },
@@ -57,7 +57,7 @@ export default{
     /**
      * 短信验证码
      */
-    getSmsCode(tel, type,isCommon = true, localLoading = 'getSmsCode') {
+    getSmsCode(tel, type, isCommon = true, localLoading = 'getSmsCode') {
         return ajax({
             url: `/common/SendSms?telphone=${tel}&smsType=${type}`,
             localLoading
@@ -72,7 +72,7 @@ export default{
             localLoading
         })
     },
-    getStatistics(searchForm,localLoading = 'getStatistics') {
+    getStatistics(searchForm, localLoading = 'getStatistics') {
         return ajax({
             url: `/good/getStatistics?activityType=${searchForm.activityType}`,
             localLoading
@@ -81,7 +81,7 @@ export default{
     /**
      * 首页商品搜索
      */
-    goodSearch(searchForm,localLoading = 'goodsSearch') {
+    goodSearch(searchForm, localLoading = 'goodsSearch') {
         return ajax({
             url: `/Good/Search?goodsName=${searchForm.goodsName}&verticalFieldCode=${searchForm.verticalFieldCode}&activityType=${searchForm.activityType}&lowSales=${searchForm.lowSales}&highSales=${searchForm.highSales}&lowDailyPrice=${searchForm.lowDailyPrice}&highDailyPrice=${searchForm.highDailyPrice}&lowCommissionRatio=${searchForm.lowCommissionRatio}&highCommissionRatio=${searchForm.highCommissionRatio}&pageIndex=${searchForm.pageIndex}&itemsPerPage=${searchForm.itemsPerPage}&sortField=${searchForm.sortField}&sort=${searchForm.sort}`,
             localLoading
@@ -123,7 +123,7 @@ export default{
         })
     },
     //排期
-    setBroadcastScheduling(orderId,form,localLoading = 'setBroadcastScheduling') {
+    setBroadcastScheduling(orderId, form, localLoading = 'setBroadcastScheduling') {
         return ajax({
             url: `/Order/SetBroadcastScheduling?orderId=${orderId}&date=${form.date}`,
             method: 'put',
@@ -131,7 +131,7 @@ export default{
         })
     },
     //评价
-    setAssessment(orderId,form,localLoading = 'setAssessment') {
+    setAssessment(orderId, form, localLoading = 'setAssessment') {
         return ajax({
             url: `/Order/SetAssessment?orderId=${orderId}&description=${form.description}&star=${form.star}`,
             method: 'put',
@@ -139,7 +139,7 @@ export default{
         })
     },
     //申请定向
-    requestDirectionalPlan(orderId,localLoading = 'requestDirectionalPlan') {
+    requestDirectionalPlan(orderId, localLoading = 'requestDirectionalPlan') {
         return ajax({
             url: `/Order/RequestDirectionalPlan?orderId=${orderId}`,
             method: 'put',
@@ -147,7 +147,7 @@ export default{
         })
     },
     //填写物流信息
-    setLogisticsInfo(orderId,form,localLoading = 'setLogisticsInfo') {
+    setLogisticsInfo(orderId, form, localLoading = 'setLogisticsInfo') {
         return ajax({
             url: `/Order/SetLogisticsInfo?orderId=${orderId}&logisticName=${form.logisticName}&logisticNo=${form.logisticNo}&postage=${form.postage}`,
             method: 'put',
@@ -196,7 +196,7 @@ export default{
     /**
      * 修改密码
      */
-    changePassword(data,localLoading = 'changePassword') {
+    changePassword(data, localLoading = 'changePassword') {
         return ajax({
             url: `/User/ChangePassword?oldpassword=${data.oldpassword}&newpassword=${data.newpassword}`,
             method: 'put',
@@ -206,7 +206,7 @@ export default{
     /**
      * 忘记密码
      */
-    retrievePassword(data,localLoading = 'retrievePassword') {
+    retrievePassword(data, localLoading = 'retrievePassword') {
         return ajax({
             url: `/User/RetrievePassword?telphone=${data.telphone}&imageIdentifyCode=${data.imageIdentifyCode}`,
             localLoading

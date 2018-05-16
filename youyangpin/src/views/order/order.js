@@ -1,4 +1,3 @@
-
 import {
     api as ajax
 } from 'services';
@@ -323,20 +322,20 @@ export default {
                 let s = datetime.getSeconds();
                 s = s < 10 ? `0${s}` : s;
                 switch (type) {
-                case 'hms':
-                    return `${y}/${m}/${d} ${h}:${M}:${s}`;
-                case 'timestamp':
-                    return Date.parse(datetime);
-                case 'ymdhM':
-                    return `${y}/${m}/${d} ${h}:${M}`;
-                case 'md':
-                    return `${m}/${d}`;
-                case 'd':
-                    return d;
-                case 'hm':
-                    return `${h}:${M}`;
-                default:
-                    return `${y}/${m}/${d}`;
+                    case 'hms':
+                        return `${y}/${m}/${d} ${h}:${M}:${s}`;
+                    case 'timestamp':
+                        return Date.parse(datetime);
+                    case 'ymdhM':
+                        return `${y}/${m}/${d} ${h}:${M}`;
+                    case 'md':
+                        return `${m}/${d}`;
+                    case 'd':
+                        return d;
+                    case 'hm':
+                        return `${h}:${M}`;
+                    default:
+                        return `${y}/${m}/${d}`;
                 }
             } else {
                 return date;

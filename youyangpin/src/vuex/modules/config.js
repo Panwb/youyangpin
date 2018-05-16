@@ -7,18 +7,18 @@ const state = {
 }
 
 const mutations = {
-    [types.SET_ACCOUNT] (state, data) {
+    [types.SET_ACCOUNT](state, data) {
         state.account = data
     },
-    [types.ActivityTypes] (state, data) {
+    [types.ActivityTypes](state, data) {
         state.activityTypes = data
     },
-    [types.setStatistics] (state, data) {
+    [types.setStatistics](state, data) {
         state.statistics = data
     }
 }
 
-export default{
+export default {
     state,
     mutations
 }

@@ -1,4 +1,6 @@
-import { api as ajax } from 'services'
+import {
+    api as ajax
+} from 'services'
 
 export default {
     data() {
@@ -33,12 +35,12 @@ export default {
             this.isShowChoose = false;
             ajax.getGoodsDetail(this.goodsId)
                 .then((result) => {
-                    if(result){
+                    if (result) {
                         this.applyData = result;
                         this.ApplicationForm.ShopId = result.Shop.ShopId;
                         this.ApplicationForm.MerchantUserId = result.Shop.UserId;
                         this.ApplicationForm.AnchorAbilitySelfReport = this.applyData.StudioHost.Remark;
-                        this.applyData.RelatedGoods.forEach((item,index) => {
+                        this.applyData.RelatedGoods.forEach((item, index) => {
                             this.$set(this.isChecked, index, false)
                         });
                         this.isShowChoose = true;
@@ -48,8 +50,8 @@ export default {
         //提交申请
         requestApplication() {
             let GoodsIds = [];
-            this.isChecked.forEach((item,index) => {
-                if(item) {
+            this.isChecked.forEach((item, index) => {
+                if (item) {
                     GoodsIds.push(this.applyData.RelatedGoods[index].GoodsId)
                 }
             });
@@ -57,24 +59,30 @@ export default {
             this.ApplicationForm.GoodIds = GoodsIds;
             ajax.requestApplication(this.ApplicationForm)
                 .then((result) => {
-                    this.$message({type:"success",message:"提交成功，等待商家审核"});
+                    this.$message({
+                        type: "success",
+                        message: "提交成功，等待商家审核"
+                    });
                     this.$router.push('/applyrecord')
-                },error => {
-                    this.$message({type:"warning",message:error});
+                }, error => {
+                    this.$message({
+                        type: "warning",
+                        message: error
+                    });
                 })
         },
         //修改个人信息
         editPersonalMeg() {
-            sessionStorage.setItem('goodid',this.$route.query.goodsId);
+            sessionStorage.setItem('goodid', this.$route.query.goodsId);
             this.$router.push('user')
         },
         //完善收货地址
         improveAddress() {
-            sessionStorage.setItem('goodid',this.$route.query.goodsId);
+            sessionStorage.setItem('goodid', this.$route.query.goodsId);
             this.$router.push('user');
         },
         handleCheckAllChange(val) {
-            this.applyData.RelatedGoods.forEach((item,index) => {
+            this.applyData.RelatedGoods.forEach((item, index) => {
                 this.$set(this.isChecked, index, val)
             });
         },
@@ -88,11 +96,11 @@ export default {
             console.log(`当前页: ${val}`);
         },
         formatDate(val) {
-            if(val) {
+            if (val) {
                 return `${val.substring(0,4)}/${val.substring(5,7)}/${val.substring(8,10)}`
-            }else {
+            } else {
                 return null
             }
         }
-  }
+    }
 }

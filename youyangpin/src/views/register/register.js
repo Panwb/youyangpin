@@ -138,7 +138,7 @@ export default {
                     }
                     this.sendMsgDisabled = true;
                     const that = this;
-                    const interval = window.setInterval(function () {
+                    const interval = window.setInterval(function() {
                         if ((that.time--) <= 0) {
                             that.time = 90;
                             that.sendMsgDisabled = false;

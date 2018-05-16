@@ -1,10 +1,15 @@
 // 引入window.fetch polyfill
 import 'whatwg-fetch'
-import { rootPath, commonPath } from './config'
+import {
+    rootPath,
+    commonPath
+} from './config'
 import actions from '../../vuex/actions'
 import store from '../../vuex'
 import * as util from '../../util/common'
-import { Message} from 'element-ui'
+import {
+    Message
+} from 'element-ui'
 /**
  * 检查ajax返回的状态码,如果为401,则跳转到登录页
  * @param response
@@ -21,11 +26,11 @@ const checkStatus = function(response) {
         //})
         // localStorage.removeItem('user');
         util.clearCookie('user')
-        setTimeout(()=>{
-            window.location = '/#/login?redirect=' + window.location.hash.replace('#/','%2F')
+        setTimeout(() => {
+            window.location = '/#/login?redirect=' + window.location.hash.replace('#/', '%2F')
         })
         return response
-    } else{        
+    } else {
         const error = new Error(response.statusText)
         error.response = response
         throw error
@@ -55,7 +60,9 @@ const ajax = ({
     url = throwIfMissing('url'),
     formJson = true,
     body = null,
-    headersData = { 'Content-Type': 'application/json; charset=utf-8' },
+    headersData = {
+        'Content-Type': 'application/json; charset=utf-8'
+    },
     method = 'get',
     path = rootPath,
     isShowFullLoading = false,
@@ -70,15 +77,14 @@ const ajax = ({
             ...headersData,
             Authorization: 'Bearer ' + store.getters.authToken
         }
-    }
-    else {
+    } else {
         headers = headersData
     }
 
     if (isCommon) {
         path = commonPath
     }
-    
+
     const options = {
         credentials: 'same-origin', // 发送cookie
         // credentials: 'include', // cross-origin  调试用 上线删
@@ -118,15 +124,14 @@ const ajax = ({
                 // 返回正确数据
                 if (!result.HasViolation) {
                     resolve(result.Data)
-                } 
-                else {
+                } else {
                     // 返回错误的数据
                     reject(result.ErrorMessage)
                     // throw new Error(result.ErrorMessage)
                     let errors = result.ErrorMessage
                     Message({
-                        type:'error',
-                        message: errors ,
+                        type: 'error',
+                        message: errors,
                     })
                 }
                 // 关闭全屏动画
@@ -149,10 +154,10 @@ const ajax = ({
                 }
                 // 显示错误提示
                 reject(error)
-                console.log('e',typeof error)
+                console.log('e', typeof error)
                 Message({
-                    type:'error',
-                    message: '出现错误' ,
+                    type: 'error',
+                    message: '出现错误',
                 })
 
 

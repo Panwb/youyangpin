@@ -1,4 +1,4 @@
-import promisePolyfill from 'es6-promise'   // es6 promise polyfill
+import promisePolyfill from 'es6-promise' // es6 promise polyfill
 import Vue from 'vue'
 import Vuex from 'vuex'
 import actions from './actions'
@@ -13,11 +13,11 @@ import loading from './modules/loading'
 import config from './modules/config'
 
 export default new Vuex.Store({
-    actions,
-    getters,
-    modules: {
-        demo,
-        loading,
-        config
-    }
+	actions,
+	getters,
+	modules: {
+		demo,
+		loading,
+		config
+	}
 })

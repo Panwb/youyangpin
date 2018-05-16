@@ -4,9 +4,9 @@ import App from './app.vue'
 import routes from './routes'
 import store from './vuex'
 import actions from './vuex/actions'
-import { sync } from 'vuex-router-sync'   
+import { sync } from 'vuex-router-sync'
 import Element from 'element-ui'
-import Component from './components'  // 全局组件
+import Component from './components' // 全局组件
 import * as util from './util/common'
 import '!style-loader!css-loader!less-loader!./assets/theme/index.css'
 import '!style-loader!css-loader!less-loader!./assets/styles/css/reset.css'
@@ -19,7 +19,7 @@ Vue.prototype.util = util
 // 路由实例
 const router = new VueRouter({
     mode: 'hash', // hash: 使用 URL hash 值来作路由。支持所有浏览器，包括不支持 HTML5 History Api 的浏览器。history: 依赖 HTML5 History API 和服务器配置。
-    scrollBehavior(to, from, savePosition) {   // 前进或后退,滚动到原来的位置
+    scrollBehavior(to, from, savePosition) { // 前进或后退,滚动到原来的位置
         if (savePosition) {
             return savePosition
         } else {
@@ -34,10 +34,10 @@ const router = new VueRouter({
     ],
 })
 
-sync(store,router)
+sync(store, router)
 
 router.beforeEach((to, from, next) => {
-    sessionStorage.setItem('prePath',from.path);
+    sessionStorage.setItem('prePath', from.path);
     if (to.matched.some(record => record.meta.auth)) {
         console.log(util.checkCookie('user') ? '需要登录' : '不需要登录')
         if (util.checkCookie('user')) {
@@ -48,21 +48,17 @@ router.beforeEach((to, from, next) => {
                     redirect: to.path
                 }
             })
-        }
-        else {
+        } else {
             if (to.fullPath == '/') {
                 next('/index')
-            }
-            else {
+            } else {
                 next()
             }
         }
-    }
-    else {
+    } else {
         if (to.fullPath == '/') {
             next('/index')
-        }
-        else {
+        } else {
             next()
         }
     }
@@ -73,5 +69,3 @@ new Vue({
     router,
     render: h => h(App)
 }).$mount('#app')
-
-

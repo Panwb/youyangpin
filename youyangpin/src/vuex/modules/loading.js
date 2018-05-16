@@ -6,15 +6,15 @@ const state = {
 }
 
 const mutations = {
-    [types.SHOW_FULL_LOADING] (state, isShowFullLoading) {
+    [types.SHOW_FULL_LOADING](state, isShowFullLoading) {
         state.isShowFullLoading = isShowFullLoading
     },
-    [types.SHOW_LOCAL_LOADING] (state, localLoading) {
+    [types.SHOW_LOCAL_LOADING](state, localLoading) {
         state.localLoading = localLoading
     }
 }
 
-export default{
+export default {
     state,
     mutations
 }

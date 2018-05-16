@@ -1,14 +1,16 @@
-import { api as ajax } from 'services'
+import {
+    api as ajax
+} from 'services'
 
 export default {
     data() {
         var validatePass = (rule, value, callback) => {
-            var newpwd=/^[a-zA-Z0-9]{6,25}$/;
+            var newpwd = /^[a-zA-Z0-9]{6,25}$/;
             if (value === '') {
                 callback(new Error('请输入新密码'));
-            } else if(!newpwd.test(value)){
+            } else if (!newpwd.test(value)) {
                 callback(new Error('密码格式不正确'));
-            }else {
+            } else {
                 callback();
             }
         };
@@ -22,50 +24,50 @@ export default {
             }
         };
         return {
-            menus: [
-                {
-                    title: '我的订单',
-                    key: '1',
-                    path: '/order'
-                },
-                {
-                    title: '申请记录',
-                    key: '2',
-                    path: '/applyrecord'
-                },
-                {
-                    title: '运费提现',
-                    key: '3',
-                    path: '/freight'
-                },
-                {
-                    title: '个人信息',
-                    key: '4',
-                    path: '/user'
-                },
-                {
-                    title: '修改密码',
-                    key: '5',
-                    path: '/modifypwd'
-                }
-            ],
-            asideIndex:'5',
+            menus: [{
+                title: '我的订单',
+                key: '1',
+                path: '/order'
+            }, {
+                title: '申请记录',
+                key: '2',
+                path: '/applyrecord'
+            }, {
+                title: '运费提现',
+                key: '3',
+                path: '/freight'
+            }, {
+                title: '个人信息',
+                key: '4',
+                path: '/user'
+            }, {
+                title: '修改密码',
+                key: '5',
+                path: '/modifypwd'
+            }],
+            asideIndex: '5',
             ruleForm: {
-                prepwd:'',
-                newpwd:'',
-                surepwd:''
+                prepwd: '',
+                newpwd: '',
+                surepwd: ''
             },
             rules: {
-                prepwd: [
-                    { required: true, validator: validatePass, trigger: 'blur' }
-                ],
-                newpwd: [
-                    { required: true, validator: validatePass, trigger: 'blur' }
-                ],
-                surepwd: [
-                    { required: true, validator: validatesurepwd, trigger: 'blur' }
-                ]
-            } 
+                prepwd: [{
+                    required: true,
+                    validator: validatePass,
+                    trigger: 'blur'
+                }],
+                newpwd: [{
+                    required: true,
+                    validator: validatePass,
+                    trigger: 'blur'
+                }],
+                surepwd: [{
+                    required: true,
+                    validator: validatesurepwd,
+                    trigger: 'blur'
+                }]
+            }
         }
     },
     methods: {
@@ -80,8 +82,8 @@ export default {
                         newpassword: this.ruleForm.newpwd
                     }).then((result) => {
                         this.$message({
-                            type:'success',
-                            message:'修改密码成功！'
+                            type: 'success',
+                            message: '修改密码成功！'
                         });
                         this.$router.push('login')
                     })
