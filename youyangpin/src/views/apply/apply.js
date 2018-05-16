@@ -95,11 +95,8 @@ export default {
         handleCurrentChange(val) {
             console.log(`当前页: ${val}`);
         },
-        formatDate(val) {
-            if (val) {
-                return `${val.substring(0, 4)}/${val.substring(5, 7)}/${val.substring(8, 10)}`;
-            }
-            return null;
+        formatDate(date, type) {
+            return this.util.formatDate(date, type);
         },
     },
 };

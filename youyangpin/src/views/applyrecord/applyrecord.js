@@ -76,48 +76,10 @@ export default {
             this.getPagedRequest();
         },
         formatDate(date, type) {
-            if (new Date(date) === 'Invalid Date') {
-                return date;
-            } else if (date) {
-                const datetime = new Date(date);
-                const y = datetime.getFullYear();
-                let m = datetime.getMonth() + 1;
-                m = m < 10 ? `0${m}` : m;
-                let d = datetime.getDate();
-                d = d < 10 ? `0${d}` : d;
-                let h = datetime.getHours();
-                h = h < 10 ? `0${h}` : h;
-                let M = datetime.getMinutes();
-                M = M < 10 ? `0${M}` : M;
-                let s = datetime.getSeconds();
-                s = s < 10 ? `0${s}` : s;
-                switch (type) {
-                    case 'hms':
-                        return `${y}/${m}/${d} ${h}:${M}:${s}`;
-                    case 'timestamp':
-                        return Date.parse(datetime);
-                    case 'ymdhM':
-                        return `${y}/${m}/${d} ${h}:${M}`;
-                    case 'md':
-                        return `${m}/${d}`;
-                    case 'd':
-                        return d;
-                    case 'hm':
-                        return `${h}:${M}`;
-                    default:
-                        return `${y}/${m}/${d}`;
-                }
-            } else {
-                return date;
-            }
+            return this.util.formatDate(date, type);
         },
         cutString(str, len) {
-            // length属性读出来的汉字长度为1
-            if (!str || str.length <= len) {
-                return str;
-            }
-
-            return `${str.substring(0, len)}...`;
+            return this.util.cutString(str, len);
         },
     },
 };
