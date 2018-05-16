@@ -112,6 +112,6 @@ export default {
             this.searchForm.verticalFieldCode = '';
             this.goodsSearch();
             this.getStatistics(name);
-        }
+        },
     }
 }
