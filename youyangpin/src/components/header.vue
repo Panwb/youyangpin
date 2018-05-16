@@ -97,7 +97,7 @@
                 this.$emit('clickType',name);
                 sessionStorage.setItem('typekey',key);
                 sessionStorage.setItem('typename',name);
-                this.$router.push('/index')
+                this.$router.push('/index?keywords=' + this.keywords);
             },
             logout() {
                 ajax.logout().then((result) =>{
