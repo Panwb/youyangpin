@@ -35,8 +35,8 @@
 										<el-form-item class="myitem btnitem" >
 											<div class="btnbox">
 												<el-button class="applybtn" 
-													:class="freightData.AccountBalance>100?'active':''" 
-													@click="freightData.AccountBalance<100?dialogVisible = false:dialogVisible = true">申请提现
+													:class="freightData.AccountBalance>100 && freightData.AlipayAccount?'active':''" 
+													@click="applyClick">申请提现
 												</el-button>
 												<el-dialog :visible.sync="dialogVisible" width="30%">
 													<span>确认要提现吗？</span>
