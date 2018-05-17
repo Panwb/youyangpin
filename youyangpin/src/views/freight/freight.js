@@ -83,6 +83,13 @@ export default {
                 })
                 .catch(_ => {});
         },
+        applyClick() {
+            if (this.freightData.AccountBalance < 100 || !this.freightData.AlipayAccount) {
+                this.dialogVisible = false;
+            } else {
+                this.dialogVisible = true;
+            }
+        },
         format(row, column, cellValue) {
             return this.formatDate(cellValue, 'hms');
         },        
