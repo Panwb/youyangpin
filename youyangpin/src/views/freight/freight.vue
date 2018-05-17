@@ -235,6 +235,10 @@
 	float:left;
 	margin-left:20px;
 }
+.applybox .applybtn:hover{
+	color:#fff;
+	opacity:0.8;
+}
 .applybox .applybtn.active{
 	background:#f9513b;
 }
