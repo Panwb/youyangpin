@@ -71,6 +71,8 @@ export default {
             dialogVisible3: false,
             dialogVisible4: false,
             dialogVisible5: false,
+            dialogVisible6: false,
+            dialogVisible7: false,
             activeIndex: '2',
             form: {
                 date: '',
@@ -85,6 +87,7 @@ export default {
                 star: 0,
             },
             good: {},
+            order: {},
             orderId: null,
             options: [{
                 value: '顺丰速运',
@@ -259,6 +262,16 @@ export default {
         showDialog5(good) {
             this.dialogVisible5 = true;
             this.good = good;
+        },
+        //  查看物流信息
+        showDialog6(order) {
+            this.dialogVisible6 = true;
+            this.order = order;
+        },
+        //  查看异常原因
+        showDialog7(order) {
+            this.dialogVisible7 = true;
+            this.order = order;
         },
         requestDirectionalPlan() {
             ajax.requestDirectionalPlan(this.orderId)

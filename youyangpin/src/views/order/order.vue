@@ -35,32 +35,41 @@
 									</el-tabs>
 									<div v-if="currentStatu === ''" class="selectbox">
 									    <el-row>
-                                            <el-col :span="5"><span class="name">排期</span>
+                        <el-col :span="5"><span class="name">订单状态</span>
+											   <el-select v-model="searchCondition.OrderStatus" @change="search" placeholder="请选择">
+											     <el-option label="全部" value="全部"></el-option>
+											     <el-option v-for="item in status.slice(1)" :key="item.key" :label="item.name" :value="item.name"></el-option>
+											    </el-select>
+											   </el-col>
+                        
+                         <el-col :span="5"><span class="name">定向状态</span>
+											   <el-select v-model="searchCondition.OrderStatus" @change="search" placeholder="请选择">
+											     <el-option label="全部" value="全部"></el-option>
+											     <el-option v-for="item in status.slice(1)" :key="item.key" :label="item.name" :value="item.name"></el-option>
+											    </el-select>
+											   </el-col>
+                           
+                         <el-col :span="5"><span class="name">排期</span>
 											   <el-select v-model="searchCondition.BroadcastSchedulingStatus" @change="search" placeholder="请选择">
 											     <el-option label="全部" value="全部"></el-option>
 											     <el-option label="待排期" value="待排期"></el-option>
 											     <el-option label="已排期" value="已排期"></el-option>
 											    </el-select>
-											</el-col>
-                                           <el-col :span="6"><span class="name">订单状态</span>
-											   <el-select v-model="searchCondition.OrderStatus" @change="search" placeholder="请选择">
-											     <el-option label="全部" value="全部"></el-option>
-											     <el-option v-for="item in status.slice(1)" :key="item.key" :label="item.name" :value="item.name"></el-option>
-											    </el-select>
-											</el-col>
-                                            <el-col :span="6">
+											   </el-col>
+                         
+                         <el-col :span="9">
 											   <el-input placeholder="请输入商品标题或快递单号搜索" v-model="searchCondition.GoodsNameOrExpressNumber" class="input-with-select" @keyup.enter.native="search">
 											    <el-button slot="append" type="text" @click="search">订单搜索</el-button>
-											  </el-input>
-                                            </el-col>
-                                        </el-row>
+											   </el-input>
+                         </el-col>
+                      </el-row>
 									</div>
 									<div class="titlebox">
 										<div class="title1">宝贝</div>
 										<div class="title2">销量</div>
 										<div class="title3">库存</div>
-										<div class="title4">优惠方式</div>
-										<div class="title5">定向计划状态</div>
+										<div class="title4">&nbsp;&nbsp; </div>
+										<div class="title5">时间节点</div>
 										<div class="title6">订单状态</div>
 										<div class="title7">交易操作</div>
 									</div>
@@ -69,17 +78,18 @@
 											<div class="date">{{ formatDate(item.CreateTime) }}</div>
 											<div class="orderId">订单号:{{ item.OrderNo }}</div>
 											<div class="shop" :title="item.ShopName"><span :class="item.ShopType=='淘宝店'?'icon icon-tao':'icon icon-tian'"></span>{{ item.ShopName }}</div>
-											<div class="wechat" :title="item.WeChat">微信号:{{ item.WeChat }}</div>
-											<div class="phone">联系电话:{{ item.LinkmanPhone }}</div>
+											<div class="wechat" :title="item.WeChat">VX:{{ item.WeChat }}</div>
+											<div class="phone">TEL:{{ item.LinkmanPhone }}</div>
+                      <div class="qq">QQ:{{ item.QQ }}</div>
 										</div>
 										<div class="bottombox clear" v-for="(good,index) in item.Goods" :key="index">
 											<div class="infobox">
 												<div class="imgbox"><a :href="good.GoodsURL" target="view_window"><img :src="good.GoodsImgURL"></a></div>
 												<div class="con">
 													<p class="name">{{ good.GoodsName }}</p>
-													<p class="price">直播专享价:<span class="num">{{ good.LivePrice }}</span> <span class="normal">日常价:{{ good.DailyPrice.toFixed(2) }}</span></p>
+													<p class="price">直播价:<span class="num">{{ good.LivePrice }}</span> <span class="normal">日常价:{{ good.DailyPrice.toFixed(2) }}</span></p>
 													<p class="money">佣金比例:<span class="num">{{ good.CommissionRatio }}%</span></p>
-													<p class="detail">{{ good.IsProvideMulticolor === '是' ?  '提供多色（' + good.ColorNum + '中颜色）' : '' }}</p>
+													<p class="detail">{{ good.PreferentialWay ==='拍下立减'?'拍下立减':(good.DailyPrice-good.LivePrice).toFixed(2)+'元优惠券' }}</p>
 													<p class="date">{{ good.NeedSendBack ==='是'? '需要退回样品':''}}</p>
 												</div>
 											</div>
@@ -88,10 +98,9 @@
 											<div class="quan">
 											 <div class="outer">
 												<div class="inner">
-												 {{ good.PreferentialWay ==='拍下立减'?'拍下立减':(good.DailyPrice-good.LivePrice).toFixed(2)+'元优惠券' }}
-													<el-button type="text" v-if="good.PreferentialWay ==='优惠券'" class="copybox copyBtn" :data-clipboard-text="good.CouponsURL">复制优惠券链接</el-button>
-												   
-                                                  	<el-button class="optbtn copyBtn" type="text"  :data-clipboard-text="good.GoodsURL">复制宝贝地址</el-button>
+												 
+													<el-button class="copybox copyBtn" type="text" :data-clipboard-text="good.CouponsURL" v-if="good.PreferentialWay ==='优惠券'">复制优惠券链接</el-button> 
+                          <el-button class="optbtn copyBtn" type="text" :data-clipboard-text="good.GoodsURL">复制宝贝地址</el-button>
 													<el-button class="optbtn" v-if="good.SellingPointDescribe" type="text" @click="showDialog5(good)">卖点介绍</el-button>
 												</div>
 											 </div>
@@ -100,60 +109,67 @@
 										<!--申请计划状态-->
 										<div class="planstate">
 											<div class="outer">
-											   <div class="inner" >{{ item.DirectionalPlanStatus }} 
-											    <el-button class="copybox copyBtn" type="text" :data-clipboard-text="item.Goods[0].CommissionURL" >复制定向链接</el-button>
+											   <div class="inner" >
+                           <span class="words" v-if="item.FaHuoTime">{{ formatDate(item.FaHuoTime) }}发货</span>
+                           <span class="words" v-if="item.DaoHuoTime">{{ formatDate(item.DaoHuoTime) }}到货</span>
+                           <span class="words" v-if="item.BroadcastScheduling">{{ formatDate(item.BroadcastScheduling) }}排期</span>
+                           <span class="words" v-if="item.TuiHuoTime">{{ formatDate(item.TuiHuoTime) }}退货</span>
+                           <span class="words" v-if="item.TuiFeiTime">{{ formatDate(item.TuiFeiTime) }}退费</span>
+											    <!--<el-button class="copybox copyBtn" type="text" :data-clipboard-text="item.Goods[0].CommissionURL" >复制定向链接</el-button>-->
 											   </div>
 											 </div>
 									    </div>
+                    
+                      
 										<div class="orderstate">
 										  <div class="outer">
-										   	<div class="inner ycstate" v-if="item.OrderStatus === '异常订单'">{{item.OrderStatus}}
-											   	<div class="reason">
+                                           <div class="inner">
+										   	<div class="inner-state ycstate" v-if="item.OrderStatus === '异常订单'" title="订单状态">{{item.OrderStatus}}
+											   	<!--<div class="reason">
 											   		<span class="words" v-if="item.AbnormalReason" :title="item.AbnormalReason">{{ '（' + cutString(item.AbnormalReason, 4) + '）' }}</span>
-											   	</div>
+											   	</div>-->
 										   	</div>  
-										    <div class="inner fhstate" v-else-if="item.OrderStatus === '已发货'">
-										    	<div class="wldate">
-										    		<span class="time" title="发货时间">{{ formatDate(item.FaHuoTime) }}</span>
-										    	</div>
+										    <!-- <div class="inner-state fhstate" v-else-if="item.OrderStatus === '已发货'">
 										    	{{item.OrderStatus}}
 										    	<div class="wlnum">
 										    		<span class="words" :title="item.LogisticName">{{ '（' + item.LogisticNo  + '）' }}</span>
 										    	</div>
 										    </div>
-										    <div class="inner dhstate" v-else-if="item.OrderStatus === '已到货'">
-										    	<div class="wldate">
-										    		<span class="time" title="到货时间">{{  formatDate(item.DaoHuoTime)  }}</span>
-										    	</div>
+										   <div class="inner-state dhstate" v-else-if="item.OrderStatus === '已到货'">
 										    	{{item.OrderStatus}}
 										    </div>  
-										    <div class="inner thstate" v-else-if="item.OrderStatus === '已退货'">
-										    	<div>
-										    		<span class="time" title="退货时间">{{  formatDate(item.TuiHuoTime) }}</span>
-										    	</div>
+										    <div class="inner-state thstate" v-else-if="item.OrderStatus === '已退货'">
+										    	{{item.OrderStatus}}
+										    </div>  -->
+										    <div class="inner-state wcstate" v-else-if="item.OrderStatus === '已完成'" title="订单状态">
 										    	{{item.OrderStatus}}
 										    </div>  
-										    <div class="inner wcstate" v-else-if="item.OrderStatus === '已完成'">
-										    	<div>
-										    		<span class="time" title="完成时间">{{  formatDate(item.TuiFeiTime) }}</span>
-										    	</div>
-										    	{{item.OrderStatus}}
-										    </div>  
-										    <div class="inner" v-else>{{item.OrderStatus}}</div> 
+										    <div class="inner-state" v-else title="订单状态">{{item.OrderStatus}}</div> 
+                      
+                         <div class="inner-state" title="定向计划状态">{{ item.DirectionalPlanStatus }}</div>
+											    <!--<el-button class="copybox copyBtn" type="text" v-if="item.DirectionalPlanStatus==='待申请'" :data-clipboard-text="item.Goods[0].CommissionURL" >复制定向链接</el-button>-->
+										   </div>
 										  </div>
-										</div>
+										</div>                        
+                          
 										<div class="option">
 										   <div class="outer">
 												<div class="box inner">
-												  <span v-if="item.OrderStatus === '已到货' || item.OrderStatus === '待退货'" class="date" title="排期时间">{{  item.BroadcastScheduling && formatDate(item.BroadcastScheduling) }}</span>
+												  <!--<span v-if="item.OrderStatus === '已到货' || item.OrderStatus === '待退货'" class="date" title="排期时间">{{  item.BroadcastScheduling && formatDate(item.BroadcastScheduling) }}</span>-->
 												  <el-button v-if="item.OrderStatus === '已到货' || item.OrderStatus === '待退货'" class="optbtn" type="text" @click="showDialog2(item)">排期</el-button>
 												  <el-button v-if="item.OrderStatus === '已完成' && !item.StudioHosToMerchant && !item.StudioHosGiveMerchantStars" class="optbtn" type="text" @click="showDialog4(item)">评价</el-button>
 												  <el-button class="optbtn" type="text" @click="showDialog1(item)">申请定向</el-button>
-												  <el-button v-if="item.OrderStatus === '待退货' && item.NeedSendBack" class="optbtn" type="text" @click="showDialog3(item)">填写物流信息</el-button>
+												  <el-button v-if="item.OrderStatus === '待退货' && item.NeedSendBack" class="optbtn" type="text" @click="showDialog3(item)">填写退样信息</el-button>
+                          <el-button v-if="item.LogisticName && item.LogisticNo" class="optbtn" type="text" @click="showDialog6(item)">查看物流信息</el-button>
+                          <el-button v-if="item.OrderStatus === '异常订单' && item.AbnormalReason" class="optbtn" type="text" @click="showDialog7(item)">查看异常原因</el-button>
 												</div>
 											</div>
 										</div>
-										<div class="tuiaddrress">退货地址：{{ item.ShopAddress }}</div>
+                    
+                                        <div class="line"></div>
+										<div class="tuiaddrress" v-if="item.Goods[0].NeedSendBack ==='是'">退样地址：{{ item.ShopAddress }} {{item.LinkmanPhone}}</div>
+                      
+                    
 									</div>
 									<!--排期-->
 									<el-dialog :visible.sync="dialogVisible2" width="500px">
@@ -220,12 +236,26 @@
 											<p>{{ good.SellingPointDescribe }}</p>
 										</div>
 									</el-dialog>
+                 <!--查看物流信息-->
+									<el-dialog :visible.sync="dialogVisible6" width="500px" class="dialog5">
+									    <div :model="order" class="digcontent">
+											<p>物流公司：{{ order.LogisticName }}</p>
+                      <p>物流单号：{{ order.LogisticNo }}</p>
+										</div>
+									</el-dialog>
+                 <!--查看异常原因-->
+									<el-dialog :visible.sync="dialogVisible7" width="500px" class="dialog5">
+									    <div :model="order" class="digcontent">
+											<p>{{ order.AbnormalReason }}</p>
+										</div>
+									</el-dialog>
+                
 								</div>
 								<!--分页开始-->
 								<div class="pagebox">
-                                    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="pageIndex" :page-size="itemsPerPage" layout="prev, pager, next, jumper" :total="total"></el-pagination>
-							    </div>
-							    <!--分页结束-->
+                    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="pageIndex" :page-size="itemsPerPage" layout="prev, pager, next, jumper" :total="total"></el-pagination>
+							  </div>
+							  <!--分页结束-->
 							</div>
 						</el-main>
 					</el-container>
@@ -422,19 +452,19 @@
 	width:320px;
 }
 .titlebox > div.title2{
-	width:80px;
+	width:70px;
 }
 .titlebox > div.title3{
-	width:80px;
+	width:70px;
 }
 .titlebox > div.title4{
-	width:120px;
+	width:130px;
 }
 .titlebox > div.title5{
-	width:100px;
+	width:120px;
 }
 .titlebox > div.title6{
-	width:100px;
+	width:110px;
 }
 .titlebox > div.title7{
 	width:120px;
@@ -481,10 +511,16 @@
 	color:#000;
 	font-size:14px;
 }
+.line{
+	height:1px;
+	width:100%;
+	background:#ebeef5;
+}
 .tuiaddrress{
 	padding:12px 0 12px 15px;
 	border: 1px solid #ebeef5;
 	font-size:14px;
+	border-top:none;
 }
 .bottombox{
     font-size:12px;
@@ -493,7 +529,7 @@
 	border-top:none;
 }
 .bottombox .salenum,.bottombox .leavenum{
-	width:80px;
+	width:70px;
 	text-align:center;
 	font-size:14px;
 	height:140px;
@@ -530,6 +566,7 @@
 	float:left;
 	width:305px;
 	padding:15px 0 15px 15px;
+	height:110px;
 }
 .infobox .imgbox {
     width: 110px;
@@ -582,9 +619,9 @@
 .planstate{
 	position: absolute;
     right: 230px;
-    width: 100px;
+    width: 120px;
     top: 37px;
-    bottom:42px;
+    height:140px;
     border-left: 1px solid #ebeef5;
     text-align: center;
 }
@@ -608,7 +645,7 @@
     right: 121px;
     width: 110px;
     top: 37px;
-    bottom:42px;
+    height:140px;
     border-left: 1px solid #ebeef5;
     text-align: center;
 }
@@ -621,7 +658,7 @@
     right:0px;
     width: 120px;
     top: 37px;
-    bottom:42px;
+    height:140px;
     border-left: 1px solid #ebeef5;
     text-align: center;
 }
@@ -638,7 +675,7 @@
 .topbox>div.shop{
     padding-left: 25px;
     position: relative;
-    margin-left: 20px;
+    margin-left: 10px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -696,7 +733,7 @@
 	height:260px;
 	overflow:auto;
 }
-.orderstate .inner.ycstate{
+.orderstate .ycstate{
 	color:red;
 }
 .orderstate .inner.ycstate .reason,.orderstate .inner.fhstate .wlnum,.orderstate .inner .wldate{
@@ -713,6 +750,13 @@
 }
 .orderstate .inner .wldate{
 	color:#333;
+}
+.orderstate .inner .inner-state:first-child{
+	margin-top:15px;
+}
+.orderstate .inner .inner-state{
+	margin-bottom:10px;
+	line-height:1;
 }
 .orderstate .inner.fhstate .wlnum span,.orderstate .inner .wldate span{
 	margin-top: -3px;
@@ -736,14 +780,26 @@
     cursor:pointer;
     padding:8px;
 }
-.topbox>div.wechat,.topbox>div.phone{
-	margin-left:20px;
+.topbox>div.wechat,.topbox>div.phone,.topbox>div.qq{
+	margin-left:10px;
 }
 .topbox>div.wechat{
 	overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 150px;
+    width: 130px;
+}
+.topbox>div.phone{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 130px;
+}
+.topbox>div.qq{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 130px;
 }
 .option .date{
 	color:green;
